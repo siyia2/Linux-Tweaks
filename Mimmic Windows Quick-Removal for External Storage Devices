@@ -134,6 +134,7 @@ write_cache = off
 #the keyword 'command_line', and no attempt is made to validate syntax.
 #It is provided for those more comfortable with hdparm syntax.
 
+## Whitelist for Write-Cache enabled Drives ##
 
 /dev/sda {
 	write_cache = on
