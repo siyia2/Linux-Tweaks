@@ -1,0 +1,9 @@
+[Unit]
+Description=#Skeleton templete for a service called before suspend
+Before=suspend.target #runs before suspend is completed
+
+[Service]
+ExecStart=#path to your executable
+
+[Install]
+WantedBy=suspend.target #called at suspend
