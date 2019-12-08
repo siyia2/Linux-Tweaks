@@ -14,6 +14,7 @@ sync,noatime,nosuid,nodev,nofail,noauto,x-gvfs-show,umask=002
 then set identify as /dev/disk/by-id/ and then press ok and enter your password.
 Now every time you mount the specific drive it will mount automatically with the sync option consistently after reboots.
 If you want other ntfs devices to behave this way add them in the same way.
+To check the mount options of the devices in your system, fire up a terminal and run the command "mount"
 
 Pros:
 Being able to quick-remove your external drives.
