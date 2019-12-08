@@ -1,5 +1,13 @@
 In this file i ll describe how to manage your write cache for external drives in a way that it mimmics windows Quick Removal option,
 so you can actually unplug external drives without unmount/eject.
+Pros:
+
+Able to qucik unplug removable media devices
+No need to limit vm.dirty.ratio/background in sysctl.conf
+
+Cons:
+Slower write speed to removable drives
+
 
 Steps:
 
