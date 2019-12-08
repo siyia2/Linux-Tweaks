@@ -1,0 +1,2 @@
+#Enable flush similar to widnows quick-removal works only for native fat32 in linux
+ACTION=="add", ENV{ID_FS_TYPE}=="vfat", ENV{mount_options}="flush,noatime,nosuid,nodev,nofail,noauto,x-gvfs-show,umask=002"
