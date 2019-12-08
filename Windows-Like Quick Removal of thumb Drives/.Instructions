@@ -16,9 +16,9 @@ Now every time you mount the specific drive it will mount automatically with the
 If you want other ntfs devices to behave this way add them in the same way.
 
 Pros:
-Being able to quick-remove your external drive
+Being able to quick-remove your external drives.
 
 Cons:
-Is a little slower
-There are no guarantees
+Is a little slower.
+There are no guarantees.
 
