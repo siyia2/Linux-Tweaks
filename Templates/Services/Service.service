@@ -1,0 +1,9 @@
+[Unit]
+Description=#skeleton template for systemd service
+
+[Service]
+Type=oneshot #means it will run once and then exit
+ExecStart=#add your path to scrip/executable here
+
+[Install]
+WantedBy=multi-user.target #means it's called at user startup
