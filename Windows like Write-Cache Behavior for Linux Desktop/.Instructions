@@ -1,6 +1,0 @@
-To achieve a Windows like write-cahce behavior for a linux Desktop:
-
-1) Follow instructions in Mimmic Windows Quick-Removal for External Storage Devices
-2) Copy 60-ioschedulers.rules file to /etc/udev/rules.d/ and reboot, if rules.d directory is not present create it.
-
-Tested the above configs with Fat32&exFat removable usb drives.
