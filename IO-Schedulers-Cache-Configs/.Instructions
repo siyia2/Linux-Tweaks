@@ -1,1 +1,2 @@
-sda
+To use my configs for I/O scheduling and write-cahce place 60-ioschedulers.rules in /etc/udev/rules.d/
+and sysctl.conf in /etc, then reboot.
