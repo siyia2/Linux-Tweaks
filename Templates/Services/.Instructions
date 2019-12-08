@@ -10,3 +10,5 @@ systemctl enable example.service ---> enables the service
 systemctl start example.service ---> starts the service immediatelly
 systemctl stop example.service ---> stops the service immediatelly
 systemctl disable example.service ---> disables the service
+systemctl status example.service ---> gives status of the service
+
