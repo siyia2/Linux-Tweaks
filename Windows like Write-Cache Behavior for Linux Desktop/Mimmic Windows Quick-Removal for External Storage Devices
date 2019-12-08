@@ -3,11 +3,11 @@ so you can actually unplug external drives without unmount/eject.
 
 Pros:
 
-Able to qucik unplug removable media devices
-No need to limit vm.dirty.ratio/background in sysctl.conf
+Able to qucik unplug removable media devices.
+No need to limit vm.dirty.ratio/background in sysctl.conf.
 
 Cons:
-Slower write speed to removable drives
+Slower write speed to removable drives.
 
 
 Steps:
@@ -18,7 +18,7 @@ Steps:
 
 3) Find the global option write_cache and set it to off (This will automatically disable all write cache for all drives by default).
 
-4) Whitelist the internal hard drives to which you want the write cache always enabled for performance reasons.
+4) Whitelist any internal hard drives for which you want the write-cache always enabled for performance reasons.
 
 After this 4 steps shutdown your PC and power it up again,
 check with hdparm -I /dev/sd(x) if the write cache is enabled for your internal stationary drives and the drives you 've set in the config.
