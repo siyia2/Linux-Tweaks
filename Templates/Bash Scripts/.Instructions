@@ -1,14 +1,14 @@
 Templates for common bash scripts with paramaters that i find often useful.
 
-To use any/all of the bash scripts as templates download them and copy them to your ~/Templates and /root/Templates/ folders
-if the folders dont exist simply create them.
+To use any/all of the bash scripts as templates download and copy them to your ~/Templates and /root/Templates/ folders
+if the folders don't exist simply create them.
 
 To simply start a bash script as user at startup, add one of them to your autostart according to your DE
 
 If you need to run a scrip at startup with root privilages you ll have to create a systemd .service and call the script via
 ExecStart="path to script"
 
-An easy way to have one or more of these bash scripts be called before/after suspend/resume is to copy them at the
-/usr/lib/systemd/system-sleep/ directory and make sure they are executable.Once you resume you pc, systemd will execute the scripts
-present in the folder above, both before and after suspend, but the commands executed iside the scripts 
-will be dictated according to the specific rules of each bash script.
+An easy way to have one or more of these bash scripts be called before/after suspend/resume with root privillages
+is to copy them at the/usr/lib/systemd/system-sleep/ directory and make sure they are executable.
+Once you resume you pc, systemd will execute the scriptspresent in the folder above, both before and after suspend, 
+but the commands executed iside the scripts depend on the specific rules inside each bash script.
