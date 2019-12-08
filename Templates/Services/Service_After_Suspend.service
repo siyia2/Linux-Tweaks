@@ -1,0 +1,9 @@
+[Unit]
+Description=#skeleton template for a service at resume
+After=suspend.target #runs after suspend on resume
+
+[Service]
+ExecStart=#path to your script/executable
+
+[Install]
+WantedBy=suspend.target #called by suspend action
