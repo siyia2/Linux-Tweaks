@@ -1,1 +1,12 @@
 
+Templates for some useful services for systemd.
+To use any/all of the services as templates download and copy them to your ~/Templates and /root/Templates/ folders
+if the folders don't exist simply create them.
+
+To use any/all of those services simply copy them to /usr/lib/systemd/system folder/
+from there on modify them according to your needs and use the systemctl tool from terminal.
+
+systemctl enable example.service ---> enables the service
+systemctl start example.service ---> starts the service immediatelly
+systemctl stop example.service ---> stops the service immediatelly
+systemctl disable example.service ---> disables the service
