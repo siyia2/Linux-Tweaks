@@ -1,0 +1,10 @@
+[Unit]
+Description=#skeleton template for systemd service
+
+[Service]
+ExecStart=#add your path to scrip/executable here
+IOSchedulingClass=idle #runs when IO is idle
+CPUSchedulingPolicy=idle #runs wehn CPU is idle
+
+[Install]
+WantedBy=multi-user.target #means it's called at user startup
