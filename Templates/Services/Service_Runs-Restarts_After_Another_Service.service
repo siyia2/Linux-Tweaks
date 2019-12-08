@@ -1,0 +1,12 @@
+[Unit]
+Description=#skeleton template
+After=#required.service
+Requires=#required.service
+
+[Service]
+ExecStart=#your script or executable
+Restart=always
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target required.service #called by both user startup and reqyuired.service
