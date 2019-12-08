@@ -1,1 +1,16 @@
+In order to enable similar behavior like windows quick-removal of external usb drives globally,
+add the file 100-removable.rules to /etc/udev/rules.d/, then reboot.
 
+This works globally only for fat32 systems in Linux.
+
+For ntfs use gnome-disks and enable sync:
+
+Open gnome-disks and edit the mount options for your ntfs thumb drive
+
+Click the button to allow change in user defaults and set the following mount options:
+
+sync,noatime,nosuid,nodev,nofail,noauto,x-gvfs-show,umask=002
+
+then set identify as /dev/disk/by-id/ and then press ok and enter your password.
+Now every time you mount the specific drive it will mount automatically with the sync option consistently after reboots.
+If you want other ntfs devices to behave this way add them in the same way.
