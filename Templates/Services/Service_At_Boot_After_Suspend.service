@@ -1,0 +1,8 @@
+[Unit]
+Description=#skeleton template for a service at resume
+
+[Service]
+ExecStart=#path to your script/executable
+
+[Install]
+WantedBy=multi-user.target resume.target #called at boot and after suspend action
