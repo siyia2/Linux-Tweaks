@@ -1,0 +1,128 @@
+{
+    "position": "bottom",
+    "layer": "bottom",
+	"height": 25,
+    "modules-left": ["sway/workspaces" , "sway/mode"],
+    "modules-center": ["cpu", "memory", "temperature","custom/cpufan","custom/gpu","custom/gpufan"],
+    "modules-right": ["pulseaudio","network", "clock", "custom/acpi"],
+    "sway/window": {
+        "max-length": 100000
+    },
+"memory": {
+    "interval": 8,
+    "format": "Mem: {}%   ||",
+		"tooltip": false,
+    "max-length": 20,
+"on-click": "xfce4-taskmanager"
+},
+
+// 
+"cpu": {
+    "interval": 2,
+    "format": "Load: {usage}% ",
+		"tooltip": false,
+    "max-length": 40,
+"on-click": "xfce4-taskmanager"
+},
+"temperature": {
+	"thermal-zone": 0,
+	"hwmon-path": "/sys/class/hwmon/hwmon0/temp1_input",
+	"critical-threshold": 61,
+	"format-critical": "Cpu:{temperatureC}°C",
+	"format":   "Cpu: {temperatureC}°C",
+		"tooltip": false,
+	    "max-length": 20,
+"on-click": "xfce4-taskmanager"
+},
+"custom/gpu": {
+	"interval": 4,
+        "exec": " cat /sys/class/hwmon/hwmon3/temp1_input | rev | cut -c 4- | rev",
+	"format": "  || Gpu: {}°C",
+		"tooltip": false,
+	    "max-length": 20,
+"on-click": "xfce4-taskmanager"
+},
+
+"custom/acpi": {
+	"format": "⏻  ",
+		"tooltip": false,
+	    "max-length": 20,
+"on-click": "poweroff",
+"on-click-middle": "reboot",
+"on-click-right": "swaylock -f -c 000000 && systemctl suspend"
+},
+
+"custom/swap": {
+	"interval": 4,
+        "exec": "free -t | awk 'NR == 3 {print $3/$2*100}'",
+	"format": "Swap: {}%   || ",
+		"tooltip": false,
+	    "max-length": 20,
+"on-click": "xfce4-taskmanager"
+},
+
+"custom/gpufan": {
+	"interval": 4,
+        "exec": "  cat /sys/class/hwmon/hwmon2/fan2_input",
+	"format": " @ {} rpm ",
+		"tooltip": false,
+	    "max-length": 20,
+"on-click": "xfce4-taskmanager"
+},
+
+"custom/cpufan": {
+	"interval": 4,
+        "exec": "  cat /sys/class/hwmon/hwmon2/fan1_input",
+	"format": " @ {} rpm",
+		"tooltip": false,
+	    "max-length": 20,
+"on-click": "xfce4-taskmanager"
+},
+    "battery": {
+        "format": "{capacity}% {icon}",
+        "format-icons": ["", "", "", "", ""],
+		"tooltip": false
+    },
+
+"network": {
+    "interface": "wlp0s18f2u2",
+    "format": "{ifname}",
+    "format-wifi": "{essid} ({signalStrength}%) ",
+    "format-ethernet": " {ifname} ",
+    "format-disconnected": "",
+    "tooltip-format": "{ifname}",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+    "tooltip-format-ethernet": "{ifname} ",
+    "tooltip-format-disconnected": "Disconnected",
+"on-click": "kitty -e nmtui-edit",
+"on-click-middle":"kitty -e nmtui-connect",
+	"tooltip": false
+},
+
+"pulseaudio": {
+    "format": "Volume {volume}%",
+    "format-bluetooth": "{volume}% {icon}",
+    "format-muted": "🔇",
+    "format-icons": {
+        "headphones": "",
+        "handsfree": "",
+        "headset": "",
+        "phone": "",
+        "portable": "",
+        "car": "",
+        "default": ["", ""]
+
+    },
+    "scroll-step": 1,
+	"on-scroll-down":"pactl set-sink-volume @DEFAULT_SINK@ -5%",
+	"on-scroll-up":"pactl set-sink-volume @DEFAULT_SINK@ +5%",
+	"on-click-middle":"amixer set Master toggle",
+    "on-click": "pavucontrol",
+	"tooltip": false
+},
+
+    "clock": {
+        "format": "{:%A, %d %B %Y, %H:%M  ||}",
+	"tooltip": false
+    }
+}
