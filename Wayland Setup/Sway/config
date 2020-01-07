@@ -21,7 +21,7 @@ set $menu dmenu-wl_path | dmenu-wl | xargs swaymsg exec --
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output "*" bg /usr/share/backgrounds/xfce/light-stripe-maia.jpg fill
+###output "*" bg /usr/share/backgrounds/xfce/light-stripe-maia.jpg fill
 #
 # Example configuration:
 #
@@ -37,6 +37,8 @@ xkb_numlock enabled
 pointer_accel 1
 accel_profile adaptive
 }
+
+### Default mouse theme edit to your liking
 
 seat seat0 xcursor_theme Pulse-Glass-Jade-Regular
 set $gnome-schema org.gnome.desktop.interface
