@@ -25,7 +25,7 @@ output "*" bg /usr/share/backgrounds/xfce/light-stripe-maia.jpg fill
 #
 # Example configuration:
 #
-   output HDMI-A-1 mode 1920x1080@74.973000Hz 
+###   output HDMI-A-1 mode 1920x1080@74.973000Hz 
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
