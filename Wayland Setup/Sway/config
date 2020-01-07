@@ -46,7 +46,7 @@ exec_always {
     gsettings set $gnome-schema cursor-theme 'Pulse-Glass-Jade-Regular'
 }
 
-### STARTUP PROGRAMS
+### STARTUP PROGRAMS Edit according to your needs
 
 exec xhost local:root
 exec /home/siyia/.sound_fix.sh
