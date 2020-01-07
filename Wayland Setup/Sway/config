@@ -25,19 +25,15 @@ output "*" bg /usr/share/backgrounds/xfce/light-stripe-maia.jpg fill
 #
 # Example configuration:
 #
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
+   output HDMI-A-1 mode 1920x1080@74.973000Hz 
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
 
 ### MOUSE/TOUCHPAD SETUP
 
-input touchpad {
-pointer_accel 1
-accel_profile adaptive
-}
-
-input pointer {
+input '*' {
+xkb_numlock enabled
 pointer_accel 1
 accel_profile adaptive
 }
@@ -51,7 +47,6 @@ exec_always {
 ### STARTUP PROGRAMS
 
 exec xhost local:root
-#exec --no-startup-id kitty
 exec /home/siyia/.sound_fix.sh
 exec --no-startup-id doublecmd --no-splash
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
@@ -75,13 +70,33 @@ for_window [class="Doublecmd"] focus
 
 ### POWER MANAGEMENT
 
+### Default power settings
  exec swayidle -w \
 before-sleep 'swaylock -f -c 000000' \
 timeout 3601 'systemctl suspend' \
-timeout 300 'swaymsg "input '*' xkb_layout 'us'"' \
-timeout 321 'swaylock -f -c 000000' \
-timeout 621 'swaymsg "output * dpms off"' \
-resume 'swaymsg "output * dpms on"'; pkill -nx swayidle' \
+timeout 301 'swaylock -f -c 000000' \
+timeout 302 'swaymsg "output * dpms off"' \
+resume  'swaymsg "output * dpms on"' ; 'swaymsg "input '*' xkb_layout 'us'"' \
+
+### Manually lock screen and disable auto-suspend
+
+bindsym $mod+f11 exec killall swayidle && swayidle -w  \
+	timeout 1 'swaylock -e -f -c 000000 -i ~/.config/wall.png -t' \
+	timeout 2 'swaymsg "output * dpms off"' \
+	resume 'swaymsg "output * dpms on"; swaymsg "input '*' xkb_layout 'us'" \
+
+### Manually restore default power settings
+
+bindsym $mod+pause exec killall swayidle && swayidle -w \
+before-sleep 'swaylock -f -c 000000' \
+timeout 3601 'systemctl suspend' \
+timeout 301 'swaylock -f -c 000000' \
+timeout 302 'swaymsg "output * dpms off"' \
+resume  'swaymsg "output * dpms on"' ; 'swaymsg "input '*' xkb_layout 'us'"' \ 
+
+### Manually suspend&lock system
+
+bindsym $mod+f1 exec swaymsg "input '*' xkb_layout 'us'" && swaylock -f -c 000000 && systemctl suspend
 
 
 # wayland version
@@ -96,20 +111,17 @@ for_window [app_id="mpv"] inhibit_idle fullscreen
 
 ### Key bindings
 #
-### CUSTOM
+### CUSTOM Replace or edit according to the progs that you use
 
-bindsym $mod+x exec kitty
+bindsym $mod+x exec $term
 bindsym $mod+f exec doublecmd --no-splash
 bindsym $mod+w exec env MOZ_ENABLE_WAYLAND=1 firefox
 bindsym ctrl+alt+delete exec xfce4-taskmanager
 bindsym ctrl+alt+KP_delete exec xfce4-taskmanager
 
-bindsym f11 exec swaylock -f -c 000000
 
-bindsym $mod+f1 exec swaylock -f -c 000000 && systemctl suspend
-
-bindsym f9 exec thunderbird
-bindsym f12 exec qalculate-gtk
+bindsym $mod+f9 exec thunderbird
+bindsym $mod+f12 exec qalculate-gtk
 
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
