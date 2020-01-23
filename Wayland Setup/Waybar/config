@@ -46,10 +46,10 @@
 "custom/acpi": {
 	"format": "⏻  ",
 		"tooltip": false,
-	    "max-length": 20,
-"on-click": "poweroff",
+	    "max-length": 4,
+"on-scroll-up": "poweroff",
 "on-click-middle": "reboot",
-"on-click-right": "swaylock -f -c 000000 && systemctl suspend"
+"on-click-right": "swaylock -C /home/siyia/.config/swaylock.conf && systemctl suspend && swaymsg reload"
 },
 
 "custom/swap": {
