@@ -21,7 +21,7 @@ set $menu dmenu-wl_path | dmenu-wl | xargs swaymsg exec --
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-###output "*" bg /usr/share/backgrounds/xfce/light-stripe-maia.jpg fill
+output "*" bg /home/siyia/Pictures/goku_black.png fill
 #
 # Example configuration:
 #
@@ -38,31 +38,36 @@ pointer_accel 1
 accel_profile adaptive
 }
 
-### Default mouse theme edit to your liking
-
 seat seat0 xcursor_theme Pulse-Glass-Jade-Regular
 set $gnome-schema org.gnome.desktop.interface
 exec_always {
     gsettings set $gnome-schema cursor-theme 'Pulse-Glass-Jade-Regular'
 }
+### KB LAYOUTS
 
-### STARTUP PROGRAMS Edit according to your needs
+input "*" {
+    xkb_layout us,gr
+    xkb_options grp:alt_shift_toggle
+}
+
+### STARTUP PROGRAMS
 
 exec xhost local:root
+#exec --no-startup-id kitty
 exec /home/siyia/.sound_fix.sh
 exec --no-startup-id doublecmd --no-splash
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec mako --anchor bottom-right --default-timeout 5000
 exec redshift
-exec qbittorrent
+exec env QT_QPA_PLATFORM=xcb qbittorrent
 
 #### WINDOW SETUP
 
-for_window [title="PlayOnLinux"] move container to workspace 3: Steam/Gaming
+for_window [class="PlayOnLinux"] move container to workspace 3: Steam/Gaming
 for_window [title="Friends List"] move container to workspace 3: Steam/Gaming
 for_window [class="Steam"] move container to workspace 3: Steam/Gaming
 for_window [app_id="uget"] move container to workspace 5: Torrents/P2P
-for_window [app_id="qbittorrent"] move container to workspace 5: Torrents/P2P
+for_window [class="qBittorrent"] move container to workspace 5: Torrents/P2P
 for_window [app_id="firefox"] move container to workspace 1: Web/Mail
 for_window [class="Thunderbird"] move container to workspace 1: Web/Mail
 for_window [title="Firefox"] focus
@@ -72,48 +77,31 @@ for_window [class="Doublecmd"] focus
 
 ### POWER MANAGEMENT
 
-### Default power settings
  exec swayidle -w \
-before-sleep 'swaylock -f -c 000000' \
-timeout 3601 'systemctl suspend' \
-timeout 301 'swaylock -f -c 000000' \
-timeout 302 'swaymsg "output * dpms off"' \
-resume  'swaymsg "output * dpms on"' ; 'swaymsg "input '*' xkb_layout 'us'"' \
+before-sleep 'swaylock -C /home/siyia/.config/swaylock.conf' \
+timeout 4001 'systemctl suspend' \
+timeout 301 'swaylock -C /home/siyia/.config/swaylock.conf' \
+timeout 601 'swaymsg "output * dpms off"' \
+resume  'swaymsg "output * dpms on"'
 
-### Manually lock screen and disable auto-suspend
+###timeout 301 'swaylock -C /home/siyia/.config/swaylock.conf' \
+#timeout 15 'if pgrep -x swaylock; then swaymsg "output * dpms off"; fi' \
 
-bindsym $mod+f11 exec killall swayidle && swayidle -w  \
-	timeout 1 'swaylock -e -f -c 000000 -i ~/.config/wall.png -t' \
-	timeout 2 'swaymsg "output * dpms off"' \
-	resume 'swaymsg "output * dpms on"; swaymsg "input '*' xkb_layout 'us'" \
-
-### Manually restore default power settings
-
-bindsym $mod+pause exec killall swayidle && swayidle -w \
-before-sleep 'swaylock -f -c 000000' \
-timeout 3601 'systemctl suspend' \
-timeout 301 'swaylock -f -c 000000' \
-timeout 302 'swaymsg "output * dpms off"' \
-resume  'swaymsg "output * dpms on"' ; 'swaymsg "input '*' xkb_layout 'us'"' \ 
-
-### Manually suspend&lock system
-
-bindsym $mod+f1 exec swaymsg "input '*' xkb_layout 'us'" && swaylock -f -c 000000 && systemctl suspend
+bindsym $mod+f11 exec swaylock -C /home/siyia/.config/swaylock.conf
 
 
-# wayland version
-for_window [class="Firefox"] inhibit_idle fullscreen
-for_window [app_id="firefox"] inhibit_idle fullscreen
+for_window [app_id="firefox"] inhibit_idle focus
+for_window [class="TeamViewer"] inhibit_idle open
 for_window [class="mpv"] inhibit_idle fullscreen
 for_window [app_id="mpv"] inhibit_idle fullscreen
 #
-# This will lock your screen after 300 seconds of inactivity, then turn off
+# This will lock your screen after 301 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
 
 ### Key bindings
 #
-### CUSTOM Replace or edit according to the progs that you use
+### CUSTOM
 
 bindsym $mod+x exec $term
 bindsym $mod+f exec doublecmd --no-splash
@@ -131,8 +119,6 @@ bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym XF86MonBrightnessDown exec light -U 5
 bindsym XF86MonBrightnessUp exec light -A 5
-bindsym $mod+Alt_R exec swaymsg input '*' xkb_layout 'gr'
-bindsym $mod+Alt_L exec swaymsg input '*' xkb_layout 'us'
 bindsym Print exec grim $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S_grim.png')
 bindsym button2 kill
 
@@ -272,6 +258,11 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 workspace_layout tabbed
+
+### GAPS
+
+gaps inner 5
+gaps outer -5
 
 #
 # Status Bar:
