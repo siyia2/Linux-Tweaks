@@ -206,8 +206,7 @@ bindsym --whole-window $mod+button4 workspace prev_on_output
     # Switch the current container between different layout styles
     bindsym $mod+s layout stacking
     bindsym $mod+t layout tabbed
-    bindsym $mod+e layout toggle split
-
+    bindsym $mod+e layout toggle split tabbed 
     # Make the current focus fullscreen
     bindsym $mod+return fullscreen
 
@@ -261,6 +260,7 @@ workspace_layout tabbed
 
 gaps inner 5
 gaps outer -5
+default_border pixel 3
 
 #
 # Status Bar:
