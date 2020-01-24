@@ -21,7 +21,8 @@ set $menu dmenu-wl_path | dmenu-wl | xargs swaymsg exec --
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output "*" bg /home/siyia/Pictures/goku_black.png fill
+# Example:
+#### output "*" bg /home/siyia/Pictures/goku_black.png fill
 #
 # Example configuration:
 #
@@ -50,6 +51,25 @@ input "*" {
     xkb_options grp:alt_shift_toggle
 }
 
+### FONTS
+
+font Dina 10, "Noto Sans Emoji" 10
+
+### COLORS
+
+set $focused-bg-color    #004000
+set $text-color          #FFFFFF
+set $indicator           #505050
+
+# class			border		background		text      
+client.focused		$indicator	$focused-bg-color	$text-color
+
+### GAPS
+
+gaps inner 5
+gaps outer -5
+default_border pixel 4
+
 ### STARTUP PROGRAMS
 
 exec xhost local:root
@@ -70,9 +90,9 @@ for_window [app_id="uget"] move container to workspace 5: Torrents/P2P
 for_window [class="qBittorrent"] move container to workspace 5: Torrents/P2P
 for_window [app_id="firefox"] move container to workspace 1: Web/Mail
 for_window [class="Thunderbird"] move container to workspace 1: Web/Mail
-for_window [title="Firefox"] focus
-for_window [class="Doublecmd"] move container to workspace 2: FM 
-for_window [class="Doublecmd"] focus
+for_window [app_id="firefox"] focus
+for_window [class="Double Commander"] move container to workspace 2: FM 
+for_window [class="Double Commander"] focus
 ##for_window [app_id="kitty"] move container to workspace 2: FM
 
 ### POWER MANAGEMENT
@@ -85,11 +105,13 @@ timeout 15 'if pgrep -x swaylock; then swaymsg "output * dpms off"; fi' \
 timeout 601 'swaymsg "output * dpms off"' \
 resume  'swaymsg "output * dpms on"'
 
+###timeout 301 'swaylock -C /home/siyia/.config/swaylock.conf' \
+
 bindsym $mod+f11 exec swaylock -C /home/siyia/.config/swaylock.conf
 
-
 for_window [app_id="firefox"] inhibit_idle focus
-for_window [class="TeamViewer"] inhibit_idle open
+for_window [app_id="TeamViewer"] inhibit_idle open
+for_window [app_id="dolphin-emu"] inhibit_idle open
 for_window [class="mpv"] inhibit_idle fullscreen
 for_window [app_id="mpv"] inhibit_idle fullscreen
 #
@@ -206,7 +228,8 @@ bindsym --whole-window $mod+button4 workspace prev_on_output
     # Switch the current container between different layout styles
     bindsym $mod+s layout stacking
     bindsym $mod+t layout tabbed
-    bindsym $mod+e layout toggle split tabbed 
+    bindsym $mod+e layout toggle split h tabbed 
+
     # Make the current focus fullscreen
     bindsym $mod+return fullscreen
 
@@ -255,12 +278,6 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 workspace_layout tabbed
-
-### GAPS
-
-gaps inner 5
-gaps outer -5
-default_border pixel 3
 
 #
 # Status Bar:
