@@ -220,7 +220,7 @@ bindsym --whole-window $mod+button4 workspace prev_on_output
 # Layout stuff:
 #
     # You can "split" the current object of your focus with
-    # $mod+b or $mod+v, for horizontal and vertical splits
+    # $mod+c    bindsym $mod+c splitt, for horizontal and vertical splits
     # respectively.
     bindsym $mod+c splitt
 
