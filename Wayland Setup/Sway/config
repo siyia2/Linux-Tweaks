@@ -104,9 +104,7 @@ timeout 301 'swaylock -C /home/siyia/.config/swaylock.conf' \
 timeout 15 'if pgrep -x swaylock; then swaymsg "output * dpms off"; fi' \
 timeout 601 'swaymsg "output * dpms off"' \
 resume  'swaymsg "output * dpms on"'
-
-###timeout 301 'swaylock -C /home/siyia/.config/swaylock.conf' \
-
+    bindsym $mod+c splitt
 bindsym $mod+f11 exec swaylock -C /home/siyia/.config/swaylock.conf
 
 for_window [app_id="firefox"] inhibit_idle focus
