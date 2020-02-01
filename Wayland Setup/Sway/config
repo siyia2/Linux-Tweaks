@@ -39,6 +39,8 @@ pointer_accel 1
 accel_profile adaptive
 }
 
+### CURSOR THEME
+
 seat seat0 xcursor_theme Pulse-Glass-Jade-Regular
 set $gnome-schema org.gnome.desktop.interface
 exec_always {
