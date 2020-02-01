@@ -147,8 +147,6 @@ bindsym button2 kill
 
     # kill focused window
     bindsym $mod+q kill
-    split focused window
-    bindsym $mod+c splitt
     # start your launcher
     bindsym $mod+d exec $menu
 
