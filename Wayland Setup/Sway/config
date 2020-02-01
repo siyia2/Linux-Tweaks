@@ -142,7 +142,7 @@ bindsym XF86MonBrightnessUp exec light -A 5
 bindsym Print exec grim $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S_grim.png')
 bindsym button2 kill
 
-# Basics:
+### BASICS:
 #
 
     # kill focused window
@@ -163,7 +163,7 @@ bindsym button2 kill
     # exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 #
-# Moving around:
+#### MOVING AROUND:
 #
     # Move your focus around
     bindsym $mod+$left focus left
@@ -187,7 +187,7 @@ bindsym button2 kill
     bindsym $mod+Shift+Up move up
     bindsym $mod+Shift+Right move right
 #
-# Workspaces:
+#### WORKSPACES:
 bindsym --whole-window $mod+button5 workspace next_on_output
 bindsym --whole-window $mod+button4 workspace prev_on_output
 #
@@ -216,8 +216,12 @@ bindsym --whole-window $mod+button4 workspace prev_on_output
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
 #
-# Layout stuff:
+#### LAYOUT STUFF:
 #
+
+    ### DEFAULT LAYOUT STYLE
+    workspace_layout tabbed
+    
     # You can "split" the current object of your focus with
     # $mod+c    bindsym $mod+c splitt, for horizontal and vertical splits
     # respectively.
@@ -240,7 +244,7 @@ bindsym --whole-window $mod+button4 workspace prev_on_output
     # move focus to the parent container
     bindsym $mod+a focus parent
 #
-# Scratchpad:
+#### SCRATCHPAD:
 #
     # Sway has a "scratchpad", which is a bag of holding for windows.
     # You can send windows there and get them back later.
@@ -252,7 +256,7 @@ bindsym --whole-window $mod+button4 workspace prev_on_output
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
 #
-# Resizing containers:
+#### RESIZING CONTAINERS:
 #
 mode "resize" {
     # left will shrink the containers width
@@ -275,10 +279,9 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
-workspace_layout tabbed
 
 #
-# Status Bar:
+#### STATUS BAR:
 #
 # Read `man 5 sway-bar` for more information about this section.
 #bar {
