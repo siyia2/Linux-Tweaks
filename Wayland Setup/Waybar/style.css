@@ -3,12 +3,15 @@
     border-radius: 0;
     font-family: Roboto, Helvetica, Arial, sans-serif;
     font-size: 14px;
-    min-height: 24px;
+    min-height: 25px;
+	
 }
 window#waybar {
-    background-color: black;
-border-top: 1px solid rgba(100, 114, 125, 0.5);
-    border-bottom: 1px solid rgba(100, 114, 125, 0.5);
+    background-color: rgba(0, 0, 0, 0.65);
+    border-top: 2px solid rgba(100, 114, 125, 0.0);
+    border-bottom: 2px solid rgba(100, 114, 125, 0.0);
+    border-right: 2px solid rgba(100, 114, 125, 0.0);
+    border-left: 2px solid rgba(100, 114, 125, 0.0);
     color: white;
 }
 
@@ -22,7 +25,7 @@ border-top: 1px solid rgba(100, 114, 125, 0.5);
 
 #workspaces button.focused {
     background: transparent;
-color: green;
+color: cyan;
     border: 2px solid white;
 }
 #workspaces button.urgent {
