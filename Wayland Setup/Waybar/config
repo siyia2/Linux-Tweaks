@@ -10,7 +10,7 @@
     },
 
 "custom/kb": {
-  "exec": "/home/siyia/.config/waybar/modules/s1.sh",
+  "exec": "/home/siyia/.config/waybar/modules/kb-layout.sh",
 		"tooltip": false
 },
 
