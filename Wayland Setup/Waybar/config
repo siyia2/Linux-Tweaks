@@ -1,13 +1,20 @@
 {
     "position": "bottom",
     "layer": "bottom",
-	"height": 25,
+	"height": 29,
     "modules-left": ["sway/workspaces" , "sway/mode"],
     "modules-center": ["cpu", "memory", "temperature","custom/cpufan","custom/gpu","custom/gpufan"],
-    "modules-right": ["pulseaudio","network", "clock", "custom/acpi"],
+    "modules-right": ["custom/kb","pulseaudio","network", "clock", "custom/acpi"],
     "sway/window": {
         "max-length": 100000
     },
+
+"custom/kb": {
+  "exec": "/home/siyia/.config/waybar/modules/s1.sh",
+		"tooltip": false
+},
+
+
 "memory": {
     "interval": 8,
     "format": "Mem: {}%   ||",
@@ -47,9 +54,9 @@
 	"format": "⏻  ",
 		"tooltip": false,
 	    "max-length": 4,
-"on-scroll-up": "poweroff",
+"on-click": "poweroff",
 "on-click-middle": "reboot",
-"on-click-right": "swaylock -C /home/siyia/.config/swaylock.conf && systemctl suspend && swaymsg reload"
+"on-click-right": "swaymsg reload && systemctl suspend"
 },
 
 "custom/swap": {
@@ -88,41 +95,39 @@
     "interface": "wlp0s18f2u2",
     "format": "{ifname}",
     "format-wifi": "{essid} ({signalStrength}%) ",
-    "format-ethernet": " {ifname} ",
-    "format-disconnected": "",
+    "format-ethernet": "Connected ",
+    "format-disconnected": "{ifname}",
     "tooltip-format": "{ifname}",
-    "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
-    "tooltip-format-ethernet": "{ifname} ",
-    "tooltip-format-disconnected": "Disconnected",
-"on-click": "kitty -e nmtui-edit",
-"on-click-middle":"kitty -e nmtui-connect",
+"on-click": "kitty -e nmtui-connect",
+"on-click-middle":"kitty -e nmtui-edit",
 	"tooltip": false
 },
 
 "pulseaudio": {
-    "format": "Volume {volume}%",
+    "format": " {volume}% {icon}",
     "format-bluetooth": "{volume}% {icon}",
-    "format-muted": "🔇",
+    "format-muted": " Muted 🔇",
     "format-icons": {
-        "headphones": "",
+        "headphones": "",
         "handsfree": "",
         "headset": "",
         "phone": "",
         "portable": "",
         "car": "",
-        "default": ["", ""]
+        "default": ["🔈","🔉", "🔊"]
 
     },
     "scroll-step": 1,
 	"on-scroll-down":"pactl set-sink-volume @DEFAULT_SINK@ -5%",
 	"on-scroll-up":"pactl set-sink-volume @DEFAULT_SINK@ +5%",
-	"on-click-middle":"amixer set Master toggle",
+	"on-click-middle":"pactl set-sink-mute @DEFAULT_SINK@ toggle",
     "on-click": "pavucontrol",
 	"tooltip": false
 },
 
     "clock": {
         "format": "{:%A, %d %B %Y, %H:%M  ||}",
+	"on-click": "gsimplecal",
 	"tooltip": false
     }
 }
