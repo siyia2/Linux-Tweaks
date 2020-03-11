@@ -6,7 +6,7 @@ i am trying my best to describe each config in simple layman's terms with instru
 # Current Topics are:
 
 * Cahe & I/O config
-* Zram Setup
+* Zram setup
 
 * Wayland desktop setup (currently only under sway)
 
