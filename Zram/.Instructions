@@ -15,4 +15,5 @@ Zram Allocators: zbud(default, 2 compressed objects are stored into 1 page),z3fo
 Zram compression modes currently supported kernel 5.4+: LZ4, LZO, ZSTD, LZO-RLE (default).
 
 If you wish to change the compression algorithm,allocator or zram size edit the zram script and the grub boot parameters
-to accommodate your needs.
+to accommodate your needs.Zram device according to my script will always have maximum priority over regular swap, so you don't
+have to disable swap unless you absolutely want to.
