@@ -1,0 +1,13 @@
+#! /bin/sh
+
+modprobe zram
+ echo zstd > /sys/block/zram0/comp_algorithm
+wait
+ echo 2G > /sys/block/zram0/disksize
+wait
+ mkswap --label zram0 /dev/zram0
+wait
+ swapon --priority 100 /dev/zram0
+wait
+
+exit
