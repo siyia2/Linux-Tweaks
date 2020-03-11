@@ -1,1 +1,18 @@
-...
+The best way in my opinion to setup a zram disk drive with your preferred compression/disksize:
+
+1) Disable all automated services and scripts that setup zram/swap in your system.
+2) Add the grub boot parameters to /etc/default/grub file from the repo and save&update grub.
+3) Add the zram script in this repo in your /usr/bin and make it executable.
+4) Add the zram.service file in /lib/systemd/system and enable it with systemctl enable zram.service.
+
+The above four steps will configure a zram disk at the size of 2G (18% of my 12gb) 
+using zstd compression and the z3fold allocator that allows up to 3 compressed objects by page.
+Changes take effect on boot and stay persistent after suspend/restart.
+
+Additional info:
+Zram Allocators: zbud(default, 2 compressed objects are stored into 1 page),z3fold (3 compressed objects are stored into 1 page).
+
+Zram compression modes currently supported kernel 5.4+: LZ4, LZO, ZSTD, LZO-RLE (default).
+
+If you wish to change the compression algorithm or allocator or zram size edit the zram script and the grub boot parameters
+to accomodate your needs.
