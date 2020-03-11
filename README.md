@@ -5,10 +5,9 @@ i am trying my best to describe each config in simple layman's terms with instru
 
 # Current Topics are:
 
-### Cahe & I/O config
+* Cahe & I/O config
+* Zram Setup
 
-### Zram Setup
+* Wayland desktop setup (currently only under sway)
 
-### Wayland desktop setup (currently only under sway)
-
-## Many scripts and services the average layman would find handy
+* Many scripts and services the average layman would find handy
