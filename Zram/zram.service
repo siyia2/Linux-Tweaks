@@ -1,0 +1,9 @@
+[Unit]
+Description=Enable zswap
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/zswap
+
+[Install]
+WantedBy=multi-user.target
