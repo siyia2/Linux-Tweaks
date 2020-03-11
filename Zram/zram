@@ -1,6 +1,7 @@
 #! /bin/sh
 
 modprobe zram
+#It is important to set compression mode before the creation of zram device otherwise default compression alg is always used.
  echo zstd > /sys/block/zram0/comp_algorithm
 wait
  echo 2G > /sys/block/zram0/disksize
