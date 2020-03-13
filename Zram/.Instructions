@@ -13,9 +13,9 @@ Additional info:
 Zram/zswap Drive: Dedicates a part of your memory as a compressed ram cache, effectively maximizing your available
 ram capacity, useful for systems with low ram and/or  when adding more ram is not an option.
 
-Zram Allocators: zbud(default, 2 compressed objects are stored into 1 page),z3fold (3 compressed objects are stored into 1 page).
+Zram Allocators: zbud(default, 2 compressed objects are stored into 1 page),z3fold(3 compressed objects are stored into 1 page).
 
-Zram compression modes currently supported kernel 5.4+: LZ4, LZO, ZSTD, LZO-RLE (default).
+Zram compression algs currently supported kernel 5.4+: LZ4, LZO, ZSTD, LZO-RLE (default).
 
 If you wish to change the compression algorithm,allocator or zram size edit the zram script and the grub boot parameters
 to accommodate your needs.The zram device according to my script will always have maximum priority over regular swap,
