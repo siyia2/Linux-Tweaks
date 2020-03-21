@@ -1,0 +1,10 @@
+[Unit]
+Description=Resets wifi before suspend
+Before=suspend.target
+
+[Service]
+Type=oneshot
+ExecStart=sh /usr/bin/restart_network_pre.sh
+
+[Install]
+WantedBy=suspend.target
