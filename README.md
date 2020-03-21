@@ -6,8 +6,11 @@ i am doing my best to describe each config in simple layman's terms with instruc
 # Current Topics:
 
 * Cahe & I/O config
+
 * Zram setup
 
 * Wayland desktop setup (currently only under sway)
 
 * Many scripts and services the average layman would find handy
+
+* Laptop quirks (under constr)
