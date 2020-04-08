@@ -1,6 +1,0 @@
-1)Install thermald
-2)Move the config files of thermald included in this repo under /etc/thermald
-3)Edit thermal-conf.xml change max temp,name and hwmon path to your own static cpu sensor temp.
-4)systemctl enable --now thermald
-
-Tested on an intel sandybridge with p-state powersave and on amd vishera with acpufreq+schedultil.
