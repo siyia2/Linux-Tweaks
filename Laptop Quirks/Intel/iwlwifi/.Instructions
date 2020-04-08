@@ -1,0 +1,5 @@
+On some older laptops the iwlwifi doesnt wake up after suspend and the module has to be restarted after every resume.
+
+1) Move restart_network_pre.sh and restart_network_post.sh to /usr/bin + make sure they are executable.
+2) Move restore-wifi-pre.service restore-wifi-post.service to /lib/systemd/system
+3) systemctl enable --now restore-wifi-pre.service  	restore-wifi-post.service.
