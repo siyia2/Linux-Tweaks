@@ -1,12 +1,13 @@
 <?xml version="1.0"?>
 <ThermalConfiguration>
 <Platform>
-        <Name>Fujitsu Lifeboo</Name>
+        <Name>Fujitsu Lifebook</Name>
         <ProductName>*</ProductName>
         <Preference>QUIET</Preference>
         <ThermalSensors>
                 <ThermalSensor>
                         <Type>pkg-temp-0</Type>
+             #Importand find and change the hwmon path to your cpu temp sensor and make sure it is static across reboots.
                         <Path>/sys/class/hwmon/hwmon0/temp1_input</Path>
                         <AsyncCapable>1</AsyncCapable>
                 </ThermalSensor>
