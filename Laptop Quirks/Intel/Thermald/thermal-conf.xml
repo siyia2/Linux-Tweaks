@@ -1,13 +1,14 @@
 <?xml version="1.0"?>
 <ThermalConfiguration>
 <Platform>
+        <!-- #Optional change the name of your device. -->
         <Name>Fujitsu Lifebook</Name>
         <ProductName>*</ProductName>
         <Preference>QUIET</Preference>
         <ThermalSensors>
                 <ThermalSensor>
                         <Type>pkg-temp-0</Type>
-             #Importand find and change the hwmon path to your cpu temp sensor and make sure it is static across reboots.
+         <!-- Important!!! set the hwmon path below to your actual cpu temp sensor path and make sure it is static.-->
                         <Path>/sys/class/hwmon/hwmon0/temp1_input</Path>
                         <AsyncCapable>1</AsyncCapable>
                 </ThermalSensor>
@@ -18,6 +19,7 @@
                         <TripPoints>
                                 <TripPoint>
                                         <SensorType>pkg-temp-0</SensorType>
+                                        <!-- Change to your preferred max temp.-->
                                         <Temperature>70000</Temperature>
                                         <type>passive</type>
                                         <ControlType>PARALLEL</ControlType>
