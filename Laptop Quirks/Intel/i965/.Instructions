@@ -1,1 +1,3 @@
-12
+Place the i965.conf file in /etc/modprobe.d/ and then reboot.
+
+Optimizations generally work for sandybridge+ newer igpus and should increase performance and lower power consuption.
