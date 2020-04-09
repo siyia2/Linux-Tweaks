@@ -1,1 +1,12 @@
+Edit /etc/systemd/logind.conf & uncomment:
 
+HandleLidSwitch=ignore
+HandleLidSwitchExternalPower=ignore
+HandleLidSwitchDocked=ignore
+
+This alone should suffice for modern laptops. If wifi still disconnects on lid close:
+
+1) Install acpid from your package manager
+2) Put the file called lidconf in /etc/acpi/events/etc/acpi/events.
+3) Put lid.sh into /etc/acpi/action/ and make sure it is executable.
+4) systemctl enable acpid && systemctl start acpid.
