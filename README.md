@@ -7,10 +7,13 @@ i am doing my best to describe each config in simple layman's terms with instruc
 
 * Cahe & I/O config
 
-* Zram setup
-
-* Wayland desktop setup (currently only under sway)
+* Laptop quirks (under constr)
 
 * Many scripts and services the average layman would find handy
 
-* Laptop quirks (under constr)
+* Various programs configs that i use
+
+* Wayland desktop setup (currently only under sway)
+
+* Zram setup
+
