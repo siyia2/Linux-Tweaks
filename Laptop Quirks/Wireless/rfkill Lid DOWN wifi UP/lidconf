@@ -1,0 +1,3 @@
+# run a script on lid open/close events
+event=button/lid
+action=/etc/acpi/actions/lid.sh "%e"

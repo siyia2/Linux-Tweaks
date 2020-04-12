@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<ThermalConfiguration>
+<Platform>
+        <!-- #Optional change the name of your device. -->
+        <Name>Fujitsu Lifebook</Name>
+        <ProductName>*</ProductName>
+        <Preference>QUIET</Preference>
+        <ThermalSensors>
+                <ThermalSensor>
+                        <Type>pkg-temp-0</Type>
+         <!-- Important!!! set the hwmon path below to your actual cpu temp sensor path and make sure it is static.-->
+                        <Path>/sys/class/hwmon/hwmon0/temp1_input</Path>
+                        <AsyncCapable>1</AsyncCapable>
+                </ThermalSensor>
+        </ThermalSensors>
+        <ThermalZones>
+                <ThermalZone>
+                        <Type>cpu package</Type>
+                        <TripPoints>
+                                <TripPoint>
+                                        <SensorType>pkg-temp-0</SensorType>
+                                        <!-- Change to your preferred max temp.-->
+                                        <Temperature>70000</Temperature>
+                                        <type>passive</type>
+                                        <ControlType>PARALLEL</ControlType>
+                                        <CoolingDevice>
+                                                <index>1</index>
+                                                <type>rapl_controller</type>
+                                                <influence> 50 </influence>
+                                                <SamplingPeriod> 2 </SamplingPeriod>
+                                        </CoolingDevice>
+                                        <CoolingDevice>
+                                                <index>2</index>
+                                                <type>intel_pstate</type>
+                                                <influence> 40 </influence>
+                                                <SamplingPeriod> 2 </SamplingPeriod>
+                                        </CoolingDevice>
+                                        <CoolingDevice>
+                                                <index>3</index>
+                                                <type>intel_powerclamp</type>
+                                                <influence> 30 </influence>
+                                                <SamplingPeriod> 2 </SamplingPeriod>
+                                        </CoolingDevice>
+                                        <CoolingDevice>
+                                                <index>4</index>
+                                                <type>cpufreq</type>
+                                                <influence> 20 </influence>
+                                                <SamplingPeriod> 2 </SamplingPeriod>
+                                        </CoolingDevice>
+                                        <CoolingDevice>
+                                                <index>5</index>
+                                                <type>Processor</type>
+                                                <influence> 10 </influence>
+                                                <SamplingPeriod> 2 </SamplingPeriod>
+                                        </CoolingDevice>
+                                </TripPoint>
+                        </TripPoints>
+                </ThermalZone>
+        </ThermalZones>
+</Platform>
+</ThermalConfiguration>

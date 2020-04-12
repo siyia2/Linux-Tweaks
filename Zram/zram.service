@@ -3,7 +3,7 @@ Description=Enable zswap
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/zswap
+ExecStart=/usr/bin/zram
 
 [Install]
 WantedBy=multi-user.target

@@ -43,7 +43,7 @@
 },
 "custom/gpu": {
 	"interval": 4,
-        "exec": " cat /sys/class/hwmon/hwmon3/temp1_input | rev | cut -c 4- | rev",
+        "exec": " cat /sys/class/hwmon/hwmon3/temp1_input | grep -Po '.*(?=...$)'",
 	"format": "  || Gpu: {}°C",
 		"tooltip": false,
 	    "max-length": 20,

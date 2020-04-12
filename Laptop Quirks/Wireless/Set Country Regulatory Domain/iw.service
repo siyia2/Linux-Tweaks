@@ -1,0 +1,10 @@
+[Unit]
+Description=Set Network Country Domain
+After=NetworkManager.service
+
+[Service]
+Type=oneshot
+ExecStart=sh /usr/bin/iw.sh
+
+[Install]
+WantedBy=multi-user.target
