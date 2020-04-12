@@ -7,7 +7,7 @@ i am doing my best to describe each config in simple layman's terms with instruc
 
 * Cahe & I/O config
 
-* Laptop quirks (under constr)
+* Laptop quirks
 
 * Many scripts and services the average layman would find handy
 
