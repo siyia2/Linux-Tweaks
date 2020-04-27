@@ -46,7 +46,7 @@ upload_rate = 50
 # Ratios
 
 ratio.max.set= 50
-ratio.upload.set=250M
+ratio.upload.set=256M
 
 ## Peer settings
 throttle.max_uploads.set = 100
@@ -75,7 +75,7 @@ network.max_open_sockets.set = 300
 pieces.preload.type= 1
 pieces.preload.min_size.set = 262144
 pieces.preload.min_rate.set = 5120
-pieces.memory.max.set = 256M
+pieces.memory.max.set = 512M
 network.xmlrpc.size_limit.set = 4M
 
 
