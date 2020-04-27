@@ -58,7 +58,8 @@ throttle.min_peers.seed.set = 30
 throttle.max_peers.seed.set = 80
 trackers.numwant.set = 80
 
-protocol.encryption.set = require,require_RC4,allow_incoming,try_outgoing
+protocol.encryption.set = allow_incoming,try_outgoing,enable_retry
+#protocol.encryption.set = prefer,require_RC4,allow_incoming,try_outgoing
 
 
 ## Limits for file handle resources, this is optimized for
@@ -71,7 +72,10 @@ network.max_open_sockets.set = 300
 
 ## Memory resource usage (increase if you have a large number of items loaded,
 ## and/or the available resources to spend)
-pieces.memory.max.set = 800M
+pieces.preload.type= 1
+pieces.preload.min_size.set = 262144
+pieces.preload.min_rate.set = 5120
+pieces.memory.max.set = 256M
 network.xmlrpc.size_limit.set = 4M
 
 
@@ -109,7 +113,6 @@ method.insert = d.session_file, simple, "cat=(session.path), (d.hash), .torrent"
 # Dirs & Dir Settings
 system.file.allocate = 1
 session.path.set = /mnt/D/rtorrent.session
-# The line below deletes also the torrent data upon torrent deletion in rtorrent to reverse comment it.
 method.set_key = event.download.erased,delete_erased,"execute=rm,-rf,--,$d.base_path="
 schedule2 = watch_directory_Firefox_Downloads, 10, 10, "load.start=/mnt/D/Firefox_Downloads/*.torrent,d.directory.set=/mnt/D/Torrents/"
 
