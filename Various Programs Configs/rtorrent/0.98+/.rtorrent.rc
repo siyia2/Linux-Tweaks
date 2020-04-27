@@ -109,7 +109,7 @@ method.insert = d.session_file, simple, "cat=(session.path), (d.hash), .torrent"
 # Dirs & Dir Settings
 system.file.allocate = 1
 session.path.set = /mnt/D/rtorrent.session
-# The line below deletes also the torrent data upon rtorrent deletion in rtorrent to reverse comment it.
+# The line below deletes also the torrent data upon torrent deletion in rtorrent to reverse comment it.
 method.set_key = event.download.erased,delete_erased,"execute=rm,-rf,--,$d.base_path="
 schedule2 = watch_directory_Firefox_Downloads, 10, 10, "load.start=/mnt/D/Firefox_Downloads/*.torrent,d.directory.set=/mnt/D/Torrents/"
 
