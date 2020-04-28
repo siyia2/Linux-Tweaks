@@ -44,9 +44,9 @@ download_rate = 0
 upload_rate = 50
 
 # Ratios
-
+ratio.enable=
+ratio.upload.set=50b
 ratio.max.set= 50
-ratio.upload.set=256M
 
 ## Peer settings
 throttle.max_uploads.set = 100
@@ -58,7 +58,9 @@ throttle.min_peers.seed.set = 30
 throttle.max_peers.seed.set = 80
 trackers.numwant.set = 80
 
+#Standard encryption options
 protocol.encryption.set = allow_incoming,try_outgoing,enable_retry
+#To force encryption on all connections comment above and uncomment below line
 #protocol.encryption.set = prefer,require_RC4,allow_incoming,try_outgoing
 
 
