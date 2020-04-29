@@ -39,14 +39,15 @@ protocol.pex.set= yes
 trackers.use_udp.set = yes
 
 # Global upload and download rate in KiB. "0" for unlimited.
-
 download_rate = 0
-upload_rate = 50
+upload_rate = 60
 
-# Ratios
-ratio.enable=
-ratio.upload.set=50b
-ratio.max.set= 50
+## Ratios
+ratio.enable= 
+ratio.upload.set= 256M
+ratio.min.set= 50
+ratio.max.set= 100
+method.set = group.seeding.ratio.command, "d.close= ;"
 
 ## Peer settings
 throttle.max_uploads.set = 100
@@ -58,9 +59,9 @@ throttle.min_peers.seed.set = 30
 throttle.max_peers.seed.set = 80
 trackers.numwant.set = 80
 
-#Standard encryption options
+#Standard encryption options for rtorrent
 protocol.encryption.set = allow_incoming,try_outgoing,enable_retry
-#To force encryption on all connections comment above and uncomment below line
+#Maximum enforced encryption,(cannot use magnet links with rtorrent)
 #protocol.encryption.set = prefer,require_RC4,allow_incoming,try_outgoing
 
 
@@ -112,9 +113,10 @@ method.insert = d.data_path, simple,\
         (cat, (d.directory), /, (d.name))"
 method.insert = d.session_file, simple, "cat=(session.path), (d.hash), .torrent"
 
-# Dirs & Dir Settings
+## Dirs & Dir Settings
 system.file.allocate = 1
-session.path.set = /mnt/D/rtorrent.session
+session.path.set = /mnt/D/.rtorrent.session
+#The line below deletes torrent&data when you remove a torrent from the list comment it to revert it.
 method.set_key = event.download.erased,delete_erased,"execute=rm,-rf,--,$d.base_path="
 schedule2 = watch_directory_Firefox_Downloads, 10, 10, "load.start=/mnt/D/Firefox_Downloads/*.torrent,d.directory.set=/mnt/D/Torrents/"
 
