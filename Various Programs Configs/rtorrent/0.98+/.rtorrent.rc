@@ -75,7 +75,7 @@ network.max_open_sockets.set = 300
 
 ## Memory resource usage (increase if you have a large number of items loaded,
 ## and/or the available resources to spend)
-pieces.preload.type= 2
+pieces.preload.type= 1
 pieces.preload.min_size.set = 262144
 pieces.preload.min_rate.set = 5120
 pieces.memory.max.set = 512M
