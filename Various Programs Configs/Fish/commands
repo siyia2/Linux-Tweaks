@@ -1,0 +1,2 @@
+set fish_color_search_match --background=purple
+set fish_color_valid_path --underline
