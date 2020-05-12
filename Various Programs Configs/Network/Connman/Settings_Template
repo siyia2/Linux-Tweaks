@@ -1,0 +1,17 @@
+### Template for Conman Wireless Connection static IP under /var/lib/connman/wifi_hash/settings 
+
+[wifi_f4ec388fafbd_636f6e6e2d78393266353330_managed_psk]
+Name=conn-x92f530
+SSID=636f6e6e2d78393266353330
+Frequency=2462
+Favorite=true
+AutoConnect=true
+Modified=2020-05-12T11:30:08Z
+Passphrase=1111111111
+IPv4.method=manual
+IPv4.netmask_prefixlen=24
+IPv4.local_address=192.168.1.31
+IPv4.gateway=192.168.1.1
+IPv6.method=off
+IPv6.privacy=disabled
+Nameservers=1.1.1.1,8.8.8.8;
