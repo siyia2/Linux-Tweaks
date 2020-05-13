@@ -21,11 +21,11 @@ set $menu dmenu-wl_path | dmenu-wl | xargs swaymsg exec --
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-#output "*" bg /home/siyia/Pictures/1056644-arch-linux-wallpaper-1920x1080-for-4k.jpg fill
+output "*" bg /home/siyia/Pictures/1056644-arch-linux-wallpaper-1920x1080-for-4k.jpg fill
 #
 # Example configuration:
 #
-#   output HDMI-A-1 mode 1920x1080@74.973000Hz 
+   output HDMI-A-1 mode 1920x1080@74.973000Hz 
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
@@ -36,7 +36,7 @@ input '*' {
 xkb_numlock enabled
 pointer_accel 1
 accel_profile adaptive
-scroll_factor 1.5
+scroll_factor 2
 }
 
 seat seat0 xcursor_theme Pulse-Glass-Sapphire-Regular
@@ -71,53 +71,56 @@ gaps inner 5
 gaps outer -5
 default_border pixel 4
 
+
 ### STARTUP PROGRAMS
 
 exec xhost local:root
+#exec --no-startup-id kitty
 exec /home/siyia/.sound_fix.sh
-exec --no-startup-id doublecmd --no-splash
+exec doublecmd --no-splash
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec mako --anchor bottom-right --default-timeout 5000
+exec mako --anchor bottom-right --background-color=#002B36 --default-timeout 8000
 exec redshift
-exec env QT_QPA_PLATFORM=xcb qbittorrent
+exec kitty -e Rtorrent-BitorrentClient
+#exec killall s1.sh
+#exec /home/siyia/.config/waybar/modules/s1.sh
 
 #### WINDOW SETUP
 
-for_window [class="PlayOnLinux"] move container to workspace 3: Steam/Gaming
-for_window [title="Friends List"] move container to workspace 3: Steam/Gaming
-for_window [class="Steam"] move container to workspace 3: Steam/Gaming
-for_window [app_id="uget"] move container to workspace 5: Torrents/P2P
-for_window [class="qBittorrent"] move container to workspace 5: Torrents/P2P
+for_window [class="PlayOnLinux"] move container to workspace 3: Steam
+for_window [title="Friends List"] move container to workspace 3: Steam
+for_window [class="Steam"] move container to workspace 3: Steam
+for_window [app_id="uget"] move container to workspace 5: P2P
+for_window [title="Rtorrent-BitorrentClient"] move container to workspace 5: P2P
 for_window [app_id="firefox"] move container to workspace 1: Web/Mail
 for_window [class="Thunderbird"] move container to workspace 1: Web/Mail
 for_window [app_id="firefox"] focus
-for_window [class="Double Commander"] move container to workspace 2: FM 
-for_window [class="Double Commander"] focus
+for_window [class="Doublecmd"] move container to workspace 2: FM 
+for_window [class="Doublecmd"] focus
 ##for_window [app_id="kitty"] move container to workspace 2: FM
 
 ### POWER MANAGEMENT
 
  exec swayidle -w \
-before-sleep 'swaylock -C /home/siyia/.config/swaylock.conf' \
+before-sleep 'swaylock -e -f -c 000000' \
 timeout 6001 'systemctl suspend' \
-timeout 601 'swaylock -e -f -c 000000' \
+timeout 501 'swaylock -e -f -c 000000' \
 timeout 1001 'swaymsg "output * dpms off"' \
-timeout 31 'if pgrep -x swaylock; then swaymsg "output * dpms off"; fi' \
 resume  'swaymsg "output * dpms on"'
 
 ###timeout 301 'swaylock -C /home/siyia/.config/swaylock.conf' \
 bindsym $mod+f11 exec swaylock swaylock -e -f -c 000000
 
 # wayland version
-
+#timeout 31 'if pgrep -x swaylock; then swaymsg "output * dpms off"; fi' \
 for_window [app_id="firefox"] inhibit_idle focus
 for_window [app_id="TeamViewer"] inhibit_idle open
 for_window [app_id="dolphin-emu"] inhibit_idle open
 for_window [class="mpv"] inhibit_idle fullscreen
 for_window [app_id="mpv"] inhibit_idle fullscreen
 #
-# This will lock your screen after 601 seconds of inactivity, then turn off
-# your displays after another 1001 seconds, and turn your screens back on when
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
 
 ### Key bindings
@@ -125,7 +128,7 @@ for_window [app_id="mpv"] inhibit_idle fullscreen
 ### CUSTOM
 
 bindsym $mod+x exec $term
-bindsym $mod+f exec doublecmd --no-splash
+bindsym $mod+f exec env QT_QPA_PLATFORM=xcb doublecmd --no-splash
 bindsym $mod+w exec env MOZ_ENABLE_WAYLAND=1 firefox
 bindsym ctrl+alt+delete exec xfce4-taskmanager
 bindsym ctrl+alt+KP_delete exec xfce4-taskmanager
@@ -194,9 +197,9 @@ bindsym button2 kill
     # switch to workspace
     bindsym $mod+1 workspace 1: Web/Mail
     bindsym $mod+2 workspace 2: FM
-    bindsym $mod+3 workspace 3: Steam/Gaming 
+    bindsym $mod+3 workspace 3: Steam 
     bindsym $mod+4 workspace 4: Games/Misc
-    bindsym $mod+5 workspace 5: Torrents/P2P
+    bindsym $mod+5 workspace 5: P2P
     bindsym $mod+6 workspace 6
     bindsym $mod+7 workspace 7
     bindsym $mod+8 workspace 8
@@ -205,9 +208,9 @@ bindsym button2 kill
     # move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace 1: Web/Mail
     bindsym $mod+Shift+2 move container to workspace 2: FM
-    bindsym $mod+Shift+3 move container to workspace 3: Steam/Gaming
+    bindsym $mod+Shift+3 move container to workspace 3: Steam
     bindsym $mod+Shift+4 move container to workspace 4: Games/Misc
-    bindsym $mod+Shift+5 move container to workspace 5: Torrents/P2P
+    bindsym $mod+Shift+5 move container to workspace 5: P2P
     bindsym $mod+Shift+6 move container to workspace 6
     bindsym $mod+Shift+7 move container to workspace 7
     bindsym $mod+Shift+8 move container to workspace 8
@@ -283,10 +286,22 @@ bindsym $mod+r mode "resize"
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
+#bar {
+    #position bottom
 
+    # When the status_command prints a new line to stdout, swaybar updates.
+    # The default just shows the current date and time.
+
+  #  status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
+
+   # colors {
+    #    statusline #ffffff
+     #   background #323232
+      #  inactive_workspace #32323200 #32323200 #5c5c5c
+    #}
+#}
 bar {
-   
-   swaybar_command  waybar
+    swaybar_command  waybar
 
 }
 
