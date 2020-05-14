@@ -115,7 +115,7 @@ bindsym $mod+f11 exec swaylock swaylock -e -f -c 000000
 #timeout 31 'if pgrep -x swaylock; then swaymsg "output * dpms off"; fi' \
 for_window [app_id="firefox"] inhibit_idle focus
 for_window [app_id="TeamViewer"] inhibit_idle open
-for_window [app_id="dolphin-emu"] inhibit_idle open
+for_window [class="Dolphin"] inhibit_idle focus
 for_window [class="mpv"] inhibit_idle fullscreen
 for_window [app_id="mpv"] inhibit_idle fullscreen
 #
