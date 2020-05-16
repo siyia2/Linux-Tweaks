@@ -51,6 +51,20 @@ input "*" {
     xkb_options grp:alt_shift_toggle
 }
 
+### Control Mouse with Keyboard
+
+bindsym $mod+KP_2 seat "*" cursor move 0 10
+bindsym $mod+KP_8 seat "*" cursor move 0 -10
+bindsym $mod+KP_9 seat "*" cursor move 10 -10
+bindsym $mod+KP_7 seat "*" cursor move -10 -10
+bindsym $mod+KP_4 seat "*" cursor move -10 0
+bindsym $mod+KP_1 seat "*" cursor move -10 10
+bindsym $mod+KP_3 seat "*" cursor move 10 10
+bindsym $mod+KP_6 seat "*" cursor move 10 0
+#bindsym $mod+KP_5 seat "*" cursor press button1
+#bindsym --release $mod+KP_5 seat "*" cursor release button1
+bindsym $mod+KP_5 seat "*" cursor press button1; seat "*" cursor release button1
+
 ### FONTS
 
 font Ubuntu 10
