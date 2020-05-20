@@ -17,7 +17,7 @@ set $right l
 set $term kitty
 # Your preferred application launcher
 # Note: it's recommended that you pass the final command to sway
-set $menu dmenu-wl_path | dmenu-wl | xargs swaymsg exec --
+set $menu dmenu-wl_run -i -ec -et 4
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
