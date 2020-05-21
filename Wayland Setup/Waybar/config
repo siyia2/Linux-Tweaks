@@ -1,7 +1,7 @@
 {
     "position": "bottom",
     "layer": "bottom",
-    	"width": 1919,
+    	"width": 1920,
 	"height": 29,
     "modules-left": ["sway/workspaces" , "sway/mode"],
     "modules-center": ["cpu", "memory", "temperature","custom/cpufan","custom/gpu","custom/gpufan"],
