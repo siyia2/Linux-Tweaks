@@ -7,7 +7,7 @@
     "modules-center": ["cpu", "memory", "temperature","custom/cpufan","custom/gpu","custom/gpufan"],
     "modules-right": ["custom/kb","pulseaudio","network", "clock","clock#utc", "custom/acpi"],
     "sway/window": {
-        "max-length": 100000
+        "max-length": 1920
     },
 
 "custom/kb": {
