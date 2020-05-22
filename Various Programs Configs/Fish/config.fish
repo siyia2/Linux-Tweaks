@@ -1,1 +1,0 @@
-#screenfetch -w
