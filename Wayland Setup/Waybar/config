@@ -1,16 +1,17 @@
 {
     "position": "bottom",
     "layer": "bottom",
+    	"width": 1920,
 	"height": 29,
     "modules-left": ["sway/workspaces" , "sway/mode"],
     "modules-center": ["cpu", "memory", "temperature","custom/cpufan","custom/gpu","custom/gpufan"],
-    "modules-right": ["custom/kb","pulseaudio","network", "clock", "custom/acpi"],
+    "modules-right": ["custom/kb","pulseaudio","network", "clock","clock#utc", "custom/acpi"],
     "sway/window": {
-        "max-length": 100000
+        "max-length": 1920
     },
 
 "custom/kb": {
-  "exec": "/home/siyia/.config/waybar/modules/kb-layout.sh",
+  "exec": "/home/siyia/.config/waybar/modules/s1.sh",
 		"tooltip": false
 },
 
@@ -19,7 +20,6 @@
     "interval": 8,
     "format": "Mem: {}%   ||",
 		"tooltip": false,
-    "max-length": 20,
 "on-click": "xfce4-taskmanager"
 },
 
@@ -28,7 +28,6 @@
     "interval": 2,
     "format": "Load: {usage}% ",
 		"tooltip": false,
-    "max-length": 40,
 "on-click": "xfce4-taskmanager"
 },
 "temperature": {
@@ -38,22 +37,19 @@
 	"format-critical": "Cpu:{temperatureC}°C",
 	"format":   "Cpu: {temperatureC}°C",
 		"tooltip": false,
-	    "max-length": 20,
 "on-click": "xfce4-taskmanager"
 },
 "custom/gpu": {
-	"interval": 4,
-        "exec": " cat /sys/class/hwmon/hwmon3/temp1_input | grep -Po '.*(?=...$)'",
+	"interval": 2,
+        "exec": "cat /sys/class/hwmon/hwmon3/temp1_input | grep -Po '.*(?=...$)'",
 	"format": "  || Gpu: {}°C",
 		"tooltip": false,
-	    "max-length": 20,
 "on-click": "xfce4-taskmanager"
 },
 
 "custom/acpi": {
 	"format": "⏻  ",
 		"tooltip": false,
-	    "max-length": 4,
 "on-click": "poweroff",
 "on-click-middle": "reboot",
 "on-click-right": "swaymsg reload && systemctl suspend"
@@ -64,25 +60,22 @@
         "exec": "free -t | awk 'NR == 3 {print $3/$2*100}'",
 	"format": "Swap: {}%   || ",
 		"tooltip": false,
-	    "max-length": 20,
 "on-click": "xfce4-taskmanager"
 },
 
 "custom/gpufan": {
-	"interval": 4,
-        "exec": "  cat /sys/class/hwmon/hwmon2/fan2_input",
+	"interval": 2,
+        "exec": "cat /sys/class/hwmon/hwmon2/fan2_input",
 	"format": " @ {} rpm ",
 		"tooltip": false,
-	    "max-length": 20,
 "on-click": "xfce4-taskmanager"
 },
 
 "custom/cpufan": {
-	"interval": 4,
-        "exec": "  cat /sys/class/hwmon/hwmon2/fan1_input",
+	"interval": 2,
+        "exec": "cat /sys/class/hwmon/hwmon2/fan1_input",
 	"format": " @ {} rpm",
 		"tooltip": false,
-	    "max-length": 20,
 "on-click": "xfce4-taskmanager"
 },
     "battery": {
@@ -92,14 +85,14 @@
     },
 
 "network": {
-    "interface": "wlp0s18f2u2",
-    "format": "{ifname}",
+    "interface": "wlan0",
+    "format": "conn-x92f530 ",
     "format-wifi": "{essid} ({signalStrength}%) ",
-    "format-ethernet": "Connected ",
+    "format-ethernet": "conn-x92f530 ",
     "format-disconnected": "{ifname}",
     "tooltip-format": "{ifname}",
-"on-click": "kitty -e nmtui-connect",
-"on-click-middle":"kitty -e nmtui-edit",
+"on-click": "cmst",
+
 	"tooltip": false
 },
 
@@ -126,8 +119,15 @@
 },
 
     "clock": {
-        "format": "{:%A, %d %B %Y, %H:%M  ||}",
+        "format": "{:%A, %d %B %Y, %H:%M   ||}",
 	"on-click": "gsimplecal",
 	"tooltip": false
+    },
+   
+  "clock#utc": {
+  	"format": "UTC {:%H:%M     ||}",
+  	"on-click": "gsimplecal",
+        "timezone": "Africa/Accra"
+
     }
 }
