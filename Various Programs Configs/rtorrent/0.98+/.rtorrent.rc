@@ -137,4 +137,17 @@ log.open_file = "log", (cfg.logfile)
 log.add_output = "info", "log"
 #log.add_output = "tracker_debug", "log"
 
+## Disable in built DNS cache in favor of an external one fe systemd-resolved
+network.http.dns_cache_timeout.set=0
+
+##Rtorrent-ps gui modification
+
+#method.set_key = ui.column.render, (ui.column.spec, 700)
+#method.set_key = ui.column.render, (ui.column.spec, 500)
+#method.set_key = ui.column.render, (ui.column.spec, 200)
+#method.set_key = ui.column.render, (ui.column.spec, 210)
+#method.set_key = ui.column.render, (ui.column.spec, 220)
+#method.set_key = ui.column.render, (ui.column.spec, 120)
+#method.set_key = ui.column.render, (ui.column.spec, 980)
+
 ### END of rtorrent.rc ###
