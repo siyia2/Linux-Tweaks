@@ -119,7 +119,7 @@ session.path.set = /mnt/D/.rtorrent.session
 #The line below deletes torrent&data when you remove a torrent from the list comment it to revert it.
 method.set_key = event.download.erased,delete_erased,"execute=rm,-rf,--,$d.base_path="
 schedule2 = watch_directory_Firefox_Downloads, 10, 10, "load.start=/mnt/D/Firefox_Downloads/*.torrent,d.directory.set=/mnt/D/Torrents/"
-# Set default download Directory
+#Set default download Directory including magnet links downloads
 directory.default.set = /mnt/D/Torrents/
 
 
