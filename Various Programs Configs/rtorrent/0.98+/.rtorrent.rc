@@ -44,7 +44,7 @@ upload_rate = 60
 
 ## Ratios
 ratio.enable= 
-ratio.upload.set= 256M
+ratio.upload.set= 512M
 ratio.min.set= 50
 ratio.max.set= 100
 method.set = group.seeding.ratio.command, "d.close= ;"
