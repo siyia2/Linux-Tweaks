@@ -17,7 +17,7 @@ set $right l
 set $term kitty
 # Your preferred application launcher
 # Note: it's recommended that you pass the final command to sway
-set $menu dmenu-wl_run -i
+set $menu bemenu-run -H 25 --fn Ubuntu --tf '#00FFFF'  --hf '#00FFFF' --hb '#1793D1'
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
