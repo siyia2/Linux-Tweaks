@@ -89,14 +89,11 @@ default_border pixel 4
 ### STARTUP PROGRAMS
 
 exec xhost local:root
-#exec --no-startup-id kitty
-exec /home/siyia/.sound_fix.sh
 exec doublecmd --no-splash
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec mako --anchor bottom-right --background-color=#002B36 --default-timeout 8000
 exec redshift
 exec kitty -e Rtorrent-BitorrentClient
-#exec killall s1.sh
 #exec /home/siyia/.config/waybar/modules/s1.sh
 
 #### WINDOW SETUP
@@ -122,11 +119,10 @@ timeout 501 'swaylock -e -f -c 000000' \
 timeout 1001 'swaymsg "output * dpms off"' \
 resume  'swaymsg "output * dpms on"'
 
-###timeout 301 'swaylock -C /home/siyia/.config/swaylock.conf' \
+#timeout 31 'if pgrep -x swaylock; then swaymsg "output * dpms off"; fi' \
+
 bindsym $mod+f11 exec swaylock swaylock -e -f -c 000000
 
-# wayland version
-#timeout 31 'if pgrep -x swaylock; then swaymsg "output * dpms off"; fi' \
 for_window [app_id="firefox"] inhibit_idle focus
 for_window [app_id="TeamViewer"] inhibit_idle open
 for_window [class="Dolphin"] inhibit_idle focus
