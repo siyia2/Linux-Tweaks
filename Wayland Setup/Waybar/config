@@ -5,7 +5,7 @@
 	"height": 29,
     "modules-left": ["sway/workspaces" , "sway/mode"],
     "modules-center": ["cpu", "memory", "temperature","custom/cpufan","custom/gpu","custom/gpufan"],
-    "modules-right": ["custom/kb","pulseaudio","network", "clock","clock#utc", "custom/acpi"],
+    "modules-right": ["custom/kb","custom/Torrent","pulseaudio","network", "clock","clock#utc", "custom/acpi"],
     "sway/window": {
         "max-length": 1920
     },
@@ -53,6 +53,14 @@
 "on-click": "poweroff",
 "on-click-middle": "reboot",
 "on-click-right": "swaymsg reload && systemctl suspend"
+},
+
+"custom/Torrent": {
+	"format": " ↑ ↓",
+		"tooltip": false,
+"on-click": "kitty -e Rtorrent-BitorrentClient ",
+"on-scroll-down":"swaymsg workspace back_and_forth",
+"on-scroll-up":"swaymsg workspace 5: P2P"
 },
 
 "custom/swap": {
@@ -127,6 +135,7 @@
   "clock#utc": {
   	"format": "UTC {:%H:%M     ||}",
   	"on-click": "gsimplecal",
+  	"tooltip": false,
         "timezone": "Africa/Accra"
 
     }
