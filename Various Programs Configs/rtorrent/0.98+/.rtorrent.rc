@@ -105,8 +105,8 @@ pieces.hash.on_completion.set = yes
 #network.http.ssl_verify_host.set = 0
 
 # Sort the main view by name
-view.sort_current = main,greater=d.name=
-view.sort_new = main,less=d.name=
+view.sort_current = main,less=d.name=
+view.sort_new = main,greater=d.name=
 view.sort = main
 
 ## Some additional values and commands
