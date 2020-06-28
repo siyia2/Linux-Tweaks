@@ -1,5 +1,3 @@
-#!/usr/bin/bash
-
 # The Sway configuration file in ~/.config/sway/config calls this script.
 # You should see changes to the status bar after saving this script.
 # If not, do "killall swaybar" and $mod+Shift+c to reload the configuration.
