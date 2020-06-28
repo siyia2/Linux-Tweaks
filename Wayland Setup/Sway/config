@@ -93,7 +93,7 @@ exec doublecmd --no-splash
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec mako --anchor bottom-right --background-color=#002B36 --default-timeout 8000
 exec redshift
-exec alacritty -e Rtorrent-BitorrentClient
+exec alacritty -t Rtorrent-BitorrentClient -e Rtorrent-BitorrentClient
 #exec /home/siyia/.config/waybar/modules/s1.sh
 
 #### WINDOW SETUP
