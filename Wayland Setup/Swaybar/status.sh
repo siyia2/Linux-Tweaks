@@ -14,11 +14,13 @@ cpu_temp=$(cat /sys/class/hwmon/hwmon0/temp1_input | grep -Po '.*(?=...$)')
 gpu_usage=$(cat /sys/class/drm/card0/device/gpu_busy_percent)
 gpu_temp=$(cat /sys/class/hwmon/hwmon3/temp1_input | grep -Po '.*(?=...$)')
 gpu_fan=$(cat /sys/class/hwmon/hwmon2/fan2_input)
+vram_total=4096
 gpu_vram_mb=$(cat /sys/class/drm/card0/device/mem_info_vram_used | grep -Po '.*(?=......$)')
+vram_percent=$(awk "BEGIN { pc=100*${gpu_vram_mb}/${vram_total}; i=int(pc); print (pc-i<0.5)?i:i+1 }")
 
 # The abbreviated weekday (e.g., "Sat"), followed by the ISO-formatted date
 # like 2018-10-06 and the time (e.g., 14:01)
-date_formatted=$(date "+%A %d %B %Y %H:%M")
+date_formatted=$(date "+%a %d %b %Y %H:%M")
 time_utc=$(date -u "+%H:%M")
 # Get the Linux version but remove the "-1-ARCH" part
 linux_version=$(uname -r | cut -d '-' -f1)
@@ -32,5 +34,5 @@ ssid=$(iwgetid wlan0 -r)
 
 
 # Emojis and characters for the status bar
-# 💎 💻 💡 🔌 ⚡ 📁 ⌨️   \|
-echo RAM: $ram_usage "|" SWAP: $swap_usage "|" VRAM: $gpu_vram_mb MB " " CPU: $cpu_load @ $cpu_temp°C @ $cpu_fan rpm "	" GPU: $gpu_usage% @ $gpu_temp°C @ $gpu_fan rpm "		" 🐧 $linux_version " " 🖧 $ssid " " ⌨️ $kb_layout " " $audio_info $date_formatted " "UTC: $time_utc
+# 💎 💻 💡 🔌 ⚡ 📁 ⌨️   🖧 \|
+echo RAM: $ram_usage "|" ZSWAP: $swap_usage "|" VRAM: $vram_percent% "|" CPU: $cpu_load% @ $cpu_temp°C @ $cpu_fan rpm "|" GPU: $gpu_usage.0% @ $gpu_temp°C @ $gpu_fan rpm "		" 🐧 $linux_version " " 🖧 $ssid " " ⌨️ $kb_layout " " $audio_info $date_formatted " "UTC $time_utc
