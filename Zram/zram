@@ -1,6 +1,7 @@
 #! /bin/sh
 
 modprobe zram
+ echo zstd > /sys/module/zswap/parameters/compressor
 #It is important to set compression alg before the creation of zram device otherwise default compression alg is always used.
  echo zstd > /sys/block/zram0/comp_algorithm
 wait
