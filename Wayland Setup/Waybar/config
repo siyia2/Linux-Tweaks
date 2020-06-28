@@ -58,7 +58,7 @@
 "custom/Torrent": {
 	"format": " ↑ ↓",
 		"tooltip": false,
-"on-click": "kitty -e Rtorrent-BitorrentClient ",
+"on-click": "alacritty -t Rtorrent-BitorrentClient -e Rtorrent-BitorrentClient",
 "on-scroll-down":"swaymsg workspace back_and_forth",
 "on-scroll-up":"swaymsg workspace 5: P2P"
 },
