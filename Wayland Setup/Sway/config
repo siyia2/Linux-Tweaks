@@ -14,7 +14,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term kitty
+set $term alacritty
 # Your preferred application launcher
 # Note: it's recommended that you pass the final command to sway
 set $menu bemenu-run -H 24 --fn Ubuntu --tf '#00FFFF'  --hf '#00FFFF' --hb '#1793D1' -i -w
@@ -93,7 +93,7 @@ exec doublecmd --no-splash
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec mako --anchor bottom-right --background-color=#002B36 --default-timeout 8000
 exec redshift
-exec kitty -e Rtorrent-BitorrentClient
+exec alacritty -e Rtorrent-BitorrentClient
 #exec /home/siyia/.config/waybar/modules/s1.sh
 
 #### WINDOW SETUP
