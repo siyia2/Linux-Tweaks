@@ -33,4 +33,4 @@ ssid=$(iwgetid wlan0 -r)
 
 # Emojis and characters for the status bar
 # 💎 💻 💡 🔌 ⚡ 📁 ⌨️   \|
-echo RAM: $ram_usage "|" SWAP: $swap_usage "|" VRAM: $gpu_vram_mb MB "	" CPU: $cpu_load @ $cpu_temp°C @ $cpu_fan rpm "	" GPU: $gpu_usage% @ $gpu_temp°C @ $gpu_fan rpm "		" 🐧 $linux_version " " 🖧 $ssid " " ⌨️ $kb_layout " " $audio_info $date_formatted " "UTC: $time_utc
+echo RAM: $ram_usage "|" SWAP: $swap_usage "|" VRAM: $gpu_vram_mb MB " " CPU: $cpu_load @ $cpu_temp°C @ $cpu_fan rpm "	" GPU: $gpu_usage% @ $gpu_temp°C @ $gpu_fan rpm "		" 🐧 $linux_version " " 🖧 $ssid " " ⌨️ $kb_layout " " $audio_info $date_formatted " "UTC: $time_utc
