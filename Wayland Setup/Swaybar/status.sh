@@ -7,7 +7,7 @@ uptime_formatted=$(uptime | cut -d ',' -f1  | cut -d ' ' -f4,5)
 
 ram_usage=$(free -t | awk 'NR == 2 {printf("%.d%"), $3/$2*100}')
 swap_usage=$(free -t | awk 'NR == 3 {printf(" %.2f%"), $3/$2*100}')
-cpu_load=$(cat <(grep 'cpu ' /proc/stat) <(sleep 1 && grep 'cpu ' /proc/stat) | awk -v RS="" '{printf "%.1f%\n", ($13-$2+$15-$4)*100/($13-$2+$15-$4+$16-$5)}')
+cpu_load=$(top -n 1 -b | awk '/^%Cpu/{print $2}')
 cpu_fan=$(cat /sys/class/hwmon/hwmon2/fan1_input)
 cpu_temp=$(cat /sys/class/hwmon/hwmon0/temp1_input | grep -Po '.*(?=...$)')
 
