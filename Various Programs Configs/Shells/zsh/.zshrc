@@ -1,4 +1,4 @@
-echo 'Welcome to the Terminal!'
+echo 'Welcome To The Terminal!'
 echo 'Package Managers: "pacman", "yay" (aur)'
 echo 'Basic Functions: "-Ss" (search), "-S" (install), "-R" (remove)'
 echo " "
@@ -9,12 +9,12 @@ SAVEHIST=1000
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/siyia/.zshrc'
-
 autoload -Uz compinit
 compinit
+# End of lines added by compinstall
+# Plugins in use and settings
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-
 ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=white,underline
 ZSH_HIGHLIGHT_STYLES[precommand]=fg=cyan,bold
 ZSH_HIGHLIGHT_STYLES[command]=fg=white,bold
@@ -28,6 +28,7 @@ ZSH_HIGHLIGHT_STYLES[builtin]=fg=green
 ZSH_HIGHLIGHT_STYLES[function]=fg=cyan
 ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]=fg=green
 ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]=fg=green
+# Prompt setup
 PS1="%F{cyan}%n%F{magenta}@%F{cyan}%m%F{magenta}@%F{cyan}%~ %1 %#: "
+# Custom Key Bindings
 bindkey "\e" "kill-line"
-# End of lines added by compinstall
