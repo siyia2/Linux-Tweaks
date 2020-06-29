@@ -24,7 +24,7 @@ ZSH_HIGHLIGHT_STYLES[history-expansion]=fg=blue
 ZSH_HIGHLIGHT_STYLES[commandseparator]=fg=magenta
 ZSH_HIGHLIGHT_STYLES[reserved-word]=fg=white,underline
 ZSH_HIGHLIGHT_STYLES[alias]=fg=cyan
-ZSH_HIGHLIGHT_STYLES[builtin]=fg=yellow
+ZSH_HIGHLIGHT_STYLES[builtin]=fg=green
 ZSH_HIGHLIGHT_STYLES[function]=fg=cyan
 ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]=fg=green
 ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]=fg=green
