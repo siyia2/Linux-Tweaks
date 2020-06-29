@@ -29,5 +29,5 @@ ZSH_HIGHLIGHT_STYLES[function]=fg=cyan
 ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]=fg=green
 ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]=fg=green
 PS1="%F{cyan}%n%F{magenta}@%F{cyan}%m%F{magenta}@%F{cyan}%~ %1 %#: "
-# End of lines added by compinstall
 bindkey "\e" "kill-line"
+# End of lines added by compinstall
