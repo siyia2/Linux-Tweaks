@@ -28,7 +28,7 @@ linux_version=$(uname -r | cut -d '-' -f1)
 volume=$(pactl list sinks | grep Volume | head -n1 | awk '{print $5}')
 audio_info=$(pactl list sinks | grep Mute | awk -v vol="${volume}" '{print $2=="no"? "🔉 " vol : "🔇 " vol}')
 
-kb_layout=$(swaymsg -t get_inputs | jq '.[] | select(.identifier == "6700:19550:SEMICO_USB_Keyboard") | .xkb_active_layout_name' | head -n 1| tail -c +2 | head -c -2)
+kb_layout=$(swaymsg -t get_inputs | jq '.[] | select(.identifier == "6700:19550:SEMICO_USB_Keyboard") | .xkb_active_layout_name' | tail -1| tail -c +2 | head -c -2)
 
 ssid=$(iwgetid wlan0 -r)
 
