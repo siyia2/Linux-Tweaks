@@ -1,4 +1,4 @@
-# Greeting, delete if you dont want any
+# Greeting, delete it if you dont want any
 echo 'Welcome To The Terminal!'
 echo 'Package Managers: "pacman", "yay" (aur)'
 echo 'Basic Functions: "-Ss" (search), "-S" (install), "-R" (remove)'
