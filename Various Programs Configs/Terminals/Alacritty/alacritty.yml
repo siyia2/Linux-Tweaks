@@ -1,15 +1,22 @@
 # Font configuration (changes require restart)
 font:
-  family: Monospace Regular
-  style: Regular
-  size: 12
-# Cursor blinking
-#cursor_blink:
-#cursor_blink_interval: 300
+  size: 14
+  # The normal (roman) font face to use.
+  normal:
+    family: inconsolata
+    style: Regular
 
+  # The bold font face
+  bold:
+    family: inconsolata
+    style: Bold
+  
+  italic:
+    family: inconsolata
+    style: Italic
 
 shell:
-  program: /usr/bin/fish
+  program: /bin/zsh
 
 
 scrolling:
@@ -30,8 +37,7 @@ scrolling:
   # Specifying `0` will disable faux scrolling.
   scroll_escape: 3
 
-  # Scroll to the bottom when new text is written to the terminal.
-  #auto_scroll: false
+# Opacity
 background_opacity: 0.70
 
 # Colors (Kitty)
