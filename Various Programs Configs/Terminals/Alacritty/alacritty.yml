@@ -4,7 +4,7 @@ font:
   # The normal (roman) font face to use.
   normal:
     family: inconsolata
-    style: Regular
+    style: Medium
 
   # The bold font face
   bold:
