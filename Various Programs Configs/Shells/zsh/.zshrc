@@ -1,3 +1,4 @@
+# Greeting, delete if you dont want any
 echo 'Welcome To The Terminal!'
 echo 'Package Managers: "pacman", "yay" (aur)'
 echo 'Basic Functions: "-Ss" (search), "-S" (install), "-R" (remove)'
@@ -12,7 +13,7 @@ zstyle :compinstall filename '/home/siyia/.zshrc'
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
-# Plugins in use and settings
+# Plugins in use&settings
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=white,underline
