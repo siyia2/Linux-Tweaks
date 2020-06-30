@@ -29,7 +29,7 @@ ZSH_HIGHLIGHT_STYLES[builtin]=fg=green
 ZSH_HIGHLIGHT_STYLES[function]=fg=cyan
 ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]=fg=green
 ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]=fg=green
-# Prompt setup
+# Prompt config
 PS1="%F{cyan}%n%F{magenta}@%F{cyan}%m%F{magenta}@%F{cyan}%~ %1 %#: "
 # Custom Key Bindings
 bindkey "\e" "kill-line"
