@@ -104,8 +104,8 @@ for_window [class="Steam"] move container to workspace 3: Steam
 for_window [app_id="uget"] move container to workspace 5: P2P
 for_window [title="Rtorrent-BitorrentClient"] move container to workspace 5: P2P
 for_window [app_id="firefox"] move container to workspace 1: Web/Mail
-for_window [class="Thunderbird"] move container to workspace 1: Web/Mail
-for_window [app_id="firefox"] focus
+for_window [app_id="thunderbird"] move container to workspace 1: Web/Mail
+for_window [app_id="thunderbird"] focusfor_window [app_id="firefox"] focus
 for_window [class="Doublecmd"] move container to workspace 2: FM 
 for_window [class="Doublecmd"] focus
 ##for_window [app_id="kitty"] move container to workspace 2: FM
