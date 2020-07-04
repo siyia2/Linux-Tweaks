@@ -16,7 +16,7 @@ font:
     style: Italic
 
 shell:
-  program: /bin/zsh
+  program: /usr/bin/fish
 
 
 scrolling:
