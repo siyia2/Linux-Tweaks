@@ -1,3 +1,5 @@
+#!/bin/sh
+
 case $1 in
     pre)
         #Enter Command to execute before suspend
