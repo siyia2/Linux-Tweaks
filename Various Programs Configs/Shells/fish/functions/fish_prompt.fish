@@ -11,9 +11,9 @@ function fish_prompt --description 'Write out the prompt'
     # Host
     set_color $fish_color_command
     echo -n (prompt_hostname)
-    set_color $fish_color_command
+    set_color purple
 
-     echo -n ':'
+     echo -n '@'
 
     # PWD
     set_color $fish_color_comment
