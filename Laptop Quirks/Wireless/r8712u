@@ -1,0 +1,2 @@
+#Disables powersaving for wi-fi (r8712u)
+options r8712u fwlps=N
