@@ -11,6 +11,7 @@ cpu_load=$(top -n 1 -b | awk '/^%Cpu/{print $2}')
 cpu_fan=$(cat /sys/class/hwmon/hwmon2/fan1_input)
 cpu_temp=$(cat /sys/class/hwmon/hwmon0/temp1_input | grep -Po '.*(?=...$)')
 
+mesa_version=$(glxinfo | grep "Version" | cut -c 13-)
 gpu_usage=$(cat /sys/class/drm/card0/device/gpu_busy_percent)
 gpu_temp=$(cat /sys/class/hwmon/hwmon3/temp1_input | grep -Po '.*(?=...$)')
 gpu_fan=$(cat /sys/class/hwmon/hwmon2/fan2_input)
@@ -30,9 +31,9 @@ audio_info=$(pactl list sinks | grep Mute | awk -v vol="${volume}" '{print $2=="
 
 kb_layout=$(swaymsg -t get_inputs | jq '.[] | select(.identifier == "6700:19550:SEMICO_USB_Keyboard") | .xkb_active_layout_name' | tail -1| tail -c +2 | head -c -2)
 
-ssid=$(iwgetid wlan0 -r)
+ssid=$(iwgetid wlp0s18f2u2 -r)
 
 
 # Emojis and characters for the status bar
-# 💎 💻 💡 🔌 ⚡ 📁 ⌨️   🖧 \|
-echo RAM: $ram_usage "|" ZSWAP: $swap_usage "|" VRAM: $vram_percent% "|" CPU: $cpu_load% @ $cpu_temp°C @ $cpu_fan rpm "|" GPU: $gpu_usage.0% @ $gpu_temp°C @ $gpu_fan rpm "		" 🐧 $linux_version " " 🖧 $ssid " " ⌨️ $kb_layout " " $audio_info $date_formatted " "UTC $time_utc
+# 💎 💻 💡 🔌 ⚡ 📁 ⌨️ 🐧   🖧 \|
+echo RAM: $ram_usage "|" ZSWAP: $swap_usage "|" VRAM: $vram_percent% "|" CPU: $cpu_load% @ $cpu_temp°C @ $cpu_fan rpm "|" GPU: $gpu_usage.0% @ $gpu_temp°C @ $gpu_fan rpm "		" 🐧 $linux_version " " ⚙️ $mesa_version " " 🖧 $ssid " " ⌨️ $kb_layout " " $audio_info $date_formatted " "UTC $time_utc
