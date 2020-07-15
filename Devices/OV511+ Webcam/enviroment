@@ -1,0 +1,2 @@
+# Add this in your /etc/enviroment file if you want to use this ancient webcam
+LD_PRELOAD=/usr/lib/libv4l/v4l2convert.so
