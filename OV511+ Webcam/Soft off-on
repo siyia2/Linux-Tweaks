@@ -1,0 +1,4 @@
+#Turn off wbecam
+sudo modprobe -r gspca_ov519
+#Turn on webcam
+sudo modprobe gspca_ov519
