@@ -97,7 +97,7 @@ system.umask.set = 022
 system.cwd.set = (directory.default)
 network.http.dns_cache_timeout.set = 25
 schedule2 = monitor_diskspace, 15, 60, ((close_low_diskspace, 1000M))
-schedule2 = session_save, 1200, 43200, ((session.save))
+schedule2 = session_save, 1200, 14400, ((session.save))
 pieces.hash.on_completion.set = yes
 #view.sort_current = seeding, greater=d.ratio=
 #keys.layout.set = qwerty
