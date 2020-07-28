@@ -36,7 +36,8 @@ dht.mode.set = auto
 dht.port.set = 6881
 protocol.pex.set= yes
 
-trackers.use_udp.set = yes
+# Disable udp support because it causes hangs with version 0.98, set to yes to revert
+trackers.use_udp.set = no
 
 # Global upload and download rate in KiB. "0" for unlimited.
 download_rate = 0
@@ -142,10 +143,6 @@ print = (cat, "Logging to ", (cfg.logfile))
 log.open_file = "log", (cfg.logfile)
 log.add_output = "info", "log"
 #log.add_output = "tracker_debug", "log"
-
-#Disable udp support because it causes hangs with version 0.98
-schedule = disableudp, 0, 1, trackers.use_udp.set=no
-trackers.use_udp.set = no
 
 ## Disable in built DNS cache in favor of an external one fe systemd-resolved
 network.http.dns_cache_timeout.set=0
