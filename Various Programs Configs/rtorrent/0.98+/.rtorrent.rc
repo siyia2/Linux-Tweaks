@@ -14,6 +14,8 @@ method.insert = cfg.logs,     private|const|string, (cat,(cfg.basedir),"log/")
 method.insert = cfg.logfile,  private|const|string, (cat,(cfg.logs),"rtorrent-",(system.time),".log")
 method.insert = cfg.session,  private|const|string, (cat,(cfg.basedir),".session/")
 method.insert = cfg.watch,    private|const|string, (cat,(cfg.basedir),"watch/")
+# Enable pyroscope hacks for -ps rtorrent
+method.insert = pyro.extended, value|const, 1
 
 
 ## Create instance directories
