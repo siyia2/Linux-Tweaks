@@ -46,7 +46,7 @@ download_rate = 0
 upload_rate = 60
 
 # Maximum number of simultaneous downloads and uploads slots (global slots!) (`max_downloads_global`, `max_uploads_global`)
-throttle.max_downloads.global.set = 4
+throttle.max_downloads.global.set = 2
 throttle.max_uploads.global.set   = 4
 
 ## Ratios
@@ -75,7 +75,7 @@ protocol.encryption.set = allow_incoming,try_outgoing,enable_retry
 ## Limits for file handle resources, this is optimized for
 ## an `ulimit` of 1024 (a common default). You MUST leave
 ## a ceiling of handles reserved for rTorrent's internal needs!
-network.http.max_open.set = 50
+network.http.max_open.set = 256
 network.max_open_files.set = 600
 network.max_open_sockets.set = 300
 
@@ -87,6 +87,13 @@ pieces.preload.min_size.set = 262144
 pieces.preload.min_rate.set = 5120
 pieces.memory.max.set = 512M
 network.xmlrpc.size_limit.set = 4M
+
+# Send and receive buffer size for socket. Disabled by default (`0`), this means the default is used by OS 
+#  (you have to modify the system wide settings!) (`send_buffer_size`, `receive_buffer_size`)
+# Increasing buffer sizes may help reduce disk seeking, connection polling as more data is buffered each time
+#  the socket is written to. It will result higher memory usage (not visible in rtorrent process!).
+network.receive_buffer.size.set =  2M
+network.send_buffer.size.set    = 6M
 
 
 ## Basic operational settings (no need to change these)
