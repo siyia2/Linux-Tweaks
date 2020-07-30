@@ -71,13 +71,19 @@ font Ubuntu 10
 #"Noto Sans Emoji" 10
 
 ### COLORS
-
 #set $focused-bg-color    #006633
 #set $text-color          #FFFFFF
 #set $indicator           #505050
 
-# class			border		background		text      
-#Cclient.focused		$indicator	$focused-bg-color	$text-color
+#set $unfocused-bg-color  #505050
+#set $text-color-unfocused #A9A9A9 
+#set $indicator-unfocused #505050
+
+
+
+# class			         border		         background		            text      
+#client.focused		   $indicator	         $focused-bg-color	         $text-color
+#client.unfocused  $indicator-unfocused	   $unfocused-bg-color	   $text-color-unfocused
 
 ### GAPS
 
