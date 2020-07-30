@@ -45,10 +45,6 @@ trackers.use_udp.set = no
 download_rate = 0
 upload_rate = 60
 
-# Maximum number of simultaneous downloads and uploads slots (global slots!) (`max_downloads_global`, `max_uploads_global`)
-throttle.max_downloads.global.set = 2
-throttle.max_uploads.global.set   = 4
-
 ## Ratios
 ratio.enable= 
 ratio.upload.set= 512M
