@@ -14,6 +14,8 @@ method.insert = cfg.logs,     private|const|string, (cat,(cfg.basedir),"log/")
 method.insert = cfg.logfile,  private|const|string, (cat,(cfg.logs),"rtorrent-",(system.time),".log")
 method.insert = cfg.session,  private|const|string, (cat,(cfg.basedir),".session/")
 method.insert = cfg.watch,    private|const|string, (cat,(cfg.basedir),"watch/")
+# Enable pyroscope hacks for -ps rtorrent
+method.insert = pyro.extended, value|const, 1
 
 
 ## Create instance directories
@@ -36,7 +38,8 @@ dht.mode.set = auto
 dht.port.set = 6881
 protocol.pex.set= yes
 
-trackers.use_udp.set = yes
+# Disable udp support because it causes hangs with version 0.98, set to yes to revert
+trackers.use_udp.set = no
 
 # Global upload and download rate in KiB. "0" for unlimited.
 download_rate = 0
@@ -44,7 +47,7 @@ upload_rate = 60
 
 ## Ratios
 ratio.enable= 
-ratio.upload.set= 256M
+ratio.upload.set= 512M
 ratio.min.set= 50
 ratio.max.set= 100
 method.set = group.seeding.ratio.command, "d.close= ;"
@@ -68,7 +71,7 @@ protocol.encryption.set = allow_incoming,try_outgoing,enable_retry
 ## Limits for file handle resources, this is optimized for
 ## an `ulimit` of 1024 (a common default). You MUST leave
 ## a ceiling of handles reserved for rTorrent's internal needs!
-network.http.max_open.set = 50
+network.http.max_open.set = 200
 network.max_open_files.set = 600
 network.max_open_sockets.set = 300
 
@@ -80,6 +83,13 @@ pieces.preload.min_size.set = 262144
 pieces.preload.min_rate.set = 5120
 pieces.memory.max.set = 512M
 network.xmlrpc.size_limit.set = 4M
+
+# Send and receive buffer size for socket. Disabled by default (`0`), this means the default is used by OS 
+#  (you have to modify the system wide settings!) (`send_buffer_size`, `receive_buffer_size`)
+# Increasing buffer sizes may help reduce disk seeking, connection polling as more data is buffered each time
+#  the socket is written to. It will result higher memory usage (not visible in rtorrent process!).
+network.receive_buffer.size.set =  2M
+network.send_buffer.size.set    = 6M
 
 
 ## Basic operational settings (no need to change these)
@@ -97,6 +107,7 @@ system.umask.set = 022
 system.cwd.set = (directory.default)
 network.http.dns_cache_timeout.set = 25
 schedule2 = monitor_diskspace, 15, 60, ((close_low_diskspace, 1000M))
+schedule2 = session_save, 1200, 14400, ((session.save))
 pieces.hash.on_completion.set = yes
 #view.sort_current = seeding, greater=d.ratio=
 #keys.layout.set = qwerty
@@ -104,6 +115,10 @@ pieces.hash.on_completion.set = yes
 #network.http.ssl_verify_peer.set = 0
 #network.http.ssl_verify_host.set = 0
 
+# Sort the main view by name
+view.sort_current = main,less=d.name=
+view.sort_new = main,greater=d.name=
+view.sort = main
 
 ## Some additional values and commands
 method.insert = system.startup_time, value|const, (system.time)
@@ -119,7 +134,8 @@ session.path.set = /mnt/D/.rtorrent.session
 #The line below deletes torrent&data when you remove a torrent from the list comment it to revert it.
 method.set_key = event.download.erased,delete_erased,"execute=rm,-rf,--,$d.base_path="
 schedule2 = watch_directory_Firefox_Downloads, 10, 10, "load.start=/mnt/D/Firefox_Downloads/*.torrent,d.directory.set=/mnt/D/Torrents/"
-
+#Set default download Directory including magnet links downloads
+directory.default.set = /mnt/D/Torrents/
 
 
 ## Run the rTorrent process as a daemon in the background
@@ -136,5 +152,18 @@ print = (cat, "Logging to ", (cfg.logfile))
 log.open_file = "log", (cfg.logfile)
 log.add_output = "info", "log"
 #log.add_output = "tracker_debug", "log"
+
+## Disable in built DNS cache in favor of an external one fe systemd-resolved
+network.http.dns_cache_timeout.set=0
+
+##Rtorrent-ps gui modification
+
+#method.set_key = ui.column.render, (ui.column.spec, 700)
+#method.set_key = ui.column.render, (ui.column.spec, 500)
+#method.set_key = ui.column.render, (ui.column.spec, 200)
+#method.set_key = ui.column.render, (ui.column.spec, 210)
+#method.set_key = ui.column.render, (ui.column.spec, 220)
+#method.set_key = ui.column.render, (ui.column.spec, 120)
+#method.set_key = ui.column.render, (ui.column.spec, 980)
 
 ### END of rtorrent.rc ###

@@ -14,10 +14,10 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term kitty
+set $term alacritty
 # Your preferred application launcher
 # Note: it's recommended that you pass the final command to sway
-set $menu dmenu-wl_run -i
+set $menu bemenu-run -H 24 --fn Ubuntu --tf '#00FFFF'  --hf '#00FFFF' --hb '#1793D1' -i -w
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
@@ -25,7 +25,7 @@ output "*" bg /home/siyia/Pictures/1056644-arch-linux-wallpaper-1920x1080-for-4k
 #
 # Example configuration:
 #
-   output HDMI-A-1 mode 1920x1080@74.973000Hz 
+   output HDMI-A-1 mode 1920x1080@74.973000Hz subpixel rgb  max_render_time 2
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
@@ -71,13 +71,19 @@ font Ubuntu 10
 #"Noto Sans Emoji" 10
 
 ### COLORS
-
 #set $focused-bg-color    #006633
 #set $text-color          #FFFFFF
 #set $indicator           #505050
 
-# class			border		background		text      
-#Cclient.focused		$indicator	$focused-bg-color	$text-color
+#set $unfocused-bg-color  #505050
+#set $text-color-unfocused #A9A9A9 
+#set $indicator-unfocused #505050
+
+
+
+# class			         border		         background		            text      
+#client.focused		   $indicator	         $focused-bg-color	         $text-color
+#client.unfocused  $indicator-unfocused	   $unfocused-bg-color	   $text-color-unfocused
 
 ### GAPS
 
@@ -89,14 +95,11 @@ default_border pixel 4
 ### STARTUP PROGRAMS
 
 exec xhost local:root
-#exec --no-startup-id kitty
-exec /home/siyia/.sound_fix.sh
 exec doublecmd --no-splash
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec mako --anchor bottom-right --background-color=#002B36 --default-timeout 8000
-exec redshift
-exec kitty -e Rtorrent-BitorrentClient
-#exec killall s1.sh
+exec redshift -c ~/.config/redshift.conf
+exec alacritty -t Rtorrent-BitorrentClient -e Rtorrent-BitorrentClient
 #exec /home/siyia/.config/waybar/modules/s1.sh
 
 #### WINDOW SETUP
@@ -107,8 +110,8 @@ for_window [class="Steam"] move container to workspace 3: Steam
 for_window [app_id="uget"] move container to workspace 5: P2P
 for_window [title="Rtorrent-BitorrentClient"] move container to workspace 5: P2P
 for_window [app_id="firefox"] move container to workspace 1: Web/Mail
-for_window [class="Thunderbird"] move container to workspace 1: Web/Mail
-for_window [app_id="firefox"] focus
+for_window [app_id="thunderbird"] move container to workspace 1: Web/Mail
+for_window [app_id="thunderbird"] focusfor_window [app_id="firefox"] focus
 for_window [class="Doublecmd"] move container to workspace 2: FM 
 for_window [class="Doublecmd"] focus
 ##for_window [app_id="kitty"] move container to workspace 2: FM
@@ -122,11 +125,10 @@ timeout 501 'swaylock -e -f -c 000000' \
 timeout 1001 'swaymsg "output * dpms off"' \
 resume  'swaymsg "output * dpms on"'
 
-###timeout 301 'swaylock -C /home/siyia/.config/swaylock.conf' \
+#timeout 31 'if pgrep -x swaylock; then swaymsg "output * dpms off"; fi' \
+
 bindsym $mod+f11 exec swaylock swaylock -e -f -c 000000
 
-# wayland version
-#timeout 31 'if pgrep -x swaylock; then swaymsg "output * dpms off"; fi' \
 for_window [app_id="firefox"] inhibit_idle focus
 for_window [app_id="TeamViewer"] inhibit_idle open
 for_window [class="Dolphin"] inhibit_idle focus
@@ -302,18 +304,20 @@ bindsym $mod+r mode "resize"
 # Read `man 5 sway-bar` for more information about this section.
 #bar {
     #position bottom
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-
-  #  status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
-
-   # colors {
-    #    statusline #ffffff
-     #   background #323232
+    #swaybar_command  swaybar
+    #status_command while ~/.config/sway/status.sh; do sleep 1; done
+    #font pango: Ununtu 10
+    #Disables tray
+    #tray_output none
+     #colors {
+     #binding_mode #C0C0C0 #C0C0C0 #C0C0C0
+     #   statusline #C0C0C0
+     #   background #gAfC13
       #  inactive_workspace #32323200 #32323200 #5c5c5c
     #}
+
 #}
+
 bar {
     swaybar_command  waybar
 
