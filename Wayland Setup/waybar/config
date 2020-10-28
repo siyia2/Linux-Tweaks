@@ -34,6 +34,8 @@
 		"tooltip": false
 },
 
+// CPU STUFF
+
 "cpu": {
     "interval": 2,
     "format": "{usage}% @",
