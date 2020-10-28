@@ -4,8 +4,8 @@
     	"width": 1920,
 	"height": 29,
     "modules-left": ["sway/workspaces" , "sway/mode"],
-    "modules-center": ["memory","custom/vram","custom/zram","custom/cpu","cpu","temperature","custom/cpufan","custom/gpu","custom/gpusage","custom/gputemp","custom/gpufan"],
-    "modules-right": ["custom/kernel","custom/mesa","custom/Torrent","custom/kb","network","pulseaudio","clock","clock#utc"],
+    "modules-center": ["memory","custom/zram","custom/vram","custom/cpu","cpu","temperature","custom/cpufan","custom/gpu","custom/gpusage","custom/gputemp","custom/gpufan"],
+    "modules-right": ["custom/kernel","custom/mesa","custom/Torrent","custom/kb","pulseaudio","network","clock","clock#utc"],
     "sway/window": {
         "max-length": 1920
     },
@@ -23,8 +23,8 @@
 },
 
 "memory": {
-    "interval": 8,
-    "format": "Mem: {}% ",
+    "interval": 5,
+    "format": "Ram: {}%",
 		"tooltip": false,
 "on-click": "xfce4-taskmanager"
 },
@@ -66,9 +66,10 @@
 },
 
 "custom/vram": {
+		"interval": 5,
 		"tooltip": false,
 		"exec": "cat /sys/class/drm/card0/device/mem_info_vram_used | grep -Po '.*(?=.......$)'",
-		"format": "Vram: {}% "
+		"format": "Vram: {}% || "
 },
 
 "custom/gpusage": {
@@ -104,9 +105,9 @@
 },
 
 "custom/zram": {
-	"interval": 4,
+	"interval": 5,
         "exec": "free -t | awk 'NR == 3 {print $3/$2*100}'",
-	"format": " Zram: {}%  || ",
+	"format": "Zram: {}% ",
 		"tooltip": false,
 "on-click": "xfce4-taskmanager"
 },
