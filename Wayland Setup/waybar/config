@@ -4,21 +4,27 @@
     	"width": 1920,
 	"height": 29,
     "modules-left": ["sway/workspaces" , "sway/mode"],
-    "modules-center": ["cpu", "memory", "temperature","custom/cpufan","custom/gpu","custom/gpufan"],
-    "modules-right": ["custom/kb","custom/Torrent","pulseaudio","network", "clock","clock#utc", "custom/acpi"],
+    "modules-center": ["memory","custom/vram","custom/zram","custom/cpu","cpu","temperature","custom/cpufan","custom/gpu","custom/gpusage","custom/gputemp","custom/gpufan"],
+    "modules-right": ["custom/kernel","custom/mesa","custom/Torrent","custom/kb","network","pulseaudio","clock","clock#utc"],
     "sway/window": {
         "max-length": 1920
     },
 
-"custom/kb": {
-  "exec": "/home/siyia/.config/waybar/modules/s1.sh",
+"custom/cpu": {
+  "format": "Cpu:",
+  "on-click": "xfce4-taskmanager",
 		"tooltip": false
 },
 
+"custom/gpu": {
+  "format": "|| Gpu:",
+  "on-click": "xfce4-taskmanager",
+		"tooltip": false
+},
 
 "memory": {
     "interval": 8,
-    "format": "Mem: {}%   ||",
+    "format": "Mem: {}% ",
 		"tooltip": false,
 "on-click": "xfce4-taskmanager"
 },
@@ -26,23 +32,57 @@
 // 
 "cpu": {
     "interval": 2,
-    "format": "Load: {usage}% ",
+    "format": "{usage}% @",
 		"tooltip": false,
 "on-click": "xfce4-taskmanager"
 },
+
 "temperature": {
 	"thermal-zone": 0,
 	"hwmon-path": "/sys/class/hwmon/hwmon0/temp1_input",
 	"critical-threshold": 61,
-	"format-critical": "Cpu:{temperatureC}°C",
-	"format":   "Cpu: {temperatureC}°C",
+	"format-critical":"{temperatureC}°C",
+	"format":"{temperatureC}°C",
 		"tooltip": false,
 "on-click": "xfce4-taskmanager"
 },
-"custom/gpu": {
+
+"custom/kb": {
+  "exec": "/home/siyia/.config/waybar/modules/kb-layout.sh",
+  "format": "  {}",
+		"tooltip": false
+},
+
+"custom/kernel": {
+  "exec": "uname -r | cut -d '-' -f1",
+  "format": "🐧 {}  ",
+		"tooltip": false
+},
+
+"custom/mesa": {
+  "exec": "glxinfo | grep 'Version' | cut -c 13-",
+  "format": "⚙️ {}  ",
+		"tooltip": false
+},
+
+"custom/vram": {
+		"tooltip": false,
+		"exec": "cat /sys/class/drm/card0/device/mem_info_vram_used | grep -Po '.*(?=.......$)'",
+		"format": "Vram: {}% "
+},
+
+"custom/gpusage": {
+	"interval": 2,
+        "exec": "cat /sys/class/drm/card0/device/gpu_busy_percent",
+	"format": " {}% @",
+		"tooltip": false,
+"on-click": "xfce4-taskmanager"
+},
+
+"custom/gputemp": {
 	"interval": 2,
         "exec": "cat /sys/class/hwmon/hwmon3/temp1_input | grep -Po '.*(?=...$)'",
-	"format": "  || Gpu: {}°C",
+	"format": " {}°C",
 		"tooltip": false,
 "on-click": "xfce4-taskmanager"
 },
@@ -63,17 +103,17 @@
 "on-scroll-up":"swaymsg workspace 5: P2P"
 },
 
-"custom/swap": {
+"custom/zram": {
 	"interval": 4,
         "exec": "free -t | awk 'NR == 3 {print $3/$2*100}'",
-	"format": "Swap: {}%   || ",
+	"format": " Zram: {}%  || ",
 		"tooltip": false,
 "on-click": "xfce4-taskmanager"
 },
 
 "custom/gpufan": {
 	"interval": 2,
-        "exec": "cat /sys/class/hwmon/hwmon2/fan2_input",
+        "exec": "sleep 2 && cat /sys/class/hwmon/hwmon2/fan2_input",
 	"format": " @ {} rpm ",
 		"tooltip": false,
 "on-click": "xfce4-taskmanager"
@@ -82,7 +122,7 @@
 "custom/cpufan": {
 	"interval": 2,
         "exec": "cat /sys/class/hwmon/hwmon2/fan1_input",
-	"format": " @ {} rpm",
+	"format": " @ {} rpm ",
 		"tooltip": false,
 "on-click": "xfce4-taskmanager"
 },
@@ -93,13 +133,14 @@
     },
 
 "network": {
-    "interface": "wlan0",
-    "format": "conn-x92f530 ",
+    "interface": "wlp0s18f2u2",
+    "format": "",
     "format-wifi": "{essid} ({signalStrength}%) ",
-    "format-ethernet": "conn-x92f530 ",
+    "format-ethernet": " ",
     "format-disconnected": "{ifname}",
     "tooltip-format": "{ifname}",
-"on-click": "cmst",
+"on-click": "alacritty -e nmtui-connect",
+"on-click-middle": "alacritty -e nmtui-connect",
 
 	"tooltip": false
 },
@@ -115,7 +156,7 @@
         "phone": "",
         "portable": "",
         "car": "",
-        "default": ["🔈","🔉", "🔊"]
+        "default": ["🔈","🔉", "🔊"]
 
     },
     "scroll-step": 1,
@@ -127,13 +168,13 @@
 },
 
     "clock": {
-        "format": "{:%A, %d %B %Y, %H:%M   ||}",
+        "format": "{:%a, %d %b %Y, %H:%M ||}",
 	"on-click": "gsimplecal",
 	"tooltip": false
     },
    
   "clock#utc": {
-  	"format": "UTC {:%H:%M     ||}",
+  	"format": "UTC {:%H:%M}",
   	"on-click": "gsimplecal",
   	"tooltip": false,
         "timezone": "Africa/Accra"
