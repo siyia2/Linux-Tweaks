@@ -4,23 +4,13 @@
     	"width": 1920,
 	"height": 26,
     "modules-left": ["sway/workspaces" , "sway/mode"],
-    "modules-center": ["memory","custom/vram","custom/cpu","cpu","temperature","custom/cpufan","custom/gpu","custom/gpusage","custom/gputemp","custom/gpufan"],
+    "modules-center": ["memory","custom/zram","custom/vram","custom/cpu","cpu","temperature","custom/cpufan","custom/gpu","custom/gpusage","custom/gputemp","custom/gpufan"],
     "modules-right": ["custom/kernel","custom/mesa","custom/Torrent","custom/kb","pulseaudio","network","clock","clock#utc"],
     "sway/window": {
         "max-length": 1920
     },
 
-"custom/cpu": {
-  "format": "Cpu:",
-  "on-click": "xfce4-taskmanager",
-		"tooltip": false
-},
-
-"custom/gpu": {
-  "format": "|| Gpu:",
-  "on-click": "xfce4-taskmanager",
-		"tooltip": false
-},
+//MEM STUFF
 
 "memory": {
     "interval": 5,
@@ -29,10 +19,32 @@
 "on-click": "xfce4-taskmanager"
 },
 
-// 
+"custom/zram": {
+	"interval": 5,
+        "exec": "/home/siyia/.config/waybar//modules/zram.sh",
+	"format": "Zram: {} ",
+		"tooltip": false,
+"on-click": "xfce4-taskmanager"
+},
+
+
+"custom/cpu": {
+  "format": "Cpu:",
+  "on-click": "xfce4-taskmanager",
+		"tooltip": false
+},
+
 "cpu": {
     "interval": 2,
     "format": "{usage}% @",
+		"tooltip": false,
+"on-click": "xfce4-taskmanager"
+},
+
+"custom/cpufan": {
+	"interval": 2,
+        "exec": "cat /sys/class/hwmon/hwmon2/fan1_input",
+	"format": " @ {} rpm ",
 		"tooltip": false,
 "on-click": "xfce4-taskmanager"
 },
@@ -47,11 +59,6 @@
 "on-click": "xfce4-taskmanager"
 },
 
-"custom/kb": {
-  "exec": "/home/siyia/.config/waybar/modules/kb-layout.sh",
-  "format": "  {}",
-		"tooltip": false
-},
 
 "custom/kernel": {
   "exec": "uname -r | cut -d '-' -f1",
@@ -61,53 +68,22 @@
 
 "custom/mesa": {
   "exec": "glxinfo | grep 'Version' | cut -c 13-",
-  "format": "⚙️ {}  ",
+  "format": "⚙️ {}    ",
 		"tooltip": false
 },
 
-"custom/vram": {
-		"interval": 5,
-		"tooltip": false,
-		"exec": "cat /sys/class/drm/card0/device/mem_info_vram_used | grep -Po '.*(?=.......$)'",
-		"format": "Vram: {}% || "
+// GPU STUFF
+
+"custom/gpu": {
+  "format": "|| Gpu:",
+  "on-click": "xfce4-taskmanager",
+		"tooltip": false
 },
 
 "custom/gpusage": {
 	"interval": 2,
         "exec": "cat /sys/class/drm/card0/device/gpu_busy_percent",
 	"format": " {}% @",
-		"tooltip": false,
-"on-click": "xfce4-taskmanager"
-},
-
-"custom/gputemp": {
-	"interval": 2,
-        "exec": "cat /sys/class/hwmon/hwmon3/temp1_input | grep -Po '.*(?=...$)'",
-	"format": " {}°C",
-		"tooltip": false,
-"on-click": "xfce4-taskmanager"
-},
-
-"custom/acpi": {
-	"format": "⏻  ",
-		"tooltip": false,
-"on-click": "poweroff",
-"on-click-middle": "reboot",
-"on-click-right": "swaymsg reload && systemctl suspend"
-},
-
-"custom/Torrent": {
-	"format": " ↑ ↓",
-		"tooltip": false,
-"on-click": "alacritty -t Rtorrent-BitorrentClient -e Rtorrent-BitorrentClient",
-"on-scroll-down":"swaymsg workspace back_and_forth",
-"on-scroll-up":"swaymsg workspace 5: P2P"
-},
-
-"custom/zram": {
-	"interval": 5,
-        "exec": "free -t | awk 'NR == 3 {print ($3/$2*100)}' | rev | cut -c 6- | rev",
-	"format": "Zram: {}% ",
 		"tooltip": false,
 "on-click": "xfce4-taskmanager"
 },
@@ -120,18 +96,45 @@
 "on-click": "xfce4-taskmanager"
 },
 
-"custom/cpufan": {
+"custom/vram": {
+		"interval": 5,
+		"tooltip": false,
+		"exec": "/home/siyia/.config/waybar/modules/vram.sh",
+		"format": "Vram: {}% || ",
+		"on-click": "xfce4-taskmanager"
+},
+
+"custom/gputemp": {
 	"interval": 2,
-        "exec": "cat /sys/class/hwmon/hwmon2/fan1_input",
-	"format": " @ {} rpm ",
+        "exec": "cat /sys/class/hwmon/hwmon3/temp1_input | grep -Po '.*(?=...$)'",
+	"format": " {}°C",
 		"tooltip": false,
 "on-click": "xfce4-taskmanager"
 },
+
+// MISC SW
+
+"custom/Torrent": {
+	"format": " ↑ ↓",
+		"tooltip": false,
+"on-click": "rm /home/siyia/rtorrent/.session/rtorrent.lock ; alacritty -t Rtorrent-BitorrentClient -e Rtorrent-BitorrentClient",
+"on-scroll-down":"swaymsg workspace back_and_forth",
+"on-scroll-up":"swaymsg workspace 5: P2P"
+},
+
+"custom/kb": {
+  "exec": "/home/siyia/.config/waybar/modules/kb-layout.sh",
+  "format": "   {}",
+		"tooltip": false
+},
+
     "battery": {
         "format": "{capacity}% {icon}",
         "format-icons": ["", "", "", "", ""],
 		"tooltip": false
     },
+
+// MISC HW
 
 "network": {
     "interface": "wlp0s18f2u2",
@@ -167,6 +170,7 @@
     "on-click": "pavucontrol",
 	"tooltip": false
 },
+// CLOCK/DATE STUFF
 
     "clock": {
         "format": "{:%a %d %b, %H:%M}",
