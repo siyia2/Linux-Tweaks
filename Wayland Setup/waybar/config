@@ -2,9 +2,9 @@
     "position": "bottom",
     "layer": "bottom",
     	"width": 1920,
-	"height": 24,
+	"height": 26,
     "modules-left": ["sway/workspaces" , "sway/mode"],
-    "modules-center": ["memory","custom/zram","custom/vram","custom/cpu","cpu","temperature","custom/cpufan","custom/gpu","custom/gpusage","custom/gputemp","custom/gpufan"],
+    "modules-center": ["memory","custom/vram","custom/cpu","cpu","temperature","custom/cpufan","custom/gpu","custom/gpusage","custom/gputemp","custom/gpufan"],
     "modules-right": ["custom/kernel","custom/mesa","custom/Torrent","custom/kb","pulseaudio","network","clock","clock#utc"],
     "sway/window": {
         "max-length": 1920
@@ -106,7 +106,7 @@
 
 "custom/zram": {
 	"interval": 5,
-        "exec": "free -t | awk 'NR == 3 {print $3/$2*100}'",
+        "exec": "free -t | awk 'NR == 3 {print ($3/$2*100)}' | rev | cut -c 6- | rev",
 	"format": "Zram: {}% ",
 		"tooltip": false,
 "on-click": "xfce4-taskmanager"
@@ -114,7 +114,7 @@
 
 "custom/gpufan": {
 	"interval": 2,
-        "exec": "sleep 2 && cat /sys/class/hwmon/hwmon2/fan2_input",
+        "exec": "cat /sys/class/hwmon/hwmon2/fan2_input",
 	"format": " @ {} rpm ",
 		"tooltip": false,
 "on-click": "xfce4-taskmanager"
@@ -157,7 +157,7 @@
         "phone": "",
         "portable": "",
         "car": "",
-        "default": ["🔈","🔉", "🔊"]
+        "default": ["🔈","🔉","🔊"]
 
     },
     "scroll-step": 1,
@@ -169,7 +169,7 @@
 },
 
     "clock": {
-        "format": "{:%a, %d %b %Y, %H:%M ||}",
+        "format": "{:%a %d %b, %H:%M}",
 	"on-click": "gsimplecal",
 	"tooltip": false
     },
