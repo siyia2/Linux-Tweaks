@@ -2,7 +2,7 @@
     "position": "bottom",
     "layer": "bottom",
     	"width": 1920,
-	"height": 29,
+	"height": 24,
     "modules-left": ["sway/workspaces" , "sway/mode"],
     "modules-center": ["memory","custom/zram","custom/vram","custom/cpu","cpu","temperature","custom/cpufan","custom/gpu","custom/gpusage","custom/gputemp","custom/gpufan"],
     "modules-right": ["custom/kernel","custom/mesa","custom/Torrent","custom/kb","pulseaudio","network","clock","clock#utc"],
