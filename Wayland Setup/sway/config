@@ -111,7 +111,8 @@ for_window [app_id="uget"] move container to workspace 5: P2P
 for_window [title="Rtorrent-BitorrentClient"] move container to workspace 5: P2P
 for_window [app_id="firefox"] move container to workspace 1: Web/Mail
 for_window [app_id="thunderbird"] move container to workspace 1: Web/Mail
-for_window [app_id="thunderbird"] focusfor_window [app_id="firefox"] focus
+for_window [app_id="thunderbird"] focus
+for_window [app_id="firefox"] focus
 for_window [class="Doublecmd"] move container to workspace 2: FM 
 for_window [class="Doublecmd"] focus
 ##for_window [app_id="kitty"] move container to workspace 2: FM
@@ -131,7 +132,7 @@ bindsym $mod+f11 exec swaylock swaylock -e -f -c 000000
 
 for_window [app_id="firefox"] inhibit_idle focus
 for_window [app_id="TeamViewer"] inhibit_idle open
-for_window [class="Dolphin"] inhibit_idle focus
+for_window [class="dolphin-emu"] inhibit_idle focus
 for_window [class="mpv"] inhibit_idle fullscreen
 for_window [app_id="mpv"] inhibit_idle fullscreen
 #
