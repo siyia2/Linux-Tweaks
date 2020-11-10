@@ -18,7 +18,7 @@
  *     Compiler ID      "MSFT"
  *     Compiler Version 0x03000000 (50331648)
  */
-DefinitionBlock ("", "DSDT", 1, "GBT   ", "GBTUACPI", 0x00001000)
+DefinitionBlock ("", "DSDT", 1, "GBT   ", "GBTUACPI", 0x00001001)
 {
     External (LNKA, UnknownObj)
     External (LNKB, UnknownObj)
