@@ -1,1 +1,1 @@
-Grub script to load custom dsdts at boot, needs to be placed at /etc/grub.d/ folder.
+Grub script to load custom dsdts at boot, needs to be placed at /etc/grub.d/ folder. dsdt.aml needs to be placed under /boot/
