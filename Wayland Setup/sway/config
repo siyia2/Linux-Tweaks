@@ -17,15 +17,16 @@ set $right l
 set $term alacritty
 # Your preferred application launcher
 # Note: it's recommended that you pass the final command to sway
-set $menu bemenu-run -H 24 --fn Ubuntu --tf '#00FFFF'  --hf '#00FFFF' --hb '#1793D1' -i -w
+set $menu bemenu-run -H 24 --fn Ubuntu --tf '#00ff40'  --hf '#FFFFFF' --hb '#008000' -i -w 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output "*" bg /home/siyia/Pictures/1056644-arch-linux-wallpaper-1920x1080-for-4k.jpg fill
+output "*" bg /home/siyia/Pictures/wp4.jpg fill
 #
 # Example configuration:
 #
-   output HDMI-A-1 mode 1920x1080@74.973000Hz subpixel rgb  max_render_time 2
+   output HDMI-A-1 mode 1920x1080@74.973000Hz subpixel rgb max_render_time 4 adaptive_sync on
+#max_render_time 4
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
@@ -39,10 +40,10 @@ accel_profile adaptive
 scroll_factor 2
 }
 
-seat seat0 xcursor_theme Pulse-Glass-Sapphire-Regular
+seat seat0 xcursor_theme Pulse-Glass-Jade-Regular
 set $gnome-schema org.gnome.desktop.interface
 exec_always {
-    gsettings set $gnome-schema cursor-theme 'Pulse-Glass-Sapphire-Regular'
+    gsettings set $gnome-schema cursor-theme 'Pulse-Glass-Jade-Regular'
 }
 ### KB LAYOUTS
 
@@ -67,29 +68,29 @@ bindsym $mod+KP_5 seat "*" cursor press button1; seat "*" cursor release button1
 
 ### FONTS
 
-font Ubuntu 10
+font Ubuntu Regular 10
 #"Noto Sans Emoji" 10
 
 ### COLORS
-#set $focused-bg-color    #006633
-#set $text-color          #FFFFFF
-#set $indicator           #505050
+set $focused-bg-color    #006633
+set $text-color          #FFFFFF
+set $indicator           #505050
 
-#set $unfocused-bg-color  #505050
-#set $text-color-unfocused #A9A9A9 
-#set $indicator-unfocused #505050
+set $unfocused-bg-color  #404040
+set $text-color-unfocused #A9A9A9 
+set $indicator-unfocused #505050
 
 
 
-# class			         border		         background		            text      
-#client.focused		   $indicator	         $focused-bg-color	         $text-color
-#client.unfocused  $indicator-unfocused	   $unfocused-bg-color	   $text-color-unfocused
+# class			border		background		text      
+client.focused		$indicator	$focused-bg-color	$text-color
+client.unfocused	$indicator-unfocused	$unfocused-bg-color	$text-color-unfocused
 
 ### GAPS
 
 gaps inner 5
 gaps outer -5
-default_border pixel 4
+default_border pixel 3
 
 
 ### STARTUP PROGRAMS
@@ -97,10 +98,10 @@ default_border pixel 4
 exec xhost local:root
 exec doublecmd --no-splash
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec mako --anchor bottom-right --background-color=#002B36 --default-timeout 8000
-exec redshift -c ~/.config/redshift.conf
-exec alacritty -t Rtorrent-BitorrentClient -e Rtorrent-BitorrentClient
-#exec /home/siyia/.config/waybar/modules/s1.sh
+exec mako  --font ubuntu regular 9 --anchor bottom-right --background-color=#006633 --default-timeout 6000
+exec qbittorrent -platform wayland
+exec pactl unload-module 6
+exec gammastep -v -c ~/.config/redshift.conf
 
 #### WINDOW SETUP
 
@@ -108,13 +109,13 @@ for_window [class="PlayOnLinux"] move container to workspace 3: Steam
 for_window [title="Friends List"] move container to workspace 3: Steam
 for_window [class="Steam"] move container to workspace 3: Steam
 for_window [app_id="uget"] move container to workspace 5: P2P
-for_window [title="Rtorrent-BitorrentClient"] move container to workspace 5: P2P
+for_window [app_id="org.qbittorrent.qBittorrent"] move container to workspace 5: P2P
 for_window [app_id="firefox"] move container to workspace 1: Web/Mail
 for_window [app_id="thunderbird"] move container to workspace 1: Web/Mail
-for_window [app_id="thunderbird"] focus
+for_window [app_id="thunderbird"] focus 
 for_window [app_id="firefox"] focus
-for_window [class="Doublecmd"] move container to workspace 2: FM 
-for_window [class="Doublecmd"] focus
+for_window [class="Double Commander"] move container to workspace 2: FM 
+for_window [class="Double Commander"] focus
 ##for_window [app_id="kitty"] move container to workspace 2: FM
 
 ### POWER MANAGEMENT
@@ -124,9 +125,8 @@ before-sleep 'swaylock -e -f -c 000000' \
 timeout 6001 'systemctl suspend' \
 timeout 501 'swaylock -e -f -c 000000' \
 timeout 1001 'swaymsg "output * dpms off"' \
+timeout 61 'if pgrep -x swaylock; then swaymsg "output * dpms off"; fi' \
 resume  'swaymsg "output * dpms on"'
-
-#timeout 31 'if pgrep -x swaylock; then swaymsg "output * dpms off"; fi' \
 
 bindsym $mod+f11 exec swaylock swaylock -e -f -c 000000
 
@@ -145,7 +145,7 @@ for_window [app_id="mpv"] inhibit_idle fullscreen
 ### CUSTOM
 
 bindsym $mod+x exec $term
-bindsym $mod+f exec env QT_QPA_PLATFORM=xcb doublecmd --no-splash
+bindsym $mod+f exec doublecmd --no-splash
 bindsym $mod+w exec env MOZ_ENABLE_WAYLAND=1 firefox
 bindsym ctrl+alt+delete exec xfce4-taskmanager
 bindsym ctrl+alt+KP_delete exec xfce4-taskmanager
@@ -154,14 +154,15 @@ bindsym ctrl+alt+KP_delete exec xfce4-taskmanager
 bindsym $mod+f9 exec thunderbird
 bindsym $mod+f12 exec qalculate-gtk
 
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
-bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym $mod+f3 exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym $mod+f2 exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym $mod+f4 exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym XF86MonBrightnessDown exec light -U 5
 bindsym XF86MonBrightnessUp exec light -A 5
 bindsym Print exec grim $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S_grim.png')
 bindsym button2 kill
+bindsym $mod+v exec pavucontrol
 
 # Basics:
 #
@@ -303,24 +304,9 @@ bindsym $mod+r mode "resize"
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
-#bar {
-    #position bottom
-    #swaybar_command  swaybar
-    #status_command while ~/.config/sway/status.sh; do sleep 1; done
-    #font pango: Ununtu 10
-    #Disables tray
-    #tray_output none
-     #colors {
-     #binding_mode #C0C0C0 #C0C0C0 #C0C0C0
-     #   statusline #C0C0C0
-     #   background #gAfC13
-      #  inactive_workspace #32323200 #32323200 #5c5c5c
-    #}
-
-#}
-
 bar {
-    swaybar_command  waybar
+        swaybar_command waybar
+    }
 
 }
 
