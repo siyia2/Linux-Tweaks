@@ -5,10 +5,11 @@
 	"height": 26,
     "modules-left": ["sway/workspaces"],
     "modules-center": ["memory","custom/zram","custom/vram","custom/cpu","cpu","temperature","custom/cpufan","custom/gpu","custom/gpusage","custom/gputemp","custom/gpufan"],
-    "modules-right": ["custom/kernel","custom/mesa","custom/Torrent","custom/kb","pulseaudio","network","clock","clock#utc"],
+    "modules-right": ["custom/kernel","custom/mesa","custom/kb","pulseaudio","network","clock","clock#utc"],
     "sway/window": {
         "max-length": 1920
     },
+    
 
 //MEM STUFF
 
@@ -20,7 +21,7 @@
 },
 
 "custom/zram": {
-	"interval": 5,
+	"restart-interval": 5,
         "exec": "/home/siyia/.config/waybar/modules/zram.sh",
 	"format": "Zram:{} ",
 		"tooltip": false,
@@ -45,14 +46,15 @@
 },
 
 "custom/cpufan": {
-	"interval": 2,
+	"restart-interval": 2,
         "exec": "/home/siyia/.config/waybar/modules/cpu_fan.sh",
-	"format": " @ {} rpm ",
+	"format": " @ {} rpm ||",
 		"tooltip": false,
 "on-click": "xfce4-taskmanager"
 },
 
 "temperature": {
+	"interval": 2,
 	"thermal-zone": 0,
 	"hwmon-path": "/sys/class/hwmon/hwmon0/temp1_input",
 	"critical-threshold": 61,
@@ -64,27 +66,31 @@
 
 
 "custom/kernel": {
+  "restart-interval": 99,
   "exec": "uname -r | cut -d '-' -f1",
   "format": "🐧 {}  ",
+   "on-click": "pamac-manager",
 		"tooltip": false
 },
 
 "custom/mesa": {
+  	"restart-interval": 99,
   "exec": "glxinfo | grep 'Version' | cut -c 13-",
-  "format": "⚙️ {}  ",
+  "format": "⚙️ {} ",
+    "on-click": "pamac-manager",
 		"tooltip": false
 },
 
 // GPU STUFF
 
 "custom/gpu": {
-  "format": "|| Gpu:",
+  "format": " Gpu:",
   "on-click": "xfce4-taskmanager",
 		"tooltip": false
 },
 
 "custom/gpusage": {
-	"interval": 2,
+	"restart-interval": 2,
         "exec": "/home/siyia/.config/waybar/modules/gpu_usage.sh",
 	"format": " {}% @",
 		"tooltip": false,
@@ -92,15 +98,15 @@
 },
 
 "custom/gpufan": {
-	"interval": 2,
+	"restart-interval": 2,
         "exec": "/home/siyia/.config/waybar/modules/gpu_fan.sh",
-	"format": " @ {} rpm ",
+	"format": " @ {} rpm",
 		"tooltip": false,
 "on-click": "xfce4-taskmanager"
 },
 
 "custom/vram": {
-		"interval": 5,
+		"restart-interval": 5,
 		"tooltip": false,
 		"exec": "/home/siyia/.config/waybar/modules/vram.sh",
 		"format": "Vram: {}% || ",
@@ -108,7 +114,7 @@
 },
 
 "custom/gputemp": {
-	"interval": 2,
+	"restart-interval": 2,
         "exec": "/home/siyia/.config/waybar/modules/gpu_temp.sh",
 	"format": " {}°C",
 		"tooltip": false,
@@ -116,6 +122,14 @@
 },
 
 // MISC SW
+
+"custom/packages": {
+"restart-interval": 99,
+"exec": "pacman -Qq | wc -l",
+  "format": " 📦 {} ",
+  "on-click": "pamac-manager",
+		"tooltip": false
+},
 
 "custom/Torrent": {
 	"format": " ↑ ↓",
@@ -127,7 +141,7 @@
 
 "custom/kb": {
 "exec": "killall swaymsg ; swaymsg --type get_inputs | grep \"xkb_active_layout_name\" | /usr/bin/sed -u '1!d; s/^.*xkb_active_layout_name\": \"//; s/\\(.\\{2\\}\\).*/\\1/' && swaymsg --type subscribe --monitor '[\"input\"]' | /usr/bin/sed -u 's/^.*xkb_active_layout_name\": \"//; s/\\(.\\{2\\}\\).*/\\1/'",
-  "format": "   {}",
+  "format": " | {} |",
 		"tooltip": false
 },
 
@@ -161,6 +175,7 @@
         "portable": "",
         "car": "",
         "default": ["🔈","🔉","🔊"]
+        
 
     },
     "scroll-step": 1,
