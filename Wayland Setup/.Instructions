@@ -13,6 +13,7 @@ alacritty
 grim (screenshot functionality)
 mako (notification system)
 gnome-polkit (pkexec needed by some guis for root access)
+gsettings-desktop-schemas (needed for setting pointer themes)
 
 Xwayland Packages:
 
