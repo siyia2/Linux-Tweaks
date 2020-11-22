@@ -2,7 +2,7 @@ Config and style css files for both sway and waybar, themed after archlinux blac
 and place them in ~/.config/sway and ~/config/waybar respectively. 
 You can of course tweak the startup programs, bg image and resolutions to your liking depending on your setup in sway config.
 
-Essential Programs:
+Essential Packages:
 
 otf-font-awesome
 noto-emoji fonts
@@ -15,7 +15,7 @@ mako (notification system)
 gnome-polkit (pkexec needed by some guis for root access)
 xhost (needed for xwayland root)
 
-Optional Programs:
+Optional Packages:
 
 firefox
 thunderbird
