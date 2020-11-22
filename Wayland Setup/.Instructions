@@ -1,5 +1,4 @@
-Config and style css files for both sway and waybar, themed after archlinux black and blue colors, just install Sway and Waybar
-and place them in ~/.config/sway and ~/config/waybar respectively. 
+Config and style css files for sway and waybar, just install Sway and Waybar and place them in ~/.config/sway and ~/config/waybar respectively. 
 You can of course tweak the startup programs, bg image and resolutions to your liking depending on your setup in sway config.
 
 Essential Packages:
@@ -35,4 +34,5 @@ mpv
 uget (download manager)
 qbittorrent
 xfce4-taskmanager
+geany (text editor)
 
