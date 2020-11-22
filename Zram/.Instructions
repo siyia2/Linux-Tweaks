@@ -1,22 +1,19 @@
 The best way in my opinion to setup a zram disk drive with your preferred compression/disksize:
 
-1) Disable all automated services and scripts that setup zram/swap in your system.
-2) Add the grub boot parameters to /etc/default/grub file from the repo and save&update grub.
-3) Add the zram script in this repo in your /usr/bin and make it executable.
-4) Add the zram.service file in /lib/systemd/system and enable it with systemctl enable zram.service.
+1) Disable all automated services and scripts that setup zram in your system.
+2) Add the zram script in this repo in your /usr/bin and make it executable.
+3) Add the zram.service file in /lib/systemd/system and enable it with systemctl enable zram.service.
 
-The above four steps will configure a zram disk at the size of 2G (18% of my 12gb) 
-using zstd compression and the z3fold allocator that allows up to 3 compressed objects by page.
+The above three steps will configure a zram disk at the size of 2G (18% of my 12gb) using zstd compression.
 Changes take effect on boot and stay persistent after suspend/restart.
 
 Additional info:
-Zram/zswap Drive: Dedicates a part of your memory as a compressed ram cache, effectively maximizing your available
+Zram Drive: Dedicates a part of your memory as a compressed ram cache, effectively maximizing your available
 ram capacity, useful for systems with low ram and/or  when adding more ram is not an option.
 
 Zram Allocators: zbud(default, 2 compressed objects are stored into 1 page),z3fold(3 compressed objects are stored into 1 page).
 
 Zram compression algs currently supported in kernel 5.4+: LZ4, LZO, ZSTD, LZO-RLE (default).
 
-If you wish to change the compression algorithm,allocator or zram size edit the zram script and the grub boot parameters
-to accommodate your needs.The zram device according to my script, will always have maximum priority over regular swap,
-so you don't have to disable swap unless you absolutely want to.
+If you wish to change the compression algorithm,allocator or zram size edit the zram script to accommodate your needs.
+The zram device according to my script, will always have maximum priority.
