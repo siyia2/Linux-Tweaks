@@ -1,8 +1,8 @@
 Config and style css files for sway and waybar, just install Sway and Waybar and place them in ~/.config/sway and ~/config/waybar respectively. 
 You can of course tweak the startup programs, bg image and resolutions to your liking depending on your setup in sway config.
 
-Essential Packages:
-**otf-font-awesome
+##Essential Packages:
+otf-font-awesome
 noto-fonts-emoji
 ttf-ubuntu-font-family
 sway
@@ -11,7 +11,7 @@ alacritty
 grim (screenshot functionality)
 mako (notification system)
 gnome-polkit (pkexec needed by some guis for root access)
-gsettings-desktop-schemas (needed for setting cursor theme)**
+gsettings-desktop-schemas (needed for setting cursor theme)
 
 Xwayland Packages:
 
@@ -23,7 +23,7 @@ Optional Packages:
 
 firefox
 thunderbird
-gammastep (blue light filter, uses config file redshift.conf located in this repo)
+gammastep (blue light filter, uses config redshift.conf located in this repo)
 doublecmd-qt (file manager)
 steam
 dolphin-emu
