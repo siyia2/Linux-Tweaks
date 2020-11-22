@@ -239,8 +239,8 @@ bindsym $mod+v exec pavucontrol
 #
 workspace_layout tabbed
 
-    # You can "split" the current object of your focus with
-    # $mod+b or $mod+v, for horizontal and vertical splits
+    # You can toggle "split" the current object of your focus with
+    # $mod+c, for horizontal and vertical splits
     # respectively.
     bindsym $mod+c splitt
 
