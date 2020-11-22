@@ -21,6 +21,7 @@ xhost (needed for xwayland root access)
 ## Optional Packages:
 firefox
 thunderbird
+qalculate-gtk
 gammastep (blue light filter, uses config redshift.conf located in this repo)
 doublecmd-qt (file manager)
 steam
@@ -28,6 +29,7 @@ dolphin-emu
 playonlinux
 wine
 mpv
+light (control backlight)
 uget (download manager)
 qbittorrent
 xfce4-taskmanager
