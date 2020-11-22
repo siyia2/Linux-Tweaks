@@ -5,8 +5,8 @@ You can of course tweak the startup programs, bg image and resolutions to your l
 Essential Packages:
 
 otf-font-awesome
-noto-emoji fonts
-ubuntu fonts
+noto-fonts-emoji
+ttf-ubuntu-font-family
 sway
 waybar
 alacritty
