@@ -115,7 +115,6 @@ for_window [app_id="thunderbird"] focus
 for_window [app_id="firefox"] focus
 for_window [class="Double Commander"] move container to workspace 2: FM 
 for_window [class="Double Commander"] focus
-##for_window [app_id="kitty"] move container to workspace 2: FM
 
 ### POWER MANAGEMENT
 
