@@ -13,7 +13,12 @@ alacritty
 grim (screenshot functionality)
 mako (notification system)
 gnome-polkit (pkexec needed by some guis for root access)
-xhost (needed for xwayland root)
+
+Xwayland Packages:
+
+xorg-server
+xorg-server-xwayland
+xhost (needed for xwayland root access)
 
 Optional Packages:
 
