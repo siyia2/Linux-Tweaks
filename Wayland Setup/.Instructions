@@ -20,9 +20,9 @@ Optional Packages:
 firefox
 thunderbird
 gammastep (blue light filter, uses config file redshift.conf located in this repo)
-doublecmd (file manager)
+doublecmd-qt (file manager)
 steam
-dolphin emulator
+dolphin-emu
 playonlinux
 wine
 mpv
