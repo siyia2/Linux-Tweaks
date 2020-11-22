@@ -19,7 +19,7 @@ Optional Programs:
 
 firefox
 thunderbird
-gammastep (blue light filter uses redshift.conf located in various programs configs)
+gammastep (blue light filter, uses config file redshift.conf located in this repo)
 doublecmd (file manager)
 steam
 dolphin emulator
