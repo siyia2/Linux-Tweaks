@@ -97,7 +97,7 @@ default_border pixel 3
 exec xhost local:root
 exec doublecmd --no-splash
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec mako  --font ubuntu regular 9 --anchor bottom-right --background-color=#006633 --default-timeout 6000
+exec mako
 exec qbittorrent -platform wayland
 exec pactl unload-module 6
 exec gammastep -v -c ~/.config/redshift.conf
