@@ -1,0 +1,6 @@
+font=ubuntu medium 11
+anchor=bottom-right
+layer=overlay
+default-timeout=6000
+background-color=#2E8B57
+
