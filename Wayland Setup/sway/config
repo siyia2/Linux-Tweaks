@@ -69,8 +69,7 @@ bindsym alt+KP_DELETE seat "*" cursor press button2; seat "*" cursor release but
 
 ### FONTS
 
-font Ubuntu Regular 10
-#"Noto Sans Emoji" 10
+font pango:ubuntu regular 10
 
 ### COLORS
 set $focused-bg-color    #006633
