@@ -43,6 +43,8 @@ seat seat0 xcursor_theme Pulse-Glass-Jade-Regular
 set $gnome-schema org.gnome.desktop.interface
 exec_always {
     gsettings set $gnome-schema cursor-theme 'Pulse-Glass-Jade-Regular'
+    gsettings set org.gnome.desktop.wm.preferences button-layout ''
+
 }
 ### KB LAYOUTS
 
