@@ -6,6 +6,8 @@ Hello, in this small repository i am trying to help people (and hopefully myself
 
 * Collection of fixed DSDTS
 
+* Various device quirks
+
 * Cahe & I/O configs
 
 * Laptop quirks
