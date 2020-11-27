@@ -4,6 +4,8 @@ Hello, in this small repository i am trying to help people (and hopefully myself
 
 # Current Topics:
 
+* Collection of fixed DSDTS
+
 * Cahe & I/O configs
 
 * Laptop quirks
