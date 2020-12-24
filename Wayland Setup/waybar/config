@@ -17,7 +17,7 @@
     "interval": 5,
     "format": "Ram: {}%",
 		"tooltip": false,
-"on-click": "xfce4-taskmanager"
+"on-click": "killall htop & alacritty -t htop -e htop"
 },
 
 "custom/zram": {
@@ -25,7 +25,7 @@
         "exec": "/home/siyia/.config/waybar/modules/zram.sh",
 	"format": "Zram:{} ",
 		"tooltip": false,
-"on-click": "xfce4-taskmanager"
+"on-click": "killall htop & alacritty -t htop -e htop"
 },
 
 
@@ -34,7 +34,7 @@
 
 "custom/cpu": {
   "format": "Cpu:",
-  "on-click": "xfce4-taskmanager",
+  "on-click": "killall htop & alacritty -t htop -e htop",
 		"tooltip": false
 },
 
@@ -42,7 +42,7 @@
     "interval": 2,
     "format": "{usage}% @",
 		"tooltip": false,
-"on-click": "xfce4-taskmanager"
+"on-click": "killall htop & alacritty -t htop -e htop"
 },
 
 "custom/cpufan": {
@@ -50,7 +50,7 @@
         "exec": "/home/siyia/.config/waybar/modules/cpu_fan.sh",
 	"format": " @ {} rpm ||",
 		"tooltip": false,
-"on-click": "xfce4-taskmanager"
+"on-click": "killall htop & alacritty -t htop -e htop"
 },
 
 "temperature": {
@@ -61,7 +61,7 @@
 	"format-critical":"{temperatureC}°C",
 	"format":"{temperatureC}°C",
 		"tooltip": false,
-"on-click": "xfce4-taskmanager"
+"on-click": "killall htop & alacritty -t htop -e htop"
 },
 
 
@@ -85,7 +85,7 @@
 
 "custom/gpu": {
   "format": " Gpu:",
-  "on-click": "xfce4-taskmanager",
+  "on-click": "killall htop & alacritty -t htop -e htop",
 		"tooltip": false
 },
 
@@ -94,7 +94,7 @@
         "exec": "/home/siyia/.config/waybar/modules/gpu_usage.sh",
 	"format": " {}% @",
 		"tooltip": false,
-"on-click": "xfce4-taskmanager"
+"on-click": "killall htop & alacritty -t htop -e htop"
 },
 
 "custom/gpufan": {
@@ -102,7 +102,7 @@
         "exec": "/home/siyia/.config/waybar/modules/gpu_fan.sh",
 	"format": " @ {} rpm",
 		"tooltip": false,
-"on-click": "xfce4-taskmanager"
+"on-click": "killall htop & alacritty -t htop -e htop"
 },
 
 "custom/vram": {
@@ -110,7 +110,7 @@
 		"tooltip": false,
 		"exec": "/home/siyia/.config/waybar/modules/vram.sh",
 		"format": "Vram: {}% || ",
-		"on-click": "xfce4-taskmanager"
+		"on-click": "killall htop & alacritty -t htop -e htop"
 },
 
 "custom/gputemp": {
@@ -118,7 +118,7 @@
         "exec": "/home/siyia/.config/waybar/modules/gpu_temp.sh",
 	"format": " {}°C",
 		"tooltip": false,
-"on-click": "xfce4-taskmanager"
+"on-click": "killall htop & alacritty -t htop -e htop"
 },
 
 // MISC SW
