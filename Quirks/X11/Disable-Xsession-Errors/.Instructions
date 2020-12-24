@@ -1,0 +1,2 @@
+Copy the script somewhere inside your home folder (preferably under ~/.local/bin), make it executable and add it to your desktop autostart.
+The script replaces ~/.Xerrors-session & ~/.Xerrors-session.old with symlinks directed to /dev/null everytime at startup.
