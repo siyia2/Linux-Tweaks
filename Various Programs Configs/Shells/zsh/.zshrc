@@ -10,6 +10,7 @@ SAVEHIST=1000
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/siyia/.zshrc'
+zstyle ':completion:*' menu select
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
@@ -32,6 +33,6 @@ ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]=fg=green
 # Prompt config
 PS1="%B%F{cyan}%n%F{magenta}@%F{cyan}%m%F{magenta}@%F{cyan}%~ %1 %#: "
 # Custom Key Bindings
-bindkey "\e" "kill-line"
+#bindkey "\e" "kill-line"
 bindkey  "^[[H"   beginning-of-line
 bindkey  "^[[F"   end-of-line
