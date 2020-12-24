@@ -12,6 +12,8 @@ Hello, in this small repository i am trying to help people (and hopefully myself
 
 * Laptop quirks
 
+* General quirks
+
 * Many scripts and services the average layman would find handy
 
 * Various programs configs that i use
