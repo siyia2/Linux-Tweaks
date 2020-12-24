@@ -146,8 +146,8 @@ for_window [app_id="mpv"] inhibit_idle fullscreen
 bindsym $mod+x exec $term
 bindsym $mod+f exec doublecmd --no-splash
 bindsym $mod+w exec env MOZ_ENABLE_WAYLAND=1 firefox
-bindsym ctrl+alt+delete exec xfce4-taskmanager
-bindsym ctrl+alt+KP_delete exec xfce4-taskmanager
+bindsym ctrl+alt+delete exec killall htop & alacritty -t htop -e htop
+bindsym ctrl+alt+KP_delete exec killall htop & alacritty -t htop -e htop
 
 
 bindsym $mod+f9 exec thunderbird
