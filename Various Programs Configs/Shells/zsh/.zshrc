@@ -17,6 +17,7 @@ compinit
 # Plugins in use&settings
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=white,underline
 ZSH_HIGHLIGHT_STYLES[precommand]=fg=white,bold
 ZSH_HIGHLIGHT_STYLES[command]=fg=cyan,bold
@@ -34,5 +35,7 @@ ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]=fg=green
 PS1="%B%F{cyan}%n%F{magenta}@%F{cyan}%m%F{magenta}@%F{cyan}%~ %1 %#: "
 # Custom Key Bindings
 #bindkey "\e" "kill-line"
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 bindkey  "^[[H"   beginning-of-line
 bindkey  "^[[F"   end-of-line
