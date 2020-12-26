@@ -34,8 +34,8 @@ ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]=fg=green
 # Prompt config
 PS1="%B%F{cyan}%n%F{magenta}@%F{cyan}%m%F{magenta}@%F{cyan}%~ %1 %#: "
 # Custom Key Bindings
-#bindkey "\e" "kill-line"
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
+bindkey "\e" backward-kill-line
+bindkey "^[[A" history-substring-search-up
+bindkey "^[[B" history-substring-search-down
 bindkey  "^[[H"   beginning-of-line
 bindkey  "^[[F"   end-of-line
