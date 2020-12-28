@@ -23,7 +23,7 @@ firefox
 thunderbird
 qalculate-gtk
 gammastep (blue light filter, uses config redshift.conf located in this repo)
-doublecmd-qt (file manager)
+doublecmd-gtk2 (file manager)
 steam
 dolphin-emu
 playonlinux
