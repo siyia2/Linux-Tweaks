@@ -1,5 +1,5 @@
 [Unit]
-Description=a timer that activates a service every monday at midnight, to change hour or day change 00:00:00 and Mon
+Description=a timer that activates a service every monday at midnight, to change hour or day change 00:00:00 and Mon,24-hour format is used
 
 [Timer]
 OnCalendar=Mon *-*-* 00:00:00
