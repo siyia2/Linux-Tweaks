@@ -4,6 +4,8 @@ Hello, in this small repository i am trying to help people (and hopefully myself
 
 # Current Topics:
 
+* Various programs configs that i use
+
 * Collection of fixed DSDTS
 
 * Cahe & I/O configs
@@ -13,8 +15,6 @@ Hello, in this small repository i am trying to help people (and hopefully myself
 * General quirks
 
 * Useful templates for scripts & services
-
-* Various programs configs that i use
 
 * Wayland desktop setup (currently only under sway)
 
