@@ -1,5 +1,5 @@
 [Unit]
-Description=Timer daily at 7:00 change hour to whatever you want.
+Description=Timer daily at 00:00:00 change hour to whatever you want.
 
 [Timer]
 OnCalendar=*-*-* 00:00:00
