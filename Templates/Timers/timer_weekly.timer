@@ -1,8 +1,8 @@
 [Unit]
-Description=a timer that activates a service every week.
+Description=a timer that activates a service every monday at midnight, to change hour or day change 00:00:00 and Mon
 
 [Timer]
-OnCalendar=weekly
+OnCalendar=Mon *-*-* 00:00:00
 Persistent=true
 
 [Install]
