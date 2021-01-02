@@ -1,0 +1,9 @@
+[Unit]
+Description=a timer that activates a service every week.
+
+[Timer]
+OnCalendar=weekly
+Persistent=true
+
+[Install]
+WantedBy=timers.target
