@@ -1,0 +1,6 @@
+[Unit]
+Description=a service for the timers the service must have the same name as the timer
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/script_example
