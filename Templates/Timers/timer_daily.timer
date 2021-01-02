@@ -2,7 +2,7 @@
 Description=A timer for a service that runs everyday at 7:00
 
 [Timer]
-OnCalendar=7:00
+OnCalendar=daily
 Persistent=true
 
 [Install]
