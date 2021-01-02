@@ -1,0 +1,9 @@
+[Unit]
+Description=A timer for a service that runs every hour at how many hours it runs change 1:00 to whatever number you want.
+
+[Timer]
+OnCalendar=00/1:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
