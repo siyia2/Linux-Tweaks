@@ -1,0 +1,204 @@
+{
+    "position": "bottom",
+    "layer": "bottom",
+    	"width": 1920,
+	"height": 26,
+    "modules-left": ["sway/workspaces"],
+    "modules-center": ["memory","custom/zram","custom/vram","custom/cpu","cpu","temperature","custom/cpufan","custom/gpu","custom/gpusage","custom/gputemp","custom/gpufan"],
+    "modules-right": ["custom/kernel","custom/mesa","custom/kb","pulseaudio","network","clock","clock#utc"],
+    "sway/window": {
+        "max-length": 1920
+    },
+    
+
+//MEM STUFF
+
+"memory": {
+    "interval": 5,
+    "format": "Ram: {}%",
+		"tooltip": false,
+"on-click": "killall htop & alacritty -t htop -e htop"
+},
+
+"custom/zram": {
+	"restart-interval": 5,
+        "exec": "/home/siyia/.config/waybar/modules/zram.sh",
+	"format": "Zram:{} ",
+		"tooltip": false,
+"on-click": "killall htop & alacritty -t htop -e htop"
+},
+
+
+
+//CPU STUFF
+
+"custom/cpu": {
+  "format": "Cpu:",
+  "on-click": "killall htop & alacritty -t htop -e htop",
+		"tooltip": false
+},
+
+"cpu": {
+    "interval": 2,
+    "format": "{usage}% @",
+		"tooltip": false,
+"on-click": "killall htop & alacritty -t htop -e htop"
+},
+
+"custom/cpufan": {
+	"restart-interval": 2,
+        "exec": "/home/siyia/.config/waybar/modules/cpu_fan.sh",
+	"format": " @ {} rpm ||",
+		"tooltip": false,
+"on-click": "killall htop & alacritty -t htop -e htop"
+},
+
+"temperature": {
+	"interval": 2,
+	"thermal-zone": 0,
+	"hwmon-path": "/sys/class/hwmon/hwmon0/temp1_input",
+	"critical-threshold": 61,
+	"format-critical":"{temperatureC}°C",
+	"format":"{temperatureC}°C",
+		"tooltip": false,
+"on-click": "killall htop & alacritty -t htop -e htop"
+},
+
+
+"custom/kernel": {
+  "restart-interval": 99,
+  "exec": "uname -r | cut -d '-' -f1",
+  "format": "🐧 {}  ",
+   "on-click": "pamac-manager",
+		"tooltip": false
+},
+
+"custom/mesa": {
+  	"restart-interval": 99,
+  "exec": "glxinfo | grep 'Version' | cut -c 13-",
+  "format": "⚙️ {} ",
+    "on-click": "pamac-manager",
+		"tooltip": false
+},
+
+// GPU STUFF
+
+"custom/gpu": {
+  "format": " Gpu:",
+  "on-click": "killall htop & alacritty -t htop -e htop",
+		"tooltip": false
+},
+
+"custom/gpusage": {
+	"restart-interval": 2,
+        "exec": "/home/siyia/.config/waybar/modules/gpu_usage.sh",
+	"format": " {}% @",
+		"tooltip": false,
+"on-click": "killall htop & alacritty -t htop -e htop"
+},
+
+"custom/gpufan": {
+	"restart-interval": 2,
+        "exec": "/home/siyia/.config/waybar/modules/gpu_fan.sh",
+	"format": " @ {} rpm",
+		"tooltip": false,
+"on-click": "killall htop & alacritty -t htop -e htop"
+},
+
+"custom/vram": {
+		"restart-interval": 5,
+		"tooltip": false,
+		"exec": "/home/siyia/.config/waybar/modules/vram.sh",
+		"format": "Vram: {}% || ",
+		"on-click": "killall htop & alacritty -t htop -e htop"
+},
+
+"custom/gputemp": {
+	"restart-interval": 2,
+        "exec": "/home/siyia/.config/waybar/modules/gpu_temp.sh",
+	"format": " {}°C",
+		"tooltip": false,
+"on-click": "killall htop & alacritty -t htop -e htop"
+},
+
+// MISC SW
+
+"custom/packages": {
+"restart-interval": 99,
+"exec": "pacman -Qq | wc -l",
+  "format": " 📦 {} ",
+  "on-click": "pamac-manager",
+		"tooltip": false
+},
+
+"custom/Torrent": {
+	"format": " ↑ ↓",
+		"tooltip": false,
+"on-click": "qbittorrent",
+"on-scroll-down":"swaymsg workspace back_and_forth",
+"on-scroll-up":"swaymsg workspace 5: P2P"
+},
+
+"custom/kb": {
+"exec": "killall swaymsg ; swaymsg --type get_inputs | grep \"xkb_active_layout_name\" | /usr/bin/sed -u '1!d; s/^.*xkb_active_layout_name\": \"//; s/\\(.\\{2\\}\\).*/\\1/' && swaymsg --type subscribe --monitor '[\"input\"]' | /usr/bin/sed -u 's/^.*xkb_active_layout_name\": \"//; s/\\(.\\{2\\}\\).*/\\1/'",
+  "format": " | {} |",
+		"tooltip": false
+},
+
+    "battery": {
+        "format": "{capacity}% {icon}",
+        "format-icons": ["", "", "", "", ""],
+		"tooltip": false
+    },
+
+// MISC HW
+
+"network": {
+    "interface": "eth0",
+    "format": "{ipaddr}",
+    "format-wifi": "{essid} ({signalStrength}%) ",
+    "format-ethernet": "🔗",
+    "format-disconnected": "✖️",
+    "tooltip-format": "{ifname} {ipaddr}",
+	"tooltip": true
+},
+
+"pulseaudio": {
+    "format": " {volume}% {icon}",
+    "format-bluetooth": "{volume}% {icon}",
+    "format-muted": " Muted 🔇",
+    "format-icons": {
+        "headphones": "",
+        "handsfree": "",
+        "headset": "",
+        "phone": "",
+        "portable": "",
+        "car": "",
+        "default": ["🔈","🔉","🔊"]
+        
+
+    },
+    "scroll-step": 1,
+	"on-scroll-down":"pactl set-sink-volume @DEFAULT_SINK@ -5%",
+	"on-scroll-up":"pactl set-sink-volume @DEFAULT_SINK@ +5%",
+	"on-click-middle":"pactl set-sink-mute @DEFAULT_SINK@ toggle",
+    "on-click": "pavucontrol",
+	"tooltip": false
+},
+// CLOCK/DATE STUFF
+
+    "clock": {
+        "format": "{:%a %d %b, %H:%M}",
+	"on-click": "gsimplecal",
+	"tooltip-format": "{:%A %d %B %Y, %H:%M}",
+	"tooltip": true
+    },
+   
+  "clock#utc": {
+  	"format": "UTC {:%H:%M}",
+  	"on-click": "gsimplecal",
+  	"tooltip": false,
+        "timezone": "Africa/Accra"
+
+    }
+}
