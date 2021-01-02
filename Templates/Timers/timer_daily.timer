@@ -1,5 +1,5 @@
 [Unit]
-Description=A timer for a service that runs everyday at 7:00
+Description=A timer for a service that runs everyday
 
 [Timer]
 OnCalendar=daily
