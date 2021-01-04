@@ -7,7 +7,7 @@ SUB="does not need defragmentation"
 
 if [[ "$fragmentation" == *"$SUB"* ]]; then
 	
-	sudo -u your_user DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/your_user_id/bus notify-send "ext4 partition your_mount_point does not need defragmentation"
+	sudo -u your_user DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/your_user_id/bus notify-send "ext4 partition your_mount_point does not require defragmentation"
 	
 else
 
@@ -17,7 +17,7 @@ fi
 
 #if [[ "$fragmentation2" == *"$SUB"* ]]; then
 	
-#	sudo -u your_user DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/your_user_id/bus notify-send "ext4 partition your_mount_point2 does not need defragmentation"
+#	sudo -u your_user DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/your_user_id/bus notify-send "ext4 partition your_mount_point2 does not require defragmentation"
 	
 #else
 
