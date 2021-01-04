@@ -1,0 +1,5 @@
+#!/bin/bash
+
+btrfs balance start -musage=50 -dusage=50 your_device ;
+
+exit
