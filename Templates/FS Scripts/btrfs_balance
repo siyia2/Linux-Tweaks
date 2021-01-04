@@ -1,6 +1,6 @@
 #!/bin/bash
 
-btrfs balance start -musage=50 -dusage=50 your_device ;
-#btrfs balance start -musage=50 -dusage=50 your_device2;
+btrfs balance start -musage=50 -dusage=50 your_mount_point ;
+#btrfs balance start -musage=50 -dusage=50 your_mount_point2;
 
 exit
