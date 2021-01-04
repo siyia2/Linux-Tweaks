@@ -1,7 +1,7 @@
 #!/bin/bash
 
 fragmentation=$(sudo e4defrag -c your_mount_point | grep "defragmentation")
-fragmentation2=$(sudo e4defrag -c your_mount_point2 | grep "defragmentation")
+#fragmentation2=$(sudo e4defrag -c your_mount_point2 | grep "defragmentation")
 
 SUB="does not need defragmentation"
 
@@ -15,11 +15,11 @@ else
 fi
 
 
-if [[ "$fragmentation2" == *"$SUB"* ]]; then
+#if [[ "$fragmentation2" == *"$SUB"* ]]; then
 	
-	sudo -u your_user DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/your_user_id/bus notify-send "ext4 partition your_mount_point2 does not need defragmentation"
+#	sudo -u your_user DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/your_user_id/bus notify-send "ext4 partition your_mount_point2 does not need defragmentation"
 	
-else
+#else
 
-    e4defrag your_mount_point2
-fi
+#    e4defrag your_mount_point2
+#fi
