@@ -1,0 +1,9 @@
+[Unit]
+Description=A timer for a service that runs every 4 months at midnight,24-hour format is used
+
+[Timer]
+OnCalendar=**-01,04,07,10-01 00:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
