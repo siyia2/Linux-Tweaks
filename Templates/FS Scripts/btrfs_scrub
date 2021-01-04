@@ -1,0 +1,5 @@
+#!/bin/bash
+
+btrfs_scrub your_device ;
+
+exit
