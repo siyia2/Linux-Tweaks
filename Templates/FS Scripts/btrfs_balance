@@ -1,6 +1,9 @@
 #!/bin/bash
 
 btrfs balance start -musage=50 -dusage=50 your_mount_point ;
+
+#uncomment below if you need btrfs balance if you have a secondary mountpoint other than /,/home under /
+
 #btrfs balance start -musage=50 -dusage=50 your_mount_point2 ;
 
 exit
