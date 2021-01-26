@@ -1,9 +1,11 @@
 #!/bin/bash
 
+btrfs balance start -musage=0 -dusage=0 / ;
 btrfs balance start -musage=50 -dusage=50 / ;
 
 #uncomment below if you need btrfs balance on a secondary mountpoint other than /,/home under /
 
+#btrfs balance start -musage=0 -dusage=0 your_mount_point2 ;
 #btrfs balance start -musage=50 -dusage=50 your_mount_point2 ;
 
 exit
