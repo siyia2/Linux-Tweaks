@@ -1,0 +1,6 @@
+#!/bin/bash
+
+btrfs scrub start your_device1 ;
+#btrfs_scrub start your_device2 ;
+
+exit

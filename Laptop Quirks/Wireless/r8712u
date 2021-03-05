@@ -1,2 +1,0 @@
-#Disables powersaving for wi-fi (for r8712u fixes suspen/resume issues) 
-options r8712u fwlps=N

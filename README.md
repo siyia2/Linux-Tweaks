@@ -1,16 +1,20 @@
 # Linux-Tweaks
 
-Hello, in this small repository i am trying to help people (and hopefully myself too) config and optmize their linux systems mostly for desktop usage.I am doing my best to describe each config in simple layman's terms with instructions, so that the average user understands how to setup helpful configs for their desktop system. This repo also serves as a personal backup for my config files and system setups.
+Hello, creating this repository aims trying to help people (and hopefully myself too) config and optimize their linux systems mostly for desktop usage.I am doing my best to describe each config in simple layman's terms with instructions, so that the average user understands how to setup helpful configs for their desktop system. This repo also serves as a personal backup for my config files and system setups.
 
 # Current Topics:
+
+* Various programs configs that i use
+
+* Collection of fixed DSDTS
 
 * Cahe & I/O configs
 
 * Laptop quirks
 
-* Many scripts and services the average layman would find handy
+* General quirks
 
-* Various programs configs that i use
+* Useful templates for scripts & services
 
 * Wayland desktop setup (currently only under sway)
 

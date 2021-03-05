@@ -1,0 +1,9 @@
+[Unit]
+Description=A timer for a service that runs every 15 minutes to change at how many minutes it runs change 15 to whatever,24-hour format is used.
+
+[Timer]
+OnCalendar=*:0/15
+Persistent=true
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,2 @@
+# enviroment variable to disable the useless pol_error logs place it in /etc/enviroment
+POL_IgnoreWineErrors=True
