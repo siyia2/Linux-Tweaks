@@ -185,7 +185,7 @@
     
  "custom/acpi": {
   "format": " {}  ",
-   "on-click": "wlogout",
+   "on-click": "wlogout -p layer-shell",
 		"tooltip": false
 },
 
