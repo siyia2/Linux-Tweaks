@@ -10,7 +10,6 @@
         "max-length": 1920
     },
     
-
 //MEM STUFF
 
 "memory": {
@@ -27,8 +26,6 @@
 		"tooltip": false,
 "on-click": "killall htop & alacritty -t htop -e htop"
 },
-
-
 
 //CPU STUFF
 
@@ -145,7 +142,6 @@
 		"tooltip": false
 },
 
-
 // MISC HW
 
 "network": {
@@ -187,13 +183,14 @@
 		"tooltip": false
     },
     
-    "custom/acpi": {
+ "custom/acpi": {
   "format": " {}  ",
    "on-click": "poweroff",
-   "on-middle-click": "reboot",
-   "on-right-click": "suspend",
+   "on-click-middle": "reboot",
+   "on-click-right": "systemctl suspend",
 		"tooltip": false
 },
+
 // CLOCK/DATE STUFF
 
     "clock": {
