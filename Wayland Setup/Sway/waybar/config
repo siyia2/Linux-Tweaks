@@ -5,7 +5,7 @@
 	"height": 26,
     "modules-left": ["sway/workspaces"],
     "modules-center": ["memory","custom/zram","custom/vram","custom/cpu","cpu","temperature","custom/cpufan","custom/gpu","custom/gpusage","custom/gputemp","custom/gpufan"],
-    "modules-right": ["custom/kernel","custom/mesa","custom/kb","pulseaudio","network","clock","clock#utc"],
+    "modules-right": ["custom/kernel","custom/mesa","custom/kb","pulseaudio","network","clock","clock#utc","custom/acpi"],
     "sway/window": {
         "max-length": 1920
     },
@@ -145,11 +145,6 @@
 		"tooltip": false
 },
 
-    "battery": {
-        "format": "{capacity}% {icon}",
-        "format-icons": ["", "", "", "", ""],
-		"tooltip": false
-    },
 
 // MISC HW
 
@@ -184,6 +179,20 @@
 	"on-click-middle":"pactl set-sink-mute @DEFAULT_SINK@ toggle",
     "on-click": "pavucontrol",
 	"tooltip": false
+},
+
+   "battery": {
+        "format": "{capacity}% {icon}",
+        "format-icons": ["", "", "", "", ""],
+		"tooltip": false
+    },
+    
+    "custom/acpi": {
+  "format": " {}  ",
+   "on-click": "poweroff",
+   "on-middle-click": "reboot",
+   "on-right-click": "suspend",
+		"tooltip": false
 },
 // CLOCK/DATE STUFF
 
