@@ -186,8 +186,6 @@
  "custom/acpi": {
   "format": " {}  ",
    "on-click": "wlogout",
-   "on-click-middle": "wlogout",
-   "on-click-right": "wlogout",
 		"tooltip": false
 },
 
