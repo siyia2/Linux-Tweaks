@@ -185,9 +185,9 @@
     
  "custom/acpi": {
   "format": " {}  ",
-   "on-click": "poweroff",
-   "on-click-middle": "reboot",
-   "on-click-right": "systemctl suspend",
+   "on-click": "wlogout",
+   "on-click-middle": "wlogout",
+   "on-click-right": "wlogout",
 		"tooltip": false
 },
 
