@@ -201,9 +201,10 @@
     },
    
   "clock#utc": {
-  	"format": "UTC {:%H:%M}",
+  	"format": "{:%H:%M} ",
   	"on-click": "gsimplecal",
-  	"tooltip": false,
+  	"tooltip-format": "UTC {:%H:%M}",
+  	"tooltip": true,
         "timezone": "Africa/Accra"
 
     }
