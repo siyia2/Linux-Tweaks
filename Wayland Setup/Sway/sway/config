@@ -69,7 +69,7 @@ bindsym alt+KP_DELETE seat "*" cursor press button2; seat "*" cursor release but
 
 ### FONTS
 
-font pango:ubuntu italic 11
+font pango:ubuntu 10
 
 ### COLORS
 set $focused-bg-color    #006633
