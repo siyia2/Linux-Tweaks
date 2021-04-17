@@ -8,12 +8,11 @@ The above three steps will configure a zram disk at the size of 2G (18% of my 12
 Changes take effect on boot and stay persistent after suspend/restart.
 
 Additional info:
-Zram Drive: Dedicates a part of your memory as a compressed ram cache, effectively maximizing your available
+Zram Drive: Uses dynamically a specified part of your memory as a compressed ram cache, effectively maximizing your available
 ram capacity, useful for systems with low ram and/or  when adding more ram is not an option.
-
-Zram Allocators: zbud(default, 2 compressed objects are stored into 1 page),z3fold(3 compressed objects are stored into 1 page).
 
 Zram compression algs currently supported in kernel 5.4+: LZ4, LZO, ZSTD, LZO-RLE (default).
 
-If you wish to change the compression algorithm,allocator or zram size edit the zram script to accommodate your needs.
+If you wish to change the compression algorithm, or zram device size edit the zram script to accommodate your needs. 
+For most modern systems, i recommend adding the zstd compression alg and 50% of your ram as zram.
 The zram device according to my script, will always have maximum priority.
