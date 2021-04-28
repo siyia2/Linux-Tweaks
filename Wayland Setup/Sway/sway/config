@@ -242,7 +242,8 @@ workspace_layout tabbed
 
     # You can toggle "split" the current object of your focus with
     # $mod+c, for horizontal and vertical splits
-    # respectively. To remove split status of a window use move with mod+Shift up/down/right/left
+    # respectively. 
+    # To remove split status of a lone window use move with mod+Shift up/down/right/left
     bindsym $mod+grave splitt
 
     # Switch the current container between different layout styles
