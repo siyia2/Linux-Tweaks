@@ -106,8 +106,8 @@ exec gammastep -v -c ~/.config/redshift.conf
 #### WINDOW SETUP
 
 for_window [class="PlayOnLinux"] move container to workspace 3: Steam
-for_window [title="Friends List"] move container to workspace 3: Steam
-for_window [class="Steam"] move container to workspace 3: Steam
+for_window [title="Friends List"] move container to workspace 3: Steam ; layout toggle split ;
+for_window [class="Steam"] move container to workspace 3: Steam ; layout toggle split ;
 for_window [app_id="uget"] move container to workspace 5: P2P
 for_window [app_id="org.qbittorrent.qBittorrent"] move container to workspace 5: P2P
 for_window [app_id="firefox"] move container to workspace 1: Web/Mail
