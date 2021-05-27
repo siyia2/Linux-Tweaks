@@ -84,7 +84,7 @@ set $indicator-unfocused #505050
 
 
 
-# class           border					 background           text                   split_indicator
+# class           border                background           text                   split_indicator
 client.focused    $indicator            $focused-bg-color    $text-color            $indicator2
 client.unfocused  $indicator-unfocused  $unfocused-bg-color  $text-color-unfocused  $indicator2
 
