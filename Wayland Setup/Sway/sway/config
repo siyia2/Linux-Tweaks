@@ -75,6 +75,8 @@ font pango:ubuntu 10
 set $focused-bg-color    #006633
 set $text-color          #FFFFFF
 set $indicator           #505050
+set $indicator2          #00FF00
+
 
 set $unfocused-bg-color  #404040
 set $text-color-unfocused #A9A9A9 
@@ -82,9 +84,9 @@ set $indicator-unfocused #505050
 
 
 
-# class			border		background		text      
-client.focused		$indicator	$focused-bg-color	$text-color
-client.unfocused	$indicator-unfocused	$unfocused-bg-color	$text-color-unfocused
+# class				border					background						text                        Split Indicator
+client.focused		$indicator				$focused-bg-color				$text-color 				    $indicator2
+client.unfocused	$indicator-unfocused	$unfocused-bg-color			$text-color-unfocused 	    $indicator2
 
 ### GAPS
 
