@@ -158,9 +158,21 @@ for_window [app_id="mpv"] inhibit_idle fullscreen
 #
 ### CUSTOM
 
-bindsym $mod+x exec $term
-bindsym $mod+f exec doublecmd --no-splash
-bindsym $mod+w exec env MOZ_ENABLE_WAYLAND=1 firefox
+# Layout Insensitive Bindings
+bindsym --to-code {
+ 
+ $mod+x exec $term
+ $mod+f exec doublecmd --no-splash
+ $mod+w exec env MOZ_ENABLE_WAYLAND=1 firefox
+ $mod+v exec pavucontrol
+ $mod+q kill
+ $mod+d exec $menu
+ $mod+Shift+c reload
+ $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+ $mod+Shift+r mode "resize"
+
+}
+
 bindsym ctrl+alt+delete exec killall htop & alacritty -t htop -e htop
 bindsym ctrl+alt+KP_delete exec killall htop & alacritty -t htop -e htop
 
@@ -176,16 +188,6 @@ bindsym XF86MonBrightnessDown exec light -U 5
 bindsym XF86MonBrightnessUp exec light -A 5
 bindsym Print exec grim $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S_grim.png')
 bindsym button2 kill
-bindsym $mod+v exec pavucontrol
-
-# Basics:
-#
-
-    # kill focused window
-    bindsym $mod+q kill
-
-    # start your launcher
-    bindsym $mod+d exec $menu
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -193,13 +195,7 @@ bindsym $mod+v exec pavucontrol
     # Change normal to inverse to use left mouse button for resizing and right
     # mouse button for dragging.
     floating_modifier $mod normal
-
-    # reload the configuration file
-    bindsym $mod+Shift+c reload
-
-    # exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
-#
+    
 # Moving around:
 #
     # Move your focus around
@@ -313,8 +309,6 @@ mode "resize" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+Shift+r mode "resize"
-
 
 #
 # Status Bar:
