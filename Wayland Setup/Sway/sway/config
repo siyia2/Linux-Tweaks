@@ -128,6 +128,7 @@ for_window [class="Skype"] move container to workspace 5: Comms
 for_window [app_id="mpv"] move container to workspace 6: P2P
 for_window [app_id="mpv"] focus
 for_window [title="Default - Wine desktop"] move container to workspace 4: Games/Misc
+for_window [title="Default - Wine desktop"] focus
 
 ### POWER MANAGEMENT
 
