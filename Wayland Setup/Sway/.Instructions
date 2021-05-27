@@ -21,6 +21,7 @@ xorg-server-xwayland
 xhost (needed for xwayland root access)
 
 ## Optional Packages:
+autotiling
 firefox
 thunderbird
 qalculate-gtk
