@@ -43,5 +43,5 @@ else
 fi
 
 # Emojis and characters for the status bar
-# 💎 💻 💡 🔌 ⚡ 📁 ⌨️ 🐧   🖧 ⚙️ 📡 ⇆\|
+# 💎 💻 💡 🔌 ⚡ 📁 ⌨️ 🐧   🖧 ⚙️ 📡 ⛔ ⇆\|
 echo RAM: $ram_usage "|" ZSWAP: $swap_usage "|" VRAM: $vram_percent% "|" CPU: $cpu_load% @ $cpu_temp°C @ $cpu_fan rpm "|" GPU: $gpu_usage.0% @ $gpu_temp°C @ $gpu_fan rpm "			" 🐧 $linux_version " " ⚙️ $mesa_version " " $audio_info " " $network " " ⌨️ $kb_layout " " $date_formatted " "UTC $time_utc" "
