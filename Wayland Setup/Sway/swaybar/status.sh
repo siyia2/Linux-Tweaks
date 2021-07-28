@@ -1,3 +1,4 @@
+#!/bin/sh
 # The Sway configuration file in ~/.config/sway/config calls this script.
 # You should see changes to the status bar after saving this script.
 # If not, do "killall swaybar" and $mod+Shift+c to reload the configuration.
@@ -33,7 +34,14 @@ kb_layout=$(swaymsg -t get_inputs | jq '.[] | select(.identifier == "6700:19550:
 
 ssid=$(iwgetid wlp0s18f2u2 -r)
 
+network=$(ip route get 1.1.1.1 | grep -Po '(?<=dev\s)\w+' | cut -f1 -d ' ')
+if ! [ $network ]
+then
+   network="⛔"
+else
+   network="⇆"
+fi
 
 # Emojis and characters for the status bar
-# 💎 💻 💡 🔌 ⚡ 📁 ⌨️ 🐧   🖧 ⚙️ \|
-echo RAM: $ram_usage "|" ZSWAP: $swap_usage "|" VRAM: $vram_percent% "|" CPU: $cpu_load% @ $cpu_temp°C @ $cpu_fan rpm "|" GPU: $gpu_usage.0% @ $gpu_temp°C @ $gpu_fan rpm "		" 🐧 $linux_version " " ⚙️ $mesa_version " " 🖧 $ssid " " ⌨️ $kb_layout " " $audio_info $date_formatted " "UTC $time_utc" "
+# 💎 💻 💡 🔌 ⚡ 📁 ⌨️ 🐧   🖧 ⚙️ 📡 ⇆\|
+echo RAM: $ram_usage "|" ZSWAP: $swap_usage "|" VRAM: $vram_percent% "|" CPU: $cpu_load% @ $cpu_temp°C @ $cpu_fan rpm "|" GPU: $gpu_usage.0% @ $gpu_temp°C @ $gpu_fan rpm "			" 🐧 $linux_version " " ⚙️ $mesa_version " " $audio_info " " $network " " ⌨️ $kb_layout " " $date_formatted " "UTC $time_utc" "
