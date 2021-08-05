@@ -1,10 +1,13 @@
-Config and style css files for sway and waybar, just install Sway and Waybar and place them in ~/.config/sway and ~/config/waybar respectively. 
+Config and style css files for sway and waybar, just install Sway and Waybar and place them in ~/.config/sway ~/config/swaybar and ~/config/waybar respectively. 
 You can of course tweak the startup programs, bg image and resolutions to your liking depending on your setup in sway config.
 
 ## Essential Packages:
+ttf-roboto
+ttf-ubuntu-font-family
+ttf-font-awesome
 otf-font-awesome
 noto-fonts-emoji
-ttf-ubuntu-font-family
+wlogout
 sway
 waybar
 alacritty
@@ -14,16 +17,16 @@ gnome-polkit (pkexec needed by some guis for root access)
 gsettings-desktop-schemas (needed for setting cursor theme)
 
 ## Xwayland Packages:
-xorg-server
 xorg-server-xwayland
 xhost (needed for xwayland root access)
 
 ## Optional Packages:
+autotiling
 firefox
 thunderbird
 qalculate-gtk
 gammastep (blue light filter, uses config redshift.conf located in this repo)
-doublecmd-gtk2 (file manager)
+doublecmd (file manager)
 steam
 dolphin-emu
 playonlinux

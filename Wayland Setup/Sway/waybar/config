@@ -5,12 +5,11 @@
 	"height": 26,
     "modules-left": ["sway/workspaces"],
     "modules-center": ["memory","custom/zram","custom/vram","custom/cpu","cpu","temperature","custom/cpufan","custom/gpu","custom/gpusage","custom/gputemp","custom/gpufan"],
-    "modules-right": ["custom/kernel","custom/mesa","custom/kb","pulseaudio","network","clock","clock#utc"],
+    "modules-right": ["custom/kernel","custom/mesa","custom/kb","pulseaudio","network","clock","clock#utc","custom/acpi"],
     "sway/window": {
         "max-length": 1920
     },
     
-
 //MEM STUFF
 
 "memory": {
@@ -27,8 +26,6 @@
 		"tooltip": false,
 "on-click": "killall htop & alacritty -t htop -e htop"
 },
-
-
 
 //CPU STUFF
 
@@ -145,12 +142,6 @@
 		"tooltip": false
 },
 
-    "battery": {
-        "format": "{capacity}% {icon}",
-        "format-icons": ["", "", "", "", ""],
-		"tooltip": false
-    },
-
 // MISC HW
 
 "network": {
@@ -185,6 +176,19 @@
     "on-click": "pavucontrol",
 	"tooltip": false
 },
+
+   "battery": {
+        "format": "{capacity}% {icon}",
+        "format-icons": ["", "", "", "", ""],
+		"tooltip": false
+    },
+    
+ "custom/acpi": {
+  "format": " {}  ",
+   "on-click": "wlogout -p layer-shell",
+		"tooltip": false
+},
+
 // CLOCK/DATE STUFF
 
     "clock": {
@@ -195,9 +199,10 @@
     },
    
   "clock#utc": {
-  	"format": "UTC {:%H:%M}",
+  	"format": "{:%H:%M} ",
   	"on-click": "gsimplecal",
-  	"tooltip": false,
+  	"tooltip-format": "UTC {:%H:%M}",
+  	"tooltip": true,
         "timezone": "Africa/Accra"
 
     }

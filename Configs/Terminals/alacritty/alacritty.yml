@@ -14,9 +14,9 @@ font:
   italic:
     family: inconsolata
     style: italic
-
+   
 shell:
-  program: /usr/bin/fish
+  program: /bin/zsh
 
 
 scrolling:
@@ -37,6 +37,28 @@ scrolling:
   # Specifying `0` will disable faux scrolling.
   scroll_escape: 3
 
+cursor:
+  # Cursor style
+  style:
+    # Cursor shape
+    #
+    # Values for `shape`:
+    #   - ▇ Block
+    #   - _ Underline
+    #   - | Beam
+    shape: Block
+
+    # Cursor blinking state
+    #
+    # Values for `blinking`:
+    #   - Never: Prevent the cursor from ever blinking
+    #   - Off: Disable blinking by default
+    #   - On: Enable blinking by default
+    #   - Always: Force the cursor to always blink
+    blinking: Always
+    interval: 500
+
+    
 # Opacity
 background_opacity: 0.70
 

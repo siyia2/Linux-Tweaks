@@ -4,7 +4,7 @@ modprobe zram
 #It is important to set compression alg before the creation of zram device otherwise default compression alg is always used.
  echo zstd > /sys/block/zram0/comp_algorithm
 wait
- echo 2G > /sys/block/zram0/disksize
+ echo 4G > /sys/block/zram0/disksize
 wait
  mkswap --label zram0 /dev/zram0
 wait
