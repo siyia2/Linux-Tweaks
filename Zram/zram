@@ -17,7 +17,7 @@ echo zstd > /sys/module/zswap/parameters/compressor
 wait
 
 #If size > 0 echoing the resulted zram size along with a G for gigabyte
-if [ $res != $border ] 
+if (( "$res" > "$border" )) 
 
 then
 
