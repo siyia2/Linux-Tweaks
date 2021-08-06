@@ -6,6 +6,7 @@ RAM_GB=$(free -g | grep Mem: | awk '{print $2}')
 var=2
 #Resulted zram size in GBs
 res=$((RAM_GB / var))
+border=0
 
 wait
 modprobe zram
