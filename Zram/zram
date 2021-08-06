@@ -14,8 +14,16 @@ echo zstd > /sys/module/zswap/parameters/compressor
 #It is important to set compression alg before the creation of zram device otherwise default compression alg is always used.
  echo zstd > /sys/block/zram0/comp_algorithm
 wait
-#Echoing the resulted zram size along with a G for gigabyte
- echo -e "$res""G" > /sys/block/zram0/disksize
+
+#If size > 0 echoing the resulted zram size along with a G for gigabyte
+if [ $res != $border ] 
+
+then
+
+echo -e "$res""G" > /sys/block/zram0/disksize ;
+
+fi
+ 
 
 wait
  mkswap --label zram0 /dev/zram0
