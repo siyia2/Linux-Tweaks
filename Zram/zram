@@ -15,7 +15,7 @@ modprobe zram
 wait
 echo zstd > /sys/module/zswap/parameters/compressor
 #It is important to set compression alg before the creation of zram device otherwise default compression alg is always used.
- echo zstd > /sys/block/zram0/comp_algorithm
+echo zstd > /sys/block/zram0/comp_algorithm
 wait
 
 #If size > 0 echoing the resulted zram size along with a M for megabytes
@@ -27,7 +27,6 @@ echo -e "$res""M" > /sys/block/zram0/disksize ;
 
 fi
  
-
 wait
  mkswap --label zram0 /dev/zram0
 wait
