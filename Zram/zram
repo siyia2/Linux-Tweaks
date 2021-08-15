@@ -3,7 +3,7 @@
 #Total sytem ram first in kb and then in mb
 RAM_KB=$(grep MemTotal /proc/meminfo | awk '{print $2}')
 RAM_MB=$(expr $RAM_KB / 1024)
-#Division number, 2 is using  50% of your ram as zram, 4 is going to use 25%
+#Division number, 2 is using  50% of your ram as zram, 4 is going to use 25% of your ram, 1 is going to use all your ram.
 var=2
 #Resulted zram size in GBs
 res=$((RAM_MB / var))
