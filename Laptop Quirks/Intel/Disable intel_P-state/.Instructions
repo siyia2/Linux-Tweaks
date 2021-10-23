@@ -1,0 +1,3 @@
+I have found that the default intel_P-state driver with powersave governor works abysmally for my older intel i3 2350m cpu.
+Use the parameter "intel_pstate=disable" to set acpi_freq as the default cpu driver on your grub cmd and update grub.
+Then set your cpu governor to schedutil or ondemand via tlp or cpupower services and enjoy a huge all around x3 performance boost.
