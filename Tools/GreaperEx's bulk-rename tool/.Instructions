@@ -10,7 +10,7 @@ This is especially useful if you have a case-sensitive fs and want to play mods 
 To use, either download the source file and compile it with : gcc -Wall -O2 -o bulk-rename bulk-rename.c
 This will create a bulk-rename executable file, mark it as executable for it to work.
 Or download the binary straight up and make it executable.
-Works only on CASE-SENSITIVE directories even if they are located within a case-insensitive fs.
+Works only on CASE-SENSITIVE directories even if they are located within a CASE-INSENSITIVE fs.
 Type ./bulk-rename -h for help in a terminal.
 
 EXAMPLES OF USE:
