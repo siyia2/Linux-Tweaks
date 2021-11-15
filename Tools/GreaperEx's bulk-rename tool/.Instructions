@@ -11,6 +11,7 @@ To use either download the source file and compile it with : gcc -Wall -O2 -o bu
 This will create a bulk-rename executable file, mark it as executable for it to work.
 Or download the binary straight up and make it executable.
 Works only on case-sensitive directories even if they are inside a case-insensitive fs.
+Type ./bulk-rename -h for help in a terminal.
 
 EXAMPLES OF USE:
 
