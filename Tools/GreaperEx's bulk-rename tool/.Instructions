@@ -25,7 +25,7 @@ EXAMPLES OF USE:
 (makes everything in the specified path to INVERTED CASE, including the targeted folder)
 
 ./bulk-rename  -i /home/siyia2/Random_Folder
-(INVERTS only folders/files with mixed UPPER/LOWER CASE under the specified path, including the targeted folder)
+(INVERTS only MULTI-CASE folders/files under the specified path, including the targeted folder)
 
 PLEASE PAY ATTENTION TO THE FILE PATH THAT YOU SPECIFY THE PROGRAM TO RENAME INTO !!!
 IF YOU ACCIDENTALLY RENAME YOUR ROOT HOME OR OTHER IMPORTANT SYSTEM FOLDERS, THERE IS NO WAY TO RENAME THEM BACK WITH THIS TOOL !!!!!
