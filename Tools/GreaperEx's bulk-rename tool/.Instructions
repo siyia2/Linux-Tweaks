@@ -1,1 +1,32 @@
-sad
+This is an awesome bulk-rename tool is made by my good friend Greaperx written in C.
+You can check his github profile at : https://github.com/GReaperEx .
+
+The main focus of this program is to set the dir/subdirs/files under a specified fs path to either
+
+LOWER CASE, UPPER CASE or INVERTED CASE 
+
+This is especially useful if you have A case-sensitive fs and want to play mods from windows games in linux.
+
+To use either download the source file and compile it with : gcc -Wall -O2 -o bulk-rename bulk-rename.c
+This will create a bulk-rename executable file, mark it as executable for it to work.
+Or download the binary straight up and make it executable.
+
+EXAMPLES OF USE:
+
+./bulk-rename  /home/siyia2/Random_Folder
+(makes everything in the specified path to LOWER CASE which is essential for mods, including the targeted folder)
+
+./bulk-rename  -L /home/siyia2/Random_Folder
+(makes everything in the specified path to UPPER CASE, including the targeted folder)
+
+./bulk-rename  -I /home/siyia2/Random_Folder
+(makes everything in the specified path to INVERTED CASE, including the targeted folder)
+
+./bulk-rename  -i /home/siyia2/Random_Folder
+(INVERTS only folders/files with mixed UPPER/LOWER CASE in the specified path, including the targeted folder)
+
+PLEASE PAY ATTENTION TO THE FILE PATH THAT YOU SPECIFY THE PROGRAM TO RENAME!!!
+IF YOU ACCIDENTALLY RENAME ROUR ROOT HOME OR OTHER IMPORTANT SYSTEM FOLDERS THERE IS NO WAY TO RENAME THEM BACK WITH THIS TOOL!!!!!
+
+
+
