@@ -120,8 +120,9 @@ scanf(" %c", &answer);
             } else {
                 perror(argv[i]);
                 fprintf(stderr, "Continue (Y/n)? ");
-                int answer = tolower(getchar());
-
+                char answer = 'y';
+				scanf(" %c", &answer);
+				answer = tolower(answer);
                 if (answer == 'n') {
                     exit(-1);
                 }
@@ -189,8 +190,9 @@ void rename_all(DIR* dir, const char* baseName)
                 } else {
                     perror(oldName);
                     fprintf(stderr, "Continue (Y/n)? ");
-                    int answer = tolower(getchar());
-
+                    char answer = 'y';
+					scanf(" %c", &answer);
+					answer = tolower(answer);
                     if (answer == 'n') {
                         exit(-1);
                     }
