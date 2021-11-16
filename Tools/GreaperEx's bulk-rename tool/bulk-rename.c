@@ -68,7 +68,7 @@ int main(int argc, char* argv[])
         
     }
     
-printf("!!! WARNING OPERATION IRREVERSIBLE !!! \nAre you sure you want to rename the specified target & everything under it? \nEnter 'y' to commence or 'n' to abort operation \n");
+printf("!!! WARNING OPERATION IRREVERSIBLE !!! \nAre you sure you want to rename the specified target(s) & everything below? \nEnter 'y' to commence or 'n' to abort operation \n");
 scanf(" %c", &answer);
 
     if (answer == 'y')
