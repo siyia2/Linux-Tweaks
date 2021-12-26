@@ -19,7 +19,7 @@ EXAMPLES OF USE:
 (makes everything in the specified path to LOWER CASE which is essential for mods)
 
 ./bulk-rename -P /home/siyia2/Random_Folder
-(makes everything in the specified path to LOWER CASE which is essential for mods, including the parent Directory, eg "Random_Folder")
+(makes everything in the specified path to LOWER CASE, including the parent Directory, eg "Random_Folder")
 
 ./bulk-rename -L /home/siyia2/Random_Folder
 (makes everything in the specified path to UPPER CASE)
