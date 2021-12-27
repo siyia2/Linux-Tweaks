@@ -1,7 +1,7 @@
 This is an awesome bulk-rename tool made by my good friend GreaperEx written in C.
 You can check his github profile at : https://github.com/GReaperEx .
 
-The main focus of this program is to set the dir/subdirs/files under a specified fs path to either:
+The main focus of this program is to set the dir/subdirs/files under specified fs path(s) to either:
 
 LOWER CASE, UPPER CASE or INVERTED CASE 
 
