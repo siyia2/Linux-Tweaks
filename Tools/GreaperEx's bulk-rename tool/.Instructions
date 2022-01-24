@@ -1,0 +1,37 @@
+This is an awesome bulk-rename tool made by my good friend GreaperEx written in C.
+You can check his github profile at : https://github.com/GReaperEx .
+
+The main focus of this program is to set the dir/subdirs/files under specified fs path(s) to either:
+
+LOWER CASE, UPPER CASE or INVERTED CASE 
+
+This is especially useful if you have a case-sensitive fs and want to play mods from windows games in linux.
+
+To use, either download the source file and compile it with : gcc -Wall -O2 -o bulk-rename bulk-rename.c
+This will create a bulk-rename file, mark it as executable for it to work.
+Or download the binary straight up and make it executable.
+Works only on CASE-SENSITIVE directories even if they are located within a CASE-INSENSITIVE fs.
+Type ./bulk-rename -h for help in a terminal.
+
+EXAMPLES OF USE:
+
+./bulk-rename /home/siyia2/Random_Folder /home/siyia2/Random_Folder2
+(makes everything in the specified path(s) to LOWER CASE which is essential for mods)
+
+./bulk-rename -P /home/siyia2/Random_Folder /home/siyia2/Random_Folder2
+(makes everything in the specified path(s) to LOWER CASE, including the parent Directory, eg "Random_Folder")
+
+./bulk-rename -L /home/siyia2/Random_Folder /home/siyia2/Random_Folder2
+(makes everything in the specified path(s) to UPPER CASE)
+
+./bulk-rename -I /home/siyia2/Random_Folder /home/siyia2/Random_Folder2
+(makes everything in the specified path(s) to INVERTED CASE)
+
+./bulk-rename -i /home/siyia2/Random_Folder /home/siyia2/Random_Folder2
+(INVERTS only MULTI-CASE folders/files under the specified path(s))
+
+PLEASE PAY ATTENTION TO THE FILE PATH THAT YOU SPECIFY THE PROGRAM TO RENAME INTO !!!
+IF YOU ACCIDENTALLY RENAME YOUR ROOT HOME OR OTHER IMPORTANT SYSTEM FOLDERS, THERE IS NO WAY TO RENAME THEM BACK WITH THIS TOOL !!!!!
+
+
+
