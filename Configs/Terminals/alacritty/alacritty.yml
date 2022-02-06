@@ -60,7 +60,8 @@ cursor:
 
     
 # Opacity
-background_opacity: 0.70
+window:
+ opacity: 0.70
 
 # Colors (Kitty)
 colors:
