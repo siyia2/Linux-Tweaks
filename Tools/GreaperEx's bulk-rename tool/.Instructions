@@ -5,7 +5,8 @@ The main focus of this program is to set the dir/subdirs/files under specified f
 
 LOWER CASE, UPPER CASE or INVERTED CASE 
 
-This is especially useful if you have a case-sensitive fs and want to play mods from windows games in linux, it works only for english named Dirs.
+This is especially useful if you have a case-sensitive fs and want to play mods from windows games in linux. 
+It works only for english named Dirs.
 
 To use, either download the source file and compile it with : gcc -Wall -O2 -o bulk-rename bulk-rename.c
 This will create a bulk-rename file, mark it as executable for it to work.
