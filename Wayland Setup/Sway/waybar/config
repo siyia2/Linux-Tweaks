@@ -173,7 +173,7 @@
 	"on-scroll-down":"pactl set-sink-volume @DEFAULT_SINK@ -5%",
 	"on-scroll-up":"pactl set-sink-volume @DEFAULT_SINK@ +5%",
 	"on-click-middle":"pactl set-sink-mute @DEFAULT_SINK@ toggle",
-    "on-click": "pavucontrol",
+    "on-click": "killall pavucontrol ; pavucontrol",
 	"tooltip": false
 },
 
