@@ -46,7 +46,7 @@ then
 echo "NIGHT_VOLUME_THRESHOLD"
 paplay ~/Documents/bark.ogg
 fi
-sleep 4;
+
 fi
 
 done
