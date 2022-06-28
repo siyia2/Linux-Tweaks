@@ -1,8 +1,8 @@
 #!/bin/bash
 RP=/tmp/volume
 RPR=/tmp/volume/recordings
-DAY_VOLUME_THRESHOLD='0.1'
-NIGHT_VOLUME_THRESHOLD='0.05'
+DAY_VOLUME_THRESHOLD='0.2'
+NIGHT_VOLUME_THRESHOLD='0.1'
 H=$(date +%H)
 
 if [ ! -d $RP ]
