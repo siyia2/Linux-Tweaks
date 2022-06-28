@@ -30,7 +30,7 @@ echo "$VOLUME"
 if [ 1 -eq "$(echo "${VOLUME} > ${DAY_VOLUME_THRESHOLD}" | bc)" ]
 then
 echo "DAY_VOLUME_THRESHOLD"
-paplay ~/Documents/bark.ogg
+paplay ~/Music/bark.ogg
 fi
 
 fi
@@ -44,7 +44,7 @@ echo "$VOLUME"
 if [ 1 -eq "$(echo "${VOLUME} > ${NIGHT_VOLUME_THRESHOLD}" | bc)" ]
 then
 echo "NIGHT_VOLUME_THRESHOLD"
-paplay ~/Documents/bark.ogg
+paplay ~/Music/bark.ogg
 fi
 
 fi
