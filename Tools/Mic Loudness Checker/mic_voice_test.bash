@@ -50,5 +50,5 @@ fi
 fi
 
 done
-sleep 4;
+sleep 1;
 done
