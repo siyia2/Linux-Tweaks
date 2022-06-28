@@ -49,5 +49,7 @@ paplay ~/Documents/bark.ogg
 fi
 sleep 4;
 fi
+
 done
+sleep 4;
 done
