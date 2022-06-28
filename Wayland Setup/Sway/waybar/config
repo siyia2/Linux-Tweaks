@@ -154,10 +154,11 @@
 	"tooltip": true
 },
 
+
 "pulseaudio": {
     "format": " {icon} {volume}% {format_source}",
-    "format-source": " 🔴 {volume}%",
-    "format-source-muted": "🟢",
+    "format-source": " 🟢 {volume}%",
+    "format-source-muted": " 🔴",
     "format-bluetooth": "{volume}% {icon}",
     "format-muted": " Muted 🔇",
     "format-icons": {
