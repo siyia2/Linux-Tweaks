@@ -1,5 +1,6 @@
 Bash script that checks if your voice is louder than a certain threshold, it works in two mods NIGHTMOD & DAYMOD
 It requires the sox package and an audio file placed at ~/Documents/bark.ogg and uses ALSA.
+You need to place entry in /etc/fstab : "tmpfs /tmp tmpfs rw,nodev,nosuid,size=2G 0 0" or a tmpfs of a different size
 You might need to adjust different threshold levels for your specific mic device and tolerances.
                                                             
                                                             Special Thanks to my friend GOWR who made most of the work inside the script.
