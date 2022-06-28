@@ -48,7 +48,7 @@ paplay ~/Music/bark.ogg
 fi
 
 fi
-
-done
 sleep 1;
+done
+
 done
