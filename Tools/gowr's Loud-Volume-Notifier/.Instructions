@@ -12,4 +12,6 @@ To install:
 3) Place the files from folder Service&Timer to ~/.local/share/systemd/user, alternatively you can just run level.out from terminal
 4) Enable the timer with systemctl --user enable mic-alarm.timer
 
+There might be a spamming issue if you use bash instead of zsh as default shell, in my case i use zsh.
+
 Special credits go to my Friend GoWR who made this possible.
