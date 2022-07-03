@@ -1,1 +1,15 @@
+Mic alarm notifier, when mic reaches a certain threshold bark.ogg emerges to haunt you!
 
+To compile & run:
+1) Edit thresholdand audio file path to your own preferences
+2) Run gcc level.c -o level.out
+3) Finally chmod +x level.out
+
+To install:
+
+1) Make sure you have the sox package installed on your favorite distro
+2) Place bark.ogg in ~/Music/bark.ogg
+3) Place the files from folder Service&Timer to ~/.local/share/systemd/user, alternatively run level.out from cmd
+4) Enable the timer with systemctl --user enable mic-alarm.timer
+
+Special credits go to my Friend GoWR who made this possible.
