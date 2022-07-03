@@ -1,7 +1,7 @@
 Mic alarm notifier, when mic reaches a certain threshold bark.ogg emerges to haunt you!
 
 To compile & run:
-1) Edit thresholdand audio file path to your own preferences
+1) Edit thresholdand sample numbers and audio file path to your own preferences
 2) Run gcc level.c -o level.out
 3) Finally chmod +x level.out
 
