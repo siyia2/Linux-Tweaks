@@ -1,0 +1,3 @@
+It is important to set kernel boot line options explicitly to acpi_os_name='Windows 2001' to use all functions.
+
+Kudos to Styx85for providing this dsdt for my mobo!!!
