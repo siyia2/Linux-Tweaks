@@ -182,7 +182,7 @@ bindsym $mod+f12 exec qalculate-gtk
 
 bindsym $mod+f3 exec pactl set-sink-volume @DEFAULT_SINK@ +10%
 bindsym $mod+f2 exec pactl set-sink-volume @DEFAULT_SINK@ -10%
-bindsym $mod+f4 exec pactl pactl set-sink-mute @DEFAULT_SINK@ toggle && pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym $mod+f4 exec pactl set-sink-mute @DEFAULT_SINK@ toggle && pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym $mod+f1 exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE toggle
 bindsym XF86MonBrightnessDown exec light -U 5
