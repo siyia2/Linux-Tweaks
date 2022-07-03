@@ -1,8 +1,0 @@
-[Unit]
-Description=Runs mic alarm service in a timely manner
-
-[Timer]
-OnBootSec=1min
-
-[Install]
-WantedBy=timers.target
