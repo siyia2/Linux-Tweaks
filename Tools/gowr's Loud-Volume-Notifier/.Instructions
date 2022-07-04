@@ -6,12 +6,12 @@ To compile & run:
 3) Finally chmod +x level
 
 To install:
-1) Make sure you have the sox package installed on your favorite distro
+1) Make sure you have the sox package installed in your favorite distro
 2) Place bark.ogg in ~/Music/bark.ogg, if you have changed default audio path, place it accordingly
 
 To Use:
-1) You can optionally place threshold limt upon executing the program f.e level.out 0.310000
-2) Place the files from folder Service&Timer to ~/.local/share/systemd/user and level to ~/.local//bin/mic-alarm, or you can just run level from terminal
+1) You can optionally place threshold limt upon executing the program f.e level 0.310000 and or run level from terminal
+2) For automated use, place the files from folder Service&Timer to ~/.local/share/systemd/user and level to ~/.local//bin/mic-alarm 
 3) Enable the timer with systemctl --user enable mic-alarm.timer
 
 There might be a spamming issue if you use bash instead of zsh as the default shell, in my case i use zsh.
