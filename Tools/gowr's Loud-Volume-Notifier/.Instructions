@@ -7,7 +7,7 @@ To compile & run:
 
 To install:
 1) Make sure you have the sox package installed on your favorite distro
-2) Place bark.ogg in ~/Music/bark.ogg
+2) Place bark.ogg in ~/Music/bark.ogg, if you have changed default audio path, place it accordingly
 
 To Use:
 1) You can optionally place threshold limt upon executing the program f.e level.out 0.310000
