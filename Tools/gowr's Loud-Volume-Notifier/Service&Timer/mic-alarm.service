@@ -3,7 +3,7 @@ Description=Warns when mic volume is too high
 
 [Service]
 Type=oneshot
-ExecStart=/home/siyia/.local/bin/mic-alarm/level.out
+ExecStart=/home/siyia/.local/bin/mic-alarm/level
 
 [Install]
 WantedBy=default.target
