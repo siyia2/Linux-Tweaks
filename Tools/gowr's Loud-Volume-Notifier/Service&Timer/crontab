@@ -1,1 +1,1 @@
-*/5  * * * * killall level
+*/5  * * * * killall level && killall level
