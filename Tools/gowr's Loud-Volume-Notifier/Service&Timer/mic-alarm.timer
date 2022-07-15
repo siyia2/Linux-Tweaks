@@ -3,7 +3,7 @@ Description=Runs mic alarm service in a timely manner
 
 [Timer]
 OnBootSec=1min
-OnUnitActiveSec=2min
+OnUnitActiveSec=5sec
 
 [Install]
 WantedBy=timers.target
