@@ -12,6 +12,7 @@ sway
 waybar
 alacritty
 grim (screenshot functionality)
+slurp (screen selection utility for frim)
 mako (notification system)
 gnome-polkit (pkexec needed by some guis for root access)
 gsettings-desktop-schemas (needed for setting cursor theme)
