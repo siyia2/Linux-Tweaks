@@ -184,6 +184,8 @@
 		"tooltip": false,
 		"exec": "/home/siyia/.config/waybar/modules/battery_bluetooth.sh",
 		"format": "🔋 {} ",
+		"on-click": "blueman-manager",
+		
 
 },
 
