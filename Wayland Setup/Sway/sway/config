@@ -184,9 +184,18 @@ bindsym $mod+f3 exec pactl set-sink-volume @DEFAULT_SINK@ +10%
 bindsym $mod+f2 exec pactl set-sink-volume @DEFAULT_SINK@ -10%
 bindsym $mod+f4 exec pactl set-sink-mute @DEFAULT_SINK@ toggle && pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym $mod+f1 exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
-bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE toggle
+
+#XF86s
+bindsym xf86Launch1 exec swaylock swaylock -e -f -c 000000
+bindsym xf86Launch2 exec swaymsg "output * dpms on"
+bindsym xf86Launch3 exec thunderbird
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym XF86MonBrightnessDown exec light -U 5
 bindsym XF86MonBrightnessUp exec light -A 5
+
 bindsym Print exec grim $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S_grim.png')
 bindsym $mod+Print exec grim -g "$(slurp)" $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S_grim.png')
 bindsym button2 kill
