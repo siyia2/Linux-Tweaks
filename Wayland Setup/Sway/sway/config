@@ -233,6 +233,7 @@ bindsym button2 kill
 #
 # Workspaces:
 #
+workspace_layout tabbed
   # switch to workspace
     bindsym $mod+1 workspace 1: Web/Mail
     bindsym $mod+2 workspace 2: FM
