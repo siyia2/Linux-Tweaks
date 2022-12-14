@@ -1,5 +1,5 @@
 [Unit]
-Description=Enable mglru oom killer
+Description=Enables mglru and mglru oom killer
 
 [Service]
 Type=oneshot
