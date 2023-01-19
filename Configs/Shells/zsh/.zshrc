@@ -35,7 +35,7 @@ ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]=fg=green
 PS1="%B%F{cyan}%n%F{magenta}@%F{cyan}%m%F{magenta}@%F{cyan}%~ %1 %#: "
 # Custom Key Bindings
 bindkey "\e" vi-kill-line
-bindkey "^[[A" history-substring-search-up
-bindkey "^[[B" history-substring-search-down
-bindkey  "^[[H"   beginning-of-line
-bindkey  "^[[F"   end-of-line
+bindkey  "^[[H"  beginning-of-line
+bindkey  "^[[F"  end-of-line
+bindkey "\e[5~" history-substring-search-up
+bindkey "\e[6~" history-substring-search-down
