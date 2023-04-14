@@ -1,0 +1,5 @@
+#!/bin/sh
+
+exec gammastep -v -c ~/.config/redshift.conf
+
+exit
