@@ -1,4 +1,5 @@
 #!/bin/sh
 
 exec env BEMENU_OPTS="-H 25 --fn Ubuntu 9 --tf '#00ff40'  --hf '#FFFFFF' --hb '#008000' -i -w" bemenu-run
+
 exit
