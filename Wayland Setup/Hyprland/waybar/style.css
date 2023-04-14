@@ -1,6 +1,6 @@
 * {
     border: none;
-    border-radius: 0;
+    border-radius: 0px;
     font-family: Ubuntu Medium;
     font-size: 14px;
     min-height: 16px;
@@ -8,8 +8,8 @@
 }
 
 #workspaces button:hover {
-  box-shadow: inherit;
-  text-shadow: inherit;
+  box-shadow: 0 0 0px 0px;
+  text-shadow: 1px 1px 6px #FF0000;
 }
 
 window#waybar {
