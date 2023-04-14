@@ -9,7 +9,7 @@
 
 #workspaces button:hover {
   box-shadow: 0 0 0px 0px;
-  text-shadow: 1px 1px 6px #FF0000;
+  text-shadow: 1px 1px 6px #24b200;
 }
 
 window#waybar {
