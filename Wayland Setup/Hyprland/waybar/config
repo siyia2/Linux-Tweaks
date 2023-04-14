@@ -6,7 +6,7 @@
     "modules-left": ["wlr/workspaces"],
 	//"modules-left": ["sway/workspaces"],
     "modules-center": ["memory","custom/zram","custom/vram","custom/cpu","cpu","temperature","custom/cpufan","custom/gpu","custom/gpusage","custom/gputemp","custom/gpufan"],
-    "modules-right": ["custom/kernel","custom/mesa","custom/bt_battery","custom/kb","pulseaudio","network","clock"],
+    "modules-right": ["custom/kernel","custom/mesa","custom/bt_battery","hyprland/language","pulseaudio","network","clock"],
     "sway/window": {
         "max-length": 1920
     },
@@ -18,7 +18,7 @@
     "interval": 5,
     "format": "Ram: {}%",
 		"tooltip": false,
-"on-click": "killall htop & alacritty -t htop -e htop"
+"on-click": "killall btop & alacritty -t btop -e btop"
 },
 
 "custom/zram": {
@@ -26,7 +26,7 @@
         "exec": "/home/siyia/.config/waybar/modules/zram.sh",
 	"format": "Zram:{} ",
 		"tooltip": false,
-"on-click": "killall htop & alacritty -t htop -e htop"
+"on-click": "killall btop & alacritty -t btop -e btop"
 },
 
 
@@ -35,7 +35,7 @@
 
 "custom/cpu": {
   "format": "Cpu:",
-  "on-click": "killall htop & alacritty -t htop -e htop",
+  "on-click": "killall btop & alacritty -t btop -e btop",
 		"tooltip": false
 },
 
@@ -43,7 +43,7 @@
     "interval": 2,
     "format": "{usage}% @",
 		"tooltip": false,
-"on-click": "killall htop & alacritty -t htop -e htop"
+"on-click": "killall btop & alacritty -t btop -e btop"
 },
 
 "custom/cpufan": {
@@ -51,7 +51,7 @@
         "exec": "/home/siyia/.config/waybar/modules/cpu_fan.sh",
 	"format": " @ {} rpm ||",
 		"tooltip": false,
-"on-click": "killall htop & alacritty -t htop -e htop"
+"on-click": "killall btop & alacritty -t btop -e btop"
 },
 
 "temperature": {
@@ -62,7 +62,7 @@
 	"format-critical":"{temperatureC}°C",
 	"format":"{temperatureC}°C",
 		"tooltip": false,
-"on-click": "killall htop & alacritty -t htop -e htop"
+"on-click": "killall btop & alacritty -t btop -e btop"
 },
 
 
@@ -86,7 +86,7 @@
 
 "custom/gpu": {
   "format": " Gpu:",
-  "on-click": "killall htop & alacritty -t htop -e htop",
+  "on-click": "killall btop & alacritty -t btop -e btop",
 		"tooltip": false
 },
 
@@ -95,7 +95,7 @@
         "exec": "/home/siyia/.config/waybar/modules/gpu_usage.sh",
 	"format": " {}% @",
 		"tooltip": false,
-"on-click": "killall htop & alacritty -t htop -e htop"
+"on-click": "killall btop & alacritty -t btop -e btop"
 },
 
 "custom/gpufan": {
@@ -103,7 +103,7 @@
         "exec": "/home/siyia/.config/waybar/modules/gpu_fan.sh",
 	"format": " @ {} rpm",
 		"tooltip": false,
-"on-click": "killall htop & alacritty -t htop -e htop"
+"on-click": "killall btop & alacritty -t btop -e btop"
 },
 
 "custom/vram": {
@@ -111,7 +111,7 @@
 		"tooltip": false,
 		"exec": "/home/siyia/.config/waybar/modules/vram.sh",
 		"format": "Vram: {}% || ",
-		"on-click": "killall htop & alacritty -t htop -e htop"
+		"on-click": "killall btop & alacritty -t btop -e btop"
 },
 
 "custom/gputemp": {
@@ -119,10 +119,16 @@
         "exec": "/home/siyia/.config/waybar/modules/gpu_temp.sh",
 	"format": " {}°C",
 		"tooltip": false,
-"on-click": "killall htop & alacritty -t htop -e htop"
+"on-click": "killall btop & alacritty -t btop -e btop"
 },
 
 // MISC SW
+
+"hyprland/language": {
+    "format": " |{}|",
+    "format-gr": "GR",
+    "format-en": "EN",
+},
 
 "wlr/workspaces": {
 "format": "{name}",
