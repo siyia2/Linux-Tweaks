@@ -105,7 +105,6 @@ exec mako
 exec autotiling
 exec wl-paste
 exec qbittorrent -platform wayland
-exec pactl unload-module 6
 exec /home/siyia/.local/bin/xerrors.sh
 exec pactl set-sink-volume @DEFAULT_SINK@ 100%
 exec gammastep -v -c ~/.config/redshift.conf
