@@ -1,0 +1,11 @@
+#!/bin/sh
+
+exec swayidle -w \
+before-sleep 'swaylock -e -f -c 000000' \
+timeout 6000 'systemctl suspend' \
+timeout 1001 'swaylock -e -f -c 000000' \
+timeout 2001 'swaymsg "output * dpms off"' \
+timeout 61 'if pgrep -x swaylock; then swaymsg "output * dpms off"; fi' \
+resume  'swaymsg "output * dpms on"'
+
+exit
