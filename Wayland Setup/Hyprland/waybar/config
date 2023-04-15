@@ -6,7 +6,7 @@
     "modules-left": ["wlr/workspaces"],
 	//"modules-left": ["sway/workspaces"],
     "modules-center": ["memory","custom/zram","custom/vram","custom/cpu","cpu","temperature","custom/cpufan","custom/gpu","custom/gpusage","custom/gputemp","custom/gpufan"],
-    "modules-right": ["custom/kernel","custom/mesa","custom/bt_battery","hyprland/language","pulseaudio","network","clock"],
+    "modules-right": ["custom/kernel","custom/mesa","custom/bt_battery","pulseaudio","network","hyprland/language","clock"],
     "sway/window": {
         "max-length": 1920
     },
@@ -125,7 +125,7 @@
 // MISC SW
 
 "hyprland/language": {
-    "format": " |{}|",
+    "format": " {} ",
     "format-gr": "GR",
     "format-en": "EN",
 },
@@ -177,7 +177,7 @@
 		"restart-interval": 10,
 		"tooltip": false,
 		"exec": "/home/siyia/.config/waybar/modules/bluetooth.sh",
-		"format": "🔋{}",
+		"format": "🔋{} ",
 		"on-click": "blueman-manager",
 		
 },
