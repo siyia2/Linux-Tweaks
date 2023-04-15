@@ -139,7 +139,7 @@ timeout 1001 'swaymsg "output * dpms off"' \
 timeout 61 'if pgrep -x swaylock; then swaymsg "output * dpms off"; fi' \
 resume  'swaymsg "output * dpms on"'
 
-bindsym $mod+f11 exec swaylock swaylock -e -f -c 000000
+bindsym $mod+f11 exec swaylock -e -f -c 000000
 
 for_window [app_id="firefox"] inhibit_idle focus
 for_window [app_id="TeamViewer"] inhibit_idle open
