@@ -2,7 +2,8 @@
 
 # Set the script directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
+choice=0
+prev_choice=0
 # Prompt the user for the root password
 echo -n "Enter root password: "
 read -s password
@@ -19,32 +20,32 @@ if [ $? -eq 0 ]; then
   # The user is authenticated as root
 
   # Show the root options menu
-  while true; do
+  while [ $choice -ne 2 ]; do
     echo " "
     echo "To Stop the Script at Any Point press ctrl+c"
     echo "1. Root Options"
     echo "2. Exit"
     read -p "Enter your choice: " choice
-
+      prev_choice=$choice
     case $choice in
       1)
         # Show the Root Options menu
-        while true; do
+        while [ $choice -ne 4 ]; do
           echo "1. I/O&Cache"
           echo "2. MGLRU"
           echo "3. ZRAM"
-          echo "4. Exit"
+          echo "4. ↩"
           read -p "Enter your choice: " subchoice
-
+       prev_choice=$choice
           case $subchoice in
             1)
               # Ask the user for regular or low RAM scenario
               echo " "
               echo "1. Regular scenario"
               echo "2. Low RAM scenario (Only for <4GB Ram & combine with Zram)"
-              echo "3. Exit"
+              echo "3. ↩"
               read -p "Enter your choice: " iocache_choice
-
+        iocache_choice=$choice
               case $iocache_choice in
                 1)
                   # Copy files for regular scenario and execute sysctl -p
@@ -60,10 +61,9 @@ if [ $? -eq 0 ]; then
                   sudo cp "$SCRIPT_DIR/IO-Schedulers-Cache-Configs/sysctl_low_ram.conf" /etc/sysctl.d/99-sysctl.conf
                   sudo sysctl --system
                   ;;
-                3) 
-              # Exit the script
-                  exit
-                  ;; 
+                3)
+              break  # Set choice to previous menu choice
+              ;; 
                 *)
                   # Invalid iocache_choice
                   echo "Invalid choice"
@@ -88,10 +88,9 @@ if [ $? -eq 0 ]; then
     sudo systemctl enable --now zram.service
     echo "ZRAM installed and enabled"
     ;;
-            4) 
-              # Exit the script
-                  exit
-                  ;;
+        4)
+              break  # Set choice to previous menu choice
+              ;;
             *)
               # Invalid subchoice
               echo "Invalid choice"
