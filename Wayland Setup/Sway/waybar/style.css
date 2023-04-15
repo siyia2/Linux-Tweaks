@@ -18,7 +18,7 @@ border-left: 1px solid rgba(100, 114, 125, 1.0);
 
 #custom-mesa {
 padding-top: 1px;
-color: red;
+color: #C41E3A;
 border-top: 1px solid rgba(100, 114, 125, 1.0);
 border-bottom: 1px solid rgba(100, 114, 125, 1.0);
 border-right: 1px solid rgba(100, 114, 125, 1.0);
@@ -30,6 +30,7 @@ color: white;
 background-color: rgba(25, 25, 112, 0.95);
 border-top: 2px solid rgba(100, 114, 125, 1.0);
 border-bottom: 2px solid rgba(100, 114, 125, 1.0);
+border-right: 2px solid rgba(100, 114, 125, 1.0);
 font-weight: bold;
 padding-top: 4px;
 
@@ -141,9 +142,9 @@ padding-top: 4px;
 border-top: 2px solid rgba(100, 114, 125, 1.0);
 border-bottom: 2px solid rgba(100, 114, 125, 1.0);
 border-right: 2px solid rgba(0, 0, 0, 1.0);
-background-color: rgba(25, 25, 112, 0.95);
+background-color: rgba(60, 179, 113, 0.75);
 font-weight: bold;
-color: white;
+color: black;
 }
 
 #cpu{
