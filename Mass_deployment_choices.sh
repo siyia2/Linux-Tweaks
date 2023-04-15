@@ -2,6 +2,7 @@
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CONFIG_DIR="$SCRIPT_DIR/Configs"
+WAYLAND_SETUP_DIR="$SCRIPT_DIR/Wayland Setup"
 
 while true; do
   echo "Press 1 for Non-Root Options"
@@ -15,7 +16,7 @@ while true; do
     1)
       echo "Press 1 to Deploy Config Files to ~/"
       echo "Press 2 to Deploy a Wayland Desktop"
-      
+
       read -n1 subchoice
       echo ""
 
@@ -28,20 +29,41 @@ while true; do
           read files
 
           if [ "$files" == "A" ]; then
-            cp -r * ~/Downloads/config/ 
-            cp rtorrent.rc zshrc ~/Downloads/.rtorrent.rc ~/Downloads/.zshrc
+            cp -r * ~/Downloads/config/
+            cp rtorrent.rc ~/Downloads/.rtorrent.rc 
+            cp zshrc ~/Downloads/.zshrc
+            rm ~/Downloads/config/rtorrent.rc
+            rm ~/Downloads/config/zshrc
           elif [ "$files" == "zshrc" ]; then 
             cp zshrc ~/Downloads/.zshrc
             elif [ "$files" == "rtorrent.rc" ]; then 
             cp rtorrent.rc ~/Downloads/.rtorrent.rc
           else
-            cp -r $files ~/Downloads/
+            cp -r $files ~/Downloads/config
           fi
 
           echo "Config files copied successfully!"
           ;;
         2)
-          echo "Deploying Wayland Desktop..."
+          echo "Press 1 for Hyprland or Press 2 for Sway:"
+          read -n1 wayland_choice
+          echo ""
+
+          case $wayland_choice in
+            1)
+              cd "$WAYLAND_SETUP_DIR/Hyprland"
+              cp -r * ~/Downloads/config/
+              echo "Hyprland Desktop deployed successfully!"
+              ;;
+            2)
+              cd "$WAYLAND_SETUP_DIR/Sway"
+              cp -r * ~/Downloads/config/
+              echo "Sway Desktop deployed successfully!"
+              ;;
+            *)
+              echo "Invalid choice"
+              ;;
+          esac
           ;;
         *)
           echo "Invalid choice"
@@ -64,4 +86,3 @@ while true; do
       ;;
   esac
 done
-
