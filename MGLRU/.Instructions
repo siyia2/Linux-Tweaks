@@ -1,1 +1,2 @@
-
+Like oom killer but inside the kernel, place mglru file to /bin/mglru and make it executable, place mglru.service to /lib/systemd/system/mglru.service
+and enable it. 
