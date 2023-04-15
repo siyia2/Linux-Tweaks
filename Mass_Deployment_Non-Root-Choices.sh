@@ -6,8 +6,7 @@ WAYLAND_SETUP_DIR="$SCRIPT_DIR/Wayland Setup"
 
 while true; do
   echo "Press 1 for Non-Root Options"
-  echo "Press 2 for Root Options"
-  echo "Press 3 to Exit"
+  echo "Press 2 to Exit"
 
   read -n1 choice
   echo ""
@@ -72,9 +71,6 @@ while true; do
       esac
       ;;
     2)
-      echo "Root Options selected"
-      ;;
-    3)
       echo "Exiting..."
       exit 0
       ;;
