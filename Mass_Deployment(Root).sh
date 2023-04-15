@@ -47,15 +47,15 @@ if [ $? -eq 0 ]; then
                 1)
                   # Copy files for regular scenario and execute sysctl -p
                   echo "Copying files for regular scenario..."
-                 sudo mkdir -p ~/etc/udev/rules.d/ && sudo cp "$SCRIPT_DIR/IO-Schedulers-Cache-Configs/60-ioschedulers.rules" ~/etc/udev/rules.d/60-ioschedulers.rules
-                  sudo cp "$SCRIPT_DIR/IO-Schedulers-Cache-Configs/sysctl.conf" ~/etc/sysctl.d/99-sysctl.conf
+                  sudo mkdir -p ~/etc/udev/rules.d/ && sudo cp "$SCRIPT_DIR/IO-Schedulers-Cache-Configs/60-ioschedulers.rules" ~/etc/udev/rules.d/60-ioschedulers.rules
+                  sudo mkdir -p /etc/sysctl.d/sudo && cp "$SCRIPT_DIR/IO-Schedulers-Cache-Configs/sysctl.conf" ~/etc/sysctl.d/99-sysctl.conf
                   sudo sysctl --system
                   ;;
                 2)
                   # Copy files for low RAM scenario and execute sysctl -p
                   echo "Copying files for low RAM scenario..."
                   sudo mkdir -p /etc/udev/rules.d/ && sudo cp "$SCRIPT_DIR/IO-Schedulers-Cache-Configs/60-ioschedulers.rules" /etc/udev/rules.d/60-ioschedulers.rules
-                  sudo cp "$SCRIPT_DIR/IO-Schedulers-Cache-Configs/sysctl_low_ram.conf" /etc/sysctl.d/99-sysctl.conf
+                  sudo mkdir -p /etc/sysctl.d/ && sudo cp "$SCRIPT_DIR/IO-Schedulers-Cache-Configs/sysctl_low_ram.conf" /etc/sysctl.d/99-sysctl.conf
                   sudo sysctl --system
                   ;;
                 *)
