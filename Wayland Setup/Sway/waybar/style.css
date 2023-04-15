@@ -8,6 +8,7 @@
 }
 
 #custom-kernel {
+padding-top: 1px;
 color: green;
 border-top: 1px solid rgba(100, 114, 125, 1.0);
 border-bottom: 1px solid rgba(100, 114, 125, 1.0);
@@ -15,6 +16,7 @@ border-left: 1px solid rgba(100, 114, 125, 1.0);
 }
 
 #custom-mesa {
+padding-top: 1px;
 color: red;
 border-top: 1px solid rgba(100, 114, 125, 1.0);
 border-bottom: 1px solid rgba(100, 114, 125, 1.0);
@@ -26,7 +28,7 @@ border-right: 1px solid rgba(100, 114, 125, 1.0);
 color: white;
 background-color: rgba(25, 25, 112, 0.95);
 border-top: 2px solid rgba(100, 114, 125, 1.0);
-border-bottom: 2px solid rgba(100, 114, 125, 0.5);
+border-bottom: 2px solid rgba(100, 114, 125, 1.0);
 font-weight: bold;
 padding-top: 4px;
  }
@@ -90,11 +92,10 @@ background: transparent;
 }
 
 #clock {
-padding: 1px 1px;
+padding: 1px 2px;
 padding-top: 4px;
 border-top: 2px solid rgba(100, 114, 125, 1.0);
 border-bottom: 2px solid rgba(100, 114, 125, 1.0);
-border-left: 2px solid rgba(100, 114, 125, 1.0);
 border-right: 2px solid rgba(0, 0, 0, 1.0);
 background-color: rgba(25, 25, 112, 0.95);
 font-weight: bold;
@@ -139,7 +140,10 @@ background: transparent;
     color: red;
 }
 #network{
-padding: 1px 3px;
+padding: 0px 3px;
+border-right: 1px solid rgba(100, 114, 125, 1.0);
+border-bottom: 1px solid rgba(100, 114, 125, 1.0);
+padding-top: 2px;
 }
 #battery.warning:not(.charging) {
     background: #f53c3c;
