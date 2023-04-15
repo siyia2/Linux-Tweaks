@@ -36,9 +36,6 @@ border-bottom: 1px solid rgba(100, 114, 125, 1.0);
 padding-top: 1px;
 }
 
-#custom-bt_battery.critical {
-color: red;
-}
 
 #workspaces button:hover {
   box-shadow: 0 0 0px 0px;
@@ -98,10 +95,10 @@ padding-top: 4px;
 border-top: 2px solid rgba(100, 114, 125, 1.0);
 border-bottom: 2px solid rgba(100, 114, 125, 1.0);
 border-left: 2px solid rgba(100, 114, 125, 1.0);
-border-right: 2px solid rgba(0, 0, 0, 0.95);
-background-color: rgba(60, 179, 113, 0.75);
+border-right: 2px solid rgba(0, 0, 0, 1.0);
+background-color: rgba(25, 25, 112, 0.95);
 font-weight: bold;
-color: black;
+color: white;
 }
 
 #cpu{
