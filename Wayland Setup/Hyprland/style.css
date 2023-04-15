@@ -1,0 +1,202 @@
+* {
+    border: none;
+    border-radius: 0px;
+    font-family: Ubuntu Medium;
+    font-size: 14px;
+    min-height: 16px;
+	
+}
+
+#custom-kernel {
+padding-top: 1px;
+color: green;
+border-top: 1px solid rgba(100, 114, 125, 1.0);
+border-bottom: 1px solid rgba(100, 114, 125, 1.0);
+border-left: 1px solid rgba(100, 114, 125, 1.0);
+
+}
+
+#custom-mesa {
+padding-top: 1px;
+color: red;
+border-top: 1px solid rgba(100, 114, 125, 1.0);
+border-bottom: 1px solid rgba(100, 114, 125, 1.0);
+border-right: 1px solid rgba(100, 114, 125, 1.0);
+
+}
+
+#language {
+color: white;
+background-color: rgba(25, 25, 112, 0.95);
+border-top: 2px solid rgba(100, 114, 125, 1.0);
+border-bottom: 2px solid rgba(100, 114, 125, 1.0);
+font-weight: bold;
+padding-top: 4px;
+
+}
+#custom-bt_battery {
+border-right: 1px solid rgba(100, 114, 125, 1.0);
+border-bottom: 1px solid rgba(100, 114, 125, 1.0);
+padding-top: 1px;
+
+}
+
+#custom-cpu{
+padding-top: 2px;
+
+}
+
+
+#custom-gpu{
+padding-top: 2px;
+
+}
+
+#custom-gpufan{
+padding-top: 2px;
+
+}
+
+#custom-cpufan{
+padding-top: 2px;
+
+}
+
+#custom-zram{
+padding-top: 2px;
+
+}
+
+#custom-gpusage{
+padding-top: 2px;
+
+}
+
+#custom-vram{
+padding-top: 2px;
+
+}
+
+#custom-gputemp{
+padding-top: 2px;
+
+}
+
+
+#workspaces button:hover {
+  box-shadow: 0 0 0px 0px;
+  text-shadow: 1px 1px 6px #20b200;
+}
+
+window#waybar {
+    background-color: rgba(0, 0, 0, 0.95);
+    border-top: 2px solid rgba(100, 114, 125, 1.0);
+    border-bottom: 2px solid rgba(100, 114, 125, 0.5);
+    border-right: 0px solid rgba(100, 114, 125, 0.5);
+    border-left: 0px solid rgba(100, 114, 125, 0.5);
+    color: white;
+}
+
+
+#workspaces button {
+    padding: 0px 5px;
+    padding-top: 3px;
+    background: transparent;
+    color: white;
+    border-bottom: 0px solid transparent;
+}
+
+#workspaces button.active {
+background-color: rgba(60, 179, 113, 0.75);
+font-weight: bold;
+color: black;
+    border: 2px solid white;
+}
+#workspaces button.urgent {
+animation: blink 0.5s infinite;
+background: transparent;
+    background: transparent;
+color: red;
+    border: 1px solid white;
+}
+#mode, #clock, #battery {
+    padding: 1px 3px;
+    margin: 0px 0px;
+}
+#temperature.critical{
+padding: 5px 10px;
+background: transparent;
+    color: red;
+}
+
+
+#mode {
+    background: #64727D;
+    border-bottom: 3px solid white;
+}
+
+#clock {
+padding: 1px 2px;
+padding-top: 4px;
+border-top: 2px solid rgba(100, 114, 125, 1.0);
+border-bottom: 2px solid rgba(100, 114, 125, 1.0);
+border-right: 2px solid rgba(0, 0, 0, 1.0);
+background-color: rgba(25, 25, 112, 0.95);
+font-weight: bold;
+color: white;
+}
+
+#cpu{
+padding: 1px 5px;
+padding-top: 2px;
+background: transparent;
+    color: white;
+}
+#memory{
+padding: 1px 5px;
+padding-top: 2px;
+background: transparent;
+    color: white;
+}
+
+#battery {
+    background: transparent;
+    color: white;
+}
+
+#battery.charging {
+    color: yellow;
+    background-color: #26A65B;
+}
+
+@keyframes blink {
+    to {
+        background-color: #FF0000;
+        color: black;
+    }
+}
+#pulseaudio{
+padding: 1px 3px;
+border: 1px solid rgba(100, 114, 125, 1.0);
+}
+#pulseaudio.muted{
+border: 1px solid rgba(100, 114, 125, 1.0);
+padding: 1px 3px;
+background: transparent;
+    color: red;
+}
+#network{
+padding: 0px 3px;
+border-right: 1px solid rgba(100, 114, 125, 1.0);
+border-bottom: 1px solid rgba(100, 114, 125, 1.0);
+padding-top: 2px;
+}
+#battery.warning:not(.charging) {
+    background: #f53c3c;
+    color: white;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
