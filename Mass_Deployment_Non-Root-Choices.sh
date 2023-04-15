@@ -5,9 +5,9 @@ CONFIG_DIR="$SCRIPT_DIR/Configs"
 WAYLAND_SETUP_DIR="$SCRIPT_DIR/Wayland Setup"
 
 while true; do
+  echo "To Stop the Script at Any Point press ctrl+c"
   echo "Press 1 for Non-Root Options"
   echo "Press 2 to Exit"
-  echo "To Stop the Script at Any Point press ctrl+c"
 
   read -p "Enter your choice: " choice
   echo ""
