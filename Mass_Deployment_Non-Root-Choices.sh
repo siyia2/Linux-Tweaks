@@ -7,8 +7,9 @@ WAYLAND_SETUP_DIR="$SCRIPT_DIR/Wayland Setup"
 while true; do
   echo "Press 1 for Non-Root Options"
   echo "Press 2 to Exit"
+  echo "To Stop the Script at Any Point press ctrl+c"
 
-  read -n1 choice
+  read -p "Enter your choice: " choice
   echo ""
 
   case $choice in
@@ -16,7 +17,7 @@ while true; do
       echo "Press 1 to Deploy Config Files to ~/"
       echo "Press 2 to Deploy a Wayland Desktop"
 
-      read -n1 subchoice
+      read -p "Enter your choice: " subchoice
       echo ""
 
       case $subchoice in
@@ -28,36 +29,35 @@ while true; do
           read files
 
           if [ "$files" == "A" ]; then
-            cp -r * ~/Downloads/config/
-            cp rtorrent.rc ~/Downloads/.rtorrent.rc 
-            cp zshrc ~/Downloads/.zshrc
-            rm ~/Downloads/config/rtorrent.rc
-            rm ~/Downloads/config/zshrc
-            rm ~/Downloads/config/.Instructions
+            cp -r * ~/.config/
+            cp rtorrent.rc ~/.rtorrent.rc 
+            cp zshrc ~/.zshrc
+            rm ~/.config/rtorrent.rc
+            rm ~/.config/zshrc
           elif [ "$files" == "zshrc" ]; then 
-            cp zshrc ~/Downloads/.zshrc
+            cp zshrc ~/.zshrc
             elif [ "$files" == "rtorrent.rc" ]; then 
-            cp rtorrent.rc ~/Downloads/.rtorrent.rc
+            cp rtorrent.rc ~/.rtorrent.rc
           else
-            cp -r $files ~/Downloads/config
+            cp -r $files ~/.config
           fi
 
           echo "Config files copied successfully!"
           ;;
         2)
           echo "Press 1 for Hyprland or Press 2 for Sway:"
-          read -n1 wayland_choice
+          read -p "Enter your choice: " subchoice
           echo ""
 
           case $wayland_choice in
             1)
               cd "$WAYLAND_SETUP_DIR/Hyprland"
-              cp -r * ~/Downloads/config/
+              cp -r * ~/.config/
               echo "Hyprland Desktop deployed successfully!"
               ;;
             2)
               cd "$WAYLAND_SETUP_DIR/Sway"
-              cp -r * ~/Downloads/config/
+              cp -r * ~/.config/
               echo "Sway Desktop deployed successfully!"
               ;;
             *)
