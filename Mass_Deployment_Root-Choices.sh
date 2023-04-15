@@ -64,13 +64,23 @@ if [ $? -eq 0 ]; then
               esac
               ;;
             2)
-              # Run MGLRU command
-              echo "Running MGLRU command"
-              ;;
+              # Code for MGLRU option
+    echo "Installing MGLRU..."
+    sudo cp "$SCRIPT_DIR/MGLRU/mglru" /bin/mglru
+    sudo chmod +x /bin/mglru
+    sudo cp "$SCRIPT_DIR/MGLRU/mglru.service" /lib/systemd/system/mglru.service
+    sudo systemctl enable --now mglru.service
+    echo "MGLRU installed and enabled"
+    ;;
             3)
-              # Run ZRAM command
-              echo "Running ZRAM command"
-              ;;
+# Code for ZRAM option
+    echo "Installing ZRAM..."
+    sudo cp "$SCRIPT_DIR/Zram/zram" /bin/zram
+    sudo chmod +x /bin/zram
+    sudo cp "$SCRIPT_DIR/Zram/zram.service" /lib/systemd/system/zram.service
+    sudo systemctl enable --now zram.service
+    echo "ZRAM installed and enabled"
+    ;;
             *)
               # Invalid subchoice
               echo "Invalid choice"
@@ -93,4 +103,3 @@ else
   echo "Incorrect password"
   exit
 fi
-
