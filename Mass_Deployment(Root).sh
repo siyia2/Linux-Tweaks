@@ -33,6 +33,7 @@ if [ $? -eq 0 ]; then
           echo "1. I/O&Cache"
           echo "2. MGLRU"
           echo "3. ZRAM"
+          echo "4. Exit"
           read -p "Enter your choice: " subchoice
 
           case $subchoice in
@@ -41,6 +42,7 @@ if [ $? -eq 0 ]; then
               echo " "
               echo "1. Regular scenario"
               echo "2. Low RAM scenario (Only for <4GB Ram & combine with Zram)"
+              echo "3. Exit"
               read -p "Enter your choice: " iocache_choice
 
               case $iocache_choice in
@@ -58,6 +60,10 @@ if [ $? -eq 0 ]; then
                   sudo cp "$SCRIPT_DIR/IO-Schedulers-Cache-Configs/sysctl_low_ram.conf" /etc/sysctl.d/99-sysctl.conf
                   sudo sysctl --system
                   ;;
+                3) 
+              # Exit the script
+                  exit
+                  ;; 
                 *)
                   # Invalid iocache_choice
                   echo "Invalid choice"
@@ -82,6 +88,10 @@ if [ $? -eq 0 ]; then
     sudo systemctl enable --now zram.service
     echo "ZRAM installed and enabled"
     ;;
+            4) 
+              # Exit the script
+                  exit
+                  ;;
             *)
               # Invalid subchoice
               echo "Invalid choice"
