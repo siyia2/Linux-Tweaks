@@ -40,7 +40,7 @@ if [ $? -eq 0 ]; then
               # Ask the user for regular or low RAM scenario
               echo " "
               echo "1. Regular scenario"
-              echo "2. Low RAM scenario (Combine with Zram)"
+              echo "2. Low RAM scenario (Only for <4GB Ram & combine with Zram)"
               read -p "Enter your choice: " iocache_choice
 
               case $iocache_choice in
