@@ -21,6 +21,7 @@ if [ $? -eq 0 ]; then
   # Show the root options menu
   while true; do
     echo " "
+    echo "To Stop the Script at Any Point press ctrl+c"
     echo "1. Root Options"
     echo "2. Exit"
     read -p "Enter your choice: " choice
