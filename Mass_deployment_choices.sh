@@ -34,6 +34,7 @@ while true; do
             cp zshrc ~/Downloads/.zshrc
             rm ~/Downloads/config/rtorrent.rc
             rm ~/Downloads/config/zshrc
+            rm ~/Downloads/config/.Instructions
           elif [ "$files" == "zshrc" ]; then 
             cp zshrc ~/Downloads/.zshrc
             elif [ "$files" == "rtorrent.rc" ]; then 
