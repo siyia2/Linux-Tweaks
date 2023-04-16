@@ -1,10 +1,11 @@
 #!/bin/bash
-
-while true; do
+var=0
+while [ $var -ne 3 ]; do
   echo "Press 1 for Non-Root Options"
   echo "Press 2 for Root Options"
   echo "Press 3 to exit"
   read -p "Enter your choice: " choice
+  
   case $choice in
     1)
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -26,7 +27,7 @@ while true; do
 
       case $subchoice in
         1)
-          cd "$CONFIG_DIR"
+          cd "$CONFIG_DIR" || exit
           ls
 
           echo "Enter '[A]ll' to copy all files press "q" to quit, or enter the file or directory names separated by a space:"
@@ -79,20 +80,12 @@ while true; do
           esac
           ;;
           3)
-          exit
+          break
           ;;
         *)
           echo "Invalid choice"
           ;;
       esac
-      ;;
-    2)
-      echo "Exiting..."
-      exit 0
-      ;;
-    $'\e')
-      echo "Returning to previous menu..."
-      continue
       ;;
     *)
       echo "Invalid choice"
@@ -107,6 +100,8 @@ done
 # Set the script directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 choice=0
+prev_choice=0
+iocache_choice=0
 # Prompt the user for the root password
 echo -n "Enter root password: "
 read -s password
@@ -123,14 +118,14 @@ if [ $? -eq 0 ]; then
   # The user is authenticated as root
 
   # Show the root options menu
-  
-        while [ $choice -ne 4 ]; do
+        while true; do
           echo " "
           echo "1. I/O&Cache"
           echo "2. MGLRU"
           echo "3. ZRAM"
           echo "4. Exit"
           read -p "Enter your choice: " subchoice
+prev_choice=$choice
           case $subchoice in
             1)
               # Ask the user for regular or low RAM scenario
@@ -139,7 +134,7 @@ if [ $? -eq 0 ]; then
               echo "2. Low RAM scenario (Only for <4GB Ram & combine with Zram)"
               echo "3. ↩"
               read -p "Enter your choice: " iocache_choice
-        iocache_choice=$choice
+              
               case $iocache_choice in
                 1)
                   # Copy files for regular scenario and execute sysctl -p
@@ -156,8 +151,9 @@ if [ $? -eq 0 ]; then
                   sudo sysctl --system
                   ;;
                 3)
-              break  # Set choice to previous menu choice
+                 iocache_choice=$prev_choice # Set choice to previous menu choice
               ;; 
+               
                 *)
                   # Invalid iocache_choice
                   echo "Invalid choice"
@@ -182,9 +178,9 @@ if [ $? -eq 0 ]; then
     sudo systemctl enable --now zram.service
     echo "ZRAM installed and enabled"
     ;;
-        4)
-              break 3  # Set choice to previous menu choice
-              ;;
+           4)
+               break
+                  ;;
             *)
               # Invalid subchoice
               echo "Invalid choice"
@@ -208,5 +204,5 @@ fi
       continue
       ;;
   esac
-  break
+  
 done
