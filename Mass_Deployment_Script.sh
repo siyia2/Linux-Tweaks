@@ -10,6 +10,7 @@ while true; do
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CONFIG_DIR="$SCRIPT_DIR/Configs"
 WAYLAND_SETUP_DIR="$SCRIPT_DIR/Wayland Setup"
+wayland_choice=0
 
 while true; do
   echo ""
@@ -29,6 +30,7 @@ while true; do
           ls
 
           echo "Enter '[A]ll' to copy all files press "q" to quit, or enter the file or directory names separated by a space:"
+          
           read files
 
           if [ "$files" == "A" ]; then
@@ -42,9 +44,10 @@ while true; do
             elif [ "$files" == "rtorrent.rc" ]; then 
             cp rtorrent.rc ~/.rtorrent.rc
             elif [ "$files" == "q" ]; then
+            echo "exiting..."
             exit
           else
-            cp -r $files ~/.config
+            cp -r "$files" ~/.config
           fi
 
           echo "Config files copied successfully!"
@@ -58,12 +61,12 @@ while true; do
 
           case $wayland_choice in
             1)
-              cd "$WAYLAND_SETUP_DIR/Hyprland"
+              cd "$WAYLAND_SETUP_DIR/Hyprland" || exit
               cp -r * ~/.config/
               echo "Hyprland Desktop deployed successfully!"
               ;;
             2)
-              cd "$WAYLAND_SETUP_DIR/Sway"
+              cd "$WAYLAND_SETUP_DIR/Sway" || exit
               cp -r * ~/.config/
               echo "Sway Desktop deployed successfully!"
               ;;
@@ -104,7 +107,6 @@ done
 # Set the script directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 choice=0
-prev_choice=0
 # Prompt the user for the root password
 echo -n "Enter root password: "
 read -s password
@@ -129,7 +131,6 @@ if [ $? -eq 0 ]; then
           echo "3. ZRAM"
           echo "4. Exit"
           read -p "Enter your choice: " subchoice
-       prev_choice=$choice
           case $subchoice in
             1)
               # Ask the user for regular or low RAM scenario
