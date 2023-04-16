@@ -221,8 +221,10 @@
 // CLOCK/DATE STUFF
 
     "clock": {
-        "format": "{:%a %d %b, %H:%M}",
+    "format": "{:%a %d %b, %H:%M}",
 	"on-click": "gsimplecal",
+    "scroll-step": 1,
+    "on-scroll-down":"killall gsimplecal",
 	"tooltip-format": "{:%A %d %B %Y, %H:%M}",
 	"tooltip": true,
     },
@@ -230,6 +232,9 @@
   "clock#utc": {
   	"format": "{:%H:%M} ",
   	"on-click": "gsimplecal",
+  	"scroll-step": 1,
+  	"on-scroll-down":"killall gsimplecal",
+  	"on-click": "killall gsimplecal",
   	"tooltip-format": "UTC {:%H:%M}",
   	"tooltip": true,
         "timezone": "Africa/Accra"
