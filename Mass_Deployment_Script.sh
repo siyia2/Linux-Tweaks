@@ -139,14 +139,30 @@ prev_choice=$choice
                 1)
                   # Copy files for regular scenario and execute sysctl -p
                   echo "Copying files for regular scenario..."
+                  dir="/etc/udev/rules.d"
+                  dir2="/etc/sysctl.d/"
+                  if [ ! -d "$dir" ]; then
+                    mkdir -p "$dir"
+                  fi
                   sudo cp "$SCRIPT_DIR/IO-Schedulers-Cache-Configs/60-ioschedulers.rules" /etc/udev/rules.d/60-ioschedulers.rules
+                  if [ ! -d "$dir2" ]; then
+                    mkdir -p "$dir2"
+                  fi
                   sudo cp "$SCRIPT_DIR/IO-Schedulers-Cache-Configs/sysctl.conf" /etc/sysctl.d/99-sysctl.conf
                   sudo sysctl --system
                   ;;
                 2)
                   # Copy files for low RAM scenario and execute sysctl -p
                   echo "Copying files for low RAM scenario..."
+                  dir="/etc/udev/rules.d"
+                  dir2="/etc/sysctl.d/"
+                  if [ ! -d "$dir" ]; then
+                    mkdir -p "$dir"
+                  fi
                   sudo cp "$SCRIPT_DIR/IO-Schedulers-Cache-Configs/60-ioschedulers.rules" /etc/udev/rules.d/60-ioschedulers.rules
+                  if [ ! -d "$dir2" ]; then
+                    mkdir -p "$dir2"
+                  fi
                   sudo cp "$SCRIPT_DIR/IO-Schedulers-Cache-Configs/sysctl_low_ram.conf" /etc/sysctl.d/99-sysctl.conf
                   sudo sysctl --system
                   ;;
