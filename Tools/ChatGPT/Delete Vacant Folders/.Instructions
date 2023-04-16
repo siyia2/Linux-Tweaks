@@ -1,1 +1,4 @@
-
+A tool written in C by chatgpt for my mother to delete any folder that does not contain 
+a video file on one path and any .zip files on another path, 
+you can edit the paths to your liking inside "delete_vacant_folders.c" and recompile it  with: 
+"gcc -o delete_vacant_folders delete_vacant_folders.c".
