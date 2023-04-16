@@ -140,9 +140,8 @@ padding-top: 4px;
 border-top: 2px solid rgba(100, 114, 125, 1.0);
 border-bottom: 2px solid rgba(100, 114, 125, 1.0);
 border-right: 2px solid rgba(0, 0, 0, 1.0);
-background-color: rgba(60, 179, 113, 0.75);
-font-weight: bold;
-color: black;
+font-weight: 600;
+color: lime;
 }
 
 #cpu{
