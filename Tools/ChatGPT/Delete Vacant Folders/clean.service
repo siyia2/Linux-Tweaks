@@ -1,0 +1,9 @@
+[Unit]
+Description=Deletes vacant folders and zip files.
+
+[Service]
+Type=oneshot
+ExecStart=/bin/delete_vacant_folders
+
+[Install]
+WantedBy=default.target
