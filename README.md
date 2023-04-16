@@ -16,7 +16,9 @@ Hello, this repository aims in trying to help people (and hopefully myself too) 
 
 * Useful templates for scripts & services
 
-* Wayland desktop setup (currently only under sway)
+* Wayland desktop setup (Sway & Hyprland)
 
 * Zram setup
+
+* Mass Deployment Script for Configs & Optimizations
 
