@@ -46,7 +46,7 @@ while true; do
             cp rtorrent.rc ~/.rtorrent.rc
             elif [ "$files" == "q" ]; then
             echo "exiting..."
-            exit
+            :
           else
             cp -r "$files" ~/.config
           fi
