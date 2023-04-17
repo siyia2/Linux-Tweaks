@@ -4,7 +4,7 @@ The best way in my opinion to setup a zram disk drive with your preferred compre
 2) Add the zram.service file in /lib/systemd/system/ and enable it with systemctl enable --now zram.service. 
 3) Check if its activated by running zramctl in a terminal.
 
-The above three steps will configure a zram disk at the size of 2G (18% of my 12gb) using zstd compression.
+The above three steps will configure a zram disk at the size of 50% of your available RAM using zstd compression.
 Changes take effect on boot and stay persistent after suspend/restart.
 
 Additional info:
