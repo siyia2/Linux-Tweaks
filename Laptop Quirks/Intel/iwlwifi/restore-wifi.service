@@ -1,0 +1,10 @@
+[Unit]
+Description=Restores wifi after suspend
+After=suspend.target
+
+[Service]
+Type=oneshot
+ExecStart=sh /usr/bin/restore_wifi.sh
+
+[Install]
+WantedBy=suspend.target
