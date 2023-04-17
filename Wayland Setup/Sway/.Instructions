@@ -23,6 +23,7 @@ xorg-server-xwayland
 xhost (needed for xwayland root access)
 
 ## Optional Packages:
+yay
 firefox
 thunderbird
 qalculate-gtk
