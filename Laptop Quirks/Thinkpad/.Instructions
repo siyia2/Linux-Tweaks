@@ -1,1 +1,9 @@
+Fan control for Thinkpad Laptops.
 
+Steps:
+
+1) sudo pacman -S lm_sensors lib32-lm_sensors
+2) sudo sensors
+3) yay -S thinkfan
+4) sudo cp thinkfan.conf /etc/thinkfan.conf
+5) sudo systemctl enable --now thinkfan.service
