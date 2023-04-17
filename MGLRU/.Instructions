@@ -1,7 +1,0 @@
-Like oom killer but inside kerneland.
-
-Steps:
-
-1) sudo cp mglru /bin/mglru & chmod +x /bin/mglru
-2) sudo cp mglru.service /lib/systemd/system/mglru.service
-3) systemctl enable --now mglru.service
