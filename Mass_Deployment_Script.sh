@@ -30,10 +30,10 @@ prev_choice=$subchoice
           cd "$CONFIG_DIR" || exit
           ls
 
-          echo "Enter '[A]ll' to copy all config files, or enter specific filename(s) separated by space, alternatively press "q" to quit:"
-          
+          echo "Enter '[A]ll' to copy all config files, or enter specific filename(s) one at a time, press "q" to quit at any time:"
+       while true; do    
           read files
-
+    
           if [ "$files" == "A" ]; then
             cp -r * ~/.config/
             cp rtorrent.rc ~/.rtorrent.rc 
@@ -50,7 +50,7 @@ prev_choice=$subchoice
           else
             cp -r "$files" ~/.config
           fi
-
+       done
           echo "Config files copied successfully!"
           ;;
         2)
