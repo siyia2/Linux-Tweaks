@@ -7,8 +7,8 @@ ttf-ubuntu-font-family
 ttf-font-awesome
 otf-font-awesome
 noto-fonts-emoji
-wlogout
 sway
+hyprland
 waybar
 alacritty
 grim (screenshot functionality)
@@ -22,7 +22,6 @@ xorg-server-xwayland
 xhost (needed for xwayland root access)
 
 ## Optional Packages:
-autotiling
 firefox
 thunderbird
 qalculate-gtk
