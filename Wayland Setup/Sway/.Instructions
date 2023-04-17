@@ -36,4 +36,5 @@ light (control backlight)
 uget (download manager)
 qbittorrent
 htop
+gedit
 geany (text editor)
