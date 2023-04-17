@@ -30,7 +30,7 @@ prev_choice=$subchoice
           cd "$CONFIG_DIR" || exit
           ls
 
-          echo "Enter '[A]ll' to copy all config files, or enter specific filename(s) one at a time, press "q" to quit at any time:"
+          echo "Enter '[A]ll' to copy all config files, or enter specific filename(s) one at a time, press 'q' to quit at any time:"
        while true; do    
           read files
     
