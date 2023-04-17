@@ -1,0 +1,19 @@
+The best way in my opinion to setup a zram disk drive with your preferred compression/disksize:
+
+1) Add the zram script in this repo in your /usr/bin/ and make it executable.
+2) Add the zram.service file in /lib/systemd/system/ and enable it with systemctl enable --now zram.service. 
+3) Check if its activated by running zramctl in a terminal.
+
+The above three steps will configure a zram disk at the size of 50% of your available RAM using zstd compression.
+Changes take effect on boot and stay persistent after suspend/restart.
+
+Additional info:
+Zram Device: Uses dynamically a specified part of your memory as a compressed ram cache, effectively maximizing your available
+ram capacity, useful for systems with low ram and/or  when adding more ram is not an option.
+Max ram:zram ratio is (1:2.6) f.e 1 GB of ram can equal at best to 2.6 GB of zram.
+
+Zram compression algs currently supported in kernel 5.4+: LZ4, LZO, ZSTD, LZO-RLE (default).
+
+If you wish to change the compression algorithm, or zram device size edit the zram script to accommodate your needs. 
+For most modern systems, i recommend adding the zstd compression alg and 50% of your ram as zram.
+The zram device according to my script, will always have maximum priority.
