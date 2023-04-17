@@ -2,5 +2,5 @@ On some older laptops the iwlwifi doesnt wake up after suspend and the module ha
 
 1) sudo cp restore_wifi.sh /usr/bin/restore_wifi.sh
 2) sudo chmod +x /usr/bin/restore_wifi.sh
-2) sudo cp restore-wifi.service to /lib/systemd/system/restore-wifi.service
+2) sudo cp restore-wifi.service /lib/systemd/system/restore-wifi.service
 3) systemctl enable --now restore-wifi.service
