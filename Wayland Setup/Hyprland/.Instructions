@@ -1,5 +1,5 @@
 Config and style css files for hyprland and waybar, just install Sway and Waybar and place them in ~/.config/hyprland ~/.config/swayidle and ~/.config/waybar respectively. 
-You can of course tweak the startup programs, bg image and resolutions to your liking depending on your setup in sway config.fig/hyprla
+You can of course tweak the startup programs, bg image and resolutions to your liking depending on your setup in hyprland.conf
 
 ## Essential Packages:
 ttf-roboto
