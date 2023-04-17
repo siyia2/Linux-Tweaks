@@ -142,11 +142,11 @@ prev_choice=$choice
                   dir="/etc/udev/rules.d"
                   dir2="/etc/sysctl.d/"
                   if [ ! -d "$dir" ]; then
-                    mkdir -p "$dir"
+                   sudo mkdir -p "$dir"
                   fi
                   sudo cp "$SCRIPT_DIR/Optimizations/IO-Schedulers-Cache-Configs/60-ioschedulers.rules" /etc/udev/rules.d/60-ioschedulers.rules
                   if [ ! -d "$dir2" ]; then
-                    mkdir -p "$dir2"
+                   sudo mkdir -p "$dir2"
                   fi
                   sudo cp "$SCRIPT_DIR/Optimizations/IO-Schedulers-Cache-Configs/sysctl.conf" /etc/sysctl.d/99-sysctl.conf
                   sudo sysctl --system
@@ -157,11 +157,11 @@ prev_choice=$choice
                   dir="/etc/udev/rules.d"
                   dir2="/etc/sysctl.d/"
                   if [ ! -d "$dir" ]; then
-                    mkdir -p "$dir"
+                   sudo mkdir -p "$dir"
                   fi
                   sudo cp "$SCRIPT_DIR/Optimizations/IO-Schedulers-Cache-Configs/60-ioschedulers.rules" /etc/udev/rules.d/60-ioschedulers.rules
                   if [ ! -d "$dir2" ]; then
-                    mkdir -p "$dir2"
+                   sudo mkdir -p "$dir2"
                   fi
                   sudo cp "$SCRIPT_DIR/Optimizations/IO-Schedulers-Cache-Configs/sysctl_low_ram.conf" /etc/sysctl.d/99-sysctl.conf
                   sudo sysctl --system
