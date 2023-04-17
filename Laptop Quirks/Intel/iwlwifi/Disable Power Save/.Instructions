@@ -1,0 +1,6 @@
+You can optionally disable power saving features for inter wireless iwlwifi if you are experiencing connection problems.
+
+steps:
+
+1) sudo cp iwlmvm.conf iwlwifi.conf /etc/modprobe.d/iwlmvm.conf /etc/modprobe.d/iwlwifi.conf
+2) Reboot to take effect
