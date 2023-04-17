@@ -12,7 +12,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CONFIG_DIR="$SCRIPT_DIR/Configs"
 WAYLAND_SETUP_DIR="$SCRIPT_DIR/Wayland Setup"
 wayland_choice=0
-
+prev_choice=0
 while true; do
   echo ""
 
@@ -24,7 +24,7 @@ while true; do
 
       read -p "Enter your choice: " subchoice
       echo ""
-
+prev_choice=$subchoice
       case $subchoice in
         1)
           cd "$CONFIG_DIR" || exit
@@ -57,7 +57,7 @@ while true; do
           echo "Press 1 for Hyprland" 
           echo "Press 2 for Sway"
           echo "3. ↩"
-          read -p "Enter your choice: " subchoice
+          read -p "Enter your choice: " wayland_choice
           echo ""
 
           case $wayland_choice in
@@ -72,7 +72,7 @@ while true; do
               echo "Sway Desktop deployed successfully!"
               ;;
             3)
-              break
+              wayland_choice=$subchoice
               ;;
             *)
               echo "Invalid choice"
