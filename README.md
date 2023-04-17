@@ -4,21 +4,19 @@ Hello, this repository aims in trying to help people (and hopefully myself too) 
 
 # Current Topics:
 
-* Various programs configs that i use
+* Configuration files
 
 * Collection of fixed DSDTS
-
-* Cahe & I/O configs
 
 * Laptop quirks
 
 * General quirks
 
+* Optimizations
+
 * Useful templates for scripts & services
 
-* Wayland desktop setup (Sway & Hyprland)
-
-* Zram setup
+* Wayland desktop setup (currently Sway & Hyprland)
 
 * Mass Deployment Script for Configs & Optimizations
 
