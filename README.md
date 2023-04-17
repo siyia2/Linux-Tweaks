@@ -10,15 +10,15 @@ Hello, this repository aims in trying to help people (and hopefully myself too) 
 
 * Laptop quirks
 
-* General quirks
-
 * Optimizations
 
-* Useful templates for scripts & services
+* General quirks
+
+* Templates for scripts & services
 
 * Some utility tools
 
-* Wayland desktop setup (currently Sway & Hyprland)
+* Wayland desktop setup (currently only under Sway & Hyprland)
 
 * Mass Deployment Script for Configs & Optimizations
 
