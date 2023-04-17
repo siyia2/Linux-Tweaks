@@ -1,0 +1,7 @@
+#! /bin/sh
+
+echo 7 | sudo tee /sys/kernel/mm/lru_gen/enabled ;
+
+echo 1000 | sudo tee /sys/kernel/mm/lru_gen/min_ttl_ms ;
+
+exit

@@ -1,0 +1,9 @@
+[Unit]
+Description=Enables mglru and mglru oom killer
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/mglru
+
+[Install]
+WantedBy=multi-user.target
