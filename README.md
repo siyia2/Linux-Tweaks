@@ -16,6 +16,8 @@ Hello, this repository aims in trying to help people (and hopefully myself too) 
 
 * Useful templates for scripts & services
 
+* Some utility tools
+
 * Wayland desktop setup (currently Sway & Hyprland)
 
 * Mass Deployment Script for Configs & Optimizations
