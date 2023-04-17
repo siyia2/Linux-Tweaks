@@ -30,7 +30,7 @@ prev_choice=$subchoice
           cd "$CONFIG_DIR" || exit
           ls
 
-          echo "Enter '[A]ll' to copy all files press "q" to quit, or enter the file or directory names separated by a space:"
+          echo "Enter '[A]ll' to copy all config files, or enter specific filename(s) separated by space, alternatively press "q" to quit:"
           
           read files
 
@@ -46,7 +46,7 @@ prev_choice=$subchoice
             cp rtorrent.rc ~/.rtorrent.rc
             elif [ "$files" == "q" ]; then
             echo "exiting..."
-            :
+            break
           else
             cp -r "$files" ~/.config
           fi
@@ -216,7 +216,7 @@ fi
       ;;
 *) 
       # Code to execute if the user enters an invalid choice
-      echo "Invalid choice, please enter 1 or 2"
+      echo "Invalid choice, please enter 1 or 2 or 3"
       continue
       ;;
   esac
