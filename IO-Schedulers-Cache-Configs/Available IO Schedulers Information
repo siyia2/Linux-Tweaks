@@ -1,9 +1,0 @@
-In modern Linux there are 3 main I/O schedulers: mq-deadline,bfq,kyber, you can also use no scheduler with none option.
-
-mq-deadline: Is the default linux I/O scheduler in most distros, it tries to balance latency and throughput
-
-bfq: BFQ gives latency absolute priority but has also reasonable throughput performance (best for desktops and spinning drives)
-
-kyber: Facebook's own scheduler
-
-none: This option is nice to use with very fast drives like nvme, or in situations where you require maximum throughput.

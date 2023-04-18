@@ -1,3 +1,0 @@
-To use my configs for I/O scheduling and write-cache, place 60-ioschedulers.rules in /etc/udev/rules.d/
-and sysctl.conf in /etc/ or as /etc/sysctl.d/99-sysctl.conf depending on disto, then sysctl --system as root or reboot.
-If available RAM is <=4GB use the sysctl.conf inside the low RAM scenario folder, in combination with a zram device.
