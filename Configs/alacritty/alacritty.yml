@@ -16,8 +16,7 @@ font:
     style: italic
    
 shell:
-  program: /bin/zsh
-
+  program: /bin/fish
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -56,13 +55,14 @@ cursor:
     #   - On: Enable blinking by default
     #   - Always: Force the cursor to always blink
     blinking: Always
-    interval: 500
-
-    
+      
 # Opacity
 window:
- opacity: 0.70
-
+ opacity: 0.75
+ padding:
+     x: 10
+     y: 5
+     
 # Colors (Kitty)
 colors:
   # Default colors
