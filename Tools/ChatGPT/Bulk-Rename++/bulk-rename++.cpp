@@ -97,7 +97,7 @@ int main(int argc, char *argv[]) {
   const char* path_completion = rl_basic_word_break_characters;
   while (true) {
     // Read line with readline()
-    char *line = readline("Enter path: ");
+    char *line = readline("Enter path to rename: ");
 
     // Add line to history
     if (line && *line) {
