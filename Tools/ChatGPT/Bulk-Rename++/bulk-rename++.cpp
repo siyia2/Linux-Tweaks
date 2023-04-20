@@ -23,6 +23,13 @@ void print_help() {
 
 void rename_path(const fs::path& path, const std::string& case_input, bool verbose=true) {
   for (const auto& entry : fs::directory_iterator(path)) {
+    if (entry.is_symlink()) {
+      if (verbose) {
+        std::cout << "Skipping symlink " << entry.path() << std::endl;
+      }
+      continue;
+    }
+
     if (entry.is_directory()) {
       // Rename subdirectories recursively
       const auto& sub_path = entry.path();
@@ -84,13 +91,10 @@ void rename_path(const fs::path& path, const std::string& case_input, bool verbo
       } catch (const std::filesystem::filesystem_error& e) {
         std::cerr << "Error: " << e.what() << '\n';
       }
-    } else if (entry.is_symlink()) {
-      if (verbose) {
-        std::cout << "Skipping symlink " << entry.path() << std::endl;
-      }
     }
   }
 }
+
 
 
 
