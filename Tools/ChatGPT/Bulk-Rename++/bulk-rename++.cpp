@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <readline/readline.h>
 #include <readline/history.h>
-// compile with g++ rename.cpp -o rename -lreadline
+// compile with g++ bulk_rename++.cpp -o bulk_rename++ -lreadline
 namespace fs = std::filesystem;
 
 void print_help() {
