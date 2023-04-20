@@ -131,18 +131,27 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  std::string case_input;
-  printf("!!! WARNING OPERATION IRREVERSIBLE !!! \n");
+std::string case_input;
+printf("!!! WARNING OPERATION IRREVERSIBLE !!! \n");
+
+while (true) {
   std::cout << "Enter case (lower/upper/reverse/exit): ";
   std::getline(std::cin, case_input);
 
   std::transform(case_input.begin(), case_input.end(), case_input.begin(),
                  [](unsigned char c) { return std::tolower(c); });
 
-  fs::path path(path_input);
+  if (case_input == "lower" || case_input == "upper" || case_input == "reverse" || case_input == "exit") {
+    break;
+  } else {
+    std::cerr << "Error: invalid choice\n";
+  }
+}
 
-  rename_path(path, case_input);
+fs::path path(path_input);
+
+rename_path(path, case_input);
+
 
   return 0;
 }
-
