@@ -21,13 +21,13 @@ void print_help() {
             << "  rename /path/to/folder -c reverse\n";
 }
 
-void rename_path(const fs::path& path, const std::string& case_input) {
+void rename_path(const fs::path& path, const std::string& case_input, bool verbose=true) {
   for (const auto& entry : fs::directory_iterator(path)) {
 
     if (entry.is_directory()) {
       // Rename subdirectories recursively
       const auto& sub_path = entry.path();
-      rename_path(sub_path, case_input);
+      rename_path(sub_path, case_input, verbose);
 
       std::string dirname = sub_path.filename().string();
       std::string new_dirname;
@@ -49,6 +49,9 @@ void rename_path(const fs::path& path, const std::string& case_input) {
       fs::path new_path = sub_path.parent_path() / new_dirname;
       try {
         fs::rename(sub_path, new_path);
+        if (verbose) {
+          std::cout << "Renamed directory " << sub_path << " to " << new_path << std::endl;
+        }
       } catch (const std::filesystem::filesystem_error& e) {
         std::cerr << "Error: " << e.what() << '\n';
       }
@@ -76,12 +79,16 @@ void rename_path(const fs::path& path, const std::string& case_input) {
       fs::path new_path = entry.path().parent_path() / new_filename;
       try {
         fs::rename(entry.path(), new_path);
+        if (verbose) {
+          std::cout << "Renamed file " << entry.path() << " to " << new_path << std::endl;
+        }
       } catch (const std::filesystem::filesystem_error& e) {
         std::cerr << "Error: " << e.what() << '\n';
       }
     }
   }
 }
+
 
 int main(int argc, char *argv[]) {
   if (argc == 2 && (std::string(argv[1]) == "-h" || std::string(argv[1]) == "--help")) {
