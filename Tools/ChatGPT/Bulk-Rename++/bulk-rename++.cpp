@@ -66,9 +66,6 @@ void rename_path(const fs::path& path, const std::string& case_input, bool verbo
       std::string filename = entry.path().filename().string();
       std::string new_filename;
       new_filename.resize(filename.size()); // Resize new_filename
-      if (case_input == "exit") { 
-        break;
-      }
       if (case_input == "lower") {
         std::transform(filename.begin(), filename.end(), new_filename.begin(),
                        [](unsigned char c) { return std::tolower(c); });
@@ -162,11 +159,10 @@ while (true) {
     std::cerr << "Error: invalid choice\n";
   }
 }
-
+  if (case_input == "lower" || case_input == "upper" || case_input == "reverse") {
 fs::path path(path_input);
 
 rename_path(path, case_input);
-
-
+}
   return 0;
 }
