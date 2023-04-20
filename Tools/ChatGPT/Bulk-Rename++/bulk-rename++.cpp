@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <readline/readline.h>
 #include <readline/history.h>
-// compile with g++ bulk_rename++.cpp -o bulk_rename++ -lreadline
+// compile with g++ bulk-rename++.cpp -o bulk-rename++ -lreadline
 namespace fs = std::filesystem;
 
 void print_help() {
@@ -23,7 +23,6 @@ void print_help() {
 
 void rename_path(const fs::path& path, const std::string& case_input, bool verbose=true) {
   for (const auto& entry : fs::directory_iterator(path)) {
-
     if (entry.is_directory()) {
       // Rename subdirectories recursively
       const auto& sub_path = entry.path();
@@ -61,7 +60,7 @@ void rename_path(const fs::path& path, const std::string& case_input, bool verbo
       std::string new_filename;
       new_filename.resize(filename.size()); // Resize new_filename
       if (case_input == "exit") { 
-	break;
+        break;
       }
       if (case_input == "lower") {
         std::transform(filename.begin(), filename.end(), new_filename.begin(),
@@ -85,9 +84,14 @@ void rename_path(const fs::path& path, const std::string& case_input, bool verbo
       } catch (const std::filesystem::filesystem_error& e) {
         std::cerr << "Error: " << e.what() << '\n';
       }
+    } else if (entry.is_symlink()) {
+      if (verbose) {
+        std::cout << "Skipping symlink " << entry.path() << std::endl;
+      }
     }
   }
 }
+
 
 
 int main(int argc, char *argv[]) {
