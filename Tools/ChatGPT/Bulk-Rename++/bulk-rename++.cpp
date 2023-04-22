@@ -93,8 +93,6 @@ void rename_path(const fs::path& path, const std::string& case_input, bool verbo
 }
 
 
-
-
 int main(int argc, char *argv[]) {
   if (argc == 2 && (std::string(argv[1]) == "-h" || std::string(argv[1]) == "--help")) {
     // Print help message and exit
