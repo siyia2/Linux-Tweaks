@@ -86,7 +86,7 @@ padding-top: 2px;
 
 #workspaces button:hover {
   box-shadow: 0 0 0px 0px;
-  text-shadow: 1px 1px 6px #20b200;
+  text-shadow: 1px 1px 4px #20b200;
 }
 
 window#waybar {
