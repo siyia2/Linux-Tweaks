@@ -39,7 +39,7 @@ dht.port.set = 50001
 protocol.pex.set= yes
 
 # Disable udp support because it causes hangs with version 0.98, set to yes to revert
-trackers.use_udp.set = no
+trackers.use_udp.set = yes
 
 # Global upload and download rate in KiB. "0" for unlimited.
 download_rate = 0
