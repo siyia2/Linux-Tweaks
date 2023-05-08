@@ -8,7 +8,7 @@
 
 
 ## Instance layout (base paths)
-method.insert = cfg.basedir,  private|const|string, (cat,"/home/siyia/rtorrent/")
+method.insert = cfg.basedir,  private|const|string, (cat,"/mnt/D/.rtorrent/")
 method.insert = cfg.download, private|const|string, (cat,(cfg.basedir),"download/")
 method.insert = cfg.logs,     private|const|string, (cat,(cfg.basedir),"log/")
 method.insert = cfg.logfile,  private|const|string, (cat,(cfg.logs),"rtorrent-",(system.time),".log")
@@ -28,14 +28,14 @@ execute.throw = sh, -c, (cat,\
 
 
 ## Listening port for incoming peer traffic (fixed; you can also randomize it)
-network.port_range.set = 1641-1641
-network.port_random.set = no
+network.port_range.set = 50000-50100
+network.port_random.set = yes
 
 
 ## Tracker-less torrent and UDP tracker support
 ## (conservative settings for 'private' trackers, change for 'public')
 dht.mode.set = auto
-dht.port.set = 6881
+dht.port.set = 50001
 protocol.pex.set= yes
 
 # Disable udp support because it causes hangs with version 0.98, set to yes to revert
@@ -67,6 +67,8 @@ protocol.encryption.set = allow_incoming,try_outgoing,enable_retry
 #Maximum enforced encryption,(cannot use magnet links with rtorrent)
 #protocol.encryption.set = prefer,require_RC4,allow_incoming,try_outgoing
 
+#Executes a hash check when rTorrent is started
+pieces.hash.on_completion.set = yes
 
 ## Limits for file handle resources, this is optimized for
 ## an `ulimit` of 1024 (a common default). You MUST leave
@@ -130,7 +132,7 @@ method.insert = d.session_file, simple, "cat=(session.path), (d.hash), .torrent"
 
 ## Dirs & Dir Settings
 system.file.allocate = 1
-session.path.set = /mnt/D/.rtorrent.session
+session.path.set = /mnt/D/.rtorrent/session
 #The line below deletes torrent&data when you remove a torrent from the list comment it to revert it.
 method.set_key = event.download.erased,delete_erased,"execute=rm,-rf,--,$d.base_path="
 schedule2 = watch_directory_Firefox_Downloads, 10, 10, "load.start=/mnt/D/Firefox_Downloads/*.torrent,d.directory.set=/mnt/D/Torrents/"
@@ -155,6 +157,7 @@ log.add_output = "info", "log"
 
 ## Disable in built DNS cache in favor of an external one fe systemd-resolved
 network.http.dns_cache_timeout.set=0
+
 
 ##Rtorrent-ps gui modification
 
