@@ -1,5 +1,5 @@
 [Unit]
-Description=Deletes vacant folders and zip files.
+Description=Deletes vacant folders and rar&zip files.
 
 [Service]
 Type=oneshot
