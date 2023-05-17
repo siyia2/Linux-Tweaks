@@ -1,5 +1,5 @@
 A tool written in C by chatgpt for my mother to delete any folder that does not contain 
-a video file on the one path, plus any .zip files on the other path. 
+a video file on the one path, plus any .zip and .rar files on the other path which she downloads subtitles into. 
 
 1) Edit the paths to your liking at the bottom of "delete_vacant_folders.c".
 2) Recompile with gcc -o delete_vacant_folders delete_vacant_folders.c.
