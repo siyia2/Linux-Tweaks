@@ -55,7 +55,7 @@ void delete_folders(char *root) {
     closedir(dir);
 }
 
-void delete_zip_files(char *path) {
+void delete_zip_and_rar_files(char *path) {
     struct dirent *entry;
     DIR *dir = opendir(path);
     if (dir == NULL) {
@@ -68,7 +68,7 @@ void delete_zip_files(char *path) {
         snprintf(full_path, sizeof(full_path), "%s/%s", path, entry->d_name);
         if (entry->d_type == DT_REG) {
             char *ext = strrchr(entry->d_name, '.');
-            if (ext && (strcmp(ext, ".zip") == 0)) {
+            if (ext && (strcmp(ext, ".zip") == 0 || strcmp(ext, ".rar") == 0)) {
                 printf("Deleting file: %s\n", full_path);
                 remove(full_path);
             }
@@ -79,7 +79,7 @@ void delete_zip_files(char *path) {
 
 int main() { // change the paths accoding to your needs
     delete_folders("/home/phgh/Βίντεο");
-    delete_zip_files("/home/phgh/Firefox");
+    delete_zip_and_rar_files("/home/phgh/Firefox");
     return 0;
 }
 
