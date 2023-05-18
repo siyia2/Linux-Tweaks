@@ -35,7 +35,7 @@ network.port_random.set = yes
 ## Tracker-less torrent and UDP tracker support
 ## (conservative settings for 'private' trackers, change for 'public')
 dht.mode.set = auto
-dht.port.set = 50001
+dht.port.set = 6881
 protocol.pex.set= yes
 
 # Disable udp support because it causes hangs with version 0.98, set to yes to revert
