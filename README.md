@@ -20,5 +20,5 @@ Hello, this repository aims in trying to help people (and hopefully myself too) 
 
 * Wayland desktop setup (currently only under Sway & Hyprland)
 
-* Mass Deployment Script for configs & optimizations & wayland desktops
+* Mass Deployment Script for configs | optimizations | wayland desktops
 
