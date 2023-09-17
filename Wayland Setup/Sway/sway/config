@@ -151,6 +151,7 @@ resume  'swaymsg "output * dpms on"'
 bindsym $mod+f11 exec swaylock -e -f -c 000000
 
 for_window [app_id="firefox"] inhibit_idle focus
+for_window [app_id="firefox-esr"] inhibit_idle focus
 for_window [app_id="TeamViewer"] inhibit_idle open
 for_window [class="dolphin-emu"] inhibit_idle focus
 for_window [app_id="WebCord"] inhibit_idle focus
