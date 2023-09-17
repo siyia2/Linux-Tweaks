@@ -100,7 +100,7 @@ default_border pixel 5
 
 exec xhost local:root
 exec swaylock -e -f -c 000000 --indicator-idle-visible
-exec env QT_QPA_PLATFORM=xcb doublecmd --no-splash
+exec env QT_QPA_PLATFORM=wayland doublecmd --no-splash
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec mako
 exec_always autotiling
@@ -126,9 +126,8 @@ for_window [app_id="thunderbird"] move container to workspace 1: Web/Mail
 for_window [app_id="thunderbird"] focus 
 for_window [app_id="firefox"] focus
 for_window [app_id="gsimplecal"] move position 1712 850
-for_window [class="Double Commander"] move container to workspace 2: FM  ; layout tabbed ;
-for_window [class="Double Commander"] focus 
-for_window [class="Double Commander"] focus
+for_window [app_id="doublecmd"] move container to workspace 2: FM  ; layout tabbed ;
+for_window [app_id="doublecmd"] focus
 for_window [class="discord"] move container to workspace 5: Comms
 for_window [app_id="WebCord"] move container to workspace 5: Comms
 for_window [class="Skype"] move container to workspace 5: Comms
@@ -166,7 +165,7 @@ for_window [app_id="mpv"] inhibit_idle fullscreen
 ### CUSTOM
 bindsym --to-code {
  $mod+x exec $term
- $mod+f exec env QT_QPA_PLATFORM=xcb doublecmd --no-splash
+ $mod+f exec env QT_QPA_PLATFORM=wayland doublecmd
  $mod+w exec env firefox-esr
  $mod+v exec pavucontrol
  $mod+q kill
