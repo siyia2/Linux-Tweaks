@@ -92,7 +92,7 @@ client.unfocused	$indicator-unfocused	$unfocused-bg-color				$text-color-unfocus
 ### GAPS
 
 gaps inner 6
-gaps outer 4
+gaps outer 2
 default_border pixel 5
 
 
