@@ -63,6 +63,11 @@ padding-top: 2px;
 
 }
 
+#custom-psufan{
+padding-top: 2px;
+
+}
+
 #custom-zram{
 padding-top: 2px;
 
@@ -103,11 +108,11 @@ window#waybar {
     padding: 0px 5px;
     padding-top: 3px;
     background: transparent;
-    color: white;
+    color: green;
     border-bottom: 0px solid transparent;
 }
 
-#workspaces button.active {
+#workspaces button.focused {
 background-color: rgba(60, 179, 113, 0.75);
 font-weight: bold;
 color: black;
