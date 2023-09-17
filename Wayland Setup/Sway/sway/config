@@ -140,7 +140,7 @@ for_window [title="Worms Armageddon"] move container to workspace 4: Games/Misc 
 
 ### POWER MANAGEMENT
 
-exec swayidle
+exec swayidle -w
 
 bindsym $mod+f11 exec swaylock -e -f -c 000000
 
