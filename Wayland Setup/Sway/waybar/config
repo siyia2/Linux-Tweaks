@@ -3,9 +3,10 @@
     "layer": "top",
     	"width": 1920,
 	"height": 26,
-    "modules-left": ["sway/workspaces"],
-    "modules-center": ["memory","custom/swap","custom/vram","custom/cpu","cpu","temperature","custom/cpufan","custom/gpu","custom/gpusage","custom/gputemp","custom/gpufan"],
-    "modules-right": ["custom/kernel","custom/mesa","custom/bt_battery","custom/kb","pulseaudio","network","clock","clock#utc"],
+    //"modules-left": ["hyprland/workspaces"],
+	"modules-left": ["sway/workspaces"],
+    "modules-center": ["memory","custom/vram","custom/psufan","custom/cpu","cpu","temperature","custom/cpufan","custom/gpu","custom/gpusage","custom/gputemp","custom/gpufan"],
+    "modules-right": ["custom/kernel","custom/mesa","custom/bt_battery","pulseaudio","network","hyprland/language","clock"],
     "sway/window": {
         "max-length": 1920
     },
@@ -17,15 +18,15 @@
     "interval": 5,
     "format": "Ram: {}%",
 		"tooltip": false,
-"on-click": "killall htop & alacritty -t htop -e htop"
+"on-click": "killall btop & alacritty -t btop -e btop"
 },
 
-"custom/swap": {
+"custom/zram": {
 	"restart-interval": 5,
         "exec": "/home/siyia/.config/waybar/modules/zram.sh",
-	"format": "Swap:{} ",
+	"format": "Zram:{} ",
 		"tooltip": false,
-"on-click": "killall htop & alacritty -t htop -e htop"
+"on-click": "killall btop & alacritty -t btop -e btop"
 },
 
 
@@ -34,7 +35,7 @@
 
 "custom/cpu": {
   "format": "Cpu:",
-  "on-click": "killall htop & alacritty -t htop -e htop",
+  "on-click": "killall btop & alacritty -t btop -e btop",
 		"tooltip": false
 },
 
@@ -42,7 +43,7 @@
     "interval": 2,
     "format": "{usage}% @",
 		"tooltip": false,
-"on-click": "killall htop & alacritty -t htop -e htop"
+"on-click": "killall btop & alacritty -t btop -e btop"
 },
 
 "custom/cpufan": {
@@ -50,7 +51,7 @@
         "exec": "/home/siyia/.config/waybar/modules/cpu_fan.sh",
 	"format": " @ {} rpm ||",
 		"tooltip": false,
-"on-click": "killall htop & alacritty -t htop -e htop"
+"on-click": "killall btop & alacritty -t btop -e btop"
 },
 
 "temperature": {
@@ -61,7 +62,7 @@
 	"format-critical":"{temperatureC}°C",
 	"format":"{temperatureC}°C",
 		"tooltip": false,
-"on-click": "killall htop & alacritty -t htop -e htop"
+"on-click": "killall btop & alacritty -t btop -e btop"
 },
 
 
@@ -85,7 +86,7 @@
 
 "custom/gpu": {
   "format": " Gpu:",
-  "on-click": "killall htop & alacritty -t htop -e htop",
+  "on-click": "killall btop & alacritty -t btop -e btop",
 		"tooltip": false
 },
 
@@ -94,7 +95,7 @@
         "exec": "/home/siyia/.config/waybar/modules/gpu_usage.sh",
 	"format": " {}% @",
 		"tooltip": false,
-"on-click": "killall htop & alacritty -t htop -e htop"
+"on-click": "killall btop & alacritty -t btop -e btop"
 },
 
 "custom/gpufan": {
@@ -102,7 +103,7 @@
         "exec": "/home/siyia/.config/waybar/modules/gpu_fan.sh",
 	"format": " @ {} rpm",
 		"tooltip": false,
-"on-click": "killall htop & alacritty -t htop -e htop"
+"on-click": "killall btop & alacritty -t btop -e btop"
 },
 
 "custom/vram": {
@@ -110,7 +111,7 @@
 		"tooltip": false,
 		"exec": "/home/siyia/.config/waybar/modules/vram.sh",
 		"format": "Vram: {}% || ",
-		"on-click": "killall htop & alacritty -t htop -e htop"
+		"on-click": "killall btop & alacritty -t btop -e btop"
 },
 
 "custom/gputemp": {
@@ -118,11 +119,24 @@
         "exec": "/home/siyia/.config/waybar/modules/gpu_temp.sh",
 	"format": " {}°C",
 		"tooltip": false,
-"on-click": "killall htop & alacritty -t htop -e htop"
+"on-click": "killall btop & alacritty -t btop -e btop"
 },
 
-
 // MISC SW
+
+"hyprland/language": {
+    "format": " {} ",
+    "format-gr": "GR",
+    "format-en": "EN",
+    "on-click": "hyprctl switchxkblayout semico-usb-keyboard-1 next"
+},
+
+"wlr/workspaces": {
+"format": "{name}",
+"on-click": "activate",
+"on-scroll-up": "hyprctl dispatch workspace e+1",
+"on-scroll-down": "hyprctl dispatch workspace e-1"
+},
 
 "custom/packages": {
 "restart-interval": 99,
@@ -160,40 +174,40 @@
 
 // MISC HW
 
-"network": {
-    "interface": "eth0",
-    "format": "{ipaddr}",
-    "format-wifi": "{essid} ({signalStrength}%) ",
-    "format-ethernet": "🔗",
-    // "format-ethernet": "📡",
-    "format-disconnected": "✖️",
-    "tooltip-format": "{ifname} {ipaddr} ",
-	"tooltip": true
-},
-
-"custom/signal": {
-		"restart-interval": 2,
+"custom/psufan": {
+	"restart-interval": 2,
+        "exec": "/home/siyia/.config/waybar/modules/psu_fan.sh",
+	"format": "Psu: {} rpm || ",
 		"tooltip": false,
-		"exec": "/home/siyia/.config/waybar/modules/signal.sh",
-		"format": "{}",
-
+"on-click": "killall btop & alacritty -t btop -e btop"
 },
 
 "custom/bt_battery": {
 		"restart-interval": 10,
 		"tooltip": false,
-		"exec": "/home/siyia/.config/waybar/modules/battery_bluetooth.sh",
-		"format": "🔋 {} ",
+		"exec": "/home/siyia/.config/waybar/modules/bluetooth.sh",
+		"format": "🔋{} ",
 		"on-click": "blueman-manager",
 		
+},
 
+
+"network": {
+    "interface": "enp5s0",
+    "format": "{ipaddr}",
+    "format-wifi": "{essid} ({signalStrength}%) ",
+    "format-ethernet": "🔗",
+    "format-disconnected": "✖️",
+    "tooltip-format": "{ifname} {ipaddr}",
+	"tooltip": true,
+	"on-click": "killall nmtui ; alacritty -e nmtui"
 },
 
 "pulseaudio": {
-    "format": "{icon} {volume}% {format_source}",
-    "format-source": " 🟢",
-    "format-source-muted": " 🔴",
-    "format-bluetooth": "{volume}% {icon}",
+    "format": " {volume}% {icon} {format_source}",
+    "format-source": "🟢",
+    "format-source-muted": "🔴",
+    "format-bluetooth": "{volume}% {icon} {format_source}",
     "format-muted": " Muted 🔇",
     "format-icons": {
         "headphones": "",
@@ -209,16 +223,17 @@
     "scroll-step": 1,
 	"on-scroll-down":"pactl set-sink-volume @DEFAULT_SINK@ -5%",
 	"on-scroll-up":"pactl set-sink-volume @DEFAULT_SINK@ +5%",
-	"on-click-middle":"pactl set-sink-mute @DEFAULT_SINK@ toggle && pactl set-source-mute @DEFAULT_SOURCE@ on",
-    "on-click": "killall pavucontrol ; pavucontrol",
+	"on-click-middle":"pactl set-sink-mute @DEFAULT_SINK@ toggle",
+    "on-click": "pavucontrol",
 	"tooltip": false
 },
 // CLOCK/DATE STUFF
 
     "clock": {
-	"locale": "el_GR.UTF-8",
     "format": "{:%a %d %b, %H:%M}",
 	"on-click": "gsimplecal",
+    "scroll-step": 1,
+    "on-scroll-down":"killall gsimplecal",
 	"tooltip-format": "{:%A %d %B %Y, %H:%M}",
 	"tooltip": true,
     },
@@ -226,6 +241,9 @@
   "clock#utc": {
   	"format": "{:%H:%M} ",
   	"on-click": "gsimplecal",
+  	"scroll-step": 1,
+  	"on-scroll-down":"killall gsimplecal",
+  	"on-click": "killall gsimplecal",
   	"tooltip-format": "UTC {:%H:%M}",
   	"tooltip": true,
         "timezone": "Africa/Accra"
