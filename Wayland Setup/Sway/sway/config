@@ -17,15 +17,15 @@ set $right l
 set $term alacritty
 # Your preferred application launcher
 # Note: it's recommended that you pass the final command to sway
-set $menu bemenu-run -H 24 --fn Ubuntu --tf '#00ff40'  --hf '#FFFFFF' --hb '#008000' -i -w 
+set $menu bemenu-run -H 25 --fn Ubuntu 9 --tf '#00ff40'  --hf '#FFFFFF' --hb '#008000' -i -w
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output "*" bg /home/siyia/Pictures/wp4.jpg fill
+output "*" bg /home/siyia/Pictures/wp8.jpg fit
 #
 # Example configuration:
 #
-   output HDMI-A-1 mode 1920x1080@74.973000Hz subpixel rgb max_render_time 3 adaptive_sync on
+output HDMI-A-1 mode 1920x1080@74.9730Hz subpixel rgb max_render_time 4 adaptive_sync on
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
@@ -37,6 +37,7 @@ xkb_numlock enabled
 pointer_accel 1
 accel_profile adaptive
 scroll_factor 2
+#left_handed enabled
 }
 
 seat seat0 xcursor_theme Pulse-Glass-Jade-Regular
@@ -44,8 +45,8 @@ set $gnome-schema org.gnome.desktop.interface
 exec_always {
     gsettings set $gnome-schema cursor-theme 'Pulse-Glass-Jade-Regular'
     gsettings set org.gnome.desktop.wm.preferences button-layout ''
-
 }
+
 ### KB LAYOUTS
 
 input "*" {
@@ -67,9 +68,9 @@ bindsym alt+KP_5 seat "*" cursor press button1; seat "*" cursor release button1
 bindsym alt+KP_0 seat "*" cursor press button3; seat "*" cursor release button3
 bindsym alt+KP_DELETE seat "*" cursor press button2; seat "*" cursor release button2
 
-### FONTS
 
-font pango:ubuntu 10
+### FONTS
+font pango: Ubuntu Medium 10
 
 ### COLORS
 set $focused-bg-color    #006633
@@ -82,60 +83,69 @@ set $unfocused-bg-color  #404040
 set $text-color-unfocused #A9A9A9 
 set $indicator-unfocused #505050
 
+title_align left
 
-
-# class           border                background           text                   split_indicator
-client.focused    $indicator            $focused-bg-color    $text-color            $indicator2
-client.unfocused  $indicator-unfocused  $unfocused-bg-color  $text-color-unfocused  $indicator2
+# class				border					background						text      					Split Indicator
+client.focused		$indicator				$focused-bg-color				$text-color 				$indicator2
+client.unfocused	$indicator-unfocused	$unfocused-bg-color				$text-color-unfocused 	    $indicator2
 
 ### GAPS
 
-gaps inner 5
-gaps outer -5
-default_border pixel 3
+gaps inner 4
+gaps outer -4
+default_border pixel 4
 
 
 ### STARTUP PROGRAMS
 
 exec xhost local:root
 exec swaylock -e -f -c 000000 --indicator-idle-visible
-exec doublecmd --no-splash
+exec env QT_QPA_PLATFORM=xcb doublecmd --no-splash
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec mako
-exec qbittorrent -platform wayland
+exec_always autotiling
+#exec swaykbdd
+exec transmission-gtk
+#exec pactl unload-module 6
 exec /home/siyia/.local/bin/xerrors.sh
-exec pactl set-sink-volume @DEFAULT_SINK@ 100%
+#exec pactl set-sink-volume @DEFAULT_SINK@ 100%
 exec gammastep -v -c ~/.config/redshift.conf
+
 
 #### WINDOW SETUP
 
-for_window [class="PlayOnLinux"] move container to workspace 3: Steam
 for_window [title="Friends List"] move container to workspace 3: Steam
-for_window [class="Steam"] move container to workspace 3: Steam
+for_window [class="steam"] move container to workspace 3: Steam
 for_window [app_id="uget"] move container to workspace 5: P2P
 for_window [app_id="org.qbittorrent.qBittorrent"] move container to workspace 6: P2P ; layout tabbed ;
+for_window [app_id="com.transmissionbt.transmission_39_10234301"] move container to workspace 6: P2P ; layout tabbed ;
+for_window [class="Tixati"] move container to workspace 6: P2P ; layout tabbed ;
 for_window [app_id="firefox"] move container to workspace 1: Web/Mail
+for_window [app_id="firefox-esr"] move container to workspace 1: Web/Mail
 for_window [app_id="thunderbird"] move container to workspace 1: Web/Mail
 for_window [app_id="thunderbird"] focus 
 for_window [app_id="firefox"] focus
-for_window [class="Double Commander"] move container to workspace 2: FM 
-for_window [class="Doublecmd"] move container to workspace 2: FM 
-for_window [class="Doublecmd"] focus 
+for_window [class="Double Commander"] move container to workspace 2: FM  ; layout tabbed ;
+for_window [class="Double Commander"] focus 
 for_window [class="Double Commander"] focus
 for_window [class="discord"] move container to workspace 5: Comms
+for_window [app_id="WebCord"] move container to workspace 5: Comms
 for_window [class="Skype"] move container to workspace 5: Comms
 for_window [app_id="mpv"] move container to workspace 6: P2P
 for_window [app_id="mpv"] focus
+#for_window xwayland move container to workspace 4: Games/Misc
 for_window [title="Default - Wine desktop"] move container to workspace 4: Games/Misc
 for_window [title="Default - Wine desktop"] focus
+for_window [title="Worms Armageddon"] move container to workspace 4: Games/Misc ; layout floating ;
+##for_window [app_id="kitty"] move container to workspace 2: FM
 
 ### POWER MANAGEMENT
 
  exec swayidle -w \
 before-sleep 'swaylock -e -f -c 000000' \
-timeout 6001 'systemctl suspend' \
-timeout 501 'swaylock -e -f -c 000000' \
-timeout 1001 'swaymsg "output * dpms off"' \
+timeout 6000 'systemctl suspend' \
+timeout 1001 'swaylock -e -f -c 000000' \
+timeout 2001 'swaymsg "output * dpms off"' \
 timeout 61 'if pgrep -x swaylock; then swaymsg "output * dpms off"; fi' \
 resume  'swaymsg "output * dpms on"'
 
@@ -144,8 +154,8 @@ bindsym $mod+f11 exec swaylock -e -f -c 000000
 for_window [app_id="firefox"] inhibit_idle focus
 for_window [app_id="TeamViewer"] inhibit_idle open
 for_window [class="dolphin-emu"] inhibit_idle focus
+for_window [class="discord"] inhibit_idle focus
 for_window [app_id="mpv"] inhibit_idle fullscreen
-
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -154,20 +164,16 @@ for_window [app_id="mpv"] inhibit_idle fullscreen
 ### Key bindings
 #
 ### CUSTOM
-
-# Layout Insensitive Bindings
 bindsym --to-code {
- 
  $mod+x exec $term
- $mod+f exec doublecmd --no-splash
- $mod+w exec env MOZ_ENABLE_WAYLAND=1 firefox
+ $mod+f exec env QT_QPA_PLATFORM=xcb doublecmd --no-splash
+ $mod+w exec env firefox-esr
  $mod+v exec pavucontrol
  $mod+q kill
  $mod+d exec $menu
  $mod+Shift+c reload
  $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
  $mod+Shift+r mode "resize"
-
 }
 
 bindsym ctrl+alt+delete exec killall htop & alacritty -t htop -e htop
@@ -179,23 +185,17 @@ bindsym $mod+f12 exec qalculate-gtk
 
 bindsym $mod+f3 exec pactl set-sink-volume @DEFAULT_SINK@ +10%
 bindsym $mod+f2 exec pactl set-sink-volume @DEFAULT_SINK@ -10%
-bindsym $mod+f4 exec pactl set-sink-mute @DEFAULT_SINK@ toggle && pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym $mod+f4 exec pactl set-sink-mute @DEFAULT_SINK@ toggle && pactl set-source-mute @DEFAULT_SOURCE@ 1
 bindsym $mod+f1 exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
-
-#XF86s
-bindsym xf86Launch1 exec swaylock swaylock -e -f -c 000000
-bindsym xf86Launch2 exec swaymsg "output * dpms on"
-bindsym xf86Launch3 exec thunderbird
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
-bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym XF86MonBrightnessDown exec light -U 5
 bindsym XF86MonBrightnessUp exec light -A 5
-
 bindsym Print exec grim $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S_grim.png')
-bindsym $mod+Print exec grim -g "$(slurp)" $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S_grim.png')
+bindsym $mod+Print exec grim -g "$(slurp)"
 bindsym button2 kill
+# Basics:
+#
+
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -203,7 +203,13 @@ bindsym button2 kill
     # Change normal to inverse to use left mouse button for resizing and right
     # mouse button for dragging.
     floating_modifier $mod normal
-    
+
+    # reload the configuration file
+    bindsym $mod+Shift+c reload
+
+    # exit sway (logs you out of your Wayland session)
+    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+#
 # Moving around:
 #
     # Move your focus around
@@ -230,8 +236,7 @@ bindsym button2 kill
 #
 # Workspaces:
 #
-workspace_layout tabbed
-  # switch to workspace
+    # switch to workspace
     bindsym $mod+1 workspace 1: Web/Mail
     bindsym $mod+2 workspace 2: FM
     bindsym $mod+3 workspace 3: Steam
@@ -258,17 +263,15 @@ workspace_layout tabbed
 #
 # Layout stuff:
 #
-# Uncomment to set your default layout (split is default)
-# workspace_layout tabbed
+workspace_layout tabbed
 
     # You can toggle "split" the current object of your focus with
     # $mod+c, for horizontal and vertical splits
-    # respectively. 
-    # To remove split status of a lone window use move with mod+Shift up/down/right/left
+    # respectively.
     bindsym $mod+grave splitt
 
     # Switch the current container between different layout styles
-    #bindsym $mod+s layout stacking
+    #bindsym $mod+minus layout stacking
     #bindsym $mod+t layout tabbed
     bindsym $mod+Tab layout toggle split tabbed 
 
@@ -282,7 +285,7 @@ workspace_layout tabbed
     bindsym $mod+space focus mode_toggle
 
     # move focus to the parent container
-    #bindsym $mod+a focus parent
+    bindsym $mod+a focus parent
 #
 # Scratchpad:
 #
@@ -290,11 +293,11 @@ workspace_layout tabbed
     # You can send windows there and get them back later.
 
     # Move the currently focused window to the scratchpad
-    #bindsym $mod+Shift+minus move scratchpad
+    #bindsym $mod+Shift+s move scratchpad
 
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
-    #bindsym $mod+minus scratchpad show
+    #bindsym $mod+s scratchpad show
 #
 # Resizing containers:
 #
@@ -303,28 +306,31 @@ mode "resize" {
     # right will grow the containers width
     # up will shrink the containers height
     # down will grow the containers height
-    bindsym $left resize shrink width 10px
-    bindsym $down resize grow height 10px
-    bindsym $up resize shrink height 10px
-    bindsym $right resize grow width 10px
 
     # ditto, with arrow keys
-    bindsym $mod+Left resize shrink width 10px
-    bindsym $mod+Down resize grow height 10px
-    bindsym $mod+Up resize shrink height 10px
-    bindsym $mod+Right resize grow width 10px
+    bindsym Left resize shrink width 10px
+    bindsym Up resize grow height 10px
+    bindsym Down resize shrink height 10px
+    bindsym Right resize grow width 10px
 
     # return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
 
+
 #
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
-bar {
-        swaybar_command waybar
+bar {   swaybar_command waybar
+        #swaybar_command swaybar
+        #status_command while ~/.config/swaybar/status.sh; do sleep 1; done
+       # font pango: Ubuntu Medium 10
+      #  colors {
+     #   focused_workspace #006633 #006633 #FFFFFF
+    #}
+    #tray_output none
     }
 
 }
