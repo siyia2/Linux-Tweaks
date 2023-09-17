@@ -125,6 +125,7 @@ for_window [app_id="firefox-esr"] move container to workspace 1: Web/Mail
 for_window [app_id="thunderbird"] move container to workspace 1: Web/Mail
 for_window [app_id="thunderbird"] focus 
 for_window [app_id="firefox"] focus
+for_window [app_id="gsimplecal"] move position 1712 850
 for_window [class="Double Commander"] move container to workspace 2: FM  ; layout tabbed ;
 for_window [class="Double Commander"] focus 
 for_window [class="Double Commander"] focus
