@@ -7,6 +7,17 @@
 	
 }
 
+#custom-kb {
+color: white;
+background-color: rgba(25, 25, 112, 0.95);
+border-top: 2px solid rgba(100, 114, 125, 1.0);
+border-bottom: 2px solid rgba(100, 114, 125, 1.0);
+border-right: 2px solid rgba(100, 114, 125, 1.0);
+font-weight: bold;
+padding-top: 4px;
+
+}
+
 #custom-kernel {
 padding-top: 1px;
 color: green;
