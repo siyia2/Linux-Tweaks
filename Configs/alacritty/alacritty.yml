@@ -58,11 +58,10 @@ cursor:
       
 # Opacity
 window:
- opacity: 0.75
+ opacity: 0.90
  padding:
      x: 10
      y: 5
-     
 # Colors (Kitty)
 colors:
   # Default colors
