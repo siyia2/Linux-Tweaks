@@ -116,7 +116,7 @@ window#waybar {
 background-color: rgba(60, 179, 113, 0.75);
 font-weight: bold;
 color: black;
-    border: 2px solid yellow;
+    border: 2px solid white;
 }
 #workspaces button.urgent {
 animation: blink 1s infinite;
