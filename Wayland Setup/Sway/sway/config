@@ -135,6 +135,7 @@ for_window [app_id="mpv"] move container to workspace 6: P2P
 for_window [app_id="mpv"] focus
 for_window [title="Default - Wine desktop"] move container to workspace 4: Games/Misc
 for_window [title="Default - Wine desktop"] focus
+for_window [shell="xwayland"] move container to workspace 4: Games/Misc
 for_window [title="Worms Armageddon"] move container to workspace 4: Games/Misc ; layout floating ;
 
 ### POWER MANAGEMENT
