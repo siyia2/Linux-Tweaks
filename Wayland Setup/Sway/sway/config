@@ -133,11 +133,9 @@ for_window [app_id="WebCord"] move container to workspace 5: Comms
 for_window [class="Skype"] move container to workspace 5: Comms
 for_window [app_id="mpv"] move container to workspace 6: P2P
 for_window [app_id="mpv"] focus
-#for_window xwayland move container to workspace 4: Games/Misc
 for_window [title="Default - Wine desktop"] move container to workspace 4: Games/Misc
 for_window [title="Default - Wine desktop"] focus
 for_window [title="Worms Armageddon"] move container to workspace 4: Games/Misc ; layout floating ;
-##for_window [app_id="kitty"] move container to workspace 2: FM
 
 ### POWER MANAGEMENT
 
@@ -173,7 +171,7 @@ bindsym --to-code {
  $mod+d exec $menu
  $mod+Shift+c reload
  $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
- $mod+Shift+r mode "resize"
+ $mod+r mode "resize"
 }
 
 bindsym ctrl+alt+delete exec killall htop & alacritty -t htop -e htop
@@ -316,6 +314,7 @@ mode "resize" {
     # return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
 }
 
 
