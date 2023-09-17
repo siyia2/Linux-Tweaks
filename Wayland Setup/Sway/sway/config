@@ -76,7 +76,7 @@ font pango: Ubuntu Medium 10
 set $focused-bg-color    #006633
 set $text-color          #FFFFFF
 set $indicator           #505050
-set $indicator2          #00FF00
+set $indicator2          #0096FF
 
 
 set $unfocused-bg-color  #404040
