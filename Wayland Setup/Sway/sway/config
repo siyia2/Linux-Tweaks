@@ -25,7 +25,7 @@ output "*" bg /home/siyia/Pictures/wp8.jpg fit
 #
 # Example configuration:
 #
-output HDMI-A-1 mode 1920x1080@74.9730Hz subpixel rgb max_render_time 9 adaptive_sync on
+output HDMI-A-1 mode 1920x1080@74.9730Hz subpixel rgb max_render_time 4 adaptive_sync on
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
@@ -105,7 +105,7 @@ exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec mako
 exec_always autotiling
 #exec swaykbdd
-exec transmission-gtk
+exec qbittorrent
 #exec pactl unload-module 6
 exec /home/siyia/.local/bin/xerrors.sh
 #exec pactl set-sink-volume @DEFAULT_SINK@ 100%
@@ -114,29 +114,29 @@ exec gammastep -v -c ~/.config/redshift.conf
 
 #### WINDOW SETUP
 
-for_window [title="Friends List"] move container to workspace 3: Steam
-for_window [class="steam"] move container to workspace 3: Steam
-for_window [app_id="uget"] move container to workspace 5: P2P
-for_window [app_id="org.qbittorrent.qBittorrent"] move container to workspace 6: P2P ; layout tabbed ;
-for_window [app_id="com.transmissionbt.transmission_39_10234301"] move container to workspace 6: P2P ; layout tabbed ;
-for_window [class="Tixati"] move container to workspace 6: P2P ; layout tabbed ;
-for_window [app_id="firefox"] move container to workspace 1: Web/Mail
-for_window [app_id="firefox-esr"] move container to workspace 1: Web/Mail
-for_window [app_id="thunderbird"] move container to workspace 1: Web/Mail
+for_window [title="Friends List"] move container to workspace 3: 
+for_window [class="steam"] move container to workspace 3: 
+for_window [app_id="uget"] move container to workspace 6: 
+for_window [app_id="org.qbittorrent.qBittorrent"] move container to workspace 6:   ; layout tabbed ;
+for_window [app_id="com.transmissionbt.transmission_39_10234301"] move container to workspace 6:   ; layout tabbed ;
+for_window [class="Tixati"] move container to workspace 6:  ; layout tabbed ;
+for_window [app_id="firefox"] move container to workspace 1: 
+for_window [app_id="firefox-esr"] move container to workspace 1: 
+for_window [app_id="thunderbird"] move container to workspace 1: 
 for_window [app_id="thunderbird"] focus 
 for_window [app_id="firefox"] focus
 for_window [app_id="gsimplecal"] move position 1712 850
-for_window [app_id="doublecmd"] move container to workspace 2: FM  ; layout tabbed ;
+for_window [app_id="doublecmd"] move container to workspace 2:   ; layout tabbed ;
 for_window [app_id="doublecmd"] focus
-for_window [class="discord"] move container to workspace 5: Comms
-for_window [app_id="WebCord"] move container to workspace 5: Comms
-for_window [class="Skype"] move container to workspace 5: Comms
-for_window [app_id="mpv"] move container to workspace 6: P2P
+for_window [class="discord"] move container to workspace 5: 
+for_window [app_id="WebCord"] move container to workspace 5: 
+for_window [class="Skype"] move container to workspace 5: 
+for_window [app_id="mpv"] move container to workspace 6: 
 for_window [app_id="mpv"] focus
-for_window [title="Default - Wine desktop"] move container to workspace 4: Games/Misc
+for_window [title="Default - Wine desktop"] move container to workspace 4: 
 for_window [title="Default - Wine desktop"] focus
-for_window [class="steam_app_233860"] move container to workspace 4: Games/Misc
-for_window [title="Worms Armageddon"] move container to workspace 4: Games/Misc ; layout floating ;
+for_window [class="steam_app_233860"] move container to workspace 4: 
+for_window [title="Worms Armageddon"] move container to workspace 4:  ; layout floating ;
 
 ### POWER MANAGEMENT
 
@@ -232,23 +232,23 @@ bindsym button2 kill
 # Workspaces:
 #
     # switch to workspace
-    bindsym $mod+1 workspace 1: Web/Mail
-    bindsym $mod+2 workspace 2: FM
-    bindsym $mod+3 workspace 3: Steam
-    bindsym $mod+4 workspace 4: Games/Misc
-    bindsym $mod+5 workspace 5: Comms
-    bindsym $mod+6 workspace 6: P2P
+    bindsym $mod+1 workspace 1: 
+    bindsym $mod+2 workspace 2: 
+    bindsym $mod+3 workspace 3: 
+    bindsym $mod+4 workspace 4: 
+    bindsym $mod+5 workspace 5: 
+    bindsym $mod+6 workspace 6: 
     bindsym $mod+7 workspace 7
     bindsym $mod+8 workspace 8
     bindsym $mod+9 workspace 9
     bindsym $mod+0 workspace 10
     # move focused container to workspace
-    bindsym $mod+Shift+1 move container to workspace 1: Web/Mail
-    bindsym $mod+Shift+2 move container to workspace 2: FM
-    bindsym $mod+Shift+3 move container to workspace 3: Steam
-    bindsym $mod+Shift+4 move container to workspace 4: Games/Misc
-    bindsym $mod+Shift+5 move container to workspace 5: Comms
-    bindsym $mod+Shift+6 move container to workspace 6: P2P 
+    bindsym $mod+Shift+1 move container to workspace 1: 
+    bindsym $mod+Shift+2 move container to workspace 2: 
+    bindsym $mod+Shift+3 move container to workspace 3: 
+    bindsym $mod+Shift+4 move container to workspace 4: 
+    bindsym $mod+Shift+5 move container to workspace 5: 
+    bindsym $mod+Shift+6 move container to workspace 6: 
     bindsym $mod+Shift+7 move container to workspace 7
     bindsym $mod+Shift+8 move container to workspace 8
     bindsym $mod+Shift+9 move container to workspace 9
