@@ -1,9 +1,9 @@
 * {
     border: none;
     border-radius: 0px;
-    font-family: Ubuntu Medium;
+    font-family: "Ubuntu Medium";
     font-size: 14px;
-    min-height: 16px;
+    min-height: 18px;
 	
 }
 
@@ -14,7 +14,7 @@ border-top: 2px solid rgba(100, 114, 125, 1.0);
 border-bottom: 2px solid rgba(100, 114, 125, 1.0);
 border-right: 2px solid rgba(100, 114, 125, 1.0);
 font-weight: bold;
-padding-top: 4px;
+padding-top: 1px;
 
 }
 
@@ -66,16 +66,19 @@ padding-top: 2px;
 
 #custom-gpufan{
 padding-top: 2px;
+border-right: 2px solid rgba(100, 114, 125, 1.0);
 
 }
 
 #custom-cpufan{
 padding-top: 2px;
+border-right: 2px solid rgba(100, 114, 125, 1.0);
 
 }
 
 #custom-psufan{
 padding-top: 2px;
+border-right: 2px solid rgba(100, 114, 125, 1.0);
 
 }
 
@@ -91,6 +94,7 @@ padding-top: 2px;
 
 #custom-vram{
 padding-top: 2px;
+border-right: 2px solid rgba(100, 114, 125, 1.0);
 
 }
 
@@ -138,8 +142,16 @@ color: red;
     padding: 1px 3px;
     margin: 0px 0px;
 }
+
+#temperature{
+padding-top: 2px;
+background: transparent;
+
+}
+
+
 #temperature.critical{
-padding: 5px 10px;
+padding-top: 2px;
 background: transparent;
     color: red;
 }
@@ -161,12 +173,14 @@ color: lime;
 }
 
 #cpu{
-padding: 1px 5px;
+padding-left: 4px;
+padding-right: 4px;
 padding-top: 2px;
 background: transparent;
     color: white;
 }
 #memory{
+border-left: 2px solid rgba(100, 114, 125, 1.0);
 padding: 1px 5px;
 padding-top: 2px;
 background: transparent;

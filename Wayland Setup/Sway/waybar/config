@@ -34,14 +34,14 @@
 //CPU STUFF
 
 "custom/cpu": {
-  "format": "Cpu:",
+  "format": " Cpu:",
   "on-click": "killall btop & alacritty -t btop -e btop",
 		"tooltip": false
 },
 
 "cpu": {
     "interval": 2,
-    "format": "{usage}% @",
+    "format": "{usage}% ",
 		"tooltip": false,
 "on-click": "killall btop & alacritty -t btop -e btop"
 },
@@ -49,7 +49,7 @@
 "custom/cpufan": {
 	"restart-interval": 2,
         "exec": "/home/siyia/.config/waybar/modules/cpu_fan.sh",
-	"format": " @ {} rpm ||",
+	"format": "  {} rpm ",
 		"tooltip": false,
 "on-click": "killall btop & alacritty -t btop -e btop"
 },
@@ -93,7 +93,7 @@
 "custom/gpusage": {
 	"restart-interval": 2,
         "exec": "/home/siyia/.config/waybar/modules/gpu_usage.sh",
-	"format": " {}% @",
+	"format": " {}% ",
 		"tooltip": false,
 "on-click": "killall btop & alacritty -t btop -e btop"
 },
@@ -101,7 +101,7 @@
 "custom/gpufan": {
 	"restart-interval": 2,
         "exec": "/home/siyia/.config/waybar/modules/gpu_fan.sh",
-	"format": " @ {} rpm",
+	"format": "  {} rpm ",
 		"tooltip": false,
 "on-click": "killall btop & alacritty -t btop -e btop"
 },
@@ -110,7 +110,7 @@
 		"restart-interval": 5,
 		"tooltip": false,
 		"exec": "/home/siyia/.config/waybar/modules/vram.sh",
-		"format": "Vram: {}% || ",
+		"format": "Vram: {}% ",
 		"on-click": "killall btop & alacritty -t btop -e btop"
 },
 
@@ -177,7 +177,7 @@
 "custom/psufan": {
 	"restart-interval": 2,
         "exec": "/home/siyia/.config/waybar/modules/psu_fan.sh",
-	"format": "Psu: {} rpm || ",
+	"format": " Psu: {} rpm ",
 		"tooltip": false,
 "on-click": "killall btop & alacritty -t btop -e btop"
 },
@@ -235,7 +235,7 @@
     "scroll-step": 1,
     "on-scroll-down":"killall gsimplecal",
 	"tooltip-format": "{:%A %d %B %Y, %H:%M}",
-	"tooltip": true,
+	"tooltip": false,
     },
    
   "clock#utc": {
@@ -245,7 +245,7 @@
   	"on-scroll-down":"killall gsimplecal",
   	"on-click": "killall gsimplecal",
   	"tooltip-format": "UTC {:%H:%M}",
-  	"tooltip": true,
+  	"tooltip": false,
         "timezone": "Africa/Accra"
 
     }
