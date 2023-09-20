@@ -6,7 +6,7 @@
     "modules-left": ["hyprland/workspaces"],
     //"modules-left": ["sway/workspaces"],
     "modules-center": ["memory","custom/vram","custom/psufan","custom/cpu","cpu","temperature","custom/cpufan","custom/gpu","custom/gpusage","custom/gputemp","custom/gpufan"],
-    "modules-right": ["custom/kernel","custom/mesa","custom/bt_battery","pulseaudio","network","custom/kb","clock"],
+    "modules-right": ["custom/kernel","custom/mesa","custom/bt_battery","pulseaudio","network","hyprland/language","clock"],
     "sway/window": {
         "max-length": 1920
     },
