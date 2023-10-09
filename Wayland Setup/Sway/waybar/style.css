@@ -7,6 +7,19 @@
 	
 }
 
+#custom-acpi{
+padding-left: 14px ;
+padding-top: 1px;
+background-color: black;
+color: red;
+border-top: 2px solid rgba(100, 114, 125, 1.0);
+border-bottom: 2px solid rgba(100, 114, 125, 1.0);
+border-right: 2px solid rgba(100, 114, 125, 1.0);
+border-left: 2px solid rgba(100, 114, 125, 1.0);
+font-weight: bold;
+
+}
+
 #custom-kb {
 color: white;
 background-color: rgba(25, 25, 112, 0.95);
