@@ -1,0 +1,95 @@
+#!/bin/bash
+#Problems: Couldn't figure out a way to download package with wget with correct version name.
+
+libdomain="https://archlinux.org/packages/extra/x86_64/"
+multilibdomain="https://archlinux.org/packages/multilib/x86_64/"
+#packagelist="lib32-libva-mesa-driver
+#libva-mesa-driver 
+#lib32-mesa 
+#lib32-mesa-vdpau 
+#mesa 
+#mesa-utils 
+#mesa-vdpau 
+#lib32-vulkan-icd-loader 
+#lib32-vulkan-radeon 
+#vulkan-headers 
+#vulkan-icd-loader 
+#vulkan-radeon 
+#vulkan-tools 
+#lib32-mesa-demos 
+#mesa-demos 
+#lib32-opencl-mesa 
+#opencl-mesa 
+#lib32-llvm 
+#lib32-llvm-libs 
+#llvm llvm-libs 
+#spirv-llvm-translator 
+#glew 
+#lib32-glew 
+#lib32-glew1.10 
+#glew1.10lib32-mesa 
+#lib32-mesa-vdpau
+#"
+
+packagelist="lib32-libva-mesa-driver
+libva-mesa-driver
+"
+
+#Excluded Packages:
+
+#lib32-mesa
+#lib32-mesa-vdpau
+#mesa
+#mesa-utils
+#mesa-vdpau
+#lib32-vulkan-icd-loader
+#lib32-vulkan-radeon
+#vulkan-headers
+#vulkan-icd-loader
+#vulkan-radeon
+#vulkan-tools
+#lib32-mesa-demos
+#mesa-demos
+#lib32-opencl-mesa
+#opencl-mesa
+#lib32-llvm
+#lib32-llvm-libs
+#llvm
+#llvm-libs
+#spirv-llvm-translator
+#glew
+#lib32-glew
+#lib32-glew1.10
+#glew1.10lib32-mesa
+#lib32-mesa-vdpau
+
+
+echo "Warning: This script installs unsupported packages from another linux distribution (Arch Linux) there are many things that could go wrong!
+Are you sure you want to continue? [Y/n]"
+
+read REPLY
+if [ "$REPLY" = "Y" ] || [ "$REPLY" = "y" ]; then
+    echo
+else
+    echo "Would you instead like to reinstall manjaro's original mesa pacakges? [Y/n]"
+    read REPLY
+    if [ "$REPLY" = "Y" ] || [ "$REPLY" = "y" ]; then
+        sudo pacman -S --noconfirm $packagelist
+    fi
+    exit
+fi
+
+mkdir /mnt/D/.cache/mesa_update
+cd /mnt/D/.cache/mesa_update
+
+for package in $packagelist;do
+    if echo $package | grep lib32; then
+        wget --show-progress -qO $package.pkg.tar.zst "$multilibdomain$package/download"
+    else
+        wget --show-progress -qO $package.pkg.tar.zst "$libdomain$package/download"
+    fi
+    sudo pacman -U --noconfirm $package.pkg.tar.zst
+done
+
+cd -
+rm -rf /mnt/D/.cache/mesa_update
