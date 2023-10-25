@@ -102,7 +102,8 @@ print_ascii_frame  # Print the ASCII frame
     echo "1. Mount an ISO or multiple ISOs (multiple paths, separate with spaces)"
     echo "2. Unmount an ISO or multiple ISOs (e.g., '1' or '1-2')"
     echo "3. Unmount all ISOs"
-    echo "4. Exit"
+    echo "4. Open /mnt/"
+    echo "5. Exit"
     read -p "Choose an option (1/2/3/4): " choice
 
     case $choice in
@@ -159,13 +160,17 @@ print_ascii_frame  # Print the ASCII frame
             fi
             ;;
         4)
+            nohup xdg-open /mnt/ > /dev/null 2>&1&
+            read -p "Press Enter to return to the main menu..."
+            ;;    
+        5)
             echo "Exiting the program."
             exit 0
             ;;
+        
         *)
-            echo -e "\e[1;31mInvalid choice. Please enter 1, 2, 3, or 4.\e[0m"
+            echo -e "\e[1;31mInvalid choice. Please enter 1, 2, 3,4 or 5.\e[0m"
             ;;
     esac
-done
 done
 
