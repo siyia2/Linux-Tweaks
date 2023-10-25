@@ -28,7 +28,7 @@ unmount_iso() {
     if [[ "$unmount_selection" =~ ^[0-9]+(-[0-9]+)?$ ]]; then
         IFS='-' read -a iso_numbers <<< "$unmount_selection"
         for num in ${iso_numbers[@]}; do
-            if [ $num -ge 1 ] && [ $num -le $iso_count ]; then
+            if [ "$num" -ge 1 ] && [ "$num" -le $iso_count ]; then
                 local mount_point="/mnt/iso_$num"
                 if [ -e "$mount_point" ]; then
                     sudo umount "$mount_point"
@@ -99,7 +99,7 @@ print_ascii_frame() {
 
 print_ascii_frame  # Print the ASCII frame
 
-    echo "1. Mount an ISO or multiple ISOs (multiple paths, separate with spaces)"
+    echo "1. Mount an ISO or multiple ISOs (separate paths with spaces)"
     echo "2. Unmount an ISO or multiple ISOs (e.g., '1' or '1-2')"
     echo "3. Unmount all ISOs"
     echo "4. Open /mnt/"
