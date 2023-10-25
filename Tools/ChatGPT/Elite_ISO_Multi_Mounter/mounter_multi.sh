@@ -90,11 +90,11 @@ while true; do
 
 print_ascii_frame() {
     echo " "
-    echo -e "\e[1;32m┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓"
+    echo -e "\e[1;32m┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓"
     
-    echo -e "             ELITE ISO MULTI MOUNTER             "
+    echo -e "              ELITE ISO MULTI MOUNTER/CONVERTER                       "
     
-    echo -e "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\e[0m"
+    echo -e "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\e[0m"
 }
 
 print_ascii_frame  # Print the ASCII frame
@@ -194,7 +194,7 @@ print_ascii_frame  # Print the ASCII frame
             ;;
         
         *)
-            echo -e "\e[1;31mInvalid choice. Please enter 1, 2, 3,4 or 5.\e[0m"
+            echo -e "\e[1;31mInvalid choice. Please enter 1, 2, 3, 4, 5 or 6.\e[0m"
             ;;
     esac
 done
