@@ -105,7 +105,7 @@ print_ascii_frame  # Print the ASCII frame
     echo "4. Open /mnt/"
     echo "5. Convert to ISO"
     echo "6. Exit"
-    read -p "Choose an option (1/2/3/4): " choice
+    read -p "Choose an option (1/2/3/4/5/6): " choice
 
     case $choice in
         1)
