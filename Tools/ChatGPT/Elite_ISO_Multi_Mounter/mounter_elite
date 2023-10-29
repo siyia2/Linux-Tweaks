@@ -87,7 +87,7 @@ unmount_iso_parallel() {
 			for ((i = start - 1; i < end; i++)); do
 				local selected_folder="${iso_folders[i]}"
 				(
-					sudo umount "$selected_folder"
+					sudo umount -l "$selected_folder"
 					echo "ISO $((i + 1)) unmounted."
 					# Remove the ISO folder after unmounting
 					sudo rmdir -p "$selected_folder"
@@ -110,7 +110,7 @@ unmount_all_isos_parallel() {
 		local mount_point="/mnt/iso_$i"
 		if [ -e "$mount_point" ]; then
 			(
-				sudo umount "$mount_point"
+				sudo umount -l "$mount_point"
 				sudo rmdir "$mount_point"
 			) & # Run the unmounting process in the background
 		fi
@@ -250,7 +250,7 @@ select_and_convert_files_by_number() {
 	# List .img and .bin files that meet specific criteria
 	list_img_and_bin_files "$dir_path"
 
-	if [ -z "${img_bin_files[*]}" ] 2>/dev/null; then
+	if [ -z "${img_bin_files[*]}" ]; then
 		echo -e "\e[1;31mNo .img or .bin files over 50MB were found.\e[0m"
 		return
 	fi
@@ -391,7 +391,7 @@ while true; do
 	3)
 		if [ $iso_count -eq 1 ]; then
 			echo -e "\e[1;33mNo ISOs are mounted, but cleaning mount dirs just in case...\e[0m"
-			sudo umount /mnt/iso_*
+			sudo umount -l /mnt/iso_*
 			sudo rm -r /mnt/iso_*
 		else
 			unmount_all_isos_parallel
