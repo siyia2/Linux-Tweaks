@@ -36,8 +36,56 @@ void print_help() {
             << "  rename /path/to/folder -c reverse\n";
 }
 
-void rename_directory(const fs::path& sub_path, const std::string& case_input, bool verbose) {
-  for (const auto& entry : fs::directory_iterator(sub_path)) {
+void rename_item(const fs::path& item_path, const std::string& case_input, bool is_directory, bool verbose) {
+  std::string name = item_path.filename().string();
+  std::string new_name;
+  new_name.resize(name.size()); // Resize new_name
+
+  std::transform(name.begin(), name.end(), new_name.begin(), [case_input](unsigned char c) {
+    if (case_input == "lower") {
+      return std::tolower(c);
+    } else if (case_input == "upper") {
+      return std::toupper(c);
+    } else if (case_input == "reverse") {
+      return std::islower(c) ? std::toupper(c) : std::tolower(c);
+    } else {
+          return std::tolower(c);
+    }
+  });
+
+  fs::path new_path = item_path.parent_path() / new_name;
+
+  try {
+    fs::rename(item_path, new_path);
+    if (verbose) {
+      std::string item_type = is_directory ? "directory" : "file";
+      print_message("Renamed " + item_type + " " + item_path.string() + " to " + new_path.string());
+    }
+  } catch (const std::filesystem::filesystem_error& e) {
+    print_error("Error: " + std::string(e.what()));
+  }
+}
+
+void rename_directory(const fs::path& directory_path, const std::string& case_input, bool verbose) {
+  std::string dirname = directory_path.filename().string();
+  std::string new_dirname;
+  new_dirname.resize(dirname.size());
+
+  std::transform(dirname.begin(), dirname.end(), new_dirname.begin(), [case_input](unsigned char c) {
+    if (case_input == "lower") {
+      return std::tolower(c);
+    } else if (case_input == "upper") {
+      return std::toupper(c);
+    } else if (case_input == "reverse") {
+      return std::islower(c) ? std::toupper(c) : std::tolower(c);
+    } else {
+      return std::tolower(c);
+    }
+  });
+
+  fs::path new_path = directory_path.parent_path() / new_dirname;
+
+  for (const auto& entry : fs::directory_iterator(directory_path)) {
     if (entry.is_symlink()) {
       if (verbose) {
         print_message("Skipping symlink " + entry.path().string());
@@ -47,87 +95,15 @@ void rename_directory(const fs::path& sub_path, const std::string& case_input, b
 
     if (entry.is_directory()) {
       rename_directory(entry.path(), case_input, verbose);
-
-      std::string dirname = entry.path().filename().string();
-      std::string new_dirname;
-      new_dirname.resize(dirname.size());
-
-      if (case_input == "lower") {
-        std::transform(dirname.begin(), dirname.end(), new_dirname.begin(),
-                       [](unsigned char c) { return std::tolower(c); });
-      } else if (case_input == "upper") {
-        std::transform(dirname.begin(), dirname.end(), new_dirname.begin(),
-                       [](unsigned char c) { return std::toupper(c); });
-      } else if (case_input == "reverse") {
-        std::transform(dirname.begin(), dirname.end(), new_dirname.begin(),
-                       [](unsigned char c) {
-                         return std::islower(c) ? std::toupper(c) : std::tolower(c);
-                       });
-      }
-
-      fs::path new_path = entry.path().parent_path() / new_dirname;
-      try {
-        fs::rename(entry.path(), new_path);
-        if (verbose) {
-          print_message("Renamed directory " + entry.path().string() + " to " + new_path.string());
-        }
-      } catch (const std::filesystem::filesystem_error& e) {
-        print_error("Error: " + std::string(e.what()));
-      }
-
-    } else if (entry.is_regular_file()) {
-      std::string filename = entry.path().filename().string();
-      std::string new_filename;
-      new_filename.resize(filename.size()); // Resize new_filename
-      if (case_input == "lower") {
-        std::transform(filename.begin(), filename.end(), new_filename.begin(),
-                       [](unsigned char c) { return std::tolower(c); });
-      } else if (case_input == "upper") {
-        std::transform(filename.begin(), filename.end(), new_filename.begin(),
-                       [](unsigned char c) { return std::toupper(c); });
-      } else if (case_input == "reverse") {
-        std::transform(filename.begin(), filename.end(), new_filename.begin(),
-                       [](unsigned char c) {
-                         return std::islower(c) ? std::toupper(c) : std::tolower(c);
-                       });
-      }
-
-      fs::path new_path = entry.path().parent_path() / new_filename;
-      try {
-        fs::rename(entry.path(), new_path);
-        if (verbose) {
-          print_message("Renamed file " + entry.path().string() + " to " + new_path.string());
-        }
-      } catch (const std::filesystem::filesystem_error& e) {
-        print_error("Error: " + std::string(e.what()));
-      }
+    } else {
+      rename_item(entry.path(), case_input, false, verbose);
     }
   }
-}
 
-void rename_file(const fs::path& entry_path, const std::string& case_input, bool verbose) {
-  std::string filename = entry_path.filename().string();
-  std::string new_filename;
-  new_filename.resize(filename.size()); // Resize new_filename
-
-  if (case_input == "lower") {
-    std::transform(filename.begin(), filename.end(), new_filename.begin(),
-                   [](unsigned char c) { return std::tolower(c); });
-  } else if (case_input == "upper") {
-    std::transform(filename.begin(), filename.end(), new_filename.begin(),
-                   [](unsigned char c) { return std::toupper(c); });
-  } else if (case_input == "reverse") {
-    std::transform(filename.begin(), filename.end(), new_filename.begin(),
-                   [](unsigned char c) {
-                     return std::islower(c) ? std::toupper(c) : std::tolower(c);
-                   });
-  }
-
-  fs::path new_path = entry_path.parent_path() / new_filename;
   try {
-    fs::rename(entry_path, new_path);
+    fs::rename(directory_path, new_path);
     if (verbose) {
-      print_message("Renamed file " + entry_path.string() + " to " + new_path.string());
+      print_message("Renamed directory " + directory_path.string() + " to " + new_path.string());
     }
   } catch (const std::filesystem::filesystem_error& e) {
     print_error("Error: " + std::string(e.what()));
@@ -148,7 +124,7 @@ void rename_path(const fs::path& path, const std::string& case_input, bool verbo
     if (entry.is_directory()) {
       threads.emplace_back(rename_directory, entry.path(), case_input, verbose);
     } else if (entry.is_regular_file()) {
-      threads.emplace_back(rename_file, entry.path(), case_input, verbose);
+      threads.emplace_back(rename_item, entry.path(), case_input, false, verbose);
     }
   }
 
