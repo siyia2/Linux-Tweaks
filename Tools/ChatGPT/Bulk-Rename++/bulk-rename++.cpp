@@ -11,6 +11,12 @@
 namespace fs = std::filesystem;
 
 std::mutex cout_mutex;  // Mutex to protect std::cout
+std::mutex input_mutex;   // Mutex to protect input operations
+
+char* safe_readline(const char* prompt) {
+    std::lock_guard<std::mutex> lock(input_mutex);
+    return readline(prompt);
+}
 
 void print_message(const std::string& message) {
   std::lock_guard<std::mutex> lock(cout_mutex);
@@ -152,7 +158,7 @@ int main(int argc, char *argv[]) {
     const char* path_completion = rl_basic_word_break_characters;
     while (true) {
       // Read line with readline()
-      char *line = readline("Enter path to rename (type 'exit' to quit): ");
+      char *line = safe_readline("Enter path to rename (type 'exit' to quit): ");
 
       // Check for exit command
       if (line != nullptr && std::string(line) == "exit") {
