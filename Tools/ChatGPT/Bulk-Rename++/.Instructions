@@ -1,6 +1,6 @@
 C++ program, that renames all files under specified path, either to upper, lower or reverse case, 
 it also includes -h help option and filepath autocompletion.
 
-Compile with: g++ bulk_rename++.cpp -o bulk_rename++ -lreadline
+Compile with: g++ -O2 bulk_rename++.cpp -o bulk_rename++ -lreadline
 
 
