@@ -181,7 +181,7 @@ void rename_path(const std::vector<std::string>& paths, const std::string& case_
 
     std::chrono::duration<double> elapsed_seconds = end_time - start_time; // Calculate elapsed time
 
-    std::cout << "\n\033[1mRenamed \033[1;92m" << files_count << " file(s) \033[0m\033[1mand \033[1;94m" 
+    std::cout << "\n\033[1mRenamed to "<< case_input <<" case: \033[1;92m" << files_count << " file(s) \033[0m\033[1mand \033[1;94m" 
               << dirs_count << " dir(s) \033[0m\033[1mfrom \033[1;95m" << paths.size() 
               << " input path(s) \033[0m\033[1min " << std::setprecision(1) 
               << std::fixed << elapsed_seconds.count() << "\033[1m second(s)\n";
@@ -293,8 +293,6 @@ int main(int argc, char *argv[]) {
         return 0;
     }
     
-    std::cout << "\n";
-
     // Process each path based on the chosen case conversion mode
     rename_path(paths, case_input, rename_parents, verbose_enabled);
     
