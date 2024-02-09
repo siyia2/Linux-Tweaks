@@ -132,7 +132,7 @@ void rename_path(const std::vector<std::string>& paths, const std::string& case_
 
     unsigned int max_threads = std::thread::hardware_concurrency();
     if (max_threads == 0) {
-        max_threads = 1; // If hardware concurrency is not available, default to 1 thread
+        max_threads = 2; // If hardware concurrency is not available, default to 1 thread
     }
 
     auto start_time = std::chrono::steady_clock::now(); // Start time measurement
@@ -177,7 +177,10 @@ void rename_path(const std::vector<std::string>& paths, const std::string& case_
 
     std::chrono::duration<double> elapsed_seconds = end_time - start_time; // Calculate elapsed time
 
-    std::cout << "\n\033[1mRenamed \033[1;92m" << files_count << " file(s) \033[0m\033[1mand \033[1;94m" << dirs_count << " dir(s) \033[0m\033[1mfrom \033[1;95m" << paths.size() << " input path(s) \033[0m\033[1min " << elapsed_seconds.count() << "\033[1m second(s)\n"; // Print summary
+    std::cout << "\n\033[1mRenamed \033[1;92m" << files_count << " file(s) \033[0m\033[1mand \033[1;94m" 
+              << dirs_count << " dir(s) \033[0m\033[1mfrom \033[1;95m" << paths.size() 
+              << " input path(s) \033[0m\033[1min " << std::setprecision(1) 
+              << std::fixed << elapsed_seconds.count() << "\033[1m second(s)\n";
 }
 
 int main(int argc, char *argv[]) {
