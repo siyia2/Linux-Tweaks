@@ -9,6 +9,7 @@
 #include <readline/history.h>
 
 namespace fs = std::filesystem;
+bool verbose;
 
 std::mutex cout_mutex;  // Mutex to protect std::cout
 std::mutex input_mutex;   // Mutex to protect input operations
@@ -119,6 +120,11 @@ void rename_directory(const fs::path& directory_path, const std::string& case_in
 void rename_path(const fs::path& path, const std::string& case_input, bool verbose=true) {
   std::vector<std::thread> threads;
 
+  unsigned int max_threads = std::thread::hardware_concurrency();
+  if (max_threads == 0) {
+    max_threads = 1; // If hardware concurrency is not available, default to 1 thread
+  }
+
   for (const auto& entry : fs::directory_iterator(path)) {
     if (entry.is_symlink()) {
       if (verbose) {
@@ -128,9 +134,17 @@ void rename_path(const fs::path& path, const std::string& case_input, bool verbo
     }
 
     if (entry.is_directory()) {
-      threads.emplace_back(rename_directory, entry.path(), case_input, verbose);
+      if (threads.size() < max_threads) {
+        threads.emplace_back(rename_directory, entry.path(), case_input, verbose);
+      } else {
+        rename_directory(entry.path(), case_input, verbose);
+      }
     } else if (entry.is_regular_file()) {
-      threads.emplace_back(rename_item, entry.path(), case_input, false, verbose);
+      if (threads.size() < max_threads) {
+        threads.emplace_back(rename_item, entry.path(), case_input, false, verbose);
+      } else {
+        rename_item(entry.path(), case_input, false, verbose);
+      }
     }
   }
 
@@ -141,98 +155,82 @@ void rename_path(const fs::path& path, const std::string& case_input, bool verbo
 }
 
 int main(int argc, char *argv[]) {
-  std::string path_input;
-  std::string case_input;
+    std::vector<std::string> paths; // Vector to store paths
+    std::string case_input;
 
-  // Check if the user requested help
-  if (argc == 2 && (std::string(argv[1]) == "-h" || std::string(argv[1]) == "--help")) {
-    // Print help message and exit
-    print_help();
-    return 0;
-  } else if (argc == 2) {
-    // If only one command-line argument is provided, use it as the path
-    path_input = argv[1];
-  } else {
-    // Enable tab completion for path input
-    rl_bind_key('\t', rl_complete);
-
-    const char* path_completion = rl_basic_word_break_characters;
-    while (true) {
-      // Read line with readline()
-      char *line = safe_readline("Enter path to rename (type 'exit' to quit): ");
-
-      // Check for exit command
-      if (line != nullptr && std::string(line) == "exit") {
-        free(line);
-        print_error("Exiting path input.");
-        return 1; // You can choose a different return code if needed
-      }
-
-      // Add line to history
-      if (line && *line) {
-        add_history(line);
-      }
-
-      // Copy line to path_input and free line
-      path_input = line;
-      free(line);
-
-      // Use tab completion if available
-      if (path_completion) {
-        // Attempt tab completion
-        char *completion = rl_filename_completion_function(path_input.c_str(), path_completion[0]);
-
-        if (completion != NULL) {
-          if (completion) {
-            // Print completion and add it to path_input
-            std::cout << completion;
-            path_input = completion;
-            free(completion);
-          }
+    // Check if the user requested help
+    if (argc == 2 && (std::string(argv[1]) == "-h" || std::string(argv[1]) == "--help")) {
+        // Print help message and exit
+        print_help();
+        return 0;
+    } else if (argc > 1) {
+        // Collect paths from command line arguments
+        for (int i = 1; i < argc; ++i) {
+            paths.emplace_back(argv[i]);
         }
-      }
-
-      // Check if path exists
-      if (!fs::exists(path_input)) {
-        print_error("Error: path does not exist");
-      } else {
-        break;
-      }
-    }
-  }
-
-  print_message("!!! WARNING OPERATION IRREVERSIBLE !!!");
-
-  // Prompt for case conversion mode
-  while (true) {
-    std::cout << "Enter case (lower/upper/reverse/exit): ";
-    std::getline(std::cin, case_input);
-
-    std::transform(case_input.begin(), case_input.end(), case_input.begin(),
-                   [](unsigned char c) { return std::tolower(c); });
-
-    if (case_input == "lower" || case_input == "upper" || case_input == "reverse" || case_input == "exit") {
-      break;
     } else {
-      print_error("Error: invalid choice");
+        // If no command-line arguments are provided, prompt the user for paths
+        while (true) {
+            char *line = safe_readline("Enter path to rename (type 'exit' to quit): ");
+
+            // Check for exit command
+            if (line != nullptr && std::string(line) == "exit") {
+                free(line);
+                print_error("Exiting path input.");
+                return 1;
+            }
+
+            // Add line to history
+            if (line && *line) {
+                add_history(line);
+            }
+
+            // Copy line to path_input and free line
+            std::string path_input = line;
+            free(line);
+
+            // Check if path exists
+            if (!fs::exists(path_input)) {
+                print_error("Error: path does not exist");
+            } else {
+                paths.emplace_back(path_input);
+            }
+        }
     }
-  }
 
-  // Process the path based on the chosen case conversion mode
-  if (case_input == "lower" || case_input == "upper" || case_input == "reverse") {
-    fs::path path(path_input);
+    print_message("!!! WARNING OPERATION IRREVERSIBLE !!!");
 
-    // Check if the path is a directory
-    if (fs::is_directory(path)) {
-      rename_path(path, case_input);
-    } else if (fs::is_regular_file(path)) { // If the path is a regular file
-      rename_item(path, case_input, false, true); // Rename the file directly
-    } else {
-      print_error("Error: specified path is neither a directory nor a regular file");
-      return 1;
+    // Prompt for case conversion mode
+    while (true) {
+        std::cout << "Enter case (lower/upper/reverse/exit): ";
+        std::getline(std::cin, case_input);
+
+        std::transform(case_input.begin(), case_input.end(), case_input.begin(),
+                       [](unsigned char c) { return std::tolower(c); });
+
+        if (case_input == "lower" || case_input == "upper" || case_input == "reverse" || case_input == "exit") {
+            break;
+        } else {
+            print_error("Error: invalid choice");
+        }
     }
-  }
 
-  return 0;
+    // Process each path based on the chosen case conversion mode
+    for (const auto& path : paths) {
+        fs::path current_path(path);
+
+        if (fs::exists(current_path)) {
+            if (fs::is_directory(current_path)) {
+                rename_path(current_path, case_input, true);
+            } else if (fs::is_regular_file(current_path)) {
+                rename_item(current_path, case_input, false, true);
+            } else {
+                print_error("Error: specified path is neither a directory nor a regular file");
+            }
+        } else {
+            print_error("Error: path does not exist - " + path);
+        }
+    }
+
+    return 0;
 }
-
