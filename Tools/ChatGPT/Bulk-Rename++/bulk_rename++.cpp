@@ -38,9 +38,10 @@ void print_help() {
               << "Options:\n"
               << "  -h, --help           Print this message and exit\n"
               << "  -c, --case [MODE]    Set the case conversion mode (lower/upper/reverse)\n"
+              << "  -p                   Rename parent directories too (when input paths)\n"
               << "\n"
               << "Examples:\n"
-              << "  rename /path/to/folder1 /path/to/folder2 -c lower\n"
+              << "  rename /path/to/folder1 /path/to/folder2 -p -c lower\n"
               << "  rename /path/to/folder -c upper\n";
 }
 
@@ -74,7 +75,8 @@ void rename_item(const fs::path& item_path, const std::string& case_input, bool 
     }
 }
 
-void rename_directory(const fs::path& directory_path, const std::string& case_input, bool rename_parents, bool verbose) {
+void rename_directory(const fs::path& directory_path, const std::string& case_input, bool rename_immediate_parent, bool verbose) {
+    fs::path new_path = directory_path;
     std::string dirname = directory_path.filename().string();
     std::string new_dirname;
     new_dirname.resize(dirname.size());
@@ -91,22 +93,8 @@ void rename_directory(const fs::path& directory_path, const std::string& case_in
         }
     });
 
-    fs::path new_path = directory_path.parent_path() / new_dirname;
-
-    for (const auto& entry : fs::directory_iterator(directory_path)) {
-        if (entry.is_symlink()) {
-            if (verbose) {
-                print_message("Skipping symlink " + entry.path().string());
-            }
-            continue;
-        }
-
-        if (entry.is_directory()) {
-            rename_directory(entry.path(), case_input, rename_parents, verbose);
-        } else {
-            rename_item(entry.path(), case_input, false, verbose);
-        }
-    }
+    new_path.remove_filename(); // Remove the last component (file name) from the path
+    new_path /= new_dirname; // Append the new directory name
 
     try {
         fs::rename(directory_path, new_path);
@@ -117,13 +105,22 @@ void rename_directory(const fs::path& directory_path, const std::string& case_in
         print_error("Error: " + std::string(e.what()));
     }
 
-    if (rename_parents && directory_path.parent_path() != directory_path.root_path()) {
-        rename_directory(directory_path.parent_path(), case_input, rename_parents, verbose);
+    // Recursively rename all contents within the directory
+    for (const auto& entry : fs::directory_iterator(new_path)) {
+        if (entry.is_directory()) {
+            rename_directory(entry.path(), case_input, rename_immediate_parent, verbose);
+        } else {
+            rename_item(entry.path(), case_input, false, verbose);
+        }
+    }
+
+    if (rename_immediate_parent) {
+        // If rename_immediate_parent is true, do not recursively rename
+        return;
     }
 }
 
-void rename_path(const std::vector<std::string>& paths, const std::string& case_input, bool rename_parents, bool verbose = true) {
-
+void rename_path(const std::vector<std::string>& paths, const std::string& case_input, bool rename_immediate_parent, bool verbose = true) {
     std::vector<std::thread> threads;
 
     unsigned int max_threads = std::thread::hardware_concurrency();
@@ -136,10 +133,17 @@ void rename_path(const std::vector<std::string>& paths, const std::string& case_
 
         if (fs::exists(current_path)) {
             if (fs::is_directory(current_path)) {
-                if (threads.size() < max_threads) {
-                    threads.emplace_back(rename_directory, current_path, case_input, rename_parents, verbose);
+                if (rename_immediate_parent) {
+                    // If -p option is used, only rename the immediate parent
+                    fs::path immediate_parent_path = current_path.parent_path();
+                    rename_directory(immediate_parent_path, case_input, rename_immediate_parent, verbose);
                 } else {
-                    rename_directory(current_path, case_input, rename_parents, verbose);
+                    // Otherwise, rename the entire path
+                    if (threads.size() < max_threads) {
+                        threads.emplace_back(rename_directory, current_path, case_input, rename_immediate_parent, verbose);
+                    } else {
+                        rename_directory(current_path, case_input, rename_immediate_parent, verbose);
+                    }
                 }
             } else if (fs::is_regular_file(current_path)) {
                 if (threads.size() < max_threads) {
@@ -181,7 +185,8 @@ int main(int argc, char *argv[]) {
                         print_error("Error: Missing argument for option -c");
                         return 1;
                     }
-                
+                } else if (option == "-p") {
+                    rename_parents = true;
                 } else {
                     print_error("Error: Unknown option " + option);
                     print_help();
