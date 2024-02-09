@@ -238,15 +238,22 @@ int main(int argc, char *argv[]) {
         print_error("Error: Case conversion mode not specified.");
         return 1;
     }
-
+	system("clear");
     print_message("\n\033[1;93m!!! WARNING OPERATION IRREVERSIBLE !!!\033[0m\n");
 
     // Confirm renaming for all paths
     std::string confirmation;
-    std::cout << "\033[1mThe following paths are about to be renamed:\n\n";
+if (rename_parents == true) {
+    std::cout << "\033[1mThe following path(s) including their parent dir(s) are about to be renamed recursively to \033[1;92m"<< case_input <<" case\033[0m:\033[1m\n\n";
     for (const auto& path : paths) {
         std::cout << path << std::endl;
     }
+} else {
+    std::cout << "\033[1mThe following path(s) are about to be renamed recursively to \033[1;92m"<< case_input <<" case\033[0m:\033[1m\n\n";
+    for (const auto& path : paths) {
+        std::cout << path << std::endl;
+    }
+}
     std::cout << "\nDo you want to proceed with renaming all these paths? (y/n): ";
     std::getline(std::cin, confirmation);
 
