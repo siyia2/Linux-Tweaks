@@ -37,8 +37,8 @@ void print_help() {
               << "\n"
               << "Options:\n"
               << "  -h, --help           Print this message and exit\n"
-              << "  -c, --case [MODE]    Set the case conversion mode (lower/upper/reverse)\n"
-              << "  -cp                   Rename parent directories too (when input paths)\n"
+              << "  -c  [MODE]           Set the case conversion mode (lower/upper/reverse)\n"
+              << "  -cp [MODE]           Rename parent directories too (when input is not file)(lower/upper/reverse)\n"
               << "\n"
               << "Examples:\n"
               << "  rename /path/to/folder1 /path/to/folder2 -c lower\n"
@@ -186,7 +186,7 @@ int main(int argc, char *argv[]) {
                     print_error("Error: Missing argument for option -c");
                     return 1;
                 }
-            } else if (option == "-c" || option == "--case") {
+            } else if (option == "-c") {
                 if (i + 1 < argc) {
                     case_input = argv[++i]; // Get the case conversion mode
                 } else {
@@ -239,19 +239,19 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    print_message("!!! WARNING OPERATION IRREVERSIBLE !!!");
+    print_message("\n\033[1;93m!!! WARNING OPERATION IRREVERSIBLE !!!\033[0m\n");
 
     // Confirm renaming for all paths
     std::string confirmation;
-    std::cout << "The following paths are about to be renamed:\n";
+    std::cout << "\033[1mThe following paths are about to be renamed:\n\n";
     for (const auto& path : paths) {
         std::cout << path << std::endl;
     }
-    std::cout << "Do you want to proceed with renaming all these paths? (y/n): ";
+    std::cout << "\nDo you want to proceed with renaming all these paths? (y/n): ";
     std::getline(std::cin, confirmation);
 
     if (confirmation != "y") {
-        std::cout << "Operation aborted by user.\n";
+        std::cout << "\n\033[1;91mOperation aborted by user.\n\033[0m\n";
         return 0;
     }
 
