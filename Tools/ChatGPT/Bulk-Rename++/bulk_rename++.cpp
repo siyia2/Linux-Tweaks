@@ -123,20 +123,6 @@ void rename_directory(const fs::path& directory_path, const std::string& case_in
 }
 
 void rename_path(const std::vector<std::string>& paths, const std::string& case_input, bool rename_parents, bool verbose = true) {
-    // Print inputted paths
-    std::cout << "The following paths are about to be renamed:\n";
-    for (const auto& path : paths) {
-        std::cout << path << std::endl;
-    }
-
-    std::string confirmation;
-    std::cout << "Do you want to proceed with renaming all these paths? (yes/no): ";
-    std::getline(std::cin, confirmation);
-
-    if (confirmation != "yes") {
-        std::cout << "Operation aborted by user.\n";
-        return;
-    }
 
     std::vector<std::thread> threads;
 
@@ -250,10 +236,10 @@ int main(int argc, char *argv[]) {
     for (const auto& path : paths) {
         std::cout << path << std::endl;
     }
-    std::cout << "Do you want to proceed with renaming all these paths? (yes/no): ";
+    std::cout << "Do you want to proceed with renaming all these paths? (y/n): ";
     std::getline(std::cin, confirmation);
 
-    if (confirmation != "yes") {
+    if (confirmation != "y") {
         std::cout << "Operation aborted by user.\n";
         return 0;
     }
