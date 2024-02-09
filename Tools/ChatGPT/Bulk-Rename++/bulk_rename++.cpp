@@ -68,10 +68,10 @@ void rename_item(const fs::path& item_path, const std::string& case_input, bool 
         fs::rename(item_path, new_path);
         if (verbose) {
             std::string item_type = is_directory ? "directory" : "file";
-            print_message("Renamed " + item_type + " " + item_path.string() + " to " + new_path.string());
+            print_message("\033[92mRenamed\033[0m " + item_type + " " + item_path.string() + " to " + new_path.string());
         }
     } catch (const std::filesystem::filesystem_error& e) {
-        print_error("Error: " + std::string(e.what()));
+        print_error("\033[91mError\033[0m: " + std::string(e.what()));
     }
 }
 
@@ -99,7 +99,7 @@ void rename_directory(const fs::path& directory_path, const std::string& case_in
     try {
         fs::rename(directory_path, new_path);
         if (verbose) {
-            print_message("Renamed directory " + directory_path.string() + " to " + new_path.string());
+            print_message("\033[94mRenamed\033[0m directory " + directory_path.string() + " to " + new_path.string());
         }
     } catch (const std::filesystem::filesystem_error& e) {
         print_error("Error: " + std::string(e.what()));
@@ -146,11 +146,8 @@ void rename_path(const std::vector<std::string>& paths, const std::string& case_
                     }
                 }
             } else if (fs::is_regular_file(current_path)) {
-                if (threads.size() < max_threads) {
-                    threads.emplace_back(rename_item, current_path, case_input, false, verbose);
-                } else {
-                    rename_item(current_path, case_input, false, verbose);
-                }
+                // For files, directly rename the item without considering the parent directory
+                rename_item(current_path, case_input, false, verbose);
             } else {
                 print_error("Error: specified path is neither a directory nor a regular file");
             }
@@ -172,39 +169,49 @@ int main(int argc, char *argv[]) {
 
     // Check if the user requested help
     if (argc >= 2) {
-    for (int i = 1; i < argc; ++i) {
-        if (argv[i][0] == '-') { // Check if it's an option
-            std::string option(argv[i]);
-            if (option == "-h" || option == "--help") {
-                print_help();
-                return 0;
-            } else if (option == "-cp") {
-                rename_parents = true;
-                if (i + 1 < argc) {
-                    case_input = argv[++i]; // Get the case conversion mode
+        for (int i = 1; i < argc; ++i) {
+            if (argv[i][0] == '-') { // Check if it's an option
+                std::string option(argv[i]);
+                if (option == "-h" || option == "--help") {
+                    print_help();
+                    return 0;
+                } else if (option == "-cp") {
+                    rename_parents = true;
+                    if (i + 1 < argc) {
+                        case_input = argv[++i]; // Get the case conversion mode
+                        // Check if the case mode is valid
+                        if (case_input != "lower" && case_input != "upper" && case_input != "reverse") {
+                            print_error("Error: Unspecified case mode. Please specify 'lower', 'upper', or 'reverse'.");
+                            return 1;
+                        }
+                    } else {
+                        print_error("Error: Missing argument for option -cp");
+                        return 1;
+                    }
+                } else if (option == "-c") {
+                    if (i + 1 < argc) {
+                        case_input = argv[++i]; // Get the case conversion mode
+                        // Check if the case mode is valid
+                        if (case_input != "lower" && case_input != "upper" && case_input != "reverse") {
+                            print_error("Error: Unspecified case mode. Please specify 'lower', 'upper', or 'reverse'.");
+                            return 1;
+                        }
+                    } else {
+                        print_error("Error: Missing argument for option -c");
+                        return 1;
+                    }
                 } else {
-                    print_error("Error: Missing argument for option -c");
+                    print_error("Error: Unknown option " + option);
+                    print_help();
                     return 1;
                 }
-            } else if (option == "-c") {
-                if (i + 1 < argc) {
-                    case_input = argv[++i]; // Get the case conversion mode
-                } else {
-                    print_error("Error: Missing argument for option -c");
-                    return 1;
-                }
-            } else {
-                print_error("Error: Unknown option " + option);
-                print_help();
-                return 1;
+            } else { // If it's not an option, it's a path
+                paths.emplace_back(argv[i]);
             }
-        } else { // If it's not an option, it's a path
-            paths.emplace_back(argv[i]);
         }
     }
-}
 
-    // If no paths provided, prompt the user for paths
+    // If no paths provided, prompt the user for input
     if (paths.empty()) {
         while (true) {
             char *line = safe_readline("Enter path to rename (type 'exit' to quit): ");
@@ -238,22 +245,24 @@ int main(int argc, char *argv[]) {
         print_error("Error: Case conversion mode not specified.");
         return 1;
     }
-	system("clear");
+
+    // Clear the screen and display warning
+    system("clear");
     print_message("\n\033[1;93m!!! WARNING OPERATION IRREVERSIBLE !!!\033[0m\n");
 
     // Confirm renaming for all paths
     std::string confirmation;
-if (rename_parents == true) {
-    std::cout << "\033[1mThe following path(s) including their parent dir(s) are about to be renamed recursively to \033[1;92m"<< case_input <<" case\033[0m:\033[1m\n\n";
-    for (const auto& path : paths) {
-        std::cout << path << std::endl;
+    if (rename_parents == true) {
+        std::cout << "\033[1mThe following path(s) including their parent dir(s) are about to be renamed recursively to \033[1;92m"<< case_input <<" case\033[0m:\033[1m\n\n";
+        for (const auto& path : paths) {
+            std::cout << path << std::endl;
+        }
+    } else {
+        std::cout << "\033[1mThe following path(s) are about to be renamed recursively to \033[1;92m"<< case_input <<" case\033[0m:\033[1m\n\n";
+        for (const auto& path : paths) {
+            std::cout << path << std::endl;
+        }
     }
-} else {
-    std::cout << "\033[1mThe following path(s) are about to be renamed recursively to \033[1;92m"<< case_input <<" case\033[0m:\033[1m\n\n";
-    for (const auto& path : paths) {
-        std::cout << path << std::endl;
-    }
-}
     std::cout << "\nDo you want to proceed with renaming all these paths? (y/n): ";
     std::getline(std::cin, confirmation);
 
@@ -261,9 +270,13 @@ if (rename_parents == true) {
         std::cout << "\n\033[1;91mOperation aborted by user.\n\033[0m\n";
         return 0;
     }
+    
+    std::cout << "\n";
 
     // Process each path based on the chosen case conversion mode
     rename_path(paths, case_input, rename_parents, true);
+    
+    std::cout << "\n";
 
     return 0;
 }
