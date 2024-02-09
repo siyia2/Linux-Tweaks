@@ -12,7 +12,7 @@
 
 namespace fs = std::filesystem;
 
-bool verbose;
+bool verbose_enabled = false; // Verbose mode disabled by default
 
 std::mutex cout_mutex;  // Mutex to protect std::cout
 std::mutex input_mutex;   // Mutex to protect input operations
@@ -23,8 +23,10 @@ char* safe_readline(const char* prompt) {
 }
 
 void print_message(const std::string& message) {
-    std::lock_guard<std::mutex> lock(cout_mutex);
-    std::cout << message << std::endl;
+    if (verbose_enabled) {
+        std::lock_guard<std::mutex> lock(cout_mutex);
+        std::cout << message << std::endl;
+    }
 }
 
 void print_error(const std::string& error) {
@@ -39,11 +41,13 @@ void print_help() {
               << "Options:\n"
               << "  -h, --help           Print this message and exit\n"
               << "  -c  [MODE]           Set the case conversion mode (lower/upper/reverse)\n"
-              << "  -cp [MODE]           Rename parent directories too (when input is not file)(lower/upper/reverse)\n"
+              << "  -cp [MODE]           Rename parent directories too (works only if input is not file)(lower/upper/reverse)\n"
+              << "  -v, --verbose        Enable verbose mode\n"
               << "\n"
               << "Examples:\n"
-              << "  rename /path/to/folder1 /path/to/folder2 -c lower\n"
-              << "  rename /path/to/folder -cp upper\n";
+              << "  bulk_rename++ /path/to/folder1 /path/to/folder2 -c lower\n"
+              << "  bulk_rename++ /path/to/folder -v -cp upper\n"
+              << "  bulk_rename++ /path/to/folder -cp upper\n";
 }
 
 void rename_item(const fs::path& item_path, const std::string& case_input, bool is_directory, bool verbose, int& files_count, int& dirs_count) {
@@ -191,43 +195,40 @@ int main(int argc, char *argv[]) {
     // Check if the user requested help
     if (argc >= 2) {
         for (int i = 1; i < argc; ++i) {
-            if (argv[i][0] == '-') { // Check if it's an option
-                std::string option(argv[i]);
-                if (option == "-h" || option == "--help") {
-                    print_help();
-                    return 0;
-                } else if (option == "-cp") {
-                    rename_parents = true;
-                    if (i + 1 < argc) {
-                        case_input = argv[++i]; // Get the case conversion mode
-                        // Check if the case mode is valid
-                        if (case_input != "lower" && case_input != "upper" && case_input != "reverse") {
-                            print_error("Error: Unspecified case mode. Please specify 'lower', 'upper', or 'reverse'.");
-                            return 1;
-                        }
-                    } else {
-                        print_error("Error: Missing argument for option -cp");
-                        return 1;
-                    }
-                } else if (option == "-c") {
-                    if (i + 1 < argc) {
-                        case_input = argv[++i]; // Get the case conversion mode
-                        // Check if the case mode is valid
-                        if (case_input != "lower" && case_input != "upper" && case_input != "reverse") {
-                            print_error("Error: Unspecified case mode. Please specify 'lower', 'upper', or 'reverse'.");
-                            return 1;
-                        }
-                    } else {
-                        print_error("Error: Missing argument for option -c");
+            std::string arg(argv[i]);
+            if (arg == "-v" || arg== "--verbose") {
+                verbose_enabled = true;
+            } else if (arg == "-h" || arg == "--help") {
+                print_help();
+                return 0;
+                
+            } else if (arg == "-cp") {
+                rename_parents = true;
+                if (i + 1 < argc) {
+                    case_input = argv[++i]; // Get the case conversion mode
+                    // Check if the case mode is valid
+                    if (case_input != "lower" && case_input != "upper" && case_input != "reverse") {
+                        print_error("Error: Unspecified case mode. Please specify 'lower', 'upper', or 'reverse'.");
                         return 1;
                     }
                 } else {
-                    print_error("Error: Unknown option " + option);
-                    print_help();
+                    print_error("Error: Missing argument for option -cp");
                     return 1;
                 }
-            } else { // If it's not an option, it's a path
-                paths.emplace_back(argv[i]);
+            } else if (arg == "-c") {
+                if (i + 1 < argc) {
+                    case_input = argv[++i]; // Get the case conversion mode
+                    // Check if the case mode is valid
+                    if (case_input != "lower" && case_input != "upper" && case_input != "reverse") {
+                        print_error("Error: Unspecified case mode. Please specify 'lower', 'upper', or 'reverse'.");
+                        return 1;
+                    }
+                } else {
+                    print_error("Error: Missing argument for option -c");
+                    return 1;
+                }
+            } else {
+                paths.emplace_back(arg);
             }
         }
     }
@@ -295,7 +296,7 @@ int main(int argc, char *argv[]) {
     std::cout << "\n";
 
     // Process each path based on the chosen case conversion mode
-    rename_path(paths, case_input, rename_parents, true);
+    rename_path(paths, case_input, rename_parents, verbose_enabled);
     
     std::cout << "\n";
 
