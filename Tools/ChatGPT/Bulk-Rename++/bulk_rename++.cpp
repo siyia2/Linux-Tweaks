@@ -38,11 +38,11 @@ void print_help() {
               << "Options:\n"
               << "  -h, --help           Print this message and exit\n"
               << "  -c, --case [MODE]    Set the case conversion mode (lower/upper/reverse)\n"
-              << "  -p                   Rename parent directories too (when input paths)\n"
+              << "  -cp                   Rename parent directories too (when input paths)\n"
               << "\n"
               << "Examples:\n"
-              << "  rename /path/to/folder1 /path/to/folder2 -p -c lower\n"
-              << "  rename /path/to/folder -c upper\n";
+              << "  rename /path/to/folder1 /path/to/folder2 -c lower\n"
+              << "  rename /path/to/folder -cp upper\n";
 }
 
 void rename_item(const fs::path& item_path, const std::string& case_input, bool is_directory, bool verbose) {
@@ -172,31 +172,37 @@ int main(int argc, char *argv[]) {
 
     // Check if the user requested help
     if (argc >= 2) {
-        for (int i = 1; i < argc; ++i) {
-            if (argv[i][0] == '-') { // Check if it's an option
-                std::string option(argv[i]);
-                if (option == "-h" || option == "--help") {
-                    print_help();
-                    return 0;
-                } else if (option == "-c" || option == "--case") {
-                    if (i + 1 < argc) {
-                        case_input = argv[++i]; // Get the case conversion mode
-                    } else {
-                        print_error("Error: Missing argument for option -c");
-                        return 1;
-                    }
-                } else if (option == "-p") {
-                    rename_parents = true;
+    for (int i = 1; i < argc; ++i) {
+        if (argv[i][0] == '-') { // Check if it's an option
+            std::string option(argv[i]);
+            if (option == "-h" || option == "--help") {
+                print_help();
+                return 0;
+            } else if (option == "-cp") {
+                rename_parents = true;
+                if (i + 1 < argc) {
+                    case_input = argv[++i]; // Get the case conversion mode
                 } else {
-                    print_error("Error: Unknown option " + option);
-                    print_help();
+                    print_error("Error: Missing argument for option -c");
                     return 1;
                 }
-            } else { // If it's not an option, it's a path
-                paths.emplace_back(argv[i]);
+            } else if (option == "-c" || option == "--case") {
+                if (i + 1 < argc) {
+                    case_input = argv[++i]; // Get the case conversion mode
+                } else {
+                    print_error("Error: Missing argument for option -c");
+                    return 1;
+                }
+            } else {
+                print_error("Error: Unknown option " + option);
+                print_help();
+                return 1;
             }
+        } else { // If it's not an option, it's a path
+            paths.emplace_back(argv[i]);
         }
     }
+}
 
     // If no paths provided, prompt the user for paths
     if (paths.empty()) {
