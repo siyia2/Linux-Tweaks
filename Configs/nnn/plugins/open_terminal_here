@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Open terminal in the current directory
+TERMINAL_EMULATOR="alacritty" # Change this to your preferred terminal emulator
+
+# Get the current directory
+current_dir="$(pwd)"
+
+# Open terminal in the current directory
+$TERMINAL_EMULATOR --working-directory="$current_dir"
