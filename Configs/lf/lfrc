@@ -87,7 +87,11 @@ map n :push %touch<space>
 map <delete> delete
 map <f-9> $alacritty &
 
-map b cd /mnt/D/
+cmd toggle-mount $~/.config/lf/nmount $fx
+map T toggle-mount
+
+map <f-1> cd /mnt/D/
+map <f-2> cd /run/media/
 map ~ cd ~/
 
 map x extract
