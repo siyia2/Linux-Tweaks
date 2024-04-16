@@ -56,6 +56,13 @@ cmd open &{{
     esac
 }}
 
+cmd open &{{
+    case $(file --mime-type -Lb $f) in
+        archive/*) lf -remote "send $id \$file-roller \$fx" ;;
+        *) for f in $fx; do $OPENER $f > /dev/null 2> /dev/null & done;;
+    esac
+}}
+
 # Map 'n' key to create a directory (mkdir)
 map N :push %mkdir<space>
 
