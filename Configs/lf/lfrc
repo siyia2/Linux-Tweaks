@@ -17,6 +17,11 @@ set shellopts '-eu'
 # commands accordingly.
 set ifs "\n"
 
+set previewer ctpv
+set cleaner ctpvclear
+&ctpv -s $id
+&ctpvquit $id
+
 # leave some space at the top and the bottom of the screen
 set scrolloff 10
 
@@ -80,7 +85,7 @@ map n :push %touch<space>
 # use '<delete>' key for either 'trash' or 'delete' command
 # map <delete> trash
 map <delete> delete
-map <f-9> $alacritty &
+map <f-9> $kitty &
 
 cmd toggle-mount $~/.config/lf/nmount $fx
 map M toggle-mount
