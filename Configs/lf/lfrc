@@ -85,7 +85,10 @@ map n :push %touch<space>
 # use '<delete>' key for either 'trash' or 'delete' command
 # map <delete> trash
 map <delete> delete
-map ; $alacritty &
+map <f-9> $alacritty &
+
+map b cd /mnt/D/
+map ~ cd ~/
 
 map x extract
 
