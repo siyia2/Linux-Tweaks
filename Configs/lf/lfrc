@@ -17,8 +17,10 @@ set shellopts '-eu'
 # commands accordingly.
 set ifs "\n"
 
-set previewer ~/.config/lf/lf_kitty_preview
-set cleaner ~/.config/lf/lf_kitty_clean
+set previewer ctpv
+set cleaner ctpvclear
+&ctpv -s $id
+&ctpvquit $id
 
 
 # leave some space at the top and the bottom of the screen
