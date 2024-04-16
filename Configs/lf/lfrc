@@ -95,7 +95,7 @@ map <delete> delete
 map <f-9> $alacritty &
 
 cmd toggle-mount $~/.config/lf/nmount $fx
-map T toggle-mount
+map M toggle-mount
 
 map <f-1> cd /mnt/D/
 map <f-2> cd /run/media/
