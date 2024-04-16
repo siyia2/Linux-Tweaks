@@ -41,9 +41,11 @@ map O $mimeopen --ask $f
 # This command is called when current file is not a directory. You may want to
 # use either file extensions and/or mime types here. Below uses an editor for
 # text files and a file opener for the rest.
+
 cmd open &{{
     case $(file --mime-type -Lb $f) in
         text/*) lf -remote "send $id \$geany \$fx" ;;
+        image/*) lf -remote "send $id \$swayimg \$fx" ;;
         *) for f in $fx; do $OPENER $f > /dev/null 2> /dev/null & done;;
     esac
 }}
@@ -87,6 +89,7 @@ cmd extract ${{
         *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) tar xjvf $f;;
         *.tar.gz|*.tgz) tar xzvf $f;;
         *.tar.xz|*.txz) tar xJvf $f;;
+        *.tar.zst|*.tzst) tar -xvf $f;;
         *.zip) unzip $f;;
         *.rar) unrar x $f;;
         *.7z) 7z x $f;;
