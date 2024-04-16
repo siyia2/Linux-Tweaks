@@ -78,7 +78,6 @@ map n :push %touch<space>
 # use '<delete>' key for either 'trash' or 'delete' command
 # map <delete> trash
 map <delete> delete
-map <f-9> $kitty &
 
 cmd toggle-mount $~/.config/lf/nmount $fx
 map M toggle-mount
