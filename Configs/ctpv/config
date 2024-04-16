@@ -1,0 +1,7 @@
+preview dejavu image/vnd.djvu {{
+	tmpfilejpeg="/tmp/ctpv-$RANDOM.jpeg"
+	trap "rm -f $tmpfilejpeg" 0 2 3 15
+	djvused "$f" -e 'select 1; save-page /dev/stdout' | convert -density 300 - "$tmpfilejpeg" > /dev/null 2>&1
+	ctpv "$tmpfilejpeg" $w $h $x $y $id
+	exit 1
+}}
