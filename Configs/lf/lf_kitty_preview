@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+file=$1
+w=$2
+h=$3
+x=$4
+y=$5
+
+# Get the file extension
+ext="${file##*.}"
+
+# Check if the file is an image and not a .djvu file
+if [[ "$( file -Lb --mime-type "$file")" =~ ^image ]] && [[ "$ext" != "djvu" ]]; then
+    kitty +kitten icat --silent --stdin no --transfer-mode file --place "${w}x${h}@${x}x${y}" "$file" < /dev/null > /dev/tty
+    exit 1
+fi
+
+# If the file is not an image or is a .djvu file
+pistol "$file"
