@@ -59,16 +59,15 @@ map ~ shell
 
 map a toggle-select-all
 
-map A deselct-all
+map A deselect-all
 
-cmd deselct-all :unselect; invert
+cmd deselect-all :unselect
 
 cmd toggle-select-all :invert
 
 map . set hidden!
 
 map <f-9> $kitty &
-
 
 # Map 'n' key to create a directory (mkdir)
 map N :push %mkdir<space>
@@ -106,7 +105,7 @@ cmd symlink ${{
     fi
 }}
 
-# TOGGLE EXECUTABLE STATUS OF FILE
+# TOGGLE EXECUTABLE STATUS OF A FILE
 
 cmd chmodx &{{
 	    if [ -x "$fx" ]; then
