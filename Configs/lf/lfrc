@@ -1,3 +1,5 @@
+## OPTIONS
+
 # interpreter for shell commands
 set shell sh
 
@@ -23,11 +25,14 @@ set scrolloff 5
 # disable icons
 set icons false
 
+set truncatechar "…"
+
+
 # Use the `dim` attribute instead of underline for the cursor in the preview pane
 set cursorpreviewfmt "\033[7;2m"
 
 
-## SET FILE PREVIEWS WITH CTPV
+## ENABLE FILE PREVIEWS WITH CTPV
 
 set previewer ctpv
 set cleaner ctpvclear
