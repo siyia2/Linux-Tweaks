@@ -132,7 +132,7 @@ map M toggle-mount
 
 # ARCHIVE MANAGEMENT
 
-map x extract
+map x extract && :reload
 
 cmd extract ${{
     set -f
