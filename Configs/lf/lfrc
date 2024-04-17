@@ -145,7 +145,6 @@ cmd extract ${{
         *.rar) unrar x $f;;
         *.7z) 7z x $f;;
     esac
-    :reload
 }}
 
 cmd targ ${{
