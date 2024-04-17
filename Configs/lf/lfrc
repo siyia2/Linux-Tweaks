@@ -75,6 +75,7 @@ map N :push %mkdir<space>
 # Map 'N' key to create a file (touch)
 map n :push %touch<space>
 
+
 # define a custom 'rename' command without prompt for overwrite
 # cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
 # map r push :rename<space>
@@ -98,6 +99,20 @@ map n :push %touch<space>
 # use '<delete>' key for either 'trash' or 'delete' command
 # map <delete> trash
 map <delete> delete
+
+map l symlink
+
+cmd symlink ${{
+    set -f
+    clear;
+    printf "Symlink name: "
+    read -r link_name
+    if [ -n "$link_name" ]; then
+        ln -sr "$fx" "$link_name"
+    else
+        lf -remote "send $id echo Failed to create symlink, no name provided"
+    fi
+}}
 
 cmd chmodx &{{
 	    if [ -x "$fx" ]; then
