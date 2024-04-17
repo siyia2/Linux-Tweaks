@@ -18,10 +18,28 @@ set sixel
 # commands accordingly.
 set ifs "\n"
 
+# leave some space at the top and the bottom of the screen
+set scrolloff 5
+
+# disable icons
+set icons false
+
+# Use the `dim` attribute instead of underline for the cursor in the preview pane
+set cursorpreviewfmt "\033[7;2m"
+
+# show the result of execution of previous commands
+map ` !true
+
+
+## SET FILE PREVIEWS WITH CTPV
+
 set previewer ctpv
 set cleaner ctpvclear
 &ctpv -s $id
 &ctpvquit $id
+
+
+## PROMPT COLORS
 
 set promptfmt "
 \033[48;2;35;38;39;38;2;28;220;156m  
@@ -32,42 +50,25 @@ set promptfmt "
 \033[38;2;255;255;255m %f 
 \033[;38;2;0;175;48;49m\033[m"
 
-# leave some space at the top and the bottom of the screen
-set scrolloff 5
 
-set icons false
+## CUSTOM KEYBINDS
 
-# Use the `dim` attribute instead of underline for the cursor in the preview pane
-set cursorpreviewfmt "\033[7;2m"
+map <enter> open
 
-# use enter for shell commands
-map <enter> shell
-
-# show the result of execution of previous commands
-map ` !true
-
+map ~ shell
 
 map a toggle-select-all
 
-cmd toggle-select-all :invert
+map A deselct-all
 
+cmd deselct-all :unselect; invert
+
+cmd toggle-select-all :invert
 
 map . set hidden!
 
 map <f-9> $kitty &
 
-# execute current file (must be executable)
-#map x $$f
-#map X !$f
-
-# dedicated keys for file opener actions
-map o &mimeopen $f
-map O $mimeopen --ask $f
-
-# define a custom 'open' command
-# This command is called when current file is not a directory. You may want to
-# use either file extensions and/or mime types here. Below uses an editor for
-# text files and a file opener for the rest.
 
 # Map 'n' key to create a directory (mkdir)
 map N :push %mkdir<space>
@@ -75,30 +76,21 @@ map N :push %mkdir<space>
 # Map 'N' key to create a file (touch)
 map n :push %touch<space>
 
-
-# define a custom 'rename' command without prompt for overwrite
-# cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
-# map r push :rename<space>
-
-# make sure trash folder exists
-# %mkdir -p ~/.trash
-
-# move current file or selected files to trash folder
-# (also see 'man mv' for backup/overwrite options)
-#cmd trash %set -f; mv $fx ~/.trash
-
-# define a custom 'delete' command
-# cmd delete ${{
-#     set -f
-#     printf "$fx\n"
-#     printf "delete?[y/n]"
-#     read ans
-#     [ "$ans" = "y" ] && rm -rf $fx
-# }}
-
 # use '<delete>' key for either 'trash' or 'delete' command
 # map <delete> trash
 map <delete> delete
+
+
+## BOOKMARKS
+
+map <f-1> cd ~/
+map <f-2> cd /mnt/D/
+map <f-3> cd /run/media/
+
+
+## COMMANDS
+
+# CREATE SYMLINK
 
 map l symlink
 
@@ -114,6 +106,8 @@ cmd symlink ${{
     fi
 }}
 
+# TOGGLE EXECUTABLE STATUS OF FILE
+
 cmd chmodx &{{
 	    if [ -x "$fx" ]; then
         chmod u-x "$fx"
@@ -128,12 +122,12 @@ cmd chmodx &{{
 
 map * chmodx
 
+# USE USB MOUNT PLUGIN FROM NNN
+
 cmd toggle-mount $~/.config/lf/nmount $fx
 map M toggle-mount
 
-map <f-1> cd ~/
-map <f-2> cd /mnt/D/
-map <f-3> cd /run/media/
+# ARCHIVE MANAGEMENT
 
 map x extract
 
