@@ -82,6 +82,20 @@ map n :push %touch<space>
 # map <delete> trash
 map <delete> delete
 
+cmd chmodx &{{
+	    if [ -x "$fx" ]; then
+        chmod u-x "$fx"
+        #echo "Execution permission removed from $fx"
+    else
+        chmod u+x "$fx"
+        #echo "Execution permission granted to $fx"
+    fi
+
+    lf -remote "send $id reload"
+}}
+
+map * chmodx
+
 cmd toggle-mount $~/.config/lf/nmount $fx
 map M toggle-mount
 
