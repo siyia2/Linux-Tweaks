@@ -48,8 +48,6 @@ map ` !true
 
 map . set hidden!
 
-map e $kitty -e sh -c "micro '$fx'" &
-
 map <f-9> $kitty &
 
 # execute current file (must be executable)
