@@ -46,6 +46,12 @@ map <enter> shell
 # show the result of execution of previous commands
 map ` !true
 
+
+map a toggle-select-all
+
+cmd toggle-select-all :invert
+
+
 map . set hidden!
 
 map <f-9> $kitty &
