@@ -1,28 +1,29 @@
 #!/bin/bash
 
-clear;
+clear
 
 formats=(
-"tarx (tar.xz)"
-"targ (tar.gz)"
-"tarz (tar.zst)"
-"7zip (.7z)"
-"zip (.zip)"
+    "tarx (tar.xz)"
+    "targ (tar.gz)"
+    "tarz (tar.zst)"
+    "7zip (.7z)"
+    "zip (.zip)"
 )
 
 echo "Choose the archive format:"
+
 for i in "${!formats[@]}"; do
-    printf "%d) %s\n" "$((i+1))" "${formats[$i]}"
+    printf "%d) %s\n" "$((i + 1))" "${formats[$i]}"
 done
 
 echo " "
 
-read -p "Enter your choice (1-${#formats[@]}) or any other key to exit: " choice
+read -rp "Enter your choice (1-${#formats[@]}) or any other key to exit: " choice
 
 echo " "
 
 if [[ "$choice" =~ ^[1-${#formats[@]}]$ ]]; then
-    choice=$((choice-1))
+    choice=$((choice - 1))
     type="${formats[$choice]%% (*}"
     extension=".${formats[$choice]##* (}"
 else
@@ -30,7 +31,7 @@ else
     exit 0
 fi
 
-read -p "Enter the name for the $extension archive: " archive_name
+read -rp "Enter the name for the $extension archive: " archive_name
 
 echo " "
 
@@ -40,24 +41,33 @@ if [ -e "$archive_name$extension" ]; then
     exit 1
 fi
 
-mkdir "$archive_name"
-cp -r "$@" "$archive_name"
+# Create a temporary directory in RAM
+temp_dir=$(mktemp -d /dev/shm/tmp.XXXXXXXXXX)
+
+# Copy the files to the temporary directory
+cp -r "$@" "$temp_dir"
 
 case $type in
-    "tarx") tar -Jcvf "$archive_name.tar.xz" "$archive_name" ;;
-    "targ") tar -czf "$archive_name.tar.gz" "$archive_name" ;;
-    "tarz") env ZSTD="-6" tar --zstd -cf "$archive_name.tar.zst" "$archive_name" ;;
-    "7zip") 7z a "$archive_name.7z" "$archive_name" ;;
-    "zip") zip -r "$archive_name.zip" "$archive_name";;
+    "tarx") tar -Jcvf "$archive_name.tar.xz" -C "$temp_dir" . ;;
+    "targ") tar -czf "$archive_name.tar.gz" -C "$temp_dir" . ;;
+    "tarz") env ZSTD="-6" tar --zstd -cf "$archive_name.tar.zst" -C "$temp_dir" . ;;
+    "7zip") 7z a "$archive_name.7z" "$temp_dir/*" ;;
+    "zip") zip -r "$archive_name.zip" "$temp_dir/*" ;;
 esac
 
 echo " "
 
-[ $? -ne 0 ] && echo "Compression failed!" || echo "Compression successful! Archive created: $archive_name$extension"
+if [ $? -ne 0 ]; then
+    echo "Compression failed!"
+else
+    echo "Compression successful! Archive created: $archive_name$extension"
+fi
 
-rm -rf "$archive_name"
+# Clean up the temporary directory
+rm -rf "$temp_dir"
 
 echo " "
 
-read -p "Press Enter to exit..."
+read -rp "Press Enter to exit..."
+
 
