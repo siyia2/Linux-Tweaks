@@ -1,0 +1,80 @@
+#!/bin/bash
+
+# Function to handle creating different types of archives
+create_archive() {
+    local archive_type=$1
+    local archive_name=$2
+    shift 2  # Remove first two arguments (type and name), leaving only the list of files
+
+    case $archive_type in
+        "tarx")
+            mkdir "$archive_name"
+            cp -r "$@" "$archive_name"
+            tar -Jcvf "$archive_name.tar.xz" "$archive_name"
+            rm -rf "$archive_name"
+            ;;
+        "targ")
+            mkdir "$archive_name"
+            cp -r "$@" "$archive_name"
+            tar -czf "$archive_name.tar.gz" "$archive_name"
+            rm -rf "$archive_name"
+            ;;
+        "tarz")
+            mkdir "$archive_name"
+            cp -r "$@" "$archive_name"
+            env ZSTD="-6" tar --zstd -cf "$archive_name.tar.zst" "$archive_name"
+            rm -rf "$archive_name"
+            ;;
+        "7zip")
+            mkdir "$archive_name"
+            cp -r "$@" "$archive_name"
+            7z a "$archive_name.7z" "$archive_name"
+            rm -rf "$archive_name"
+            ;;
+        "zip")
+            mkdir "$archive_name"
+            cp -r "$@" "$archive_name"
+            zip -r "$archive_name.zip" "$archive_name"
+            rm -rf "$archive_name"
+            ;;
+        *)
+            echo "Invalid archive type."
+            ;;
+    esac
+}
+
+# Main script
+echo "Choose an archive type for selected file(s):"
+echo "1. tarx (tar.xz)"
+echo "2. targ (tar.gz)"
+echo "3. tarz (tar.zst)"
+echo "4. 7zip (.7z)"
+echo "5. zip (.zip)"
+read -p "Enter your choice (1-5): " choice
+
+case $choice in
+    1)
+        read -p "Enter the name for the tar.xz archive: " archive_name
+        create_archive "tarx" "$archive_name" "$@"
+        ;;
+    2)
+        read -p "Enter the name for the tar.gz archive: " archive_name
+        create_archive "targ" "$archive_name" "$@"
+        ;;
+    3)
+        read -p "Enter the name for the tar.zst archive: " archive_name
+        create_archive "tarz" "$archive_name" "$@"
+        ;;
+    4)
+        read -p "Enter the name for the .7z archive: " archive_name
+        create_archive "7zip" "$archive_name" "$@"
+        ;;
+    5)
+        read -p "Enter the name for the .zip archive: " archive_name
+        create_archive "zip" "$archive_name" "$@"
+        ;;
+    *)
+        echo "Invalid choice. Exiting."
+        ;;
+esac
+
