@@ -93,6 +93,24 @@ map <f-3> cd /run/media/
 
 ## COMMANDS
 
+map L mkdirfile
+
+# Prompt to create a directory or file
+cmd mkdirfile %{{
+   printf "Create (d)irectory or (f)ile? "
+    read choice
+    
+    if [ "$choice" = "d" ]; then
+        shell %mkdir
+    fi
+    
+    if [ "$choice" = "f" ]; then
+       shell %touch
+    fi
+    exit
+}}
+
+
 # CREATE SYMLINK
 
 map l symlink
@@ -129,6 +147,9 @@ map * chmodx
 
 cmd toggle-mount $~/.config/lf/nmount $fx
 map M toggle-mount
+
+cmd compress $~/.config/lf/compress $fx
+map Z compress
 
 # ARCHIVE MANAGEMENT
 

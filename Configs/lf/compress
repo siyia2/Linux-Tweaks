@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Function to handle creating different types of archives
+clear;
 create_archive() {
     local archive_type=$1
     local archive_name=$2
