@@ -15,7 +15,11 @@ for i in "${!formats[@]}"; do
     printf "%d) %s\n" "$((i+1))" "${formats[$i]}"
 done
 
+echo " "
+
 read -p "Enter your choice (1-${#formats[@]}) or any other key to exit: " choice
+
+echo " "
 
 if [[ "$choice" =~ ^[1-${#formats[@]}]$ ]]; then
     choice=$((choice-1))
@@ -27,6 +31,8 @@ else
 fi
 
 read -p "Enter the name for the $extension archive: " archive_name
+
+echo " "
 
 if [ -e "$archive_name$extension" ]; then
     echo " "
@@ -45,6 +51,13 @@ case $type in
     "zip") zip -r "$archive_name.zip" "$archive_name";;
 esac
 
+echo " "
+
 [ $? -ne 0 ] && echo "Compression failed!" || echo "Compression successful! Archive created: $archive_name$extension"
 
 rm -rf "$archive_name"
+
+echo " "
+
+read -p "Press Enter to exit..."
+
