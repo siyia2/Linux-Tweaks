@@ -83,13 +83,13 @@ map Cl mksymlink
 
 map * chmodx
 
-map <c-x> extract && 
+map <c-z> compress
+
+map <c-x> extract
 
 # use '<delete>' key for either 'trash' or 'delete' command
 # map <delete> trash
 map <delete> delete
-
-map <c-z> compress
 
 map M toggle-mount
 
