@@ -103,7 +103,6 @@ map <f-3> cd /run/media/
 
 ## COMMANDS
 
-
 # CREATE SYMLINK
 
 map Cl mksymlink
@@ -120,6 +119,7 @@ cmd mksymlink ${{
     fi
 }}
 
+
 # CREATE NEW DIRECTORY
 
 cmd mkdir ${{
@@ -129,6 +129,7 @@ cmd mkdir ${{
 	mkdir $ans
 
 }}
+
 
 # CREATE NEW FILE
 
