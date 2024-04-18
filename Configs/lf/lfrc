@@ -27,7 +27,6 @@ set icons false
 
 set truncatechar "…"
 
-
 # Use the `dim` attribute instead of underline for the cursor in the preview pane
 set cursorpreviewfmt "\033[7;2m"
 
@@ -92,23 +91,6 @@ map <f-3> cd /run/media/
 
 
 ## COMMANDS
-
-map L mkdirfile
-
-# Prompt to create a directory or file
-cmd mkdirfile %{{
-   printf "Create (d)irectory or (f)ile? "
-    read choice
-    
-    if [ "$choice" = "d" ]; then
-        shell %mkdir
-    fi
-    
-    if [ "$choice" = "f" ]; then
-       shell %touch
-    fi
-    exit
-}}
 
 
 # CREATE SYMLINK
