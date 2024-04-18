@@ -13,30 +13,40 @@ create_archive() {
             cp -r "$@" "$archive_name"
             tar -Jcvf "$archive_name.tar.xz" "$archive_name"
             rm -rf "$archive_name"
+			echo " "
+            echo "Compression successful! Archive created: $archive_name.tar.xz"
             ;;
         "targ")
             mkdir "$archive_name"
             cp -r "$@" "$archive_name"
             tar -czf "$archive_name.tar.gz" "$archive_name"
             rm -rf "$archive_name"
+			echo " "
+            echo "Compression successful! Archive created: $archive_name.tar.gz"
             ;;
         "tarz")
             mkdir "$archive_name"
             cp -r "$@" "$archive_name"
             env ZSTD="-6" tar --zstd -cf "$archive_name.tar.zst" "$archive_name"
             rm -rf "$archive_name"
+			echo " "
+            echo "Compression successful! Archive created: $archive_name.tar.zst"
             ;;
         "7zip")
             mkdir "$archive_name"
             cp -r "$@" "$archive_name"
             7z a "$archive_name.7z" "$archive_name"
             rm -rf "$archive_name"
+			echo ""
+            echo "Compression successful! Archive created: $archive_name.7z"
             ;;
         "zip")
             mkdir "$archive_name"
             cp -r "$@" "$archive_name"
             zip -r "$archive_name.zip" "$archive_name"
             rm -rf "$archive_name"
+			echo " "
+            echo "Compression successful! Archive created: $archive_name.zip"
             ;;
         *)
             echo "Invalid archive type."
@@ -56,26 +66,55 @@ read -p "Enter your choice (1-5): " choice
 case $choice in
     1)
         read -p "Enter the name for the tar.xz archive: " archive_name
+        if [[ "$archive_name" == "$(basename "$(realpath "$1")")" ]]; then
+			echo " "
+            echo "Error: Archive name cannot be the same as the directory name."
+            exit 1
+        fi
         create_archive "tarx" "$archive_name" "$@"
         ;;
     2)
         read -p "Enter the name for the tar.gz archive: " archive_name
+        if [[ "$archive_name" == "$(basename "$(realpath "$1")")" ]]; then
+			echo " "
+            echo "Error: Archive name cannot be the same as the directory name."
+            exit 1
+        fi
         create_archive "targ" "$archive_name" "$@"
         ;;
     3)
         read -p "Enter the name for the tar.zst archive: " archive_name
+        if [[ "$archive_name" == "$(basename "$(realpath "$1")")" ]]; then
+			echo " "
+            echo "Error: Archive name cannot be the same as the directory name."
+            exit 1
+        fi
         create_archive "tarz" "$archive_name" "$@"
         ;;
     4)
         read -p "Enter the name for the .7z archive: " archive_name
+        if [[ "$archive_name" == "$(basename "$(realpath "$1")")" ]]; then
+			echo " "
+            echo "Error: Archive name cannot be the same as the directory name."
+            exit 1
+        fi
         create_archive "7zip" "$archive_name" "$@"
         ;;
     5)
         read -p "Enter the name for the .zip archive: " archive_name
+        if [[ "$archive_name" == "$(basename "$(realpath "$1")")" ]]; then
+			echo " "
+            echo "Error: Archive name cannot be the same as the directory name."
+            exit 1
+        fi
         create_archive "zip" "$archive_name" "$@"
         ;;
     *)
         echo "Invalid choice. Exiting."
+        exit 1
         ;;
 esac
 
+# Prompt user to press Enter to continue
+echo " "
+read -p "Press Enter to continue..."
