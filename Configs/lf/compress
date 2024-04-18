@@ -1,5 +1,7 @@
 #!/bin/bash
 
+clear;
+
 formats=(
 "tarx (tar.xz)"
 "targ (tar.gz)"
@@ -8,25 +10,43 @@ formats=(
 "zip (.zip)"
 )
 
-choice="$(printf '%s\n' "${formats[@]}" | fzf)" || exit 1
-read -r type extension < <(awk -F '[()]' '{print $1,$2}' <<< "$choice")
+echo "Choose the archive format:"
+for i in "${!formats[@]}"; do
+    printf "%d) %s\n" "$((i+1))" "${formats[$i]}"
+done
+
+read -p "Enter your choice (1-${#formats[@]}) or any other key to exit: " choice
+
+if [[ "$choice" =~ ^[1-${#formats[@]}]$ ]]; then
+    choice=$((choice-1))
+    type="${formats[$choice]%% (*}"
+    extension=".${formats[$choice]##* (}"
+else
+    echo "Exiting script."
+    exit 0
+fi
+
 read -p "Enter the name for the $extension archive: " archive_name
+
 cd "$(realpath -f "$1")"
 
 if [ -e "$archive_name$extension" ]; then
-	echo " "
-	echo "Error: File or directory $archive_name.$extension already exists."
-	exit 1
+    echo " "
+    echo "Error: File or directory $archive_name.$extension already exists."
+    exit 1
 fi
 
 mkdir "$archive_name"
 cp -r "$@" "$archive_name"
+
 case $type in
-	"tarx") tar -Jcvf "$archive_name.tar.xz" "$archive_name" ;;
-	"targ") tar -czf "$archive_name.tar.gz" "$archive_name" ;;
-	"tarz") env ZSTD="-6" tar --zstd -cf "$archive_name.tar.zst" "$archive_name" ;;
-	"7zip") 7z a "$archive_name.7z" "$archive_name" ;;
-	"zip") zip -r "$archive_name.zip" "$archive_name";;
+    "tarx") tar -Jcvf "$archive_name.tar.xz" "$archive_name" ;;
+    "targ") tar -czf "$archive_name.tar.gz" "$archive_name" ;;
+    "tarz") env ZSTD="-6" tar --zstd -cf "$archive_name.tar.zst" "$archive_name" ;;
+    "7zip") 7z a "$archive_name.7z" "$archive_name" ;;
+    "zip") zip -r "$archive_name.zip" "$archive_name";;
 esac
+
 [ $? -ne 0 ] && echo "Compression failed!" || echo "Compression successful! Archive created: $archive_name$extension"
+
 rm -rf "$archive_name"
