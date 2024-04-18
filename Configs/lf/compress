@@ -48,8 +48,11 @@ create_archive() {
 			echo " "
             echo "Compression successful! Archive created: $archive_name.zip"
             ;;
-        *)
+        *)	
+        	echo " "
             echo "Invalid archive type."
+            echo " "
+            read -p "Press Enter to continue..."
             ;;
     esac
 }
@@ -110,8 +113,11 @@ case $choice in
         create_archive "zip" "$archive_name" "$@"
         ;;
     *)
-        echo "Invalid choice. Exiting."
-        exit 1
+    	echo " "
+        echo "Invalid choice. Exiting..."
+        echo " "
+        read -p "Press Enter to continue..."
+        exit
         ;;
 esac
 
