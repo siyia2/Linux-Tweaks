@@ -72,11 +72,14 @@ map <f-9> $kitty &
 # show the result of execution of previous commands
 map ` !true
 
-# Map 'n' key to create a directory (mkdir)
-map N :push %mkdir<space>
+# Map 'Cd' key to create a directory (mkdir)
+map Cd mkdir
 
-# Map 'N' key to create a file (touch)
-map n :push %touch<space>
+# Map 'Cf' key to create a file (touch)
+map Cf mkfile
+
+# Map 'Cl' key to create a symlink
+map Cl mksymlink
 
 # use '<delete>' key for either 'trash' or 'delete' command
 # map <delete> trash
@@ -95,9 +98,9 @@ map <f-3> cd /run/media/
 
 # CREATE SYMLINK
 
-map l symlink
+map Cl mksymlink
 
-cmd symlink ${{
+cmd mksymlink ${{
     set -f
     clear;
     printf "Symlink name: "
@@ -108,6 +111,24 @@ cmd symlink ${{
         lf -remote "send $id echo Failed to create symlink, no name provided"
     fi
 }}
+
+# CREATE NEW FOLDER
+
+cmd mkdir ${{
+	printf "New Folder Name: "
+	read ans
+	mkdir $ans
+
+}}
+
+# CREATE NEW FILE
+
+cmd mkfile ${{
+	printf "New File Name: "
+	read ans
+	touch $ans
+}}
+	
 
 # TOGGLE EXECUTABLE STATUS OF A FILE
 
