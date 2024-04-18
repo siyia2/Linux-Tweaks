@@ -159,7 +159,7 @@ cmd tarz ${{
     set -f
     mkdir $1
     cp -r $fx $1
-    tar czf $1.tar.zst $1
+    tar --zstd -cf $1.tar.zst $1
     rm -rf $1
 }}
 
