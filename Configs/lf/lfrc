@@ -120,11 +120,11 @@ cmd mksymlink ${{
     fi
 }}
 
-# CREATE NEW FOLDER
+# CREATE NEW DIRECTORY
 
 cmd mkdir ${{
 	clear;
-	printf "New Folder Name: "
+	printf "New Directory Name: "
 	read ans
 	mkdir $ans
 
