@@ -81,9 +81,17 @@ map Cf mkfile
 # Map 'Cl' key to create a symlink
 map Cl mksymlink
 
+map * chmodx
+
+map <c-x> extract && :reload
+
 # use '<delete>' key for either 'trash' or 'delete' command
 # map <delete> trash
 map <delete> delete
+
+map <c-z> compress
+
+map M toggle-mount
 
 
 ## BOOKMARKS
@@ -101,8 +109,8 @@ map <f-3> cd /run/media/
 map Cl mksymlink
 
 cmd mksymlink ${{
+	clear;
     set -f
-    clear;
     printf "Symlink name: "
     read -r link_name
     if [ -n "$link_name" ]; then
@@ -115,6 +123,7 @@ cmd mksymlink ${{
 # CREATE NEW FOLDER
 
 cmd mkdir ${{
+	clear;
 	printf "New Folder Name: "
 	read ans
 	mkdir $ans
@@ -124,6 +133,7 @@ cmd mkdir ${{
 # CREATE NEW FILE
 
 cmd mkfile ${{
+	clear;
 	printf "New File Name: "
 	read ans
 	touch $ans
@@ -144,19 +154,15 @@ cmd chmodx &{{
     lf -remote "send $id reload"
 }}
 
-map * chmodx
 
 # USE USB MOUNT PLUGIN FROM NNN
 
 cmd toggle-mount $~/.config/lf/nmount $fx
-map M toggle-mount
 
-cmd compress $~/.config/lf/compress $fx
-map <c-z> compress
 
 # ARCHIVE MANAGEMENT
 
-map x extract && :reload
+cmd compress $~/.config/lf/compress $fx
 
 cmd extract ${{
     set -f
