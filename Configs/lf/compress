@@ -1,126 +1,65 @@
 #!/bin/bash
 
-# Function to handle creating different types of archives
-clear;
-create_archive() {
-    local archive_type=$1
-    local archive_name=$2
-    shift 2  # Remove first two arguments (type and name), leaving only the list of files
+formats=(
+"tarx (tar.xz)"
+"targ (tar.gz)"
+"tarz (tar.zst)"
+"7zip (.7z)"
+"zip (.zip)"
+)
 
-    case $archive_type in
-        "tarx")
-            mkdir "$archive_name"
-            cp -r "$@" "$archive_name"
-            tar -Jcvf "$archive_name.tar.xz" "$archive_name"
-            rm -rf "$archive_name"
-			echo " "
-            echo "Compression successful! Archive created: $archive_name.tar.xz"
-            ;;
-        "targ")
-            mkdir "$archive_name"
-            cp -r "$@" "$archive_name"
-            tar -czf "$archive_name.tar.gz" "$archive_name"
-            rm -rf "$archive_name"
-			echo " "
-            echo "Compression successful! Archive created: $archive_name.tar.gz"
-            ;;
-        "tarz")
-            mkdir "$archive_name"
-            cp -r "$@" "$archive_name"
-            env ZSTD="-6" tar --zstd -cf "$archive_name.tar.zst" "$archive_name"
-            rm -rf "$archive_name"
-			echo " "
-            echo "Compression successful! Archive created: $archive_name.tar.zst"
-            ;;
-        "7zip")
-            mkdir "$archive_name"
-            cp -r "$@" "$archive_name"
-            7z a "$archive_name.7z" "$archive_name"
-            rm -rf "$archive_name"
-			echo ""
-            echo "Compression successful! Archive created: $archive_name.7z"
-            ;;
-        "zip")
-            mkdir "$archive_name"
-            cp -r "$@" "$archive_name"
-            zip -r "$archive_name.zip" "$archive_name"
-            rm -rf "$archive_name"
-			echo " "
-            echo "Compression successful! Archive created: $archive_name.zip"
-            ;;
-        *)	
-        	echo " "
-            echo "Invalid archive type."
-            echo " "
-            read -p "Press Enter to continue..."
-            ;;
-    esac
-}
+choice="$(printf '%s\n' "${formats[@]}" | fzf)" || exit 1
+read -r type extension < <(awk -F '[()]' '{print $1,$2}' <<< "$choice")
+read -p "Enter the name for the $extension archive: " archive_name
+cd "$(realpath -f "$1")"
 
-# Main script
-echo "Choose an archive type for selected file(s):"
-echo "1. tarx (tar.xz)"
-echo "2. targ (tar.gz)"
-echo "3. tarz (tar.zst)"
-echo "4. 7zip (.7z)"
-echo "5. zip (.zip)"
-read -p "Enter your choice (1-5): " choice
+if [ -e "$archive_name$extension" ]; then
+	echo " "
+	echo "Error: File or directory $archive_name.$extension already exists."
+	exit 1
+fi
 
-case $choice in
-    1)
-        read -p "Enter the name for the tar.xz archive: " archive_name
-        if [[ "$archive_name" == "$(basename "$(realpath "$1")")" ]]; then
-			echo " "
-            echo "Error: Archive name cannot be the same as the directory name."
-            exit 1
-        fi
-        create_archive "tarx" "$archive_name" "$@"
-        ;;
-    2)
-        read -p "Enter the name for the tar.gz archive: " archive_name
-        if [[ "$archive_name" == "$(basename "$(realpath "$1")")" ]]; then
-			echo " "
-            echo "Error: Archive name cannot be the same as the directory name."
-            exit 1
-        fi
-        create_archive "targ" "$archive_name" "$@"
-        ;;
-    3)
-        read -p "Enter the name for the tar.zst archive: " archive_name
-        if [[ "$archive_name" == "$(basename "$(realpath "$1")")" ]]; then
-			echo " "
-            echo "Error: Archive name cannot be the same as the directory name."
-            exit 1
-        fi
-        create_archive "tarz" "$archive_name" "$@"
-        ;;
-    4)
-        read -p "Enter the name for the .7z archive: " archive_name
-        if [[ "$archive_name" == "$(basename "$(realpath "$1")")" ]]; then
-			echo " "
-            echo "Error: Archive name cannot be the same as the directory name."
-            exit 1
-        fi
-        create_archive "7zip" "$archive_name" "$@"
-        ;;
-    5)
-        read -p "Enter the name for the .zip archive: " archive_name
-        if [[ "$archive_name" == "$(basename "$(realpath "$1")")" ]]; then
-			echo " "
-            echo "Error: Archive name cannot be the same as the directory name."
-            exit 1
-        fi
-        create_archive "zip" "$archive_name" "$@"
-        ;;
-    *)
-    	echo " "
-        echo "Invalid choice. Exiting..."
-        echo " "
-        read -p "Press Enter to continue..."
-        exit
-        ;;
+case $type in
+			"tarx")
+	            mkdir "$archive_name"
+	            cp -r "$@" "$archive_name"
+	            tar -Jcvf "$archive_name.tar.xz" "$archive_name"
+	            rm -rf "$archive_name"
+				echo " "
+	            echo "Compression successful! Archive created: $archive_name.tar.xz"
+	            ;;
+	        "targ")
+	            mkdir "$archive_name"
+	            cp -r "$@" "$archive_name"
+	            tar -czf "$archive_name.tar.gz" "$archive_name"
+	            rm -rf "$archive_name"
+				echo " "
+	            echo "Compression successful! Archive created: $archive_name.tar.gz"
+	            ;;
+	        "tarz")
+	            mkdir "$archive_name"
+	            cp -r "$@" "$archive_name"
+	            env ZSTD="-6" tar --zstd -cf "$archive_name.tar.zst" "$archive_name"
+	            rm -rf "$archive_name"
+				echo " "
+	            echo "Compression successful! Archive created: $archive_name.tar.zst"
+	            ;;
+	        "7zip")
+	            mkdir "$archive_name"
+	            cp -r "$@" "$archive_name"
+	            7z a "$archive_name.7z" "$archive_name"
+	            rm -rf "$archive_name"
+				echo ""
+	            echo "Compression successful! Archive created: $archive_name.7z"
+	            ;;
+	        "zip")
+	            mkdir "$archive_name"
+	            cp -r "$@" "$archive_name"
+	            zip -r "$archive_name.zip" "$archive_name"
+	            rm -rf "$archive_name"
+				echo " "
+	            echo "Compression successful! Archive created: $archive_name.zip"
+	            ;;
 esac
 
-# Prompt user to press Enter to continue
-echo " "
-read -p "Press Enter to continue..."
+[ $? -ne 0 ] && echo "Compression failed!" || echo "Compression successful! Archive created: $archive_name$extension"
