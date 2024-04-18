@@ -28,8 +28,6 @@ fi
 
 read -p "Enter the name for the $extension archive: " archive_name
 
-cd "$(realpath -f "$1")"
-
 if [ -e "$archive_name$extension" ]; then
     echo " "
     echo "Error: File or directory $archive_name.$extension already exists."
