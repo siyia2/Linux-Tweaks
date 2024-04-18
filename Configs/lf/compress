@@ -25,40 +25,30 @@ case $type in
 	            cp -r "$@" "$archive_name"
 	            tar -Jcvf "$archive_name.tar.xz" "$archive_name"
 	            rm -rf "$archive_name"
-				echo " "
-	            echo "Compression successful! Archive created: $archive_name.tar.xz"
 	            ;;
 	        "targ")
 	            mkdir "$archive_name"
 	            cp -r "$@" "$archive_name"
 	            tar -czf "$archive_name.tar.gz" "$archive_name"
 	            rm -rf "$archive_name"
-				echo " "
-	            echo "Compression successful! Archive created: $archive_name.tar.gz"
 	            ;;
 	        "tarz")
 	            mkdir "$archive_name"
 	            cp -r "$@" "$archive_name"
 	            env ZSTD="-6" tar --zstd -cf "$archive_name.tar.zst" "$archive_name"
 	            rm -rf "$archive_name"
-				echo " "
-	            echo "Compression successful! Archive created: $archive_name.tar.zst"
 	            ;;
 	        "7zip")
 	            mkdir "$archive_name"
 	            cp -r "$@" "$archive_name"
 	            7z a "$archive_name.7z" "$archive_name"
 	            rm -rf "$archive_name"
-				echo ""
-	            echo "Compression successful! Archive created: $archive_name.7z"
 	            ;;
 	        "zip")
 	            mkdir "$archive_name"
 	            cp -r "$@" "$archive_name"
 	            zip -r "$archive_name.zip" "$archive_name"
 	            rm -rf "$archive_name"
-				echo " "
-	            echo "Compression successful! Archive created: $archive_name.zip"
 	            ;;
 esac
 
