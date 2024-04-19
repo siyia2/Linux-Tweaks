@@ -72,14 +72,16 @@ map <f-9> $kitty &
 # show the result of execution of previous commands
 map ` !true
 
-# Map 'Cd' key to create a directory (mkdir)
-map Cd mkdir
+map m
 
-# Map 'Cf' key to create a file (touch)
-map Cf mkfile
+# Map 'md' key to create a directory (mkdir)
+map md mkdir
 
-# Map 'Cl' key to create a symlink
-map Cl mksymlink
+# Map 'mf' key to create a file (touch)
+map mf mkfile
+
+# Map 'ml' key to create a symlink
+map ml mksymlink
 
 map * chmodx
 
