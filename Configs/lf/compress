@@ -1,7 +1,5 @@
 #!/bin/bash
 
-clear;
-
 formats=(
     "tarx (tar.xz)"
     "targ (tar.gz)"
