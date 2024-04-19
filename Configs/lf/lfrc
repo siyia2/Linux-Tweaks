@@ -59,9 +59,9 @@ map ~ shell
 
 map <c-a> toggle-select-all
 
-map a deselect-all
+map c deselect-all;
 
-cmd deselect-all :unselect
+cmd deselect-all :unselect;clear
 
 cmd toggle-select-all :invert
 
@@ -105,9 +105,8 @@ map <f-3> cd /run/media/
 
 ## COMMANDS
 
-# CREATE SYMLINK
 
-map Cl mksymlink
+# CREATE SYMLINK
 
 cmd mksymlink ${{
 	clear;
