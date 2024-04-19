@@ -83,6 +83,9 @@ map mf mkfile
 # Map 'ml' key to create a symlink
 map ml mksymlink
 
+# Map 'ml' key to create a hardlink
+map mh mkhardlink
+
 map * chmodx
 
 map <c-z> compress
@@ -109,7 +112,6 @@ map <f-3> cd /run/media/
 # CREATE SYMLINK
 
 cmd mksymlink ${{
-	clear;
     set -f
     printf "Symlink name: "
     read -r link_name
@@ -121,10 +123,29 @@ cmd mksymlink ${{
 }}
 
 
+# CREATE HARDLINK
+
+cmd mkhardlink ${{
+	set -f
+	if [ -d "$fx" ]; then
+    lf -remote "send $id echo Cannot create hardlink for a directory: $fx"
+    exit 1
+	else
+    printf "Hardlink name: "
+    read -r link_name
+
+    if [ -n "$link_name" ]; then
+        ln "$fx" "$link_name"
+    else
+        lf -remote "send $id echo Failed to create hardlink, no name provided"
+    fi
+	fi
+}}
+
+
 # CREATE NEW DIRECTORY
 
 cmd mkdir ${{
-	clear;
 	printf "New Directory Name: "
 	read ans
 	mkdir $ans
@@ -135,7 +156,6 @@ cmd mkdir ${{
 # CREATE NEW FILE
 
 cmd mkfile ${{
-	clear;
 	printf "New File Name: "
 	read ans
 	touch $ans
