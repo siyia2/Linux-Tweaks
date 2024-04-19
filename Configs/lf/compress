@@ -1,5 +1,7 @@
 #!/bin/bash
 
+clear;
+
 formats=(
     "tarx (tar.xz)"
     "targ (tar.gz)"
@@ -8,7 +10,7 @@ formats=(
     "zip (.zip)"
 )
 
-echo "Choose the archive format:"
+echo -e  "\nChoose the archive format:\n"
 
 for i in "${!formats[@]}"; do
     printf "%d) %s\n" "$((i + 1))" "${formats[$i]}"
@@ -18,24 +20,21 @@ echo " "
 
 read -rp "Enter your choice (1-${#formats[@]}) or any other key to exit: " choice
 
-echo " "
-
 if [[ "$choice" =~ ^[1-${#formats[@]}]$ ]]; then
     choice=$((choice - 1))
     type="${formats[$choice]%% (*}"
-    extension=".${formats[$choice]##* (}"
+    extension="${formats[$choice]##* (}"
 else
-    echo "Exiting script."
+    echo -e "\nExiting script...\n"
     exit 0
 fi
 
+echo " "
 read -rp "Enter the name for the $extension archive: " archive_name
-
 echo " "
 
 if [ -e "$archive_name$extension" ]; then
-    echo " "
-    echo "Error: File or directory $archive_name.$extension already exists."
+    echo -e "\nError: File or directory $archive_name.$extension already exists.\n"
     exit 1
 fi
 
@@ -60,17 +59,13 @@ case $type in
         ) ;;
 esac
 
-echo " "
-
 if [ $? -ne 0 ]; then
-    echo "Compression failed!"
+    echo -e "\nCompression failed!\n"
 else
-    echo "Compression successful! Archive created: $archive_name$extension"
+    echo -e "\nCompression successful! Archive created: $archive_name$extension\n"
 fi
 
 # Clean up the temporary directory
 rm -rf "$temp_dir"
-
-echo " "
 
 read -rp "Press Enter to exit..."
