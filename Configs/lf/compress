@@ -41,6 +41,9 @@ if [ -e "$archive_name$extension" ]; then
     exit 1
 fi
 
+# Get the current working directory
+cwd=$(pwd)
+
 # Create a temporary directory in RAM
 temp_dir=$(mktemp -d /dev/shm/tmp.XXXXXXXXXX)
 
@@ -52,7 +55,11 @@ case $type in
     "targ") tar -czf "$archive_name.tar.gz" -C "$temp_dir" . ;;
     "tarz") env ZSTD="-6" tar --zstd -cf "$archive_name.tar.zst" -C "$temp_dir" . ;;
     "7zip") 7z a "$archive_name.7z" "$temp_dir/*" ;;
-    "zip") zip -r "$archive_name.zip" "$temp_dir/*" ;;
+    "zip") (
+            cd "$temp_dir" || exit
+            zip -r "$archive_name.zip" .
+            mv "$archive_name.zip" "$cwd"
+        ) ;;
 esac
 
 echo " "
@@ -69,5 +76,3 @@ rm -rf "$temp_dir"
 echo " "
 
 read -rp "Press Enter to exit..."
-
-
