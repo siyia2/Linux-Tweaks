@@ -38,6 +38,11 @@ if [ -e "$archive_name$extension" ]; then
     exit 1
 fi
 
+if [ -z "$archive_name" ]; then
+  echo -e "Exiting script as no archive name was provided.\n"
+  exit 0
+fi
+
 # Get the current working directory
 cwd=$(pwd)
 
@@ -62,7 +67,7 @@ esac
 if [ $? -ne 0 ]; then
     echo -e "\nCompression failed!\n"
 else
-    echo -e "\nCompression successful! Archive created: $archive_name$extension\n"
+    echo -e "\nCompression successful! Archive created: $archive_name.$extension\n"
 fi
 
 # Clean up the temporary directory
