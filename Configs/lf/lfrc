@@ -168,12 +168,6 @@ cmd compress $~/.config/lf/compress $fx
 
 cmd extract ${{
 
-	# Check if there are any selected files
-	if [ -z "$fx" ]; then
- 	 echo "No files selected."
-  	exit 1
-	fi
-
 	for f in $fx; do
 	case $f in
 		*.tar.bz|*.tar.bz2|*.tbz|*.tbz2) tar xjvf "$f" ;;
