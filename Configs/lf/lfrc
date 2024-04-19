@@ -59,7 +59,7 @@ map ~ shell
 
 map <c-a> toggle-select-all
 
-map c deselect-all;
+map <c-c> deselect-all;
 
 cmd deselect-all :unselect;clear
 
