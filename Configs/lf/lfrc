@@ -167,30 +167,18 @@ cmd toggle-mount $~/.config/lf/nmount $fx
 cmd compress $~/.config/lf/compress $fx
 
 cmd extract ${{
-  
-  # Check if there are any selected files
-  if [ -z "$fx" ]; then
-    echo "No files selected."
-    exit 1
-  fi
-
-  for f in $fx; do
-    case $f in
-      *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) tar xjvf "$f" ;;
-      *.tar.gz|*.tgz) tar xzvf "$f" ;;
-      *.tar.xz|*.txz) tar xJvf "$f" ;;
-      *.tar.zst|*.tzst) tar -xvf "$f" ;;
-      *.zip) unzip "$f" ;;
-      *.rar) unrar x "$f" ;;
-      *.7z) 7z x "$f" ;;
-      *) echo -e "Failed to extract '$f'..." ;;
-    esac
-
-    # Check exit code and display success/failure message
-    if [ $? -eq 0 ]; then
-      echo -e "Extracted '$f' successfully."
-      lf -remote "send $id :reload"
-    fi
-  done
-
+	for f in $fx; do
+	case $f in
+		*.tar.bz|*.tar.bz2|*.tbz|*.tbz2) tar xjvf "$f" ;;
+		*.tar.gz|*.tgz) tar xzvf "$f" ;;
+		*.tar.xz|*.txz) tar xJvf "$f" ;;
+		*.tar.zst|*.tzst) tar -xvf "$f" ;;
+		*.zip) unzip "$f" ;;
+		*.rar) unrar x "$f" ;;
+		*.7z) 7z x "$f" ;;
+		*) echo -e "Failed to extract '$f'..." ;;
+	esac
+	[ $? -eq 0 ] && lf -remote "send $id :reload"
+done
 }}
+
