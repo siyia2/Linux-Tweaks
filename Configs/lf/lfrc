@@ -176,7 +176,7 @@ cmd extract ${{
 		*.zip) unzip "$f" ;;
 		*.rar) unrar x "$f" ;;
 		*.7z) 7z x "$f" ;;
-		*) echo -e "Failed to extract '$f'..." ;;
+		*) echo -e "\nFailed to extract '$f'...\n" ;;
 	esac
 	[ $? -eq 0 ] && lf -remote "send $id :reload"
 done
