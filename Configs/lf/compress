@@ -1,37 +1,27 @@
 #!/bin/bash
 
-clear;
-
 formats=(
+	"tarz (tar.zst)"
     "tarx (tar.xz)"
     "targ (tar.gz)"
-    "tarz (tar.zst)"
     "7zip (.7z)"
     "zip (.zip)"
 )
 
-echo -e  "\nChoose the archive format:\n"
+# Use fzf to select the archive format
+selected_format=$(printf "%s\n" "${formats[@]}" | fzf --prompt="Select format: ")
 
-for i in "${!formats[@]}"; do
-    printf "%d) %s\n" "$((i + 1))" "${formats[$i]}"
-done
-
-echo " "
-
-read -rp "Enter your choice (1-${#formats[@]}) or any other key to exit: " choice
-
-if [[ "$choice" =~ ^[1-${#formats[@]}]$ ]]; then
-    choice=$((choice - 1))
-    type="${formats[$choice]%% (*}"
-    extension="${formats[$choice]##* (}"
-else
+if [ -z "$selected_format" ]; then
     echo -e "\nExiting script...\n"
     exit 0
 fi
 
+# Extract type and extension from the selected format
+type="${selected_format%% (*}"
+extension="${selected_format##* (}"
+
 echo " "
-read -rp "Enter the name for the $extension archive: " archive_name
-echo " "
+read -rp "Enter the name for the $extension archive or press Enter to exit: " archive_name
 
 if [ -e "$archive_name$extension" ]; then
     echo -e "\nError: File or directory $archive_name.$extension already exists.\n"
@@ -39,8 +29,8 @@ if [ -e "$archive_name$extension" ]; then
 fi
 
 if [ -z "$archive_name" ]; then
-  echo -e "Exiting script as no archive name was provided.\n"
-  exit 0
+    echo -e "Exiting script as no archive name was provided.\n"
+    exit 0
 fi
 
 # Get the current working directory
@@ -53,9 +43,9 @@ temp_dir=$(mktemp -d /dev/shm/tmp.XXXXXXXXXX)
 cp -r "$@" "$temp_dir"
 
 case $type in
+	"tarz") env ZSTD="-6" tar --zstd -cf "$archive_name.tar.zst" -C "$temp_dir" . ;;
     "tarx") tar -Jcvf "$archive_name.tar.xz" -C "$temp_dir" . ;;
     "targ") tar -czf "$archive_name.tar.gz" -C "$temp_dir" . ;;
-    "tarz") env ZSTD="-6" tar --zstd -cf "$archive_name.tar.zst" -C "$temp_dir" . ;;
     "7zip") 7z a "$archive_name.7z" "$temp_dir/*" ;;
     "zip") (
             cd "$temp_dir" || exit
