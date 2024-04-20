@@ -14,7 +14,8 @@ selected_format=$(printf "%s\n" "${formats[@]}" | fzf --prompt="Select format: "
 
 # Extract type and extension from the selected format
 type="${selected_format%% (*}"
-extension="${selected_format##* (}"
+extension="${selected_format##* (}"  # Remove everything up to and including " ("
+extension="${extension%\)}"  # Remove the closing parenthesis
 
 echo " "
 read -rp "Enter the name for the $extension archive or press Enter to exit: " archive_name
