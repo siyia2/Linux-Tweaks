@@ -88,6 +88,8 @@ map mh mkhardlink
 
 map * chmodx
 
+map <c-f> finder
+
 map <c-z> compress
 
 map <c-x> extract
@@ -107,6 +109,7 @@ map <f-3> cd /run/media/
 
 
 ## COMMANDS
+
 
 
 # CREATE SYMLINK
@@ -175,6 +178,11 @@ cmd chmodx &{{
 
     lf -remote "send $id reload"
 }}
+
+
+# FUZZY FILE FINDER
+
+cmd finder $~/.config/lf/finder
 
 
 # USE USB MOUNT PLUGIN FROM NNN
