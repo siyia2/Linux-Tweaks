@@ -8,9 +8,10 @@ selected_file=$(find "$current_dir" -type f | fzf)
 
 # Check if a file was selected
 if [ -n "$selected_file" ]; then
-  # Open the selected file in your preferred editor (replace 'EDITOR' with your actual editor)
-  $EDITOR "$selected_file"
+  # Open the selected file in lf
+  lf "$selected_file"
 else
   # No file selected, display message
   echo "No file selected."
 fi
+
