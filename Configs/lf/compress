@@ -35,7 +35,7 @@ temp_dir=$(mktemp -d /dev/shm/tmp.XXXXXXXXXX)
 cp -r "$@" "$temp_dir"
 
 case $type in
-    "tarz") env ZSTD="-6" tar --zstd -cf "$archive_name.tar.zst" -C "$temp_dir" . ;;
+    "tarz") tar --zstd -cf "$archive_name.tar.zst" -C "$temp_dir" . ;;
     "tarx") tar -Jcvf "$archive_name.tar.xz" -C "$temp_dir" . ;;
     "targ") tar -czf "$archive_name.tar.gz" -C "$temp_dir" . ;;
     "tarb") tar -cjvf "$archive_name.tar.bz2" -C "$temp_dir" . ;;
