@@ -1,11 +1,12 @@
 #!/bin/bash
 
 formats=(
-	"tarz (tar.zst)"
-    "tarx (tar.xz)"
-    "targ (tar.gz)"
-    "7zip (.7z)"
-    "zip (.zip)"
+"tarz (tar.zst)"
+"tarx (tar.xz)"
+"targ (tar.gz)"
+"tarb (tar.bz2)"
+"7zip (.7z)"
+"zip (.zip)"
 )
 
 # Use fzf to select the archive format
@@ -17,11 +18,6 @@ extension="${selected_format##* (}"
 
 echo " "
 read -rp "Enter the name for the $extension archive or press Enter to exit: " archive_name
-
-if [ -e "$archive_name$extension" ]; then
-    echo -e "\nError: File or directory $archive_name.$extension already exists.\n"
-    exit 1
-fi
 
 if [ -z "$archive_name" ]; then
     echo -e "Exiting script as no archive name was provided.\n"
@@ -38,15 +34,16 @@ temp_dir=$(mktemp -d /dev/shm/tmp.XXXXXXXXXX)
 cp -r "$@" "$temp_dir"
 
 case $type in
-	"tarz") env ZSTD="-6" tar --zstd -cf "$archive_name.tar.zst" -C "$temp_dir" . ;;
+    "tarz") env ZSTD="-6" tar --zstd -cf "$archive_name.tar.zst" -C "$temp_dir" . ;;
     "tarx") tar -Jcvf "$archive_name.tar.xz" -C "$temp_dir" . ;;
     "targ") tar -czf "$archive_name.tar.gz" -C "$temp_dir" . ;;
+    "tarb") tar -cjvf "$archive_name.tar.bz2" -C "$temp_dir" . ;;
     "7zip") 7z a "$archive_name.7z" "$temp_dir/*" ;;
     "zip") (
-            cd "$temp_dir" || exit
-            zip -r "$archive_name.zip" .
-            mv "$archive_name.zip" "$cwd"
-        ) ;;
+        cd "$temp_dir" || exit
+        zip -r "$archive_name.zip" .
+        mv "$archive_name.zip" "$cwd"
+    ) ;;
 esac
 
 if [ $? -ne 0 ]; then
