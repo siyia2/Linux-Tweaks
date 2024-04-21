@@ -197,15 +197,16 @@ cmd mkfile ${{
 # TOGGLE EXECUTABLE STATUS OF A FILE
 
 cmd chmodx &{{
-	    if [ -x "$fx" ]; then
-        chmod u-x "$fx"
-        #echo "Execution permission removed from $fx"
-    else
-        chmod u+x "$fx"
-        #echo "Execution permission granted to $fx"
-    fi
+if [ -x "$fx" ]; then
+    chmod u-x "$fx"
+    #echo "Execution permission removed from $fx"
+else
+    chmod u+x "$fx"
+    #echo "Execution permission granted to $fx"
+fi
 
-    lf -remote "send $id reload"
+lf -remote "send $id reload"
+lf -remote "send $id down"
 }}
 
 
