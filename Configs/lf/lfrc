@@ -80,10 +80,10 @@ map md mkdir
 # Map 'mf' key to create a file (touch)
 map mf mkfile
 
-# Map 'ml' key to create a symlink
-map ml mksymlink
+# Map 'ms' key to create a symlink
+map ms mksymlink
 
-# Map 'ml' key to create a hardlink
+# Map 'mh' key to create a hardlink
 map mh mkhardlink
 
 map * chmodx
@@ -115,14 +115,32 @@ map <f-3> cd /run/media/
 # CREATE SYMLINK
 
 cmd mksymlink ${{
-    set -f
-    printf "Symlink name: "
-    read -r link_name
-    if [ -n "$link_name" ]; then
-        ln -sr "$fx" "$link_name"
-    else
-        lf -remote "send $id echo Failed to create symlink, no name provided"
-    fi
+printf "Symlink name: "
+read -r link_name
+
+if [ -n "$link_name" ]; then
+  # Validate absolute path using realpath
+  if ! realpath "$link_name" >/dev/null 2>&1; then
+    echo "Error: Invalid absolute path provided."
+    lf -remote "send $id echo Error: Invalid absolute path provided."
+    exit 1
+  fi
+
+  # Ensure target file/directory exists
+  if [ ! -e "$fx" ]; then
+    echo "Error: Target file or directory '$fx' does not exist."
+    lf -remote "send $id echo Error: Target file or directory '$fx' does not exist."
+    exit 1
+  fi
+
+  # Create symlink using absolute paths
+  ln -s "$fx" "$link_name"
+  echo "Symlink '$link_name' created successfully."
+  lf -remote "send $id echo Symlink '$link_name' created successfully."
+else
+  echo "Failed to create symlink, no name provided."
+  lf -remote "send $id echo Failed to create symlink, no name provided."
+fi
 }}
 
 
