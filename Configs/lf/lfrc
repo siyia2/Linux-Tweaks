@@ -206,7 +206,7 @@ else
 fi
 
 lf -remote "send $id reload"
-lf -remote "send $id down"
+#lf -remote "send $id down"
 }}
 
 
