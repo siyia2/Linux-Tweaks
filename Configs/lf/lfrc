@@ -115,31 +115,31 @@ map <f-3> cd /run/media/
 # CREATE SYMLINK
 
 cmd mksymlink ${{
+# Read link name from user
 printf "Symlink name: "
 read -r link_name
 
+# Create symlink if name provided
 if [ -n "$link_name" ]; then
-  # Validate absolute path using realpath
-  if ! realpath "$link_name" >/dev/null 2>&1; then
-    echo "Error: Invalid absolute path provided."
-    lf -remote "send $id echo Error: Invalid absolute path provided."
-    exit 1
-  fi
+    # Check if target exists
+    [ -e "$fx" ] || {
+        echo "Error: Target '$fx' does not exist." >&2
+        lf -remote "send $id echo Error: Target '$fx' does not exist."
+        exit 1
+    }
 
-  # Ensure target file/directory exists
-  if [ ! -e "$fx" ]; then
-    echo "Error: Target file or directory '$fx' does not exist."
-    lf -remote "send $id echo Error: Target file or directory '$fx' does not exist."
-    exit 1
-  fi
+    ln -s "$fx" "$link_name" || {
+        echo "Error: Failed to create symlink." >&2
+        lf -remote "send $id echo Error: Failed to create symlink."
+        exit 1
+    }
 
-  # Create symlink using absolute paths
-  ln -s "$fx" "$link_name"
-  echo "Symlink '$link_name' created successfully."
-  lf -remote "send $id echo Symlink '$link_name' created successfully."
+    echo "Symlink '$link_name' created successfully."
+    lf -remote "send $id echo Symlink '$link_name' created successfully."
 else
-  echo "Failed to create symlink, no name provided."
-  lf -remote "send $id echo Failed to create symlink, no name provided."
+    echo "Error: No symlink name provided." >&2
+    lf -remote "send $id echo Error: No symlink name provided."
+    exit 1
 fi
 }}
 
@@ -147,19 +147,30 @@ fi
 # CREATE HARDLINK
 
 cmd mkhardlink ${{
-	set -f
-	if [ -d "$fx" ]; then
-    lf -remote "send $id echo Cannot create hardlink for a directory: $fx"
-    exit 1
+# Check if target file exists and is not a directory
+	if ! [ -f "$fx" ]; then
+	    echo "Error: '$fx' is not a regular file." >&2
+	    lf -remote "send $id echo Error: '$fx' is not a regular file."
+	    exit 1
+	fi
+	
+	# Read link name from user
+	printf "Hardlink name: "
+	read -r link_name
+	
+	# Create hardlink if name provided
+	if [ -n "$link_name" ]; then
+	    ln "$fx" "$link_name" || {
+	        echo "Error: Failed to create hardlink." >&2
+	        lf -remote "send $id echo Error: Failed to create hardlink."
+	        exit 1
+	    }
+	    echo "Hardlink '$link_name' created successfully."
+	    lf -remote "send $id echo Hardlink '$link_name' created successfully."
 	else
-    printf "Hardlink name: "
-    read -r link_name
-
-    if [ -n "$link_name" ]; then
-        ln "$fx" "$link_name"
-    else
-        lf -remote "send $id echo Failed to create hardlink, no name provided"
-    fi
+	    echo "Error: No hardlink name provided." >&2
+	    lf -remote "send $id echo Error: No hardlink name provided."
+	    exit 1
 	fi
 }}
 
