@@ -106,6 +106,7 @@ map M toggle-mount
 map <f-1> cd ~/
 map <f-2> cd /mnt/D/
 map <f-3> cd /run/media/
+map <f-4> cd /mnt/
 
 
 ## COMMANDS
