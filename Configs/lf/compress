@@ -50,7 +50,7 @@ esac
 if [ $? -ne 0 ]; then
     echo -e "\nCompression failed!\n"
 else
-    if [ "$type" == "zip" ]; then
+    if [[ "$type" == "zip" || "$type" == "7zip" ]]; then
         echo -e "\nCompression successful! Archive created: ${archive_name}${extension}\n"
     else
         echo -e "\nCompression successful! Archive created: ${archive_name}.${extension}\n"
