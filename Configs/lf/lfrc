@@ -31,7 +31,7 @@ set truncatechar "…"
 set cursorpreviewfmt "\033[7;2m"
 
 
-## ENABLE FILE PREVIEWS WITH CTPV
+## ENABLE FILE PREVIEWS WITH KITTY
 
 set previewer ctpv
 set cleaner ctpvclear
@@ -117,7 +117,7 @@ map <f-4> cd /mnt/
 
 cmd mksymlink ${{
 # Read link name from user
-printf "Symlink name: "
+printf "\nSymlink name: "
 read -r link_name
 
 # Create symlink if name provided
@@ -156,7 +156,7 @@ cmd mkhardlink ${{
 	fi
 	
 	# Read link name from user
-	printf "Hardlink name: "
+	printf "\nHardlink name: "
 	read -r link_name
 	
 	# Create hardlink if name provided
@@ -179,7 +179,7 @@ cmd mkhardlink ${{
 # CREATE NEW DIRECTORY
 
 cmd mkdir ${{
-	printf "New Directory Name: "
+	printf "\nNew Directory Name: "
 	read ans
 	mkdir $ans
 
@@ -189,7 +189,7 @@ cmd mkdir ${{
 # CREATE NEW FILE
 
 cmd mkfile ${{
-	printf "New File Name: "
+	printf "\nNew File Name: "
 	read ans
 	touch $ans
 }}
