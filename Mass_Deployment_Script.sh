@@ -28,8 +28,19 @@ print_non_root_options() {
     echo -e "${CYAN}╠═══════════════════════════════════╣${NC}"
     echo -e "${CYAN}║${GREEN} 1 Deploy Config Files into ~/     ${CYAN}║${NC}"
     echo -e "${CYAN}║${GREEN} 2 Deploy a Wayland Desktop        ${CYAN}║${NC}"
-    echo -e "${CYAN}║${RED} 3 go back                         ${CYAN}║${NC}"
+    echo -e "${CYAN}║${RED} Press ENTER to return             ${CYAN}║${NC}"
     echo -e "${CYAN}╚═══════════════════════════════════╝${NC}"
+}
+
+# Function to print Wayland options menu
+print_wayland_options() {
+    echo -e "${CYAN}╔══════════════════════════════╗${NC}"
+    echo -e "${CYAN}║${PURPLE}      Wayland Options         ${CYAN}║${NC}"
+    echo -e "${CYAN}╠══════════════════════════════╣${NC}"
+    echo -e "${CYAN}║${GREEN} 1 Hyprland                   ${CYAN}║${NC}"
+    echo -e "${CYAN}║${GREEN} 2 Sway                       ${CYAN}║${NC}"
+    echo -e "${CYAN}║${RED} Press ENTER to return        ${CYAN}║${NC}"
+    echo -e "${CYAN}╚══════════════════════════════╝${NC}"
 }
 
 # Function to print root options menu
@@ -54,66 +65,71 @@ non_root_options() {
     clear
         print_non_root_options
         read -rp "Enter your choice: " subchoice
+        echo -e ""
 
         case "$subchoice" in
             1)
                 cd "$CONFIG_DIR" || exit
-                ls
-
-                echo "Enter 'A' to deploy all config files, or enter specific filename(s) separated by space, press 'q' to quit:"
+                ls --color=always | sed "s/\(^.*\)/$(printf '%b' '\033[0;95m')\1$(printf '%b' '\033[0m')/"
+                
+                echo -e "\nEnter 'A' to deploy all config files, or enter specific filename(s) separated by space, press 'q' to quit:"
                 while true; do
-                    read -rp "Files: " files
-                   if [ "$files" = "q" ] || [ -z "$files" ]; then
-                        break
-                    elif [ "$files" = "A" ]; then
-                        cp -r * ~/.config/
-                        cp rtorrent.rc ~/.rtorrent.rc
-                        cp zshrc ~/.zshrc
-                        rm ~/.config/rtorrent.rc ~/.config/zshrc
-                        echo "Config files deployed successfully!"
+                 read -rp $'\n'"Files: " files
+                 if [ "$files" = "q" ] || [ -z "$files" ]; then
+                                        break
+                  elif [ "$files" = "A" ]; then
+                   cp -r * ~/.config/
+                   cp rtorrent.rc ~/.rtorrent.rc
+                   cp zshrc ~/.zshrc
+                   rm ~/.config/rtorrent.rc ~/.config/zshrc
+                   echo "Config files deployed successfully!"
+                  else
+                   for file in $files; do
+                    if [ "$file" = "zshrc" ]; then
+                      cp zshrc ~/.zshrc
+                      elif [ "$file" = "rtorrent.rc" ]; then
+                       cp rtorrent.rc ~/.rtorrent.rc
                     else
-                        for file in $files; do
-                            if [ "$file" = "zshrc" ]; then
-                                cp zshrc ~/.zshrc
-                            elif [ "$file" = "rtorrent.rc" ]; then
-                                cp rtorrent.rc ~/.rtorrent.rc
-                            else
-                                cp -r "$file" ~/.config
-                            fi
-                        done
-                        echo "Config files deployed successfully!"
+                     cp -r "$file" ~/.config
                     fi
-                done
-                ;;
+                    done
+                    echo -n "Config files deployed successfully!"
+                    read -n 1 -s
+                    fi
+                    done
+                    ;;
             2)
                 while true; do
                 clear
-                    echo "Press 1 for Hyprland"
-                    echo "Press 2 for Sway"
-                    echo "Press 3 to go back"
+                print_wayland_options
                     read -rp "Enter your choice: " wayland_choice
 
                     case "$wayland_choice" in
                         1)
                             cd "$WAYLAND_SETUP_DIR/Hyprland" || exit
                             cp -r * ~/.config/
-                            echo "Hyprland Desktop deployed successfully!"
+                            echo -n "Hyprland Desktop deployed successfully!"
+                            read -n 1 -s
                             ;;
                         2)
                             cd "$WAYLAND_SETUP_DIR/Sway" || exit
                             cp -r * ~/.config/
-                            echo "Sway Desktop deployed successfully!"
+                            echo -n "Sway Desktop deployed successfully!"
+                            read -n 1 -s
                             ;;
-                        3)
+
+                        3|"")
                             break
                             ;;
+
                         *)
                             echo "Invalid choice"
                             ;;
                     esac
                 done
                 ;;
-            3)
+
+             3|"")
                 break
                 ;;
             *)
@@ -178,8 +194,9 @@ root_options() {
                             sudo cp "$SCRIPT_DIR/Optimizations/IO-Schedulers-Cache-Configs/sysctl_low_ram.conf" "$dir2/99-sysctl.conf"
                             sudo sysctl --system
                             ;;
-                        3)
-                            continue # Go back to the main menu
+
+                         3|"")
+                            break
                             ;;
                         *)
                             # Invalid iocache_choice
@@ -194,7 +211,8 @@ root_options() {
                     sudo chmod +x /bin/mglru
                     sudo cp "$SCRIPT_DIR/Optimizations/MGLRU/mglru.service" /lib/systemd/system/mglru.service
                     sudo systemctl enable --now mglru.service
-                    echo "MGLRU installed and enabled"
+                    echo -n "MGLRU installed and enabled"
+                    read -n 1 -s
                     ;;
                 3)
                     # Code for ZRAM option
@@ -203,9 +221,11 @@ root_options() {
                     sudo chmod +x /bin/zram
                     sudo cp "$SCRIPT_DIR/Optimizations/Zram/zram.service" /lib/systemd/system/zram.service
                     sudo systemctl enable --now zram.service
-                    echo "ZRAM installed and enabled"
+                    echo -n "ZRAM installed and enabled"
+                    read -n 1 -s
                     ;;
-                4)
+
+                 4|"")
                     break
                     ;;
                 *)
