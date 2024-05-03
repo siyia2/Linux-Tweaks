@@ -70,33 +70,36 @@ non_root_options() {
         case "$subchoice" in
             1)
                 cd "$CONFIG_DIR" || exit
-                ls --color=always | sed "s/\(^.*\)/$(printf '%b' '\033[0;95m')\1$(printf '%b' '\033[0m')/"
-                
-                echo -e "\nEnter 'A' to deploy all config files, or enter specific filename(s) separated by space, press 'q' to quit:"
-                while true; do
-                 read -rp $'\n'"Files: " files
-                 if [ "$files" = "q" ] || [ -z "$files" ]; then
-                                        break
-                  elif [ "$files" = "A" ]; then
-                   cp -r * ~/.config/
-                   cp rtorrent.rc ~/.rtorrent.rc
-                   cp zshrc ~/.zshrc
-                   rm ~/.config/rtorrent.rc ~/.config/zshrc
-                   echo "Config files deployed successfully!"
-                  else
-                   for file in $files; do
-                    if [ "$file" = "zshrc" ]; then
-                      cp zshrc ~/.zshrc
-                      elif [ "$file" = "rtorrent.rc" ]; then
-                       cp rtorrent.rc ~/.rtorrent.rc
-                    else
-                     cp -r "$file" ~/.config
-                    fi
+                    ls --color=always | sed "s/\(^.*\)/$(printf '%b' '\033[0;95m')\1$(printf '%b' '\033[0m')/"
+                    
+                    echo -e "\nEnter 'A' to deploy all config files, or enter specific filename(s) separated by space, press 'q' to quit:"
+                    while true; do
+                        read -erp $'\n'"Files: " files
+                    
+                        if [ "$files" = "q" ] || [ -z "$files" ]; then
+                            break
+                        elif [ "$files" = "A" ]; then
+                            cp -r * ~/.config/
+                            cp rtorrent.rc ~/.rtorrent.rc
+                            cp zshrc ~/.zshrc
+                            rm ~/.config/rtorrent.rc ~/.config/zshrc
+                            echo "Config files deployed successfully!"
+                        else
+                           # Autocompletion
+IFS=' ' read -r -a file_array <<< "${files//\/}"
+    for file in "${file_array[@]}"; do
+        if [ "$file" = "zshrc" ]; then
+            cp zshrc ~/.zshrc
+        elif [ "$file" = "rtorrent.rc" ]; then
+            cp rtorrent.rc ~/.rtorrent.rc
+        else
+            cp -r "$file" ~/.config
+        fi
+    done
+    echo "Config files deployed successfully!"
+fi
                     done
-                    echo -n "Config files deployed successfully!"
-                    read -n 1 -s
-                    fi
-                    done
+                    
                     ;;
             2)
                 while true; do
