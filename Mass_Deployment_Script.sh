@@ -182,8 +182,8 @@ root_options() {
                             dir="/etc/udev/rules.d"
                             dir2="/etc/sysctl.d/"
                             mkdir -p "$dir" "$dir2"
-                            sudo cp "$SCRIPT_DIR/Optimizations/IO-Schedulers-Cache-Configs/60-ioschedulers.rules" "$dir/60-ioschedulers.rules"
-                            sudo cp "$SCRIPT_DIR/Optimizations/IO-Schedulers-Cache-Configs/sysctl.conf" "$dir2/99-sysctl.conf"
+                            sudo cp -f "$SCRIPT_DIR/Optimizations/IO-Schedulers-Cache-Configs/60-ioschedulers.rules" "$dir/60-ioschedulers.rules"
+                            sudo cp -f "$SCRIPT_DIR/Optimizations/IO-Schedulers-Cache-Configs/sysctl.conf" "$dir2/99-sysctl.conf"
                             sudo sysctl --system
                             ;;
                         2)
@@ -192,8 +192,8 @@ root_options() {
                             dir="/etc/udev/rules.d"
                             dir2="/etc/sysctl.d/"
                             mkdir -p "$dir" "$dir2"
-                            sudo cp "$SCRIPT_DIR/Optimizations/IO-Schedulers-Cache-Configs/60-ioschedulers.rules" "$dir/60-ioschedulers.rules"
-                            sudo cp "$SCRIPT_DIR/Optimizations/IO-Schedulers-Cache-Configs/sysctl_low_ram.conf" "$dir2/99-sysctl.conf"
+                            sudo cp -f "$SCRIPT_DIR/Optimizations/IO-Schedulers-Cache-Configs/60-ioschedulers.rules" "$dir/60-ioschedulers.rules"
+                            sudo cp -f "$SCRIPT_DIR/Optimizations/IO-Schedulers-Cache-Configs/sysctl_low_ram.conf" "$dir2/99-sysctl.conf"
                             sudo sysctl --system
                             ;;
 
@@ -209,9 +209,9 @@ root_options() {
                 2)
                     # Code for MGLRU option
                     echo "Installing MGLRU..."
-                    sudo cp "$SCRIPT_DIR/Optimizations/MGLRU/mglru" /bin/mglru
+                    sudo cp -f "$SCRIPT_DIR/Optimizations/MGLRU/mglru" /bin/mglru
                     sudo chmod +x /bin/mglru
-                    sudo cp "$SCRIPT_DIR/Optimizations/MGLRU/mglru.service" /lib/systemd/system/mglru.service
+                    sudo cp -f "$SCRIPT_DIR/Optimizations/MGLRU/mglru.service" /lib/systemd/system/mglru.service
                     sudo systemctl enable --now mglru.service
                     echo -n "MGLRU installed and enabled"
                     read -n 1 -s
@@ -219,9 +219,9 @@ root_options() {
                 3)
                     # Code for ZRAM option
                     echo "Installing ZRAM..."
-                    sudo cp "$SCRIPT_DIR/Optimizations/Zram/zram" /bin/zram
+                    sudo cp -f "$SCRIPT_DIR/Optimizations/Zram/zram" /bin/zram
                     sudo chmod +x /bin/zram
-                    sudo cp "$SCRIPT_DIR/Optimizations/Zram/zram.service" /lib/systemd/system/zram.service
+                    sudo cp -f "$SCRIPT_DIR/Optimizations/Zram/zram.service" /lib/systemd/system/zram.service
                     sudo systemctl enable --now zram.service
                     echo -n "ZRAM installed and enabled"
                     read -n 1 -s
