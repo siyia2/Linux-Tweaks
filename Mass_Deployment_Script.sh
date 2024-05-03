@@ -17,7 +17,7 @@ print_menu() {
     echo -e "${CYAN}╠════════════════════════════╣${NC}"
     echo -e "${CYAN}║${GREEN} 1 Non-Root Options         ${CYAN}║${NC}"
     echo -e "${CYAN}║${GREEN} 2 Root Options            ${CYAN} ║${NC}"
-    echo -e "${CYAN}║${RED} 3 exit                    ${CYAN} ║${NC}"
+    echo -e "${CYAN}║${RED} 3 Exit                    ${CYAN} ║${NC}"
     echo -e "${CYAN}╚════════════════════════════╝${NC}"
 }
 
