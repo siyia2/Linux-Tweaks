@@ -1,5 +1,6 @@
 {
     "Alt-/": "lua:comment.comment",
     "CtrlUnderscore": "lua:comment.comment",
-    "Alt-s": "SaveAs"
+    "Alt-s": "SaveAs",
+    "N": "FindPrevious"
 }
