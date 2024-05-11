@@ -28,7 +28,6 @@ print_non_root_options() {
     echo -e "${CYAN}╠═══════════════════════════════════╣${NC}"
     echo -e "${CYAN}║${GREEN} 1 Deploy Config Files into ~/     ${CYAN}║${NC}"
     echo -e "${CYAN}║${GREEN} 2 Deploy a Wayland Desktop        ${CYAN}║${NC}"
-    echo -e "${CYAN}║${RED} Press ENTER to return             ${CYAN}║${NC}"
     echo -e "${CYAN}╚═══════════════════════════════════╝${NC}"
 }
 
@@ -39,7 +38,6 @@ print_wayland_options() {
     echo -e "${CYAN}╠══════════════════════════════╣${NC}"
     echo -e "${CYAN}║${GREEN} 1 Hyprland                   ${CYAN}║${NC}"
     echo -e "${CYAN}║${GREEN} 2 Sway                       ${CYAN}║${NC}"
-    echo -e "${CYAN}║${RED} Press ENTER to return        ${CYAN}║${NC}"
     echo -e "${CYAN}╚══════════════════════════════╝${NC}"
 }
 
@@ -64,7 +62,7 @@ non_root_options() {
     while true; do
     clear
         print_non_root_options
-        read -rp "Enter your choice: " subchoice
+        read -rp "Enter your choice or press ENTER to return: " subchoice
         echo -e ""
 
         case "$subchoice" in
@@ -72,7 +70,7 @@ non_root_options() {
                 cd "$CONFIG_DIR" || exit
                     ls --color=always | sed "s/\(^.*\)/$(printf '%b' '\033[0;95m')\1$(printf '%b' '\033[0m')/"
                     
-                    echo -e "\nEnter 'A' to deploy all config files, or enter specific filename(s) separated by space, press 'q'or ENTER to quit:"
+                    echo -e "\nEnter 'A' to deploy all config files, or enter specific filename(s) separated by space, press 'q' or ENTER to quit:"
                     while true; do
                         read -erp $'\n'"Files(Tab completion is available): " files
                     
@@ -104,7 +102,7 @@ non_root_options() {
                 while true; do
                 clear
                 print_wayland_options
-                    read -rp "Enter your choice: " wayland_choice
+                    read -rp "Enter your choice or press ENTER to return: " wayland_choice
 
                     case "$wayland_choice" in
                         1)
