@@ -27,13 +27,12 @@ command_exists() {
 mount_device() {
     local dev="$1"
     local fs_type="$(lsblk -n "/dev/$dev" -o FSTYPE)"
-
     if command_exists pmount; then
         pmount "/dev/$dev"
         exit_code="$?"
     else
         if [[ "$fs_type" == "crypto_LUKS" ]]; then
-            dev_map="$(udisksctl unlock -b "/dev/$dev" --no-user-interaction | grep -o "dm-[[:digit:]]*")"
+            dev_map="$(udisksctl unlock -b "/dev/$dev" --no-user-interaction | grep -o "dm-[\[:digit:\]]*")"
             udisksctl mount -b "/dev/$dev_map" --no-user-interaction >/dev/null
             exit_code="$?"
         else
@@ -41,7 +40,6 @@ mount_device() {
             exit_code="$?"
         fi
     fi
-
     if [[ $exit_code -eq 0 ]]; then
         sleep 1
         printf "/dev/%s mounted to %s.\n" "$dev" "$(lsblk -n "/dev/$dev" -o MOUNTPOINT | sed "/^$/d")"
@@ -52,15 +50,13 @@ mount_device() {
 unmount_device() {
     local dev="$1"
     local fs_type="$(lsblk -n "/dev/$dev" -o FSTYPE)"
-
     sync "$(lsblk -n "/dev/$dev" -o MOUNTPOINT | sed "/^$/d")"
-
     if command_exists pumount; then
         pumount "/dev/$dev"
         exit_code="$?"
     else
         if [[ "$fs_type" == "crypto_LUKS" ]]; then
-            dev_map="$(udisksctl info -b "/dev/$dev" | grep "CleartextDevice" | grep -o "dm-[[:digit:]]*")"
+            dev_map="$(udisksctl info -b "/dev/$dev" | grep "CleartextDevice" | grep -o "dm-[\[:digit:\]]*")"
             udisksctl unmount -b "/dev/$dev_map" --no-user-interaction >/dev/null
             exit_code="$?"
             udisksctl lock -b "/dev/$dev" --no-user-interaction >/dev/null
@@ -69,38 +65,28 @@ unmount_device() {
             exit_code="$?"
         fi
     fi
-
     if [[ $exit_code -eq 0 ]]; then
         printf "/dev/%s unmounted.\n" "$dev"
-        if udisksctl power-off -b "/dev/$dev" --no-user-interaction; then
-            printf "/dev/%s ejected.\n" "$dev"
-        fi
     fi
 }
 
 prompt="device name [e.g. sdXn] ('l'ist, 'q'uit): "
-
 while true; do
     lsblk
-    printf "\\nEnsure you aren't still in the mounted device.\\n"
+    printf "\nEnsure you aren't still in the mounted device.\n"
     printf "%s" "$prompt"
     read -r dev
-
     case "$dev" in
-        l)
-            continue
-            ;;
-        q)
-            exit
-            ;;
-        *)
-            if grep -qs "$dev " /proc/mounts || [[ -n "$(lsblk -n "/dev/$dev" -o MOUNTPOINT)" ]]; then
-                unmount_device "$dev"
-            elif [[ -b "/dev/$dev" ]]; then
-                mount_device "$dev"
-            else
-                printf "/dev/%s does not exist or is not a block device.\\n" "$dev"
-            fi
-            ;;
+    l) continue ;;
+    q) exit ;;
+    *)
+        if grep -qs "$dev " /proc/mounts || [[ -n "$(lsblk -n "/dev/$dev" -o MOUNTPOINT)" ]]; then
+            unmount_device "$dev"
+        elif [[ -b "/dev/$dev" ]]; then
+            mount_device "$dev"
+        else
+            printf "/dev/%s does not exist or is not a block device.\n" "$dev"
+        fi
+        ;;
     esac
 done
