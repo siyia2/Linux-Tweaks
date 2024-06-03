@@ -218,7 +218,7 @@ cmd finder $~/.config/lf/finder
 
 # USE USB MOUNT PLUGIN FROM NNN
 
-cmd toggle-mount $~/.config/lf/nmount $fx
+cmd toggle-mount $~/.config/lf/nmount $fx && lf -remote "send $id reload"
 
 
 # ARCHIVE MANAGEMENT
