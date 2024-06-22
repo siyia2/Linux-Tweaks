@@ -8,10 +8,10 @@ selected_file=$(find "$current_dir" -type f | fzf)
 
 # Check if a file was selected
 if [ -n "$selected_file" ]; then
-  # Open the selected file in lf
-  lf "$selected_file"
+    # Print the selected file path to stdout
+    # lf will use this to navigate to the file
+    printf 'select %q' "$selected_file"
 else
-  # No file selected, display message
-  echo "No file selected."
+    # No file selected, display message
+    echo "No file selected." >&2
 fi
-

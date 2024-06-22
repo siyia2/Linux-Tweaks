@@ -69,6 +69,8 @@ map . set hidden!
 
 map <f-9> $kitty &
 
+map e $kitty -e micro $fx &
+
 # show the result of execution of previous commands
 map ` !true
 
@@ -213,7 +215,12 @@ lf -remote "send $id reload"
 
 # FUZZY FILE FINDER
 
-cmd finder $~/.config/lf/finder
+cmd finder ${{
+    res="$(~/.config/lf/finder)"
+    if [ -n "$res" ]; then
+        lf -remote "send $id $res"
+    fi
+}}
 
 
 # USE USB MOUNT PLUGIN FROM NNN
