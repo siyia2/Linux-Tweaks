@@ -27,6 +27,9 @@ set icons false
 
 set truncatechar "…"
 
+#Add prefix instead of suffix for duplicate copies
+set dupfilefmt "%n~%f"
+
 # Use the `dim` attribute instead of underline for the cursor in the preview pane
 set cursorpreviewfmt "\033[7;2m"
 
