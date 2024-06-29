@@ -1,1 +1,8 @@
-s
+
+apt update && apt install -y make build-essential
+
+sudo docker cp /source/path/ debian_container:/root/
+
+sudo docker cp debian_container:/root/source/path /destination/path/
+
+sudo docker exec -it debian_container /bin/bash
