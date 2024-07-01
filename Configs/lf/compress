@@ -25,6 +25,8 @@ if [ -z "$archive_name" ]; then
     exit 0
 fi
 
+archive_name=$(echo "$archive_name" | tr -d '/')
+
 # Get the current working directory
 cwd=$(pwd)
 
