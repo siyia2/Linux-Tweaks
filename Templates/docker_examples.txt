@@ -6,3 +6,6 @@ sudo docker cp /source/path/ debian_container:/root/
 sudo docker cp debian_container:/root/source/path /destination/path/
 
 sudo docker exec -it debian_container /bin/bash
+
+sudo docker ps
+sudo docker start 9035c934d651
