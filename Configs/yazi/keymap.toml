@@ -1,0 +1,11 @@
+[manager]
+prepend_keymap = [
+    { on = ["c"], run = "unyank", desc = "Clear yanked files" },
+    { on = ["<C-c>"], run = "select_all --state=false", desc = "Clear selection" },
+    { on = ["d"], run = "yank --cut", desc = "Cut" },
+    { on = ["<C-a>"], run = "select_all --state=none", desc = "Toggle between select all and clear selection" },
+	{ on = ["<Delete>"], run = "remove --permanently", desc = "remove" },
+    { on = ["n", "f"], run = "create file", desc = "Create a new file" },
+    { on = ["n", "d"], run = "create dir", desc = "Create a new directory" },
+    { on = ["l"], run = "link --relative", desc = "Create a new symlink" },
+]
