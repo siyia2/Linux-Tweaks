@@ -45,12 +45,12 @@ set cleaner ctpvclear
 ## PROMPT COLORS
 
 set promptfmt "
-\033[48;2;35;38;39;38;2;28;220;156m  
+\033[48;2;35;38;39;38;2;28;220;156m 
 \033[38;2;0;175;0;48;2;0;175;0m
 \033[38;2;0;175;0;48;2;40;47;62m
-\033[38;2;255;255;255m %w 
+\033[38;2;255;255;255m %w
 \033[38;2;0;175;62;48;2;58;67;89m
-\033[33;150;150;255m %f 
+\033[33;150;150;255m %f
 \033[;38;2;0;175;48;49m\033[m"
 
 
@@ -98,6 +98,8 @@ map <c-f> finder
 map <c-z> compress
 
 map <c-x> extract
+
+map f :filter
 
 # use '<delete>' key for either 'trash' or 'delete' command
 # map <delete> trash
@@ -159,11 +161,11 @@ cmd mkhardlink ${{
 	    lf -remote "send $id echo Error: '$fx' is not a regular file."
 	    exit 1
 	fi
-	
+
 	# Read link name from user
 	printf "Hardlink name: "
 	read -r link_name
-	
+
 	# Create hardlink if name provided
 	if [ -n "$link_name" ]; then
 	    ln "$fx" "$link_name" || {
@@ -198,7 +200,7 @@ cmd mkfile ${{
 	read ans
 	touch $ans
 }}
-	
+
 
 # TOGGLE EXECUTABLE STATUS OF A FILE
 
@@ -250,4 +252,3 @@ cmd extract ${{
 	[ $? -eq 0 ] && lf -remote "send $id :reload"
 done
 }}
-
