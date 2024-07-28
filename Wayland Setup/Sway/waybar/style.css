@@ -7,19 +7,6 @@
 	
 }
 
-#custom-acpi{
-padding-left: 14px ;
-padding-top: 1px;
-background-color: black;
-color: red;
-border-top: 2px solid rgba(100, 114, 125, 1.0);
-border-bottom: 2px solid rgba(100, 114, 125, 1.0);
-border-right: 2px solid rgba(100, 114, 125, 1.0);
-border-left: 2px solid rgba(100, 114, 125, 1.0);
-font-weight: bold;
-
-}
-
 #custom-kb {
 color: white;
 background-color: rgba(25, 25, 112, 0.95);
@@ -116,6 +103,13 @@ padding-top: 2px;
 
 }
 
+#custom-mic {
+padding-top: 2px;
+padding-right: 2px;
+border-right: 2px solid rgba(100, 114, 125, 1.0);
+border-bottom: 1px solid rgba(100, 114, 125, 1.0);
+
+}
 
 #workspaces button:hover {
   box-shadow: 0 0 0px 0px;
@@ -142,7 +136,6 @@ window#waybar {
 
 #workspaces button.focused {
 background-color: rgba(60, 179, 113, 0.75);
-font-weight: bold;
 color: black;
     border: 2px solid white;
 }
@@ -218,10 +211,14 @@ background: transparent;
 }
 #pulseaudio{
 padding: 1px 3px;
-border: 1px solid rgba(100, 114, 125, 1.0);
+border-top: 1px solid rgba(100, 114, 125, 1.0);
+border-bottom: 1px solid rgba(100, 114, 125, 1.0);
+border-left: 1px solid rgba(100, 114, 125, 1.0);
 }
 #pulseaudio.muted{
-border: 1px solid rgba(100, 114, 125, 1.0);
+border-top: 1px solid rgba(100, 114, 125, 1.0);
+border-bottom: 1px solid rgba(100, 114, 125, 1.0);
+border-left: 1px solid rgba(100, 114, 125, 1.0);
 padding: 1px 3px;
 background: transparent;
     color: red;
