@@ -139,14 +139,6 @@
 "on-scroll-down": "hyprctl dispatch workspace e-1"
 },
 
-  "custom/mic": {
-    "format": "{}",
-    "exec": "~/.config/waybar/mic_status.sh",
-    "interval": 2,
-    "on-click": "pactl set-source-mute alsa_input.pci-0000_00_14.2.analog-stereo toggle",
-    "tooltip": false
-},
-
 "custom/packages": {
 "restart-interval": 99,
 "exec": "pacman -Qq | wc -l",
@@ -210,6 +202,14 @@
     "tooltip-format": "{ifname} {ipaddr}",
 	"tooltip": true,
 	"on-click": "killall nmtui ; kitty -e nmtui"
+},
+
+  "custom/mic": {
+    "format": "{}",
+    "exec": "~/.config/waybar/modules/mic_status.sh",
+    "interval": 2,
+    "on-click": "pactl set-source-mute alsa_input.pci-0000_00_14.2.analog-stereo toggle",
+    "tooltip": false
 },
 
 "pulseaudio": {
