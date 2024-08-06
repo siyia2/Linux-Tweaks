@@ -3,10 +3,11 @@
     "layer": "top",
     	"width": 1920,
 	"height": 26,
-    "modules-left": ["hyprland/workspaces"],
-    //"modules-left": ["sway/workspaces"],
+    //"modules-left": ["hyprland/workspaces"],
+    "modules-left": ["dwl/tags"],
+	"modules-left": ["sway/workspaces"],
     "modules-center": ["memory","custom/vram","custom/psufan","custom/cpu","cpu","temperature","custom/cpufan","custom/gpu","custom/gpusage","custom/gputemp","custom/gpufan"],
-    "modules-right": ["custom/kernel","custom/mesa","custom/bt_battery","pulseaudio","network","hyprland/language","clock"],
+    "modules-right": ["custom/kernel","custom/mesa","custom/bt_battery","pulseaudio","custom/mic","network","custom/kb","clock"],
     "sway/window": {
         "max-length": 1920
     },
@@ -18,7 +19,7 @@
     "interval": 5,
     "format": "Ram: {}%",
 		"tooltip": false,
-"on-click": "killall btop & alacritty -t btop -e btop"
+"on-click": "killall btop & kitty -T btop -e btop"
 },
 
 "custom/zram": {
@@ -26,7 +27,7 @@
         "exec": "/home/siyia/.config/waybar/modules/zram.sh",
 	"format": "Zram:{} ",
 		"tooltip": false,
-"on-click": "killall btop & alacritty -t btop -e btop"
+"on-click": "killall btop & kitty -T btop -e btop"
 },
 
 
@@ -35,7 +36,7 @@
 
 "custom/cpu": {
   "format": " Cpu:",
-  "on-click": "killall btop & alacritty -t btop -e btop",
+  "on-click": "killall btop & kitty -T btop -e btop",
 		"tooltip": false
 },
 
@@ -43,7 +44,7 @@
     "interval": 2,
     "format": "{usage}% ",
 		"tooltip": false,
-"on-click": "killall btop & alacritty -t btop -e btop"
+"on-click": "killall btop & kitty -T btop -e btop"
 },
 
 "custom/cpufan": {
@@ -51,7 +52,7 @@
         "exec": "/home/siyia/.config/waybar/modules/cpu_fan.sh",
 	"format": "  {} rpm ",
 		"tooltip": false,
-"on-click": "killall btop & alacritty -t btop -e btop"
+"on-click": "killall btop & kitty -T btop -e btop"
 },
 
 "temperature": {
@@ -62,7 +63,7 @@
 	"format-critical":"{temperatureC}°C",
 	"format":"{temperatureC}°C",
 		"tooltip": false,
-"on-click": "killall btop & alacritty -t btop -e btop"
+"on-click": "killall btop & kitty -T btop -e btop"
 },
 
 
@@ -86,7 +87,7 @@
 
 "custom/gpu": {
   "format": " Gpu:",
-  "on-click": "killall btop & alacritty -t btop -e btop",
+  "on-click": "killall btop & kitty -T btop -e btop",
 		"tooltip": false
 },
 
@@ -95,7 +96,7 @@
         "exec": "/home/siyia/.config/waybar/modules/gpu_usage.sh",
 	"format": " {}% ",
 		"tooltip": false,
-"on-click": "killall btop & alacritty -t btop -e btop"
+"on-click": "killall btop & kitty -T btop -e btop"
 },
 
 "custom/gpufan": {
@@ -103,7 +104,7 @@
         "exec": "/home/siyia/.config/waybar/modules/gpu_fan.sh",
 	"format": "  {} rpm ",
 		"tooltip": false,
-"on-click": "killall btop & alacritty -t btop -e btop"
+"on-click": "killall btop & kitty -T btop -e btop"
 },
 
 "custom/vram": {
@@ -111,7 +112,7 @@
 		"tooltip": false,
 		"exec": "/home/siyia/.config/waybar/modules/vram.sh",
 		"format": "Vram: {}% ",
-		"on-click": "killall btop & alacritty -t btop -e btop"
+		"on-click": "killall btop & kitty -T btop -e btop"
 },
 
 "custom/gputemp": {
@@ -119,7 +120,7 @@
         "exec": "/home/siyia/.config/waybar/modules/gpu_temp.sh",
 	"format": " {}°C",
 		"tooltip": false,
-"on-click": "killall btop & alacritty -t btop -e btop"
+"on-click": "killall btop & kitty -T btop -e btop"
 },
 
 // MISC SW
@@ -179,7 +180,7 @@
         "exec": "/home/siyia/.config/waybar/modules/psu_fan.sh",
 	"format": " Psu: {} rpm ",
 		"tooltip": false,
-"on-click": "killall btop & alacritty -t btop -e btop"
+"on-click": "killall btop & kitty -T btop -e btop"
 },
 
 "custom/bt_battery": {
@@ -200,14 +201,23 @@
     "format-disconnected": "✖️",
     "tooltip-format": "{ifname} {ipaddr}",
 	"tooltip": true,
-	"on-click": "killall nmtui ; alacritty -e nmtui"
+	"on-click": "killall nmtui ; kitty -e nmtui"
+},
+
+  "custom/mic": {
+    "format": "{}",
+    "exec": "~/.config/waybar/modules/mic_status.sh",
+    "interval": 1,
+    "on-click": "pactl set-source-mute alsa_input.pci-0000_00_14.2.analog-stereo toggle",
+    "tooltip": false
 },
 
 "pulseaudio": {
-    "format": " {volume}% {icon} {format_source}",
+	"source-name": "Built-in Audio Analog Stereo",
+    "format": " {volume}% {icon}",
     "format-source": "🟢",
     "format-source-muted": "🔴",
-    "format-bluetooth": "{volume}% {icon} {format_source}",
+    "format-bluetooth": "{volume}% {icon}",
     "format-muted": " Muted 🔇",
     "format-icons": {
         "headphones": "",
@@ -223,30 +233,31 @@
     "scroll-step": 1,
 	"on-scroll-down":"pactl set-sink-volume @DEFAULT_SINK@ -5%",
 	"on-scroll-up":"pactl set-sink-volume @DEFAULT_SINK@ +5%",
-	"on-click-middle":"pactl set-sink-mute @DEFAULT_SINK@ toggle",
+	"on-click-middle":"~/.config/waybar/modules/toggle_mute.sh",
     "on-click": "pavucontrol",
 	"tooltip": false
 },
 // CLOCK/DATE STUFF
-
-    "clock": {
+"clock": {
     "format": "{:%a %d %b, %H:%M}",
-	"on-click": "gsimplecal",
+    "format-alt": "{:%A, %d %B %Y, %H:%M}",
+    "on-click": "gsimplecal",
+    "on-click-right": "killall gsimplecal",
     "scroll-step": 1,
-    "on-scroll-down":"killall gsimplecal",
-	"tooltip-format": "{:%A %d %B %Y, %H:%M}",
-	"tooltip": false,
-    },
-   
-  "clock#utc": {
-  	"format": "{:%H:%M} ",
-  	"on-click": "gsimplecal",
-  	"scroll-step": 1,
-  	"on-scroll-down":"killall gsimplecal",
-  	"on-click": "killall gsimplecal",
-  	"tooltip-format": "UTC {:%H:%M}",
-  	"tooltip": false,
-        "timezone": "Africa/Accra"
+    "tooltip-format": "<big>{:%d %B %Y}</big>\n<tt><small>{calendar}</small></tt>",
+    "tooltip": true,
+    "locale": "el_GR.UTF-8"
+},
 
-    }
+"clock#utc": {
+    "format": "UTC {:%H:%M}",
+    "on-click": "gsimplecal",
+    "on-click-right": "killall gsimplecal",
+    "scroll-step": 1,
+    "tooltip-format": "UTC {:%A, %d %B %Y, %H:%M}",
+    "tooltip": true,
+    "timezone": "UTC",
+    "locale": "el_GR.UTF-8"
+}
+
 }
