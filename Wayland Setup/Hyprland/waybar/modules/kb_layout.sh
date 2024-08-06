@@ -1,21 +1,15 @@
-!/bin/bash
-  
-KEYBOARD=$(swaymsg -pt get_config | awk '{if ($1 == "input") {name=$2}; if($1 == "xkb_layout") {print name; exit}}')
+#!/bin/bash
 
-MANPAGE=$(man --where xkeyboard-config)
-case `file -bi $MANPAGE | grep -o "^[^/]*/[^;]*"` in
-    'application/x-gzip') CAT='zcat';;
-    'application/x-bzip2') CAT='bzcat';;
-    'application/x-tar') CAT='tar -O -xf';;
-    'application/x-xz') CAT='xzcat';;
-    'text/plain') CAT='cat';;
-esac
+get_layout() {
+    swaymsg -t get_inputs | awk '/xkb_active_layout_name/{print $2}' | tr -d '"'
+}
 
+layout=""
 while true; do
-    ACTIVE_LANGUAGE=$(swaymsg -t get_inputs | grep -5 $KEYBOARD | tail -1 | sed 's/.*"\(.*\)".*$/\1/gi')
-    $CAT $MANPAGE | awk -F'[\t(]' -v var="$ACTIVE_LANGUAGE" 'index($0,var)>=1 {print $1; exit}'
-
+    new_layout=$(get_layout)
+    if [ "$new_layout" != "$layout" ]; then
+        layout=$new_layout
+        echo $layout
+    fi
     sleep 1
 done
-
-exit
