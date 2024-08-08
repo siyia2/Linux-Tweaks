@@ -1,7 +1,8 @@
 #!/bin/bash
 
 get_layout() {
-    swaymsg -t get_inputs | awk '/xkb_active_layout_name/{print $2}' | sed 's/^"//;s/"$//'
+    local layout=$(swaymsg -t get_inputs | grep -o -E '"xkb_active_layout_name".*' | sed 's/"xkb_active_layout_name": "\(.*\)"/\1/')
+    echo "$layout"
 }
 
 layout=""
