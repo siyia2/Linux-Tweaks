@@ -239,22 +239,22 @@
 },
 // CLOCK/DATE STUFF
 "clock": {
-    "format": "{:%a %d %b, %H:%M}",
-    "format-alt": "{:%A, %d %B %Y, %H:%M}",
-    "on-click": "gsimplecal",
-    "on-click-right": "killall gsimplecal",
+    "format": "{:L%a %d %b, %H:%M}",
+    //"format-alt": "{:%A, %d %B %Y, %H:%M}",
+   // "on-click": "gsimplecal",
+   // "on-click-right": "killall gsimplecal",
     "scroll-step": 1,
-    "tooltip-format": "<big>{:%d %B %Y}</big>\n<tt><small>{calendar}</small></tt>",
+    "tooltip-format": "<big>{:L%d %B %Y}</big>\n<tt><small>{calendar}</small></tt>",
     "tooltip": true,
     "locale": "el_GR.UTF-8"
 },
 
 "clock#utc": {
     "format": "UTC {:%H:%M}",
-    "on-click": "gsimplecal",
-    "on-click-right": "killall gsimplecal",
+   // "on-click": "gsimplecal",
+   // "on-click-right": "killall gsimplecal",
     "scroll-step": 1,
-    "tooltip-format": "UTC {:%A, %d %B %Y, %H:%M}",
+    "tooltip-format": "UTC {L:%A, %d %B %Y, %H:%M}",
     "tooltip": true,
     "timezone": "UTC",
     "locale": "el_GR.UTF-8"
