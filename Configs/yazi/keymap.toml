@@ -84,6 +84,71 @@ run  = "cd /run/media/"
 desc = "Cd to /run/media/"
 
 [[manager.prepend_keymap]]
+on   = [ "s", "m" ]
+run  = "sort --reverse=no mtime; linemode mtime"
+desc = "Sort by modified time"
+
+[[manager.prepend_keymap]]
+on   = [ "s", "M" ]
+run  = "sort --reverse mtime; linemode mtime"
+desc = "Sort by modified time (reverse)"
+
+[[manager.prepend_keymap]]
+on   = [ "s", "b" ]
+run  = "sort --reverse=no btime; linemode btime"
+desc = "Sort by birth time"
+
+[[manager.prepend_keymap]]
+on   = [ "s", "B" ]
+run  = "sort --reverse btime; linemode btime"
+desc = "Sort by birth time (reverse)"
+
+[[manager.prepend_keymap]]
+on   = [ "s", "e" ]
+run  = "sort extension --reverse=no"
+desc = "Sort by extension"
+
+[[manager.prepend_keymap]]
+on   = [ "s", "B" ]
+run  = "sort extension"
+desc = "Sort by extension (reverse)"
+
+[[manager.prepend_keymap]]
+on   = [ "s", "a" ]
+run  = "sort --reverse=no alphabetical"
+desc = "Sort alphabetically"
+
+[[manager.prepend_keymap]]
+on   = [ "s", "A" ]
+run  = "sort --reverse alphabetical"
+desc = "Sort alphabetically (reverse)"
+
+[[manager.prepend_keymap]]
+on   = [ "s", "n" ]
+run  = "sort natural --reverse=no"
+desc = "Sort naturally"
+
+[[manager.prepend_keymap]]
+on   = [ "s", "N" ]
+run  = "sort natural --reverse"
+desc = "Sort naturally (reverse)"
+
+[[manager.prepend_keymap]]
+on   = [ "s", "s" ]
+run  = "sort size --reverse=no; linemode size"
+desc = "Sort by size"
+
+[[manager.prepend_keymap]]
+on   = [ "s", "S" ]
+run  = "sort size --reverse; linemode size"
+desc = "Sort by size (reverse)"
+
+[[manager.prepend_keymap]]
+on   = [ "s", "r" ]
+run  = "sort size --reverse=no random"
+desc = "Sort randomly"
+
+[[manager.prepend_keymap]]
 on   = [ "M" ]
 run  = "shell '/home/siyia/.config/yazi/scripts/nmount' --block"
 desc = "Mount/Unmount usb drives"
