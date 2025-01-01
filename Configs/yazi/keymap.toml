@@ -9,7 +9,7 @@ prepend_keymap = [
     { on = ["<Delete>"], run = "remove --permanently", desc = "remove" },
     { on = ["n", "f"], run = "create file", desc = "Create a new file" },
     { on = ["n", "d"], run = "create dir", desc = "Create a new directory" },
-    { on = ["l"], run = "link --relative", desc = "Create a new symlink" },
+    { on = ["n", "l"], run = "link --relative", desc = "Create a new symlink" },
 ]
 
 [[manager.prepend_keymap]]
@@ -41,3 +41,8 @@ desc = "Mount/Unmount usb drives"
 on   = [ "<F9>" ]
 run  = "shell 'kitty' --orphan"
 desc = "Launch terminal"
+
+[[manager.prepend_keymap]]
+on   = [ "e" ]
+run  = '''shell 'micro "$0"' --block'''
+desc = "Edit in terminal"
