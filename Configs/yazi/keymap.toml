@@ -19,9 +19,9 @@ run = "filter --smart"
 desc = "Filter"
 
 [[manager.prepend_keymap]]
-on = [ "z" ]
-run = "shell 'tar --zstd -cf'"
-desc = "Compress hovered files"
+on   = [ "z" ]
+run  = "plugin compress"
+desc = "Archive selected files"
 
 [[manager.prepend_keymap]]
 on = ["d"]
@@ -87,16 +87,3 @@ desc = "Launch terminal"
 on   = [ "e" ]
 run  = '''shell 'micro "$0"' --block'''
 desc = "Edit in terminal"
-
-
-[opener]
-edit_with_geany = [
-    { run = 'geany "$@"', orphan = true, for = "unix" },
-]
-
-[open]
-prepend_rules = [
-    { name = "*.txt", use = [ "edit_with_geany" ] },
-]
-
-

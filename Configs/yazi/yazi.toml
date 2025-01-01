@@ -3,9 +3,19 @@ edit_with_geany = [
     { run = 'geany "$@"', orphan = true, for = "unix" },
 ]
 
+open_with_roller = [
+    { run = 'file-roller "$@"', orphan = true, for = "unix" },
+]
+
 [open]
 prepend_rules = [
     { mime = "text/plain", use = [ "edit_with_geany" ] },
     { mime = "text/c", use = [ "edit_with_geany" ] },
+    { mime = "application/xz", use = [ "edit_with_geany" ] },
+    { mime = "application/7z", use = [ "edit_with_geany" ] },
+    { mime = "application/tar", use = [ "open_with_roller" ] },
+    { mime = "application/gz", use = [ "open_with_roller" ] },
+    { mime = "application/zstd", use = [ "open_with_roller" ] },
+    { mime = "application/zip", use = [ "open_with_roller" ] },
     
 ]
