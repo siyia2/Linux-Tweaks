@@ -19,7 +19,7 @@ run = "filter --smart"
 desc = "Filter"
 
 [[manager.prepend_keymap]]
-on   = [ "z" ]
+on   = [ "<C-z>" ]
 run  = "plugin compress"
 desc = "Archive selected files"
 
@@ -40,7 +40,7 @@ desc = "remove"
 
 [[manager.prepend_keymap]]
  on = ["n", "f"]
-run = "create file"
+run = "create"
 desc = "Create a new file"
 
 [[manager.prepend_keymap]]
@@ -50,7 +50,7 @@ desc = "Create a new symlink from yanked files/folders"
 
 [[manager.prepend_keymap]]
 on = ["n", "d"]
-run = "create dir"
+run = "create --dir"
 desc = "Create a new directory"
 
 [[manager.prepend_keymap]]
