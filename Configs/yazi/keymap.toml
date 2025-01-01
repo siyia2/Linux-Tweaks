@@ -1,16 +1,57 @@
-prepend_keymap = [
-    { on = ["c"], run = "unyank", desc = "Clear yanked files" },
-    { on = ["<C-c>"], run = "select_all --state=false", desc = "Clear selection" },
-    { on = ["<C-f>"], run = "search fd --args='-e -H'", desc = "Search" },
-    { on = ["f"], run = "filter --smart", desc = "Filter" },
-    { on = [ "z" ], run = "shell 'tar --zstd -cf'", desc = "Compress hovered files" },
-    { on = ["d"], run = "yank --cut", desc = "Cut" },
-    { on = ["<C-a>"], run = "select_all --state=none", desc = "Toggle between select all and clear selection" },
-    { on = ["<Delete>"], run = "remove --permanently", desc = "remove" },
-    { on = ["n", "f"], run = "create file", desc = "Create a new file" },
-    { on = ["n", "d"], run = "create dir", desc = "Create a new directory" },
-    { on = ["n", "l"], run = "link --relative", desc = "Create a new symlink" },
-]
+[[manager.prepend_keymap]]
+on = ["c"]
+run = "unyank"
+desc = "Clear yanked files"
+
+[[manager.prepend_keymap]]
+on = ["<C-c>"]
+run = "escape --all"
+desc = "Clear selection"
+
+[[manager.prepend_keymap]]
+on = ["<C-f>"]
+run = "search fd --args='-e -H'"
+desc = "Search"
+
+[[manager.prepend_keymap]]
+on = ["f"]
+run = "filter --smart"
+desc = "Filter"
+
+[[manager.prepend_keymap]]
+on = [ "z" ]
+run = "shell 'tar --zstd -cf'"
+desc = "Compress hovered files"
+
+[[manager.prepend_keymap]]
+on = ["d"]
+run = "yank --cut"
+desc = "Cut"
+
+[[manager.prepend_keymap]]
+on = ["<C-a>"]
+run = "toggle_all --state=none"
+desc = "Toggle between select all and clear selection"
+
+[[manager.prepend_keymap]]
+on = ["<Delete>"]
+run = "remove --permanently"
+desc = "remove"
+
+[[manager.prepend_keymap]]
+ on = ["n", "f"]
+run = "create file"
+desc = "Create a new file"
+
+[[manager.prepend_keymap]]
+on = ["n", "l"]
+run = "create link --relative"
+desc = "Create a new symlink"
+
+[[manager.prepend_keymap]]
+on = ["n", "d"]
+run = "create dir"
+desc = "Create a new directory"
 
 [[manager.prepend_keymap]]
 on   = [ "<F1>" ]
@@ -46,3 +87,16 @@ desc = "Launch terminal"
 on   = [ "e" ]
 run  = '''shell 'micro "$0"' --block'''
 desc = "Edit in terminal"
+
+
+[opener]
+edit_with_geany = [
+    { run = 'geany "$@"', orphan = true, for = "unix" },
+]
+
+[open]
+prepend_rules = [
+    { name = "*.txt", use = [ "edit_with_geany" ] },
+]
+
+
