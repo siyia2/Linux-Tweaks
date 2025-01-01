@@ -1,11 +1,43 @@
-[manager]
 prepend_keymap = [
     { on = ["c"], run = "unyank", desc = "Clear yanked files" },
     { on = ["<C-c>"], run = "select_all --state=false", desc = "Clear selection" },
+    { on = ["<C-f>"], run = "search fd --args='-e -H'", desc = "Search" },
+    { on = ["f"], run = "filter --smart", desc = "Filter" },
+    { on = [ "z" ], run = "shell 'tar --zstd -cf'", desc = "Compress hovered files" },
     { on = ["d"], run = "yank --cut", desc = "Cut" },
     { on = ["<C-a>"], run = "select_all --state=none", desc = "Toggle between select all and clear selection" },
-	{ on = ["<Delete>"], run = "remove --permanently", desc = "remove" },
+    { on = ["<Delete>"], run = "remove --permanently", desc = "remove" },
     { on = ["n", "f"], run = "create file", desc = "Create a new file" },
     { on = ["n", "d"], run = "create dir", desc = "Create a new directory" },
     { on = ["l"], run = "link --relative", desc = "Create a new symlink" },
 ]
+
+[[manager.prepend_keymap]]
+on   = [ "<F1>" ]
+run  = "cd ~/"
+desc = "Cd to ~/"
+
+[[manager.prepend_keymap]]
+on   = [ "<F2>" ]
+run  = "cd /mnt/D/"
+desc = "Cd to /mnt/D/"
+
+[[manager.prepend_keymap]]
+on   = [ "<F3>" ]
+run  = "cd /mnt/"
+desc = "Cd to /mnt/"
+
+[[manager.prepend_keymap]]
+on   = [ "<F4>" ]
+run  = "cd /run/media/"
+desc = "Cd to /run/media/"
+
+[[manager.prepend_keymap]]
+on   = [ "M" ]
+run  = "shell '/home/siyia/.config/yazi/scripts/nmount' --block"
+desc = "Mount/Unmount usb drives"
+
+[[manager.prepend_keymap]]
+on   = [ "<F9>" ]
+run  = "shell 'kitty' --orphan"
+desc = "Launch terminal"
