@@ -44,9 +44,9 @@ run = "create file"
 desc = "Create a new file"
 
 [[manager.prepend_keymap]]
-on = ["n", "l"]
-run = "create link --relative"
-desc = "Create a new symlink"
+on = ["l"]
+run = "link --relative"
+desc = "Create a new symlink from yanked files/folders"
 
 [[manager.prepend_keymap]]
 on = ["n", "d"]

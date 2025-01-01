@@ -5,5 +5,7 @@ edit_with_geany = [
 
 [open]
 prepend_rules = [
-    { name = "*.txt", use = [ "edit_with_geany" ] },
+    { mime = "text/plain", use = [ "edit_with_geany" ] },
+    { mime = "text/c", use = [ "edit_with_geany" ] },
+    
 ]
