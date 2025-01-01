@@ -54,6 +54,11 @@ run = "create dir"
 desc = "Create a new directory"
 
 [[manager.prepend_keymap]]
+on = ["x"]
+run = "cancel"
+desc = "Cancel task"
+
+[[manager.prepend_keymap]]
 on   = [ "<F1>" ]
 run  = "cd ~/"
 desc = "Cd to ~/"
