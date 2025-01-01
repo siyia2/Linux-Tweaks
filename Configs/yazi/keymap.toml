@@ -54,14 +54,19 @@ run = "create --dir"
 desc = "Create a new directory"
 
 [[manager.prepend_keymap]]
-on = ["x"]
+on = ["k"]
 run = "cancel"
-desc = "Cancel task"
+desc = "Kill task"
 
 [[manager.prepend_keymap]]
 on   = [ "<F1>" ]
 run  = "cd ~/"
 desc = "Cd to ~/"
+
+[[manager.prepend_keymap]]
+on   = [ "h" ]
+run  = "help"
+desc = "Display help"
 
 [[manager.prepend_keymap]]
 on   = [ "<F2>" ]
