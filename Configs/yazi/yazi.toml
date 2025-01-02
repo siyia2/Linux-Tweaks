@@ -1,3 +1,6 @@
+[manager]
+linemode = "mtime"
+
 [opener]
 edit_with_geany = [
     { run = 'geany "$@"', orphan = true, for = "unix" },
