@@ -109,11 +109,6 @@ run  = "sort extension --reverse=no"
 desc = "Sort by extension"
 
 [[manager.prepend_keymap]]
-on   = [ "s", "B" ]
-run  = "sort extension"
-desc = "Sort by extension (reverse)"
-
-[[manager.prepend_keymap]]
 on   = [ "s", "a" ]
 run  = "sort --reverse=no alphabetical"
 desc = "Sort alphabetically"
@@ -160,5 +155,5 @@ desc = "Launch terminal"
 
 [[manager.prepend_keymap]]
 on   = [ "e" ]
-run  = '''shell 'micro "$0"' --block'''
+run  = '''shell 'kitty -e micro "$0"' --orphan'''
 desc = "Edit in terminal"
