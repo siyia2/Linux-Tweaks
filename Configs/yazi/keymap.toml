@@ -84,6 +84,11 @@ run = "filter --smart"
 desc = "Filter"
 
 [[manager.prepend_keymap]]
+on = ["T"]
+run = "close"
+desc = "Close current tab"
+
+[[manager.prepend_keymap]]
 on = ["<C-z>"]
 run = "plugin compress"
 desc = "Archive selected files"
