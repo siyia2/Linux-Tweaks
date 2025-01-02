@@ -173,4 +173,22 @@ on = ["*"]
 run = '''shell 'for file in "$@"; do if [ -x "$file" ]; then chmod -x "$file"; else chmod +x "$file"; fi; done' '''
 desc = "Toggle executable permission for multiple files"
 
+[[manager.prepend_keymap]]
+on = ["<C-x>"]
+run = '''shell 'for f in "$@"; do
+    case "$f" in
+        *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) tar xjvf "$f" ;;
+        *.tar.gz|*.tgz) tar xzvf "$f" ;;
+        *.tar.xz|*.txz) tar xJvf "$f" ;;
+        *.tar.zst|*.tzst) tar --use-compress-program=unzstd -xvf "$f" ;;
+        *.zip) unzip "$f" ;;
+        *.rar) unrar x "$f" ;;
+        *.7z) 7z x "$f" ;;
+        *) echo -e "\nFailed to extract '$f'...\n" ;;
+    esac
+    [ $? -eq 0 ] && lf -remote "send $id :reload"
+done' '''
+desc = "Extract selected archives"
+
+
 
