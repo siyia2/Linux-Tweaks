@@ -189,6 +189,3 @@ run = '''shell 'for f in "$@"; do
     [ $? -eq 0 ] && lf -remote "send $id :reload"
 done' '''
 desc = "Extract selected archives"
-
-
-
