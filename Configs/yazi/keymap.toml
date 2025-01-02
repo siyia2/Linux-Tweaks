@@ -124,7 +124,7 @@ run = "create --dir"
 desc = "Create a new directory"
 
 [[manager.prepend_keymap]]
-on = ["k"]
+on = ["x"]
 run = "cancel"
 desc = "Kill task"
 
@@ -134,7 +134,7 @@ run = "cd ~/"
 desc = "Cd to ~/"
 
 [[manager.prepend_keymap]]
-on = ["h"]
+on = ["H"]
 run = "help"
 desc = "Display help"
 
