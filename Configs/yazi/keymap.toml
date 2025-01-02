@@ -1,4 +1,69 @@
 [[manager.prepend_keymap]]
+on = ["s", "m"]
+run = ["sort mtime --reverse=no", "linemode mtime"]
+desc = "Sort by modified time"
+
+[[manager.prepend_keymap]]
+on = ["s", "M"]
+run = ["sort mtime --reverse", "linemode mtime"]
+desc = "Sort by modified time (reverse)"
+
+[[manager.prepend_keymap]]
+on = ["s", "b"]
+run = ["sort btime --reverse=no", "linemode btime"]
+desc = "Sort by birth time"
+
+[[manager.prepend_keymap]]
+on = ["s", "B"]
+run = ["sort btime --reverse", "linemode btime"]
+desc = "Sort by birth time (reverse)"
+
+[[manager.prepend_keymap]]
+on = ["s", "e"]
+run = "sort extension --reverse=no"
+desc = "Sort by extension"
+
+[[manager.prepend_keymap]]
+on = ["s", "E"]
+run = "sort extension --reverse"
+desc = "Sort by extension (reverse)"
+
+[[manager.prepend_keymap]]
+on = ["s", "a"]
+run = "sort alphabetical --reverse=no"
+desc = "Sort alphabetically"
+
+[[manager.prepend_keymap]]
+on = ["s", "A"]
+run = "sort alphabetical --reverse"
+desc = "Sort alphabetically (reverse)"
+
+[[manager.prepend_keymap]]
+on = ["s", "n"]
+run = "sort natural --reverse=no"
+desc = "Sort naturally"
+
+[[manager.prepend_keymap]]
+on = ["s", "N"]
+run = "sort natural --reverse"
+desc = "Sort naturally (reverse)"
+
+[[manager.prepend_keymap]]
+on = ["s", "s"]
+run = ["sort size --reverse=no", "linemode size"]
+desc = "Sort by size"
+
+[[manager.prepend_keymap]]
+on = ["s", "S"]
+run = ["sort size --reverse", "linemode size"]
+desc = "Sort by size (reverse)"
+
+[[manager.prepend_keymap]]
+on = ["s", "r"]
+run = "sort random --reverse=no"
+desc = "Sort randomly"
+
+[[manager.prepend_keymap]]
 on = ["c"]
 run = "unyank"
 desc = "Clear yanked files"
@@ -19,8 +84,8 @@ run = "filter --smart"
 desc = "Filter"
 
 [[manager.prepend_keymap]]
-on   = [ "<C-z>" ]
-run  = "plugin compress"
+on = ["<C-z>"]
+run = "plugin compress"
 desc = "Archive selected files"
 
 [[manager.prepend_keymap]]
@@ -39,7 +104,7 @@ run = "remove --permanently"
 desc = "remove"
 
 [[manager.prepend_keymap]]
- on = ["n", "f"]
+on = ["n", "f"]
 run = "create"
 desc = "Create a new file"
 
@@ -59,101 +124,41 @@ run = "cancel"
 desc = "Kill task"
 
 [[manager.prepend_keymap]]
-on   = [ "<F1>" ]
-run  = "cd ~/"
+on = ["<F1>"]
+run = "cd ~/"
 desc = "Cd to ~/"
 
 [[manager.prepend_keymap]]
-on   = [ "h" ]
-run  = "help"
+on = ["h"]
+run = "help"
 desc = "Display help"
 
 [[manager.prepend_keymap]]
-on   = [ "<F2>" ]
-run  = "cd /mnt/D/"
+on = ["<F2>"]
+run = "cd /mnt/D/"
 desc = "Cd to /mnt/D/"
 
 [[manager.prepend_keymap]]
-on   = [ "<F3>" ]
-run  = "cd /mnt/"
+on = ["<F3>"]
+run = "cd /mnt/"
 desc = "Cd to /mnt/"
 
 [[manager.prepend_keymap]]
-on   = [ "<F4>" ]
-run  = "cd /run/media/"
+on = ["<F4>"]
+run = "cd /run/media/"
 desc = "Cd to /run/media/"
 
 [[manager.prepend_keymap]]
-on   = [ "s", "m" ]
-run  = "sort --reverse=no mtime; linemode mtime"
-desc = "Sort by modified time"
-
-[[manager.prepend_keymap]]
-on   = [ "s", "M" ]
-run  = "sort --reverse mtime; linemode mtime"
-desc = "Sort by modified time (reverse)"
-
-[[manager.prepend_keymap]]
-on   = [ "s", "b" ]
-run  = "sort --reverse=no btime; linemode btime"
-desc = "Sort by birth time"
-
-[[manager.prepend_keymap]]
-on   = [ "s", "B" ]
-run  = "sort --reverse btime; linemode btime"
-desc = "Sort by birth time (reverse)"
-
-[[manager.prepend_keymap]]
-on   = [ "s", "e" ]
-run  = "sort extension --reverse=no"
-desc = "Sort by extension"
-
-[[manager.prepend_keymap]]
-on   = [ "s", "a" ]
-run  = "sort --reverse=no alphabetical"
-desc = "Sort alphabetically"
-
-[[manager.prepend_keymap]]
-on   = [ "s", "A" ]
-run  = "sort --reverse alphabetical"
-desc = "Sort alphabetically (reverse)"
-
-[[manager.prepend_keymap]]
-on   = [ "s", "n" ]
-run  = "sort natural --reverse=no"
-desc = "Sort naturally"
-
-[[manager.prepend_keymap]]
-on   = [ "s", "N" ]
-run  = "sort natural --reverse"
-desc = "Sort naturally (reverse)"
-
-[[manager.prepend_keymap]]
-on   = [ "s", "s" ]
-run  = "sort size --reverse=no; linemode size"
-desc = "Sort by size"
-
-[[manager.prepend_keymap]]
-on   = [ "s", "S" ]
-run  = "sort size --reverse; linemode size"
-desc = "Sort by size (reverse)"
-
-[[manager.prepend_keymap]]
-on   = [ "s", "r" ]
-run  = "sort size --reverse=no random"
-desc = "Sort randomly"
-
-[[manager.prepend_keymap]]
-on   = [ "M" ]
-run  = "shell '/home/siyia/.config/yazi/scripts/nmount' --block"
+on = ["M"]
+run = "shell '/home/siyia/.config/yazi/scripts/nmount' --block"
 desc = "Mount/Unmount usb drives"
 
 [[manager.prepend_keymap]]
-on   = [ "<F9>" ]
-run  = "shell 'kitty' --orphan"
+on = ["<F9>"]
+run = "shell 'kitty' --orphan"
 desc = "Launch terminal"
 
 [[manager.prepend_keymap]]
-on   = [ "e" ]
-run  = '''shell 'kitty -e micro "$0"' --orphan'''
+on = ["e"]
+run = '''shell 'kitty -e micro "$0"' --orphan'''
 desc = "Edit in terminal"
