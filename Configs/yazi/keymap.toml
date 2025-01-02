@@ -170,6 +170,7 @@ desc = "Edit in terminal"
 
 [[manager.prepend_keymap]]
 on = ["*"]
-run = '''shell 'if [ -x "$0" ]; then chmod -x "$0"; else chmod +x "$0"; fi' '''
-desc = "Toggle executable permission"
+run = '''shell 'for file in "$@"; do if [ -x "$file" ]; then chmod -x "$file"; else chmod +x "$file"; fi; done' '''
+desc = "Toggle executable permission for multiple files"
+
 
