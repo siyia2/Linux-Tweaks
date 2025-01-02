@@ -112,7 +112,7 @@ exec qbittorrent
 exec /home/siyia/.local/bin/xerrors.sh
 #exec pactl set-sink-volume @DEFAULT_SINK@ 100%
 exec gammastep -c ~/.config/redshift.conf
-exec kitty -T ~lf~ -e lf
+exec kitty -T ~yazi~ -e yazi
 
 
 #### WINDOW SETUP
