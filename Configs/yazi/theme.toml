@@ -13,9 +13,11 @@ rules = [
 	# Orphan symbolic links
 	{ name = "*", is = "orphan", fg = "red" },
 
-	{ mime = "application/x-xz", fg = "#FFA500" },
-	{ mime = "application/x-7z-compressed", fg = "#FFA500" },
-	{ mime = "application/x-tar", fg = "#FFA500" },
+	{ mime = "application/xz", fg = "#FFA500" },
+	{ mime = "application/bz", fg = "#FFA500" },
+	{ mime = "application/bz2", fg = "#FFA500" },
+	{ mime = "application/7z-compressed", fg = "#FFA500" },
+	{ mime = "application/tar", fg = "#FFA500" },
 	{ mime = "application/gzip", fg = "#FFA500" },
 	{ mime = "application/zstd", fg = "#FFA500" },
 	{ mime = "application/zip", fg = "#FFA500" },
