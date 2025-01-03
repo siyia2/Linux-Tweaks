@@ -13,7 +13,7 @@ rules = [
     { mime = "video/*", fg = "magenta" },
     { mime = "audio/*", fg = "magenta" },
     # Empty files
-    { mime = "inode/empty", fg = "blue" },
+    { mime = "inode/empty", fg = "darkgray" },
     
     # Archives
     { mime = "application/xz", fg = "#FFA500" },
