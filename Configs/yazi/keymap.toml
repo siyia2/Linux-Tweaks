@@ -87,7 +87,7 @@ desc = "Clear selection"
 
 [[manager.prepend_keymap]]
 on = ["<C-f>"]
-run = "search fd --args='-e -H'"
+run = "search fd --smart"
 desc = "Search"
 
 [[manager.prepend_keymap]]
