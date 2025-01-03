@@ -26,5 +26,6 @@ rules = [
     { mime = "application/zip", fg = "#FFA500" },
     
     # Directories
-    { name = "*/", fg = "blue" }
+    { name = "*/", is = "link", fg = "cyan" },
+    { name = "*/", fg = "blue" },
 ]
