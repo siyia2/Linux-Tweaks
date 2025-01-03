@@ -1,4 +1,16 @@
 [[manager.prepend_keymap]]
+on  = [ "a" ]
+run = "noop"
+
+[[manager.prepend_keymap]]
+on  = [ "z" ]
+run = "noop"
+
+[[manager.prepend_keymap]]
+on  = [ "<C-r>" ]
+run = "noop"
+
+[[manager.prepend_keymap]]
 on = ["s", "m"]
 run = ["sort mtime --reverse=no", "linemode mtime"]
 desc = "Sort by modified time"
