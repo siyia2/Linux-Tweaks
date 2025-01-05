@@ -127,7 +127,7 @@ desc = "Create a new file"
 
 [[manager.prepend_keymap]]
 on = ["l"]
-run = "link --relative"
+run = "link --force"
 desc = "Create a new symlink from yanked files/folders"
 
 [[manager.prepend_keymap]]
