@@ -187,7 +187,7 @@ desc = "Access kdbx  passwords"
 
 [[manager.prepend_keymap]]
 on = ["D"]
-run = '''shell 'kitty -e ~/.config/yazi/scripts/disk-space.sh' --orphan'''
+run = '''shell 'kitty -e ~/.config/yazi/scripts/disk-space' --orphan'''
 desc = "Display disk space status"
 
 [[manager.prepend_keymap]]
