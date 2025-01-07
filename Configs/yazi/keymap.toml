@@ -186,6 +186,11 @@ run = '''shell 'kitty -e ~/.local/bin/pass.sh' --orphan'''
 desc = "Access kdbx  passwords"
 
 [[manager.prepend_keymap]]
+on = ["D"]
+run = '''shell 'kitty -e ~/.config/yazi/scripts/disk-space.sh' --orphan'''
+desc = "Display disk space status"
+
+[[manager.prepend_keymap]]
 on = ["*"]
 run = '''shell 'for file in "$@"; do if [ -x "$file" ]; then chmod -x "$file"; else chmod +x "$file"; fi; done' '''
 desc = "Toggle executable permission for multiple files"
