@@ -28,7 +28,7 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 # Print header
-printf "\n%-20s %-12s %-12s %-12s %-8s %-20s\n" "Device" "Total" "Used" "Free" "Use%" "Mount Point"
+printf "\n%-18s %-11s %-10s %-10s %-12s %-20s\n" "Device" "Total" "Used" "Free" "Usage%" "Mount Point"
 echo "--------------------------------------------------------------------------------"
 
 # Get disk information using df directly
@@ -46,7 +46,7 @@ df -P | grep "^/dev" | while read -r dfline; do
     used_h=$(convert_size $used)
     free_h=$(convert_size $free)
     
-    printf "%-20s %-12s %-12s %-12s %-8s %-20s\n" "$device_name" "$total_h" "$used_h" "$free_h" "$usage" "$mount"
+    printf "%-18s %-11s %-10s %-10s %-12s %-20s\n" "$device_name" "$total_h" "$used_h" "$free_h" "$usage" "$mount"
 done
 
 printf "\nPress any key to exit..."
