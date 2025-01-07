@@ -181,6 +181,11 @@ run = '''shell 'kitty -e micro "$0"' --orphan'''
 desc = "Edit in terminal"
 
 [[manager.prepend_keymap]]
+on = ["A"]
+run = '''shell 'kitty -e ~/.local/bin/pass.sh' --orphan'''
+desc = "Access kdbx  passwords"
+
+[[manager.prepend_keymap]]
 on = ["*"]
 run = '''shell 'for file in "$@"; do if [ -x "$file" ]; then chmod -x "$file"; else chmod +x "$file"; fi; done' '''
 desc = "Toggle executable permission for multiple files"
@@ -198,6 +203,5 @@ run = '''shell 'for f in "$@"; do
         *.7z) 7z x "$f" ;;
         *) echo -e "\nFailed to extract '$f'...\n" ;;
     esac
-    [ $? -eq 0 ] && lf -remote "send $id :reload"
 done' '''
 desc = "Extract selected archives"
