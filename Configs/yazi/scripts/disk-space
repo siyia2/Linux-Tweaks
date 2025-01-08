@@ -1,11 +1,9 @@
 #!/bin/bash
-
 # Function to convert bytes to human-readable format
 convert_size() {
     local size=$1
     local units=("B" "KB" "MB" "GB" "TB")
     local unit=0
-
     # Remove decimal points and trailing zeros for comparison
     size_int=$(echo "$size" | cut -d. -f1)
     
@@ -18,20 +16,24 @@ convert_size() {
         size_int=$(echo "scale=0; $size_int/1024" | bc)
         unit=$((unit + 1))
     done
-
     printf "%.2f%s" $size "${units[$unit]}"
 }
+
 clear && printf "\033c"
+
 # Check if running with root privileges
 if [ "$EUID" -ne 0 ]; then
     echo "Warning: Not running as root. Some devices might not be visible."
 fi
 
+# Create temporary file to store output
+temp_file=$(mktemp)
+
 # Print header
 printf "\n%-18s %-11s %-10s %-10s %-12s %-20s\n" "Device" "Total" "Used" "Free" "Usage%" "Mount Point"
 echo "--------------------------------------------------------------------------------"
 
-# Get disk information using df directly
+# Get disk information and store in temporary file
 df -P | grep "^/dev" | while read -r dfline; do
     device=$(echo "$dfline" | awk '{print $1}')
     device_name=$(basename "$device")
@@ -46,8 +48,15 @@ df -P | grep "^/dev" | while read -r dfline; do
     used_h=$(convert_size $used)
     free_h=$(convert_size $free)
     
-    printf "%-18s %-11s %-10s %-10s %-12s %-20s\n" "$device_name" "$total_h" "$used_h" "$free_h" "$usage" "$mount"
+    # Store formatted output in temporary file
+    printf "%-18s %-11s %-10s %-10s %-12s %-20s\n" "$device_name" "$total_h" "$used_h" "$free_h" "$usage" "$mount" >> "$temp_file"
 done
+
+# Sort and display the content
+sort "$temp_file"
+
+# Clean up
+rm "$temp_file"
 
 printf "\nPress any key to exit..."
 read -n 1 -s -r
