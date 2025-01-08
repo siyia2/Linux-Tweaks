@@ -81,7 +81,7 @@ while true; do
     read -r dev
     case "$dev" in
     l) continue ;;
-    q) exit ;;
+    q) clear && printf "\033c";exit ;;
     *)
         if grep -qs "$dev " /proc/mounts || [ -n "$(lsblk -n "/dev/$dev" -o MOUNTPOINT)" ]; then
             unmount_device "$dev"

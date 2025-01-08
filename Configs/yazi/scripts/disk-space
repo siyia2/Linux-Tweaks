@@ -50,3 +50,4 @@ done | sort
 
 printf "\nPress any key to exit..."
 read -n 1 -s -r
+clear && printf "\033c"
