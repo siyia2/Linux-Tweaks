@@ -21,7 +21,7 @@ convert_size() {
 
     printf "%.2f%s" $size "${units[$unit]}"
 }
-
+clear && printf "\033c"
 # Check if running with root privileges
 if [ "$EUID" -ne 0 ]; then
     echo "Warning: Not running as root. Some devices might not be visible."
