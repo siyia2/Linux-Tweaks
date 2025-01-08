@@ -26,14 +26,11 @@ if [ "$EUID" -ne 0 ]; then
     echo "Warning: Not running as root. Some devices might not be visible."
 fi
 
-# Create temporary file to store output
-temp_file=$(mktemp)
-
 # Print header
 printf "\n%-18s %-11s %-10s %-10s %-12s %-20s\n" "Device" "Total" "Used" "Free" "Usage%" "Mount Point"
 echo "--------------------------------------------------------------------------------"
 
-# Get disk information and store in temporary file
+# Get disk information, format it, and sort it all in one pipeline
 df -P | grep "^/dev" | while read -r dfline; do
     device=$(echo "$dfline" | awk '{print $1}')
     device_name=$(basename "$device")
@@ -48,15 +45,8 @@ df -P | grep "^/dev" | while read -r dfline; do
     used_h=$(convert_size $used)
     free_h=$(convert_size $free)
     
-    # Store formatted output in temporary file
-    printf "%-18s %-11s %-10s %-10s %-12s %-20s\n" "$device_name" "$total_h" "$used_h" "$free_h" "$usage" "$mount" >> "$temp_file"
-done
-
-# Sort and display the content
-sort "$temp_file"
-
-# Clean up
-rm "$temp_file"
+    printf "%-18s %-11s %-10s %-10s %-12s %-20s\n" "$device_name" "$total_h" "$used_h" "$free_h" "$usage" "$mount"
+done | sort
 
 printf "\nPress any key to exit..."
 read -n 1 -s -r
