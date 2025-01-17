@@ -1,0 +1,173 @@
+#############################################################################
+# A minimal rTorrent configuration that provides the basic features
+# you want to have in addition to the built-in defaults.
+#
+# See https://github.com/rakshasa/rtorrent/wiki/CONFIG-Template
+# for an up-to-date version.
+#############################################################################
+
+
+## Instance layout (base paths)
+method.insert = cfg.basedir,  private|const|string, (cat,"/mnt/D/.rtorrent/")
+method.insert = cfg.download, private|const|string, (cat,(cfg.basedir),"download/")
+method.insert = cfg.logs,     private|const|string, (cat,(cfg.basedir),"log/")
+method.insert = cfg.logfile,  private|const|string, (cat,(cfg.logs),"rtorrent-",(system.time),".log")
+method.insert = cfg.session,  private|const|string, (cat,(cfg.basedir),".session/")
+method.insert = cfg.watch,    private|const|string, (cat,(cfg.basedir),"watch/")
+# Enable pyroscope hacks for -ps rtorrent
+method.insert = pyro.extended, value|const, 1
+
+
+## Create instance directories
+execute.throw = sh, -c, (cat,\
+    "mkdir -p \"",(cfg.download),"\" ",\
+    "\"",(cfg.logs),"\" ",\
+    "\"",(cfg.session),"\" ",\
+    "\"",(cfg.watch),"/load\" ",\
+    "\"",(cfg.watch),"/start\" ")
+
+
+## Network Port Configuration
+network.port_range.set = 50001-50001
+network.port_random.set = no
+
+## DHT and Peer Exchange
+dht.mode.set = on
+dht.port.set = 6881
+protocol.pex.set = yes
+trackers.use_udp.set = yes
+trackers.delay_scrape = yes
+
+# Disable udp support because it causes hangs with version 0.98, set to yes to revert
+trackers.use_udp.set = yes
+
+# Global upload and download rate in KiB. "0" for unlimited.
+download_rate = 0
+upload_rate = 60
+
+## Ratios
+ratio.enable= 
+ratio.upload.set= 512M
+ratio.min.set= 50
+ratio.max.set= 100
+method.set = group.seeding.ratio.command, "d.close= ;"
+
+## Peer Settings - Optimized for performance
+throttle.max_uploads.set = 150
+throttle.max_uploads.global.set = 300
+
+# Increased peer limits for better swarm connectivity
+throttle.min_peers.normal.set = 40
+throttle.max_peers.normal.set = 100
+throttle.min_peers.seed.set = 40
+throttle.max_peers.seed.set = 120
+trackers.numwant.set = 120
+
+#Standard encryption options for rtorrent
+protocol.encryption.set = allow_incoming,try_outgoing,enable_retry
+#Maximum enforced encryption,(cannot use magnet links with rtorrent)
+#protocol.encryption.set = prefer,require_RC4,allow_incoming,try_outgoing
+
+#Executes a hash check when rTorrent is started
+pieces.hash.on_completion.set = yes
+
+## Limits for file handle resources, this is optimized for
+## an `ulimit` of 1024 (a common default). You MUST leave
+## a ceiling of handles reserved for rTorrent's internal needs!
+network.http.max_open.set = 200
+network.max_open_files.set = 600
+network.max_open_sockets.set = 300
+
+
+## Memory and Resource Usage - Optimized for modern systems
+pieces.preload.type = 2
+pieces.preload.min_size.set = 1M
+pieces.preload.min_rate.set = 10240
+pieces.memory.max.set = 2048M
+network.xmlrpc.size_limit.set = 8M
+
+# Send and receive buffer size for socket. Disabled by default (`0`), this means the default is used by OS 
+#  (you have to modify the system wide settings!) (`send_buffer_size`, `receive_buffer_size`)
+# Increasing buffer sizes may help reduce disk seeking, connection polling as more data is buffered each time
+#  the socket is written to. It will result higher memory usage (not visible in rtorrent process!).
+network.receive_buffer.size.set =  4M
+network.send_buffer.size.set    = 12M
+
+
+## Basic operational settings (no need to change these)
+session.path.set = (cat, (cfg.session))
+directory.default.set = (cat, (cfg.download))
+log.execute = (cat, (cfg.logs), "execute.log")
+#log.xmlrpc = (cat, (cfg.logs), "xmlrpc.log")
+execute.nothrow = sh, -c, (cat, "echo >",\
+    (session.path), "rtorrent.pid", " ",(system.pid))
+
+
+## Other operational settings (check & adapt)
+encoding.add = utf8
+system.umask.set = 022
+system.cwd.set = (directory.default)
+network.http.dns_cache_timeout.set = 25
+schedule2 = monitor_diskspace, 15, 60, ((close_low_diskspace, 1000M))
+schedule2 = session_save, 1200, 14400, ((session.save))
+pieces.hash.on_completion.set = yes
+#view.sort_current = seeding, greater=d.ratio=
+#keys.layout.set = qwerty
+#network.http.capath.set = "/etc/ssl/certs"
+#network.http.ssl_verify_peer.set = 0
+#network.http.ssl_verify_host.set = 0
+
+# Sort the main view by name
+view.sort_current = main,less=d.name=
+view.sort_new = main,greater=d.name=
+view.sort = main
+
+## Some additional values and commands
+method.insert = system.startup_time, value|const, (system.time)
+method.insert = d.data_path, simple,\
+    "if=(d.is_multi_file),\
+        (cat, (d.directory), /),\
+        (cat, (d.directory), /, (d.name))"
+method.insert = d.session_file, simple, "cat=(session.path), (d.hash), .torrent"
+
+## Dirs & Dir Settings
+system.file.allocate = 1
+session.path.set = /mnt/D/.rtorrent/session
+#The line below deletes torrent&data when you remove a torrent from the list comment it to revert it.
+method.set_key = event.download.erased,delete_erased,"execute=rm,-rf,--,$d.base_path="
+schedule2 = watch_directory_Firefox_Downloads, 10, 10, "load.start=/mnt/D/Firefox_Downloads/*.torrent,d.directory.set=/mnt/D/Torrents/"
+#Set default download Directory including magnet links downloads
+directory.default.set = /mnt/D/Torrents/
+
+
+## Run the rTorrent process as a daemon in the background
+## (and control via XMLRPC sockets)
+#system.daemon.set = true
+#network.scgi.open_local = (cat,(session.path),rpc.socket)
+#execute.nothrow = chmod,770,(cat,(session.path),rpc.socket)
+
+
+## Logging:
+##   Levels = critical error warn notice info debug
+##   Groups = connection_* dht_* peer_* rpc_* storage_* thread_* tracker_* torrent_*
+print = (cat, "Logging to ", (cfg.logfile))
+log.open_file = "log", (cfg.logfile)
+log.add_output = "info", "log"
+#log.add_output = "tracker_debug", "log"
+
+## Disable in built DNS cache in favor of an external one fe systemd-resolved
+network.http.dns_cache_timeout.set=300
+
+
+##Rtorrent-ps gui modification
+
+#method.set_key = ui.column.render, (ui.column.spec, 700)
+#method.set_key = ui.column.render, (ui.column.spec, 500)
+#method.set_key = ui.column.render, (ui.column.spec, 200)
+#method.set_key = ui.column.render, (ui.column.spec, 210)
+#method.set_key = ui.column.render, (ui.column.spec, 220)
+#method.set_key = ui.column.render, (ui.column.spec, 120)
+#method.set_key = ui.column.render, (ui.column.spec, 980)
+
+### END of rtorrent.rc ###
+
