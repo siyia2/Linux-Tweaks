@@ -1,5 +1,5 @@
 [Added Associations]
-text/plain=org.gnome.gedit.desktop;geany.desktop;
+text/plain=geany.desktop;
 x-scheme-handler/mailto=userapp-Thunderbird-HE75V0.desktop;
 message/rfc822=userapp-Thunderbird-HE75V0.desktop;
 image/png=swayimg.desktop;
@@ -28,6 +28,7 @@ video/vnd.avi=mpv.desktop;
 audio/mp3=audacious.desktop
 
 [Default Applications]
+text/x-c = geany.desktop;
 archive/*=file-roller.desktop;
 audio/mp3=audacious.desktop;
 text/plain=geany.desktop;
@@ -57,3 +58,4 @@ image/vnd.djvu+multipage=org.gnome.Evince.desktop;
 x-scheme-handler/about=chromium.desktop
 x-scheme-handler/unknown=chromium.desktop
 video/vnd.avi=mpv.desktop;
+x-scheme-handler/discord-1038970224050962582=nuclear.desktop
