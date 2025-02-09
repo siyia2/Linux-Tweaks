@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# Loop through all provided files
+for f in "$@"; do
+    case "$f" in
+        *.tar.bz|*.tar.bz2|*.tbz|*.tbz2)
+            if tar xjvf "$f"; then
+                notify-send -t 1000 "Extraction Successful" "File $f extracted successfully."
+            else
+                notify-send -t 1000 "Extraction Failed" "Failed to extract $f."
+            fi ;;
+        *.tar.gz|*.tgz)
+            if tar xzvf "$f"; then
+                notify-send -t 1000 "Extraction Successful" "File $f extracted successfully."
+            else
+                notify-send -t 1000 "Extraction Failed" "Failed to extract $f."
+            fi ;;
+        *.tar.xz|*.txz)
+            if tar xJvf "$f"; then
+                notify-send -t 1000 "Extraction Successful" "File $f extracted successfully."
+            else
+                notify-send -t 1000 "Extraction Failed" "Failed to extract $f."
+            fi ;;
+        *.tar.zst|*.tzst)
+            if tar --use-compress-program=unzstd -xvf "$f"; then
+                notify-send -t 1000 "Extraction Successful" "File $f extracted successfully."
+            else
+                notify-send -t 1000 "Extraction Failed" "Failed to extract $f."
+            fi ;;
+        *.zip)
+            if unzip "$f"; then
+                notify-send -t 1000 "Extraction Successful" "File $f extracted successfully."
+            else
+                notify-send -t 1000 "Extraction Failed" "Failed to extract $f."
+            fi ;;
+        *.rar)
+            if unrar x "$f"; then
+                notify-send -t 1000 "Extraction Successful" "File $f extracted successfully."
+            else
+                notify-send -t 1000 "Extraction Failed" "Failed to extract $f."
+            fi ;;
+        *.7z)
+            if 7z x "$f"; then
+                notify-send -t 1000 "Extraction Successful" "File $f extracted successfully."
+            else
+                notify-send -t 1000 "Extraction Failed" "Failed to extract $f."
+            fi ;;
+        *)
+            echo -e "\nFailed to extract '$f'...\n"
+            notify-send -t 1000  "Extraction Failed" "Unsupported file format for $f." ;;
+    esac
+done
