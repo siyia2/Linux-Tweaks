@@ -166,9 +166,8 @@ run = "cd /run/media/"
 desc = "Cd to /run/media/"
 
 [[manager.prepend_keymap]]
-on = ["M"]
-run = "shell '/home/siyia/.config/yazi/scripts/nmount' --block"
-desc = "Mount/Unmount usb drives"
+on  = "M"
+run = "plugin mount"
 
 [[manager.prepend_keymap]]
 on = ["<F9>"]
@@ -197,16 +196,5 @@ desc = "Toggle executable permission for multiple files"
 
 [[manager.prepend_keymap]]
 on = ["<C-x>"]
-run = '''shell 'for f in "$@"; do
-    case "$f" in
-        *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) tar xjvf "$f" ;;
-        *.tar.gz|*.tgz) tar xzvf "$f" ;;
-        *.tar.xz|*.txz) tar xJvf "$f" ;;
-        *.tar.zst|*.tzst) tar --use-compress-program=unzstd -xvf "$f" ;;
-        *.zip) unzip "$f" ;;
-        *.rar) unrar x "$f" ;;
-        *.7z) 7z x "$f" ;;
-        *) echo -e "\nFailed to extract '$f'...\n" ;;
-    esac
-done' '''
+run = '''shell 'sh ~/.config/yazi/scripts/extract "$@"' '''
 desc = "Extract selected archives"
