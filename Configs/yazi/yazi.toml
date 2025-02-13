@@ -29,11 +29,11 @@ open_passwd = [
 
 [open]
 prepend_rules = [
-    { name = "*.txt", use = [ "edit_with_geany" ] },
-    { name = "*.c", use = [ "edit_with_geany" ] },
-    { name = "*.h", use = [ "edit_with_geany" ] },
-    { name = "*.cpp", use = [ "edit_with_geany" ] },
-    { name = "*.toml", use = [ "edit_with_geany" ] },
+    { name = "*.txt", use = [ "edit_with_geany", "edit" ] },
+    { name = "*.c", use = [ "edit_with_geany", "edit" ] },
+    { name = "*.h", use = [ "edit_with_geany", "edit" ] },
+    { name = "*.cpp", use = [ "edit_with_geany", "edit" ] },
+    { name = "*.toml", use = [ "edit_with_geany", "edit" ] },
     { name = "*.kdbx", use = [ "open_passwd" ] },
     { mime = "application/xz", use = [ "open_with_roller" , "extract_here" ] },
     { mime = "application/bz", use = [ "open_with_roller" , "extract_here" ] },
