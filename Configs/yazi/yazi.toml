@@ -6,6 +6,15 @@ edit_with_geany = [
     { run = 'geany "$@"', orphan = true, for = "unix" },
 ]
 
+edit = [
+	{ run = '$EDITOR "$@"', block = true, for = "unix" },
+	{ run = "%EDITOR% %*",  block = true, for = "windows" },
+]
+
+open = [
+	{ run = 'xdg-open "$@"', desc = "Open" },
+]
+
 open_with_roller = [
     { run = 'file-roller "$@"', orphan = true, for = "unix" },
 ]
@@ -17,6 +26,7 @@ extract_here = [
 open_passwd = [
     { run = 'keepassxc "$@"', orphan = true, for = "unix" },
 ]
+
 
 [open]
 prepend_rules = [
