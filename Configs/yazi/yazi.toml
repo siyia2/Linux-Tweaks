@@ -14,13 +14,21 @@ extract_here = [
 	{ run = 'ya pub extract --list "$@"', desc = "extract here", for = "unix"},
 ]
 
+open_passwd = [
+    { run = 'keepassxc "$@"', orphan = true, for = "unix" },
+]
+
 [open]
 prepend_rules = [
-    { mime = "text/plain", use = [ "edit_with_geany" ] },
-    { mime = "text/c", use = [ "edit_with_geany" ] },
-    { mime = "application/xz", use = [ "edit_with_geany" , "extract_here" ] },
-    { mime = "application/bz", use = [ "edit_with_geany" , "extract_here" ] },
-    { mime = "application/bz2", use = [ "edit_with_geany" , "extract_here" ] },
+    { name = "*.txt", use = [ "edit_with_geany" ] },
+    { name = "*.c", use = [ "edit_with_geany" ] },
+    { name = "*.h", use = [ "edit_with_geany" ] },
+    { name = "*.cpp", use = [ "edit_with_geany" ] },
+    { name = "*.toml", use = [ "edit_with_geany" ] },
+    { name = "*.kdbx", use = [ "open_passwd" ] },
+    { mime = "application/xz", use = [ "open_with_roller" , "extract_here" ] },
+    { mime = "application/bz", use = [ "open_with_roller" , "extract_here" ] },
+    { mime = "application/bz2", use = [ "open_with_roller" , "extract_here" ] },
     { mime = "application/7z-compressed", use = [ "edit_with_geany" , "extract_here" ] },
     { mime = "application/tar", use = [ "open_with_roller" , "extract_here" ] },
     { mime = "application/gzip", use = [ "open_with_roller", "extract_here" ] },
