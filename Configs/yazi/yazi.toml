@@ -18,6 +18,10 @@ open_with_roller = [
     { run = 'file-roller "$@"', orphan = true, for = "unix" },
 ]
 
+open_with_swayimg = [
+    { run = 'swayimg "$@"', orphan = true, for = "unix" },
+]
+
 extract_here = [
 	{ run = 'ya pub extract --list "$@"', desc = "extract here", for = "unix"},
 ]
@@ -32,9 +36,11 @@ prepend_rules = [
     { name = "*.txt", use = [ "edit_with_geany", "edit" ] },
     { name = "*.c", use = [ "edit_with_geany", "edit" ] },
     { name = "*.h", use = [ "edit_with_geany", "edit" ] },
+    { name = "*.lua", use = [ "edit_with_geany", "edit" ] },
     { name = "*.cpp", use = [ "edit_with_geany", "edit" ] },
     { name = "*.toml", use = [ "edit_with_geany", "edit" ] },
     { name = "*.kdbx", use = [ "open_passwd" ] },
+    { name = "*.{png,jpg,jpeg,gif,bmp,tiff,webp,svg}", use = [ "open_with_swayimg" ] },
     { mime = "application/xz", use = [ "open_with_roller" , "extract_here" ] },
     { mime = "application/bz", use = [ "open_with_roller" , "extract_here" ] },
     { mime = "application/bz2", use = [ "open_with_roller" , "extract_here" ] },
