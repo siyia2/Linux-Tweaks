@@ -33,12 +33,7 @@ open_passwd = [
 
 [open]
 prepend_rules = [
-    { name = "*.txt", use = [ "edit_with_geany", "edit" ] },
-    { name = "*.c", use = [ "edit_with_geany", "edit" ] },
-    { name = "*.h", use = [ "edit_with_geany", "edit" ] },
-    { name = "*.lua", use = [ "edit_with_geany", "edit" ] },
-    { name = "*.cpp", use = [ "edit_with_geany", "edit" ] },
-    { name = "*.toml", use = [ "edit_with_geany", "edit" ] },
+	{ name = "*.{txt,c,h,lua,cpp,toml,log}", use = [ "edit_with_geany", "edit" ] },
     { name = "*.kdbx", use = [ "open_passwd" ] },
     { name = "*.{png,jpg,jpeg,gif,bmp,tiff,webp,svg}", use = [ "open_with_swayimg" ] },
     { mime = "application/xz", use = [ "open_with_roller" , "extract_here" ] },
