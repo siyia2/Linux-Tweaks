@@ -33,6 +33,12 @@ for f in "$@"; do
             else
                 notify-send -t 3000 "Extraction Failed" "Failed to extract $f."
             fi ;;
+        *.bz2)
+            if bzip2 -dk "$f"; then
+            	notify-send -t 3000 "Extraction Successful" "File $f extracted successfully."
+                else
+                    notify-send -t 3000 "Extraction Failed" "Failed to extract $f."
+                fi ;;
         *.rar)
             if unrar x "$f"; then
                 notify-send -t 3000 "Extraction Successful" "File $f extracted successfully."
