@@ -1,5 +1,4 @@
 #!/bin/bash
-
 formats=(
 "tarz (tar.zst)"
 "tarx (tar.xz)"
@@ -8,30 +7,25 @@ formats=(
 "7zip (.7z)"
 "zip (.zip)"
 )
-
 # Use fzf to select the archive format
 selected_format=$(printf "%s\n" "${formats[@]}" | fzf --prompt="Select format: ")
-
 # If no format is selected, exit immediately
 if [ -z "$selected_format" ]; then
     exit 0
 fi
-
 # Extract type and extension from the selected format
 type="${selected_format%% (*}"
 extension="${selected_format##* (}"  # Remove everything up to and including " ("
 extension="${extension%\)}"  # Remove the closing parenthesis
-
 echo " "
 read -rp "Enter the name for the $extension archive or press Enter to exit: " archive_name
-
 if [ -z "$archive_name" ]; then
     echo -e "Exiting script as no archive name was provided.\n"
     exit 0
 fi
-
 archive_name=$(echo "$archive_name" | tr -d '/')
-
+# Get absolute path for archive name to use after changing directories
+archive_path="$(pwd)/$archive_name"
 # Function to show progress bar
 show_progress() {
     local pid=$1
@@ -46,37 +40,50 @@ show_progress() {
     done
     printf "    \b\b\b\b"
 }
-
 echo -e "\nCompressing files... (Ctrl+c:cancel)"
-
+# Create a temporary file list without parent paths
+temp_file=$(mktemp)
+for item in "$@"; do
+    # Get the base filename/dirname
+    basename=$(basename "$item")
+    echo "$basename" >> "$temp_file"
+done
+# Store current directory
+current_dir=$(pwd)
+# Go to parent directory of the first item to be archived
+parent_dir=$(dirname "$1")
+cd "$parent_dir" || exit 1
 case $type in
     "tarz") 
-        (tar --zstd -cf "$archive_name.tar.zst" "$@" &> /dev/null) &
+        (tar --zstd -cf "${archive_path}.tar.zst" $(cat "$temp_file") &> /dev/null) &
         show_progress $!
         ;;
     "tarx") 
-        (tar -Jcvf "$archive_name.tar.xz" "$@" &> /dev/null) &
+        (tar -Jcf "${archive_path}.tar.xz" $(cat "$temp_file") &> /dev/null) &
         show_progress $!
         ;;
     "targ") 
-        (tar -czf "$archive_name.tar.gz" "$@" &> /dev/null) &
+        (tar -czf "${archive_path}.tar.gz" $(cat "$temp_file") &> /dev/null) &
         show_progress $!
         ;;
     "tarb") 
-        (tar -cjvf "$archive_name.tar.bz2" "$@" &> /dev/null) &
+        (tar -cjf "${archive_path}.tar.bz2" $(cat "$temp_file") &> /dev/null) &
         show_progress $!
         ;;
     "7zip") 
-        (7z a "$archive_name.7z" "$@" &> /dev/null) &
+        (7z a "${archive_path}.7z" $(cat "$temp_file") &> /dev/null) &
         show_progress $!
         ;;
     "zip") 
-        (zip -r "$archive_name.zip" "$@" &> /dev/null) &
+        (zip -r "${archive_path}.zip" $(cat "$temp_file") &> /dev/null) &
         show_progress $!
         ;;
 esac
-
-if [ $? -ne 0 ]; then
+archive_result=$?
+# Cleanup and return to original directory
+rm "$temp_file"
+cd "$current_dir" || exit 1
+if [ $archive_result -ne 0 ]; then
     echo -e "\nCompression failed!\n"
 else
     if [[ "$type" == "zip" || "$type" == "7zip" ]]; then
@@ -85,5 +92,4 @@ else
         echo -e "\nCompression successful! Archive created: ${archive_name}.${extension}\n"
     fi
 fi
-
 read -rp "Press Enter to exit..."
