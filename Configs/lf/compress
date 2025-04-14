@@ -12,6 +12,11 @@ formats=(
 # Use fzf to select the archive format
 selected_format=$(printf "%s\n" "${formats[@]}" | fzf --prompt="Select format: ")
 
+# If no format is selected, exit immediately
+if [ -z "$selected_format" ]; then
+    exit 0
+fi
+
 # Extract type and extension from the selected format
 type="${selected_format%% (*}"
 extension="${selected_format##* (}"  # Remove everything up to and including " ("
