@@ -3,10 +3,6 @@ on  = [ "a" ]
 run = "noop"
 
 [[manager.prepend_keymap]]
-on  = [ "z" ]
-run = "noop"
-
-[[manager.prepend_keymap]]
 on  = [ "<C-r>" ]
 run = "noop"
 
@@ -102,7 +98,7 @@ desc = "Close current tab"
 
 [[manager.prepend_keymap]]
 on = ["<C-z>"]
-run = "plugin compress"
+run = '''shell 'kitty -T compress -e sh ~/.config/yazi/scripts/compress "$@"' '''
 desc = "Archive selected files"
 
 [[manager.prepend_keymap]]
@@ -185,7 +181,7 @@ run = '''shell 'kitty -e ~/.local/bin/pass.sh' --orphan'''
 desc = "Access kdbx  passwords"
 
 [[manager.prepend_keymap]]
-on = ["D"]
+on = ["S"]
 run = '''shell 'sh  ~/.config/yazi/scripts/disk-space' --block'''
 desc = "Display disk space status"
 
