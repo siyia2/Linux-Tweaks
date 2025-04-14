@@ -36,11 +36,8 @@ set cursorpreviewfmt "\033[7;2m"
 
 ## ENABLE FILE PREVIEWS WITH CTPV
 
-set previewer ctpv
-set cleaner ctpvclear
-&ctpv -s $id
-&ctpvquit $id
-
+set previewer ~/.config/lf/previewer
+set cleaner ~/.config/lf/cleaner
 
 ## PROMPT COLORS
 
@@ -114,7 +111,7 @@ map <f-1> cd ~/
 map <f-2> cd /mnt/D/
 map <f-3> cd /mnt/
 map <f-4> cd /run/media/
-
+map <f-5> cd /run/timeshift/530485/backup
 
 ## COMMANDS
 
