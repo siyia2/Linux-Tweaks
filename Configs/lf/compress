@@ -32,26 +32,48 @@ fi
 
 archive_name=$(echo "$archive_name" | tr -d '/')
 
-# Get the current working directory
-cwd=$(pwd)
+# Function to show progress bar
+show_progress() {
+    local pid=$1
+    local delay=0.2
+    local spinstr='|/-\'
+    while [ "$(ps a | awk '{print $1}' | grep $pid)" ]; do
+        local temp=${spinstr#?}
+        printf " [%c]  " "$spinstr"
+        local spinstr=$temp${spinstr%"$temp"}
+        sleep $delay
+        printf "\b\b\b\b\b\b"
+    done
+    printf "    \b\b\b\b"
+}
 
-# Create a temporary directory in RAM
-temp_dir=$(mktemp -d /dev/shm/tmp.XXXXXXXXXX)
-
-# Copy the files to the temporary directory
-cp -r "$@" "$temp_dir"
+echo -e "\nCompressing files... (Ctrl+c:cancel)"
 
 case $type in
-    "tarz") tar --zstd -cf "$archive_name.tar.zst" -C "$temp_dir" . ;;
-    "tarx") tar -Jcvf "$archive_name.tar.xz" -C "$temp_dir" . ;;
-    "targ") tar -czf "$archive_name.tar.gz" -C "$temp_dir" . ;;
-    "tarb") tar -cjvf "$archive_name.tar.bz2" -C "$temp_dir" . ;;
-    "7zip") 7z a "$archive_name.7z" "$temp_dir/*" ;;
-    "zip") (
-        cd "$temp_dir" || exit
-        zip -r "$archive_name.zip" .
-        mv "$archive_name.zip" "$cwd"
-    ) ;;
+    "tarz") 
+        (tar --zstd -cf "$archive_name.tar.zst" "$@" &> /dev/null) &
+        show_progress $!
+        ;;
+    "tarx") 
+        (tar -Jcvf "$archive_name.tar.xz" "$@" &> /dev/null) &
+        show_progress $!
+        ;;
+    "targ") 
+        (tar -czf "$archive_name.tar.gz" "$@" &> /dev/null) &
+        show_progress $!
+        ;;
+    "tarb") 
+        (tar -cjvf "$archive_name.tar.bz2" "$@" &> /dev/null) &
+        show_progress $!
+        ;;
+    "7zip") 
+        (7z a "$archive_name.7z" "$@" &> /dev/null) &
+        show_progress $!
+        ;;
+    "zip") 
+        (zip -r "$archive_name.zip" "$@" &> /dev/null) &
+        show_progress $!
+        ;;
 esac
 
 if [ $? -ne 0 ]; then
@@ -63,8 +85,5 @@ else
         echo -e "\nCompression successful! Archive created: ${archive_name}.${extension}\n"
     fi
 fi
-
-# Clean up the temporary directory
-rm -rf "$temp_dir"
 
 read -rp "Press Enter to exit..."
