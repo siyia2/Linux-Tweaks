@@ -30,3 +30,13 @@ rules = [
     { name = "*/", is = "link", fg = "cyan" },
     { name = "*/", fg = "blue" },
 ]
+
+[icon]
+exts = [
+	{ name = "iso", text = "💽", fg = "#00afff" },
+	{ name = "bin", text = "📀", fg = "#00afff" },
+	{ name = "img", text = "📀", fg = "#00afff" },
+	{ name = "mdf", text = "📀", fg = "#00afff" },
+	{ name = "nrg", text = "📀", fg = "#00afff" },
+	# ...
+]
