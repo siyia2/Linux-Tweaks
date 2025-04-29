@@ -7,6 +7,16 @@ on  = [ "<C-r>" ]
 run = "noop"
 
 [[manager.prepend_keymap]]
+on = [ "<Space>" ]
+run = [ "toggle", "arrow 1" ]
+desc = "Toggle selection without wraparound"
+
+[[manager.prepend_keymap]]
+on = [ 'g', 'l' ]
+run = 'cd ~/.local'
+desc = 'Go ~/.local'
+
+[[manager.prepend_keymap]]
 on = ["s", "m"]
 run = ["sort mtime --reverse=no", "linemode mtime"]
 desc = "Sort by modified time"
