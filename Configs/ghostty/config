@@ -20,6 +20,8 @@ foreground = #c6d0f5
 cursor-color = #f2d5cf
 cursor-text = #dddddd
 
+#minimum-contrast = 1.1
+
 # Terminal padding
 window-padding-x = 8
 window-padding-y = 8
@@ -32,7 +34,9 @@ freetype-load-flags = force-autohint
 shell-integration-features = no-cursor
 selection-invert-fg-bg = true
 cursor-style = block
-cursor-style-blink = true
+cursor-style-blink = false
+cursor-invert-fg-bg = true
+cursor-click-to-move = true
 
 #theme = Darkside
 window-theme = dark
