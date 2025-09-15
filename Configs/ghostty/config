@@ -43,11 +43,11 @@ window-theme = dark
 window-height = 35
 window-width = 100
 background-opacity = 0.95
-font-family = Inconsolata Regular
-font-family-bold = Inconsolata Bold
+font-family = Fira Code SemiBold
+font-family-bold = Fira Code Bold
 font-family-italic = Inconsolata Semi Expanded
 font-family-bold-italic = Inconsolata Semi Expanded ExtraBold
-font-size = 14
+font-size = 12
 gtk-titlebar = false
 confirm-close-surface = false
 
