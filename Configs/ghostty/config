@@ -32,6 +32,7 @@ freetype-load-flags = force-autohint
 shell-integration-features = no-cursor
 selection-invert-fg-bg = true
 cursor-style = block
+cursor-style-blink = true
 
 #theme = Darkside
 window-theme = dark
