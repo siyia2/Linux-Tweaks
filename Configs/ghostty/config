@@ -28,8 +28,6 @@ window-padding-y = 8
 
 initial-command = /usr/bin/fish
 
-freetype-load-flags = force-autohint
-
 # Cursor settings
 shell-integration-features = no-cursor
 selection-invert-fg-bg = true
@@ -40,7 +38,8 @@ cursor-click-to-move = true
 
 #theme = Darkside
 window-theme = dark
-background-opacity = 0.95
+background-opacity = 0.9
+bold-is-bright = "true"
 font-family = Fira Code Medium
 font-family-bold = Fira Code Bold
 font-family-italic = Fira Code Light
@@ -52,3 +51,4 @@ confirm-close-surface = false
 scrollback-limit = 20000
 
 resize-overlay = never
+window-vsync = true
