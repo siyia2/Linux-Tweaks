@@ -40,8 +40,6 @@ cursor-click-to-move = true
 
 #theme = Darkside
 window-theme = dark
-window-height = 35
-window-width = 100
 background-opacity = 0.95
 font-family = Fira Code Medium
 font-family-bold = Fira Code Bold
@@ -53,3 +51,4 @@ confirm-close-surface = false
 
 scrollback-limit = 20000
 
+resize-overlay = never
