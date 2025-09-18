@@ -28,7 +28,7 @@ window-padding-y = 8
 
 shell-integration = fish
 
-initial-command = /usr/bin/fish
+command = /usr/bin/fish
 
 # Cursor settings
 shell-integration-features = no-cursor
