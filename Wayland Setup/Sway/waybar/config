@@ -1,12 +1,12 @@
 {
     "position": "bottom",
-    "layer": "top",
+    "layer": "bottom",
     	"width": 1920,
-	"height": 26,
+	"height": 22,
     //"modules-left": ["hyprland/workspaces"],
-    "modules-left": ["dwl/tags"],
+    //"modules-left": ["dwl/tags"],
 	"modules-left": ["sway/workspaces"],
-    "modules-center": ["memory","custom/vram","custom/psufan","custom/cpu","cpu","temperature","custom/cpufan","custom/gpu","custom/gpusage","custom/gputemp","custom/gpufan"],
+    "modules-center": ["memory","custom/vram","custom/cpu","cpu","temperature","custom/gpu","custom/gpusage","custom/gputemp","custom/gpufan"],
     "modules-right": ["custom/kernel","custom/mesa","custom/bt_battery","pulseaudio","custom/mic","network","custom/kb","clock"],
     "sway/window": {
         "max-length": 1920
@@ -17,9 +17,9 @@
 
 "memory": {
     "interval": 5,
-    "format": "Ram: {}%",
+    "format": "Ram: {}% |",
 		"tooltip": false,
-"on-click": "killall btop & kitty -T btop -e btop"
+"on-click": "killall btop & ghostty --title='btop' -e btop"
 },
 
 "custom/zram": {
@@ -27,7 +27,7 @@
         "exec": "/home/siyia/.config/waybar/modules/zram.sh",
 	"format": "Zram:{} ",
 		"tooltip": false,
-"on-click": "killall btop & kitty -T btop -e btop"
+"on-click": "killall btop & ghostty --title='btop' -e btop"
 },
 
 
@@ -35,8 +35,8 @@
 //CPU STUFF
 
 "custom/cpu": {
-  "format": " Cpu:",
-  "on-click": "killall btop & kitty -T btop -e btop",
+  "format": "Cpu:",
+  "on-click": "killall btop & ghostty --title='btop' -e btop",
 		"tooltip": false
 },
 
@@ -44,7 +44,7 @@
     "interval": 2,
     "format": "{usage}% ",
 		"tooltip": false,
-"on-click": "killall btop & kitty -T btop -e btop"
+"on-click": "killall btop & ghostty --title='btop' -e btop"
 },
 
 "custom/cpufan": {
@@ -58,12 +58,12 @@
 "temperature": {
 	"interval": 2,
 	"thermal-zone": 0,
-	"hwmon-path": "/sys/class/hwmon/hwmon0/temp1_input",
-	"critical-threshold": 61,
-	"format-critical":"{temperatureC}°C",
-	"format":"{temperatureC}°C",
+	"hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
+	"critical-threshold": 70,
+	"format-critical":"{temperatureC}°C |",
+	"format":"{temperatureC}°C |",
 		"tooltip": false,
-"on-click": "killall btop & kitty -T btop -e btop"
+"on-click": "killall btop & ghostty --title='btop' -e btop"
 },
 
 
@@ -87,7 +87,7 @@
 
 "custom/gpu": {
   "format": " Gpu:",
-  "on-click": "killall btop & kitty -T btop -e btop",
+  "on-click": "killall btop & ghostty --title='btop' -e btop",
 		"tooltip": false
 },
 
@@ -96,7 +96,7 @@
         "exec": "/home/siyia/.config/waybar/modules/gpu_usage.sh",
 	"format": " {}% ",
 		"tooltip": false,
-"on-click": "killall btop & kitty -T btop -e btop"
+"on-click": "killall btop & ghostty --title='btop' -e btop"
 },
 
 "custom/gpufan": {
@@ -104,7 +104,7 @@
         "exec": "/home/siyia/.config/waybar/modules/gpu_fan.sh",
 	"format": "  {} rpm ",
 		"tooltip": false,
-"on-click": "killall btop & kitty -T btop -e btop"
+"on-click": "killall btop & ghostty --title='btop' -e btop"
 },
 
 "custom/vram": {
@@ -112,7 +112,7 @@
 		"tooltip": false,
 		"exec": "/home/siyia/.config/waybar/modules/vram.sh",
 		"format": "Vram: {}% ",
-		"on-click": "killall btop & kitty -T btop -e btop"
+		"on-click": "killall btop & ghostty --title='btop' -e btop"
 },
 
 "custom/gputemp": {
@@ -120,7 +120,7 @@
         "exec": "/home/siyia/.config/waybar/modules/gpu_temp.sh",
 	"format": " {}°C",
 		"tooltip": false,
-"on-click": "killall btop & kitty -T btop -e btop"
+"on-click": "killall btop & ghostty --title='btop' -e btop"
 },
 
 // MISC SW
@@ -208,16 +208,16 @@
     "format": "{}",
     "exec": "~/.config/waybar/modules/mic_status.sh",
     "interval": 1,
-    "on-click": "pactl set-source-mute alsa_input.pci-0000_00_14.2.analog-stereo toggle",
+    "on-click": "pactl set-source-mute alsa_input.pci-0000_0a_00.4.analog-stereo toggle",
     "tooltip": false
 },
 
 "pulseaudio": {
 	"source-name": "Built-in Audio Analog Stereo",
-    "format": " {volume}% {icon}",
-    "format-source": "🟢",
-    "format-source-muted": "🔴",
-    "format-bluetooth": "{volume}% {icon}",
+    "format": "{volume}% {icon}",
+    "format-source": "",
+    "format-source-muted": "",
+    "format-bluetooth": "{volume}% {icon}",
     "format-muted": " Muted 🔇",
     "format-icons": {
         "headphones": "",
@@ -239,15 +239,32 @@
 },
 // CLOCK/DATE STUFF
 "clock": {
-    "format": "{:L%a %d %b, %H:%M}",
-    //"format-alt": "{:%A, %d %B %Y, %H:%M}",
-   // "on-click": "gsimplecal",
-   // "on-click-right": "killall gsimplecal",
-    "scroll-step": 1,
-    "tooltip-format": "<big>{:L%d %B %Y}</big>\n<tt><small>{calendar}</small></tt>",
-    "tooltip": true,
-    "locale": "el_GR.UTF-8"
-},
+        "format": " {:L%a, %d %b %H:%M} ",
+        "format-alt": "{:L%A, %B %d, %Y (%R)}  ",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "locale": "el_GR.UTF-8",
+        "calendar": {
+                    "mode"          : "year",
+                    "mode-mon-col"  : 3,
+                    "weeks-pos"     : "right",
+                    "on-scroll"     : 1,
+                    "format": {
+                              "months":     "<span color='#ffead3'><b>{}</b></span>",
+                              "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+                              "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+                              "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+                              "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+                              }
+                    },
+        "actions":  {
+                    "on-click-right": "mode",
+                    "on-scroll-up": "tz_up",
+                    "on-scroll-down": "tz_down",
+                    "on-scroll-up": "shift_up",
+                    "on-scroll-down": "shift_down"
+                    }
+                    
+    },
 
 "clock#utc": {
     "format": "UTC {:%H:%M}",

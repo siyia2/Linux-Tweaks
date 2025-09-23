@@ -2,8 +2,8 @@
     border: none;
     border-radius: 0px;
     font-family: "Ubuntu Medium";
-    font-size: 14px;
-    min-height: 18px;
+    font-size: 15px;
+    min-height: 22px;
 	
 }
 
@@ -113,32 +113,32 @@ border-bottom: 1px solid rgba(100, 114, 125, 1.0);
 
 #workspaces button:hover {
   box-shadow: 0 0 0px 0px;
-  text-shadow: 1px 1px 4px #20b200;
+  text-shadow: 1px 1px 4px #1793D1;
 }
 
 window#waybar {
-    background-color: rgba(0, 0, 0, 0.95);
-    border-top: 2px solid rgba(100, 114, 125, 1.0);
-    border-bottom: 2px solid rgba(100, 114, 125, 0.5);
-    border-right: 0px solid rgba(100, 114, 125, 0.5);
-    border-left: 0px solid rgba(100, 114, 125, 0.5);
+    background-color: rgba(0, 0, 0, 1);
+    border-top: 2px solid rgba(23, 147, 209, 1.0);
+    border-bottom: 2px solid rgba(23, 147, 209, 0.5);
+    border-right: 0px solid rgba(23, 147, 209, 0.5);
+    border-left: 0px solid rgba(23, 147, 209, 0.5);
     color: white;
 }
-
 
 #workspaces button {
     padding: 0px 5px;
     padding-top: 3px;
     background: transparent;
-    color: green;
+    color: #0F7CB0;
     border-bottom: 0px solid transparent;
 }
 
 #workspaces button.focused {
-background-color: rgba(60, 179, 113, 0.75);
-color: black;
+    background-color: rgba(23, 147, 209, 0.75);
+    color: black;
     border: 2px solid white;
 }
+
 #workspaces button.urgent {
 animation: blink 1s infinite;
 color: red;
@@ -175,7 +175,7 @@ border-top: 2px solid rgba(100, 114, 125, 1.0);
 border-bottom: 2px solid rgba(100, 114, 125, 1.0);
 border-right: 2px solid rgba(0, 0, 0, 1.0);
 font-weight: 600;
-color: lime;
+color: orange;
 }
 
 #cpu{
