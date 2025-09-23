@@ -14,7 +14,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term kitty
+set $term ghostty
 # Your preferred application launcher
 # Note: it's recommended that you pass the final command to sway
 #set $menu bemenu-run -H 25 --fn Ubuntu 12 --tf '#00ff40'  --hf '#FFFFFF' --hb '#008000' -i -w
@@ -23,7 +23,7 @@ set $menu wmenu-run -f "Ubuntu 12" -N "#000000" -M "#000000" -m "#00ff40" -p wme
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output "*" bg /home/siyia/Pictures/wp7.jpg stretch
+output "*" bg /home/siyia/Pictures/wp7.png fit
 #
 # Example configuration:
 #
@@ -42,10 +42,10 @@ scroll_factor 2
 #left_handed enabled
 }
 
-seat seat0 xcursor_theme Pulse-Glass-Jade-Regular
+seat seat0 xcursor_theme Pulse-Glass-Sapphire-Regular
 set $gnome-schema org.gnome.desktop.interface
 exec_always {
-    gsettings set $gnome-schema cursor-theme 'Pulse-Glass-Jade-Regular'
+    gsettings set $gnome-schema cursor-theme 'Pulse-Glass-Sapphire-Regular'
     gsettings set org.gnome.desktop.wm.preferences button-layout ''
 }
 
@@ -74,12 +74,11 @@ bindsym alt+KP_DELETE seat "*" cursor press button2; seat "*" cursor release but
 ### FONTS
 font pango: "Ubuntu Medium 10"
 
-### COLORS
-set $focused-bg-color    #006633
+# Arch Linux Colors
+set $focused-bg-color    #0F7CB0
 set $text-color          #FFFFFF
 set $indicator           #505050
-set $indicator2          #0096FF
-
+set $indicator2          #FF9933
 
 set $unfocused-bg-color  #404040
 set $text-color-unfocused #A9A9A9 
@@ -99,20 +98,19 @@ default_border pixel 5
 
 ### STARTUP PROGRAMS
 
-exec xhost local:root
+exec xhost local:siyia
 #exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY=wayland-0 XDG_CURRENT_DESKTOP=sway
 exec swaylock -e -f -c 000000 --indicator-idle-visible
 #exec env QT_QPA_PLATFORM=wayland doublecmd --no-splash
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec mako
-exec pactl set-source-volume alsa_input.pci-0000_00_14.2.analog-stereo 70%
 #exec swaykbdd
+#exec wpaperd -d
 exec qbittorrent
 #exec pactl unload-module 6
-exec /home/siyia/.local/bin/xerrors.sh
 #exec pactl set-sink-volume @DEFAULT_SINK@ 100%
 exec gammastep -c ~/.config/redshift.conf
-exec kitty -T ~yazi~ -e yazi
+#exec ghostty --title="~yazi~" -e yazi
 
 
 #### WINDOW SETUP
@@ -174,8 +172,8 @@ for_window [app_id="mpv"] inhibit_idle fullscreen
 ### CUSTOM
 bindsym --to-code {
  $mod+x exec $term
- $mod+f exec kitty -T ~yazi~ -e yazi
- $mod+w exec chromium
+ $mod+f exec ghostty --title="~yazi~" -e yazi
+ $mod+w exec firefox
  $mod+v exec pavucontrol
  $mod+q kill
  $mod+d exec $menu
@@ -194,7 +192,7 @@ bindsym $mod+f12 exec qalculate-gtk
 bindsym $mod+f3 exec pactl set-sink-volume @DEFAULT_SINK@ +10%
 bindsym $mod+f2 exec pactl set-sink-volume @DEFAULT_SINK@ -10%
 bindsym $mod+f4 exec ~/.config/waybar/modules/toggle_mute.sh
-bindsym $mod+f1 exec pactl set-source-mute alsa_input.pci-0000_00_14.2.analog-stereo toggle
+bindsym $mod+f1 exec pactl set-source-mute alsa_input.pci-0000_0a_00.4.analog-stereo toggle
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym XF86MonBrightnessDown exec light -U 5
 bindsym XF86MonBrightnessUp exec light -A 5
