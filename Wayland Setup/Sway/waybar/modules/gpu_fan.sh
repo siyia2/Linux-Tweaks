@@ -1,4 +1,4 @@
 #!/bin/bash
-gpu_fan=$(cat /sys/class/hwmon/hwmon2/fan2_input)
+gpu_fan=$(cat /sys/class/hwmon/hwmon3/fan1_input)
 echo "$gpu_fan"
 exit
