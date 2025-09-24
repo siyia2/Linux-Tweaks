@@ -1,4 +1,7 @@
 [filetype]
+icon = { margin = 2 }
+# or
+symbol = { padding = 2 }
 rules = [
     # Symbolic links
     { name = "*", is = "link", fg = "cyan" },
@@ -27,9 +30,9 @@ rules = [
     { mime = "application/zstd", fg = "#FFA500" },
     
     # Directories
-    { name = "*/", is = "link", fg = "cyan" },
-    { name = "*/", is = "hidden", fg = "#7a6347" },
-    { name = "*/", fg = "#0F7CB0" },
+    { name = "*/", is = "link", fg = "cyan", bold = true },
+    { name = "*/", is = "hidden", fg = "#0F7CB0", dim = true , bold = true },
+    { name = "*/", fg = "#0F7CB0", bold = true },
 ]
 
 [icon]
