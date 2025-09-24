@@ -28,7 +28,8 @@ rules = [
     
     # Directories
     { name = "*/", is = "link", fg = "cyan" },
-    { name = "*/", fg = "blue" },
+    { name = "*/", is = "hidden", fg = "#7a6347" },
+    { name = "*/", fg = "#0F7CB0" },
 ]
 
 [icon]
