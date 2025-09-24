@@ -20,7 +20,7 @@ foreground = #c6d0f5
 cursor-color = #f2d5cf
 cursor-text = #dddddd
 
-#minimum-contrast = 1.1
+minimum-contrast = 1.1
 
 # Terminal padding
 window-padding-x = 8
@@ -42,11 +42,11 @@ cursor-click-to-move = true
 window-theme = dark
 background-opacity = 0.9
 bold-is-bright = "true"
-font-family = Fira Code Medium
-font-family-bold = Fira Code Bold
-font-family-italic = Fira Code Light
-font-family-bold-italic = Fira Code SemiBold
-font-size = 12
+font-family = Inconsolata Medium
+font-family-bold = Inconsolata Bold
+font-family-italic =  Inconsolata Expanded
+font-family-bold-italic = Inconsolata Expanded Bold
+font-size = 14
 gtk-titlebar = false
 confirm-close-surface = false
 
