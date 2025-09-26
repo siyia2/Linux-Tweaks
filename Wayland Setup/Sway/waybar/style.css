@@ -2,7 +2,7 @@
     border: none;
     border-radius: 0px;
     font-family: "Ubuntu Medium";
-    font-size: 15px;
+    font-size: 16px;
     min-height: 22px;
 	
 }
@@ -14,7 +14,7 @@ border-top: 2px solid rgba(100, 114, 125, 1.0);
 border-bottom: 2px solid rgba(100, 114, 125, 1.0);
 border-right: 2px solid rgba(100, 114, 125, 1.0);
 font-weight: bold;
-padding-top: 1px;
+padding-top: 4px;
 
 }
 
@@ -94,7 +94,6 @@ padding-top: 2px;
 
 #custom-vram{
 padding-top: 2px;
-border-right: 2px solid rgba(100, 114, 125, 1.0);
 
 }
 
@@ -127,7 +126,7 @@ window#waybar {
 
 #workspaces button {
     padding: 0px 5px;
-    padding-top: 3px;
+    padding-top: 5px;
     background: transparent;
     color: #0F7CB0;
     border-bottom: 0px solid transparent;

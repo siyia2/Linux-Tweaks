@@ -17,7 +17,7 @@
 
 "memory": {
     "interval": 5,
-    "format": "Ram: {}% |",
+    "format": "Ram: {}% ",
 		"tooltip": false,
 "on-click": "killall btop & ghostty --title='btop' -e btop"
 },
@@ -60,8 +60,8 @@
 	"thermal-zone": 0,
 	"hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
 	"critical-threshold": 70,
-	"format-critical":"{temperatureC}°C |",
-	"format":"{temperatureC}°C |",
+	"format-critical":"{temperatureC}°C ",
+	"format":"{temperatureC}°C ",
 		"tooltip": false,
 "on-click": "killall btop & ghostty --title='btop' -e btop"
 },
@@ -86,7 +86,7 @@
 // GPU STUFF
 
 "custom/gpu": {
-  "format": " Gpu:",
+  "format": "| Gpu:",
   "on-click": "killall btop & ghostty --title='btop' -e btop",
 		"tooltip": false
 },
@@ -111,7 +111,7 @@
 		"restart-interval": 5,
 		"tooltip": false,
 		"exec": "/home/siyia/.config/waybar/modules/vram.sh",
-		"format": "Vram: {}% ",
+		"format": "Vram: {}% | ",
 		"on-click": "killall btop & ghostty --title='btop' -e btop"
 },
 
@@ -240,7 +240,7 @@
 // CLOCK/DATE STUFF
 "clock": {
         "format": " {:L%a, %d %b %H:%M} ",
-        "format-alt": "{:L%A, %B %d, %Y (%R)}  ",
+        "format-alt": "{:L%A, %B %d, %Y (%R)}",
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
         "locale": "el_GR.UTF-8",
         "calendar": {
