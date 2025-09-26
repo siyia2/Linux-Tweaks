@@ -240,7 +240,7 @@
 // CLOCK/DATE STUFF
 "clock": {
         "format": " {:L%a, %d %b %H:%M} ",
-        "format-alt": "{:L%A, %B %d, %Y (%R)}",
+        "format-alt": "{:L%A, %d %B, %Y (%R)}",
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
         "locale": "el_GR.UTF-8",
         "calendar": {
