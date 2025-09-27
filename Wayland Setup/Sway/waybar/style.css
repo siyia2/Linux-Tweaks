@@ -115,6 +115,14 @@ border-bottom: 1px solid rgba(100, 114, 125, 1.0);
   text-shadow: 1px 1px 4px #1793D1;
 }
 
+tooltip {
+  background: rgba(0, 0, 0, 0.99);
+}
+
+tooltip label {
+  color: black;
+}
+
 window#waybar {
     background-color: rgba(0, 0, 0, 1);
     border-top: 2px solid rgba(23, 147, 209, 1.0);

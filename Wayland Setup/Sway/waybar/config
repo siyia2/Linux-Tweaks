@@ -241,11 +241,11 @@
 "clock": {
         "format": " {:L%a, %d %b %H:%M} ",
         "format-alt": "{:L%A, %d %B, %Y (%R)}",
-        "tooltip-format": "<tt><small>{calendar}</small></tt>",
-        "locale": "el_GR.UTF-8",
+        "tooltip-format": "<tt>{calendar}</tt>",
+        "locale": "en_US.UTF-8",
         "calendar": {
-                    "mode"          : "year",
-                    "mode-mon-col"  : 3,
+                    "mode"          : "month",
+                    "mode-mon-col"  : 1,
                     "weeks-pos"     : "right",
                     "on-scroll"     : 1,
                     "format": {
