@@ -1,5 +1,0 @@
-#! /bin/sh
-
-#echo 100000000 > /sys/class/drm/card0/device/hwmon/hwmon3/power1_cap
-echo 100000000 > /sys/class/drm/card1/device/hwmon/hwmon3/power1_cap
-exit
