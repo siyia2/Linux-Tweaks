@@ -126,7 +126,7 @@
 "custom/gpupower": {
 	"restart-interval": 2,
         "exec": "/home/siyia/.config/waybar/modules/gpu_power.sh",
-	"format": " {} ",
+	"format": "{} ",
 		"tooltip": false,
 "on-click": "killall btop & ghostty --title='btop' -e btop"
 },
@@ -247,7 +247,7 @@
 },
 // CLOCK/DATE STUFF
 "clock": {
-        "format": " {:L%a, %d %b %H:%M} ",
+        "format": " {:L%a, %d %b  %H:%M} ",
         "format-alt": "{:L%A, %d %B, %Y (%R)}",
         "tooltip-format": "<tt>{calendar}</tt>",
         "locale": "en_US.UTF-8",
