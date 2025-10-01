@@ -18,7 +18,7 @@ set $term ghostty
 # Your preferred application launcher
 # Note: it's recommended that you pass the final command to sway
 #set $menu bemenu-run -H 25 --fn Ubuntu 12 --tf '#00ff40'  --hf '#FFFFFF' --hb '#008000' -i -w
-set $menu wmenu-run -f "Ubuntu 12" -N "#000000" -M "#000000" -m "#00ff40" -p wmenu-run: -S "#008000" -s "#FFFFFF" -i
+set $menu wmenu-run -f "Ubuntu 12" -N "#000000" -M "#000000" -m "#00ff40" -p wmenu-run: -S "#0F7CB0" -s "#FFFFFF" -i
 
 ### Output configuration
 #
@@ -27,7 +27,7 @@ output "*" bg /home/siyia/Pictures/wp7.png fit
 #
 # Example configuration:
 #
-output HDMI-A-1 mode 1920x1080@74.9730Hz subpixel rgb max_render_time 4 adaptive_sync on scale 1
+output HDMI-A-1 mode 1920x1080@74.9730Hz subpixel rgb max_render_time 4 scale 1
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
@@ -78,7 +78,7 @@ font pango: "Ubuntu Medium 10"
 set $focused-bg-color    #0F7CB0
 set $text-color          #FFFFFF
 set $indicator           #505050
-set $indicator2          #FF9933
+set $indicator2          #E1CC4F
 
 set $unfocused-bg-color  #404040
 set $text-color-unfocused #A9A9A9 
@@ -128,6 +128,8 @@ for_window [app_id="thunderbird"] move container to workspace 1: 
 for_window [app_id="thunderbird"] focus 
 for_window [app_id="firefox"] focus
 for_window [app_id="chromium"] focus
+for_window [class="7DaysToDie.x86_64"] move container to workspace 4: 
+for_window [class="7DaysToDie.x86_64"] focus
 for_window [app_id="gsimplecal"] move position 1712 850
 for_window [app_id="doublecmd"] move container to workspace 2:   ; layout tabbed ;
 for_window [app_id="doublecmd"] focus
@@ -177,6 +179,8 @@ bindsym --to-code {
  $mod+v exec pavucontrol
  $mod+q kill
  $mod+d exec $menu
+ $mod+Shift+p exec pkexec gpu_high
+ $mod+p exec pkexec gpu_low
  $mod+Shift+c reload
  $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
  $mod+r mode "resize"
