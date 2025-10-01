@@ -66,6 +66,10 @@ padding-top: 2px;
 
 #custom-gpufan{
 padding-top: 2px;
+}
+
+#custom-gpupower{
+padding-top: 2px;
 border-right: 2px solid rgba(100, 114, 125, 1.0);
 
 }

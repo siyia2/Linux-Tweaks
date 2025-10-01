@@ -6,7 +6,7 @@
     //"modules-left": ["hyprland/workspaces"],
     //"modules-left": ["dwl/tags"],
 	"modules-left": ["sway/workspaces"],
-    "modules-center": ["memory","custom/vram","custom/cpu","cpu","temperature","custom/gpu","custom/gpusage","custom/gputemp","custom/gpufan"],
+    "modules-center": ["memory","custom/vram","custom/cpu","cpu","temperature","custom/gpu","custom/gpusage","custom/gputemp","custom/gpufan","custom/gpupower"],
     "modules-right": ["custom/kernel","custom/mesa","custom/bt_battery","pulseaudio","custom/mic","network","custom/kb","clock"],
     "sway/window": {
         "max-length": 1920
@@ -119,6 +119,14 @@
 	"restart-interval": 2,
         "exec": "/home/siyia/.config/waybar/modules/gpu_temp.sh",
 	"format": " {}°C",
+		"tooltip": false,
+"on-click": "killall btop & ghostty --title='btop' -e btop"
+},
+
+"custom/gpupower": {
+	"restart-interval": 2,
+        "exec": "/home/siyia/.config/waybar/modules/gpu_power.sh",
+	"format": " {} ",
 		"tooltip": false,
 "on-click": "killall btop & ghostty --title='btop' -e btop"
 },
