@@ -87,7 +87,7 @@
 
 "custom/gpu": {
   "format": "| Gpu:",
-  "on-click": "killall btop & ghostty --title='btop' -e btop",
+  "on-click": "exec pkexec gpu_power_switch",
 		"tooltip": false
 },
 
@@ -96,7 +96,7 @@
         "exec": "/home/siyia/.config/waybar/modules/gpu_usage.sh",
 	"format": " {}% ",
 		"tooltip": false,
-"on-click": "killall btop & ghostty --title='btop' -e btop"
+"on-click": "exec pkexec gpu_power_switch"
 },
 
 "custom/gpufan": {
@@ -104,7 +104,7 @@
         "exec": "/home/siyia/.config/waybar/modules/gpu_fan.sh",
 	"format": "  {} rpm ",
 		"tooltip": false,
-"on-click": "killall btop & ghostty --title='btop' -e btop"
+"on-click": "exec pkexec gpu_power_switch"
 },
 
 "custom/vram": {
@@ -120,7 +120,7 @@
         "exec": "/home/siyia/.config/waybar/modules/gpu_temp.sh",
 	"format": " {}°C",
 		"tooltip": false,
-"on-click": "killall btop & ghostty --title='btop' -e btop"
+"on-click": "exec pkexec gpu_power_switch"
 },
 
 "custom/gpupower": {
@@ -128,7 +128,7 @@
         "exec": "/home/siyia/.config/waybar/modules/gpu_power.sh",
 	"format": "{} ",
 		"tooltip": false,
-"on-click": "killall btop & ghostty --title='btop' -e btop"
+"on-click": "exec pkexec gpu_power_switch"
 },
 
 // MISC SW
@@ -208,8 +208,7 @@
     "format-ethernet": "🔗",
     "format-disconnected": "✖️",
     "tooltip-format": "{ifname} {ipaddr}",
-	"tooltip": true,
-	"on-click": "killall nmtui ; kitty -e nmtui"
+	"tooltip": true
 },
 
   "custom/mic": {
