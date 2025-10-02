@@ -1,0 +1,29 @@
+#!/bin/bash
+
+PERF_FILE="/sys/class/drm/card1/device/power_dpm_force_performance_level"
+STATE_FILE="/tmp/gpu_power_state"
+
+# Check current state from our state file
+if [ -f "$STATE_FILE" ]; then
+    CURRENT_STATE=$(cat "$STATE_FILE")
+else
+    CURRENT_STATE="automatic"
+fi
+
+# Toggle the state
+if [ "$CURRENT_STATE" = "automatic" ]; then
+    echo "Switching to manual low performance mode..."
+    echo "manual" | sudo tee "$PERF_FILE" > /dev/null
+    echo "low" | sudo tee "$PERF_FILE" > /dev/null
+    echo "low" > "$STATE_FILE"
+    echo "✓ GPU set to low power mode"
+else
+    echo "Switching to automatic performance mode..."
+    echo "auto" | sudo tee "$PERF_FILE" > /dev/null
+    echo "automatic" > "$STATE_FILE"
+    echo "✓ GPU set to automatic mode"
+fi
+
+# Show current setting
+CURRENT=$(cat "$PERF_FILE")
+echo "Current performance level: $CURRENT"
