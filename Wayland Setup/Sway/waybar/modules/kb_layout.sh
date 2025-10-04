@@ -1,7 +1,7 @@
 #!/bin/bash
 
 get_layout() {
-    local layout=$(swaymsg -t get_inputs | grep -A1 '"xkb_active_layout_name"' | grep -o '"[^"]*"' | tail -n1 | tr -d '"')
+    local layout=$(swaymsg -t get_inputs | grep 'xkb_active_layout_name' | head -n1 | sed 's/.*: "\([^"]*\)".*/\1/' | cut -c1-2)
     echo "$layout"
 }
 
