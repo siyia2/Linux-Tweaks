@@ -124,7 +124,7 @@
 },
 
 "custom/gpupower": {
-	"restart-interval": 2,
+	"restart-interval": 1,
         "exec": "/home/siyia/.config/waybar/modules/gpu_power.sh",
 	"format": "{} ",
 		"tooltip": false,
