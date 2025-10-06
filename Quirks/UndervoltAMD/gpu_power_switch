@@ -7,7 +7,13 @@ STATE_FILE="/tmp/gpu_power_state"
 if [ -f "$STATE_FILE" ]; then
     CURRENT_STATE=$(cat "$STATE_FILE")
 else
-    CURRENT_STATE="automatic"
+    # Initialize from actual GPU state on first run
+    ACTUAL_STATE=$(cat "$PERF_FILE" 2>/dev/null || echo "auto")
+    if [ "$ACTUAL_STATE" = "auto" ]; then
+        CURRENT_STATE="automatic"
+    else
+        CURRENT_STATE="low"
+    fi
 fi
 
 # Toggle the state
