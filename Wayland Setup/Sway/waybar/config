@@ -228,12 +228,6 @@
     "format-bluetooth": "{volume}% {icon}",
     "format-muted": " Muted 🔇",
     "format-icons": {
-        "headphones": "",
-        "handsfree": "",
-        "headset": "",
-        "phone": "",
-        "portable": "",
-        "car": "",
         "default": ["🔈","🔉","🔊"]
         
 
@@ -251,6 +245,7 @@
         "format-alt": "{:L%A, %d %B, %Y (%R)}",
         "tooltip-format": "<tt>{calendar}</tt>",
         "locale": "en_US.UTF-8",
+       // "iso8601": true,
         "calendar": {
             "mode": "month",
             "mode-mon-col": 1,
