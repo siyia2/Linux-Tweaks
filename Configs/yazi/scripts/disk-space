@@ -1,23 +1,4 @@
 #!/bin/bash
-# Function to convert bytes to human-readable format
-convert_size() {
-    local size=$1
-    local units=("B" "KB" "MB" "GB" "TB")
-    local unit=0
-    # Remove decimal points and trailing zeros for comparison
-    size_int=$(echo "$size" | cut -d. -f1)
-    
-    # Convert using bc for floating point arithmetic
-    while [ $unit -lt ${#units[@]} ]; do
-        if [ $size_int -lt 1024 ]; then
-            break
-        fi
-        size=$(echo "scale=2; $size/1024" | bc)
-        size_int=$(echo "scale=0; $size_int/1024" | bc)
-        unit=$((unit + 1))
-    done
-    printf "%.2f%s" $size "${units[$unit]}"
-}
 
 clear && printf "\033c"
 
@@ -30,20 +11,15 @@ fi
 printf "\n%-18s %-11s %-10s %-10s %-12s %-20s\n" "Device" "Total" "Used" "Free" "Usage%" "Mount Point"
 echo "--------------------------------------------------------------------------------"
 
-# Get disk information, format it, and sort it all in one pipeline
-df -P | grep "^/dev" | while read -r dfline; do
+# Get disk information using df with human-readable format and sort
+df -h -P | grep "^/dev" | while read -r dfline; do
     device=$(echo "$dfline" | awk '{print $1}')
     device_name=$(basename "$device")
-    total=$(echo "$dfline" | awk '{print $2 * 1024}')
-    used=$(echo "$dfline" | awk '{print $3 * 1024}')
-    free=$(echo "$dfline" | awk '{print $4 * 1024}')
+    total_h=$(echo "$dfline" | awk '{print $2}')
+    used_h=$(echo "$dfline" | awk '{print $3}')
+    free_h=$(echo "$dfline" | awk '{print $4}')
     usage=$(echo "$dfline" | awk '{print $5}')
     mount=$(echo "$dfline" | awk '{print $6}')
-    
-    # Convert values to human-readable format
-    total_h=$(convert_size $total)
-    used_h=$(convert_size $used)
-    free_h=$(convert_size $free)
     
     printf "%-18s %-11s %-10s %-10s %-12s %-20s\n" "$device_name" "$total_h" "$used_h" "$free_h" "$usage" "$mount"
 done | sort
