@@ -1,0 +1,10 @@
+[Unit]
+Description=Restart Waybar after resume
+After=suspend.target hibernate.target hybrid-sleep.target suspend-then-hibernate.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c 'systemd-run --machine=siyia@.host --user --collect --wait /bin/bash -c "killall waybar; sleep 1; waybar"'
+
+[Install]
+WantedBy=suspend.target hibernate.target hybrid-sleep.target suspend-then-hibernate.target
