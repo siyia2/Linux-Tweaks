@@ -1,6 +1,8 @@
 [Unit]
 Description=Restart Waybar after resume
 After=suspend.target hibernate.target hybrid-sleep.target suspend-then-hibernate.target
+Before=shutdown.target reboot.target halt.target
+Conflicts=shutdown.target reboot.target halt.target
 
 [Service]
 Type=oneshot
