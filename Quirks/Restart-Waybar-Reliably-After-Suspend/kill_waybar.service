@@ -1,0 +1,10 @@
+[Unit]
+Description=Restart Waybar after resume
+After=kill_waybar.service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c 'for user in $(loginctl list-users --no-legend | awk "{print \\$2}"); do systemd-run --machine=$user@.host --user --collect --wait /bin/bash -c "sleep 2; waybar" || true; done'
+
+[Install]
+WantedBy=suspend.target hibernate.target hybrid-sleep.target suspend-then-hibernate.target
