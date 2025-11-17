@@ -1,0 +1,12 @@
+[Unit]
+Description=Reload Sway configuration
+After=undervoltGPU.service
+Wants=undervoltGPU.service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c 'SWAYSOCK=$(ls /run/user/%U/sway-ipc.%U.*.sock 2>/dev/null | head -n1) && [ -n "$SWAYSOCK" ] && SWAYSOCK="$SWAYSOCK" swaymsg reload'
+RemainAfterExit=no
+
+[Install]
+WantedBy=default.target
