@@ -1,0 +1,10 @@
+[Unit]
+Description=Trigger Sway reload after suspend
+After=suspend.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/su - %u -c "XDG_RUNTIME_DIR=/run/user/%U systemctl --user start swaymsg-reload.service"
+
+[Install]
+WantedBy=suspend.target
