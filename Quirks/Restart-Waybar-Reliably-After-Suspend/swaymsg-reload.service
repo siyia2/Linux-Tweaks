@@ -1,7 +1,5 @@
 [Unit]
 Description=Reload Sway configuration
-After=undervoltGPU.service
-Wants=undervoltGPU.service
 
 [Service]
 Type=oneshot
