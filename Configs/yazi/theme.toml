@@ -1,14 +1,11 @@
 [filetype]
-icon = { margin = 2 }
-# or
-symbol = { padding = 2 }
 rules = [
     # Symbolic links
-    { name = "*", is = "link", fg = "cyan" },
-    { name = "*", is = "orphan", fg = "red" },
+    { url = "*", is = "link", fg = "cyan" },
+    { url = "*", is = "orphan", fg = "red" },
     
     # Executables
-    { name = "*", is = "exec", fg = "green" },
+    { url = "*", is = "exec", fg = "green" },
     
     # Images
     { mime = "image/*", fg = "yellow" },
@@ -19,8 +16,8 @@ rules = [
     { mime = "inode/empty", fg = "darkgray" },
     
     # Archives
-    { name = "*zip", fg = "#FFA500" },
-    { name = "*rar", fg = "#FFA500" },
+    { url = "*zip", fg = "#FFA500" },
+    { url = "*rar", fg = "#FFA500" },
     { mime = "application/xz", fg = "#FFA500" },
     { mime = "application/bz", fg = "#FFA500" },
     { mime = "application/bz2", fg = "#FFA500" },
@@ -30,11 +27,10 @@ rules = [
     { mime = "application/zstd", fg = "#FFA500" },
     
     # Directories
-    { name = "*/", is = "link", fg = "cyan", bold = true },
-    { name = "*/", is = "hidden", fg = "#0F7CB0", dim = true , bold = true },
-    { name = "*/", fg = "#0F7CB0", bold = true },
+    { url = "*/", fg = "blue" },
+    { url = "*/", is = "link", fg = "cyan" },
+    { url = "*/", is = "hidden", fg = "#0F7CB0", dim = true },
 ]
-
 [icon]
 exts = [
 	{ name = "iso", text = "💽", fg = "#00afff" },
@@ -42,5 +38,4 @@ exts = [
 	{ name = "img", text = "📀", fg = "#00afff" },
 	{ name = "mdf", text = "📀", fg = "#00afff" },
 	{ name = "nrg", text = "📀", fg = "#00afff" },
-	# ...
 ]
