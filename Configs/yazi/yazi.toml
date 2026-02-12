@@ -1,40 +1,38 @@
-[manager]
+[mgr]
 linemode = "mtime"
 
 [opener]
-edit_with_geany = [
+open_with_geany = [
     { run = 'geany "$@"', orphan = true, for = "unix" },
 ]
-
 edit = [
 	{ run = '$EDITOR "$@"', block = true, for = "unix" },
 ]
-
 open = [
 	{ run = 'xdg-open "$@"', desc = "Open" },
 ]
-
 open_with_roller = [
     { run = 'file-roller "$@"', orphan = true, for = "unix" },
 ]
-
 open_with_swayimg = [
     { run = 'swayimg "$@"', orphan = true, for = "unix" },
 ]
-
 extract_here = [
 	{ run = 'ya pub extract --list "$@"', desc = "extract here", for = "unix"},
 ]
-
 open_passwd = [
     { run = 'keepassxc "$@"', orphan = true, for = "unix" },
 ]
-
+open_pdf = [
+    { run = 'zathura "$@"', orphan = true, for = "unix" },
+]
 
 [open]
 prepend_rules = [
-	{ name = "*.{txt,c,h,lua,cpp,toml,log}", use = [ "edit_with_geany", "edit" ] },
+	{ name = "*.{txt,c,h,lua,cpp,toml,log}", use = [ "open_with_geany", "edit" ] },
+	{ mime = "text/*", use = [ "open_with_geany", "edit" ] },
     { name = "*.kdbx", use = [ "open_passwd" ] },
+    { name = "*.pdf", use = [ "open_pdf" ] },
     { name = "*.{png,jpg,jpeg,gif,bmp,tiff,webp,svg}", use = [ "open_with_swayimg" ] },
     { mime = "application/xz", use = [ "open_with_roller" , "extract_here" ] },
     { mime = "application/bz", use = [ "open_with_roller" , "extract_here" ] },
@@ -44,6 +42,4 @@ prepend_rules = [
     { mime = "application/gzip", use = [ "open_with_roller", "extract_here" ] },
     { mime = "application/zstd", use = [ "open_with_roller" , "extract_here" ] },
     { mime = "application/zip", use = [ "open_with_roller" , "extract_here" ] },
-    
 ]
-
