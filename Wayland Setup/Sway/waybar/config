@@ -6,7 +6,7 @@
     //"modules-left": ["hyprland/workspaces"],
     //"modules-left": ["dwl/tags"],
 	"modules-left": ["sway/workspaces"],
-    "modules-center": ["memory","custom/vram","custom/cpu","cpu","temperature","custom/gpu","custom/gpusage","custom/gputemp","custom/gpufan","custom/gpupower"],
+    "modules-center": ["memory","custom/zram","custom/vram","custom/cpu","cpu","temperature","custom/gpu","custom/gpusage","custom/gputemp","custom/gpufan","custom/gpupower"],
     "modules-right": ["custom/kernel","custom/mesa","custom/bt_battery","pulseaudio","custom/mic","network","custom/kb","clock"],
     "sway/window": {
         "max-length": 1920
@@ -25,7 +25,7 @@
 "custom/zram": {
 	"restart-interval": 5,
         "exec": "/home/siyia/.config/waybar/modules/zram.sh",
-	"format": "Zram:{} ",
+	"format": "Zram: {} ",
 		"tooltip": false,
 "on-click": "killall btop & ghostty --title='btop' -e btop"
 },
@@ -59,7 +59,7 @@
 	"interval": 2,
 	"thermal-zone": 0,
 	"hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
-	"critical-threshold": 70,
+	"critical-threshold": 85,
 	"format-critical":"{temperatureC}°C ",
 	"format":"{temperatureC}°C ",
 		"tooltip": false,
@@ -195,7 +195,7 @@
 "custom/bt_battery": {
 		"restart-interval": 10,
 		"tooltip": false,
-		"exec": "/home/siyia/.config/waybar/modules/bluetooth.sh",
+		"exec": "/home/siyia/.config/waybar/modules/battery_bluetooth.sh",
 		"format": "🔋{} ",
 		"on-click": "blueman-manager",
 		
@@ -241,23 +241,23 @@
 },
 // CLOCK/DATE STUFF
     "clock": {
-        "format": " {:L%a, %d %b  %H:%M} ",
+        "format": " {:L%a, %d %b  %H:%M}",
         "format-alt": "{:L%A, %d %B, %Y (%R)}",
         "tooltip-format": "<tt>{calendar}</tt>",
         "locale": "en_US.UTF-8",
-       // "iso8601": true,
         "calendar": {
             "mode": "month",
             "mode-mon-col": 1,
             "weeks-pos": "right",
             "on-scroll": 1,
-            "format": {
-                "months": "<span color='#ffead3'><b>{}</b></span>",
-                "days": "<span color='#ecc6d9'><b>{}</b></span>",
-                "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
-                "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
-                "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
-            }
+           "iso8601": true,
+           "format": {
+                    "months": "<span color='#ebdbb2'><b>{}</b></span>",
+                    "days": "<span color='#bdae93'><b>{}</b></span>",
+                    "weeks": "<span color='#458588'><b>W{}</b></span>",
+                    "weekdays": "<span color='#d79921'><b>{}</b></span>",
+                    "today": "<span color='#b16286'><b><u>{}</u></b></span>",
+                  },
         },
         "actions": {
             "on-click-right": "mode",
