@@ -1,4 +1,3 @@
 #!/bin/sh
 
-upower --dump | grep "percentage" | head -n 1 | tail -c 4
-
+upower --dump | grep "percentage" | head -n 1 | awk '{print $NF}'
