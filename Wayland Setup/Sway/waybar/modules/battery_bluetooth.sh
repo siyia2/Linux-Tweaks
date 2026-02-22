@@ -1,4 +1,4 @@
 #!/bin/sh
 
-upower --dump | grep "percentage" | head -n 1 | tail -c 5
+upower --dump | grep "percentage" | head -n 1 | tail -c 4
 
