@@ -187,7 +187,7 @@
 "custom/bt_battery": {
 		"restart-interval": 10,
 		"tooltip": false,
-		"exec": "/home/siyia/.config/waybar/modules/bluetooth.sh",
+		"exec": "/home/siyia/.config/waybar/modules/battery_bluetooth.sh",
 		"format": "🔋{} ",
 		"on-click": "blueman-manager",
 		
