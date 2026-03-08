@@ -1,13 +1,13 @@
 [Unit]
 Description=Waybar
-After=graphical-session.target
+After=sway-session.target
+Wants=sway-session.target
 
 [Service]
 ExecStart=/usr/bin/waybar
 Restart=always
 RestartSec=1
-StartLimitIntervalSec=30
-StartLimitBurst=5
+Environment=PATH=/usr/local/bin:/usr/bin:/bin
 
 [Install]
-WantedBy=graphical-session.target
+WantedBy=sway-session.target
