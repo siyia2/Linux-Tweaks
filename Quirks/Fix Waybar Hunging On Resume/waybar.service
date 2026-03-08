@@ -1,0 +1,13 @@
+[Unit]
+Description=Waybar
+After=graphical-session.target
+
+[Service]
+ExecStart=/usr/bin/waybar
+Restart=always
+RestartSec=1
+StartLimitIntervalSec=30
+StartLimitBurst=5
+
+[Install]
+WantedBy=graphical-session.target
