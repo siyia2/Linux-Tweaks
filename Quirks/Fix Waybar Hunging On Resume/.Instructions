@@ -1,5 +1,29 @@
+1. Install the sleep hook
+Copy kill_waybar.sh to /lib/systemd/system-sleep/ and mark it executable so the system automatically kills waybar on suspend/resume:
+sudo cp kill_waybar.sh /lib/systemd/system-sleep/
+sudo chmod +x /lib/systemd/system-sleep/kill_waybar.sh
 
-1. Place the kill_waybar.sh scrip under /lib/systemd/system-sleep/ directory and mark it as executable.
-2. Place systemd user service file under ~/.config/systemd/user/ directory if it does not exist create it.
-3. Enable the user service with systemctl enable --now --user waybar.service.
-4. Let systemd handle executing and restarting the waybar, so comment out all waybar executions from sway/hyprland config file.
+2. Install the waybar service
+Copy waybar.service to the systemd user services directory. Create it first if it doesn't exist:
+mkdir -p ~/.config/systemd/user/
+cp waybar.service ~/.config/systemd/user/
+3. Enable and start the service
+Tell systemd to start waybar now and automatically on every login:
+bashsystemctl --user enable --now waybar.service
+4. Hand waybar over to systemd
+From now on systemd will manage waybar, so you need to remove any lines that launch waybar directly from your compositor config (e.g. exec waybar or exec-once = waybar), otherwise it will start twice.
+Then add the following so your compositor signals systemd when it's ready, which is what triggers waybar to start at the right time:
+
+Sway (~/.config/sway/config):
+
+exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec systemctl --user start sway-session.target
+
+Hyprland (~/.config/hypr/hyprland.conf):
+
+exec-once = systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec-once = systemctl --user start graphical-session.target
+
+Using a display manager? (SDDM, GDM, LightDM, etc.) — your login manager likely activates graphical-session.target automatically, so you may not need to add those lines at all. 
+In that case, just make sure waybar.service has After=graphical-session.target and WantedBy=graphical-session.target dependencies instead of the above.
+
