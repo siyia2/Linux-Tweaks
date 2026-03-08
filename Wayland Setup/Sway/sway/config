@@ -27,7 +27,7 @@ output "*" bg /home/siyia/Pictures/wp7.png fit
 #
 # Example configuration:
 #
-output HDMI-A-1 mode 1920x1080@74.9730Hz subpixel rgb max_render_time 4 scale 1
+output DP-2 mode 1920x1080@100.000Hz subpixel rgb max_render_time 2  adaptive_sync on scale 1
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
@@ -99,11 +99,17 @@ default_border pixel 5
 ### STARTUP PROGRAMS
 
 exec xhost local:siyia
+
+# Create sway-session.target for waybar service etc...
+exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec systemctl --user start sway-session.target
+
 #exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY=wayland-0 XDG_CURRENT_DESKTOP=sway
 exec swaylock -e -f -c 000000 --indicator-idle-visible
 #exec env QT_QPA_PLATFORM=wayland doublecmd --no-splash
-exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 exec mako
+exec ~/.config/autostart/bluetooth-connect
 #exec swaykbdd
 #exec wpaperd -d
 exec qbittorrent
@@ -150,11 +156,12 @@ for_window [title="Worms Armageddon"] move container to workspace 4:  ; layou
 
 ### POWER MANAGEMENT
 
-exec swayidle -w
+exec swayidle -w \
 
 bindsym $mod+f11 exec swaylock -e -f -c 000000
 
 for_window [app_id="firefox"] inhibit_idle focus
+for_window [app_id="org.duckstation.DuckStation"] inhibit_idle open
 for_window [app_id="chromium"] inhibit_idle focus
 for_window [app_id="firefox-esr"] inhibit_idle focus
 for_window [app_id="TeamViewer"] inhibit_idle open
@@ -333,16 +340,16 @@ mode "resize" {
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
-bar {   swaybar_command waybar
-        #swaybar_command swaybar
-        #status_command while ~/.config/swaybar/status.sh; do sleep 1; done
-       # font pango: Ubuntu Medium 10
-      #  colors {
-     #   focused_workspace #006633 #006633 #FFFFFF
-    #}
-    #tray_output none
-    }
 
-}
+#bar {
+#    swaybar_command waybar
+#    status_command while ~/.config/swaybar/status.sh; do sleep 1; done
+#    height 30
+#    font pango:Ubuntu Medium 12
+#    colors {
+#      #  focused_workspace #006633 #006633 #FFFFFF
+#    }
+#    tray_output none
+#}
 
 include /etc/sway/config.d/*
