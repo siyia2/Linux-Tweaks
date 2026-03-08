@@ -1,0 +1,5 @@
+
+1. Place the kill_waybar.sh scrip under /lib/systemd/system-sleep/ directory and mark it as executable.
+2. Place systemd user service file under ~/.config/systemd/user/ directory if it does not exist create it.
+3. Enable the user service with systemctl enable --now --user waybar.service.
+4. Let systemd handle executing and restarting the waybar, so comment out all waybar executions from sway/hyprland config file.
