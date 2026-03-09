@@ -15,11 +15,15 @@ Sway (~/.config/sway/config):
 
 exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 exec systemctl --user start sway-session.target
+exec systemctl --user start waybar.service
+
 
 Hyprland (~/.config/hypr/hyprland.conf):
 
 exec-once = systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-exec-once = systemctl --user start graphical-session.target
+exec-once = systemctl --user start hyprland-session.target
+exec systemctl --user start waybar.service
+
 
 Using a mainstream display manager? (SDDM, GDM, LightDM, etc.) — your login manager likely activates graphical-session.target automatically, so you may not need to add those lines at all. 
 In that case, just make sure waybar.service has After=graphical-session.target and WantedBy=graphical-session.target dependencies instead of the above.
