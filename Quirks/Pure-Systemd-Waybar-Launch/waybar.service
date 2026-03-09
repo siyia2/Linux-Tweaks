@@ -1,7 +1,6 @@
 [Unit]
 Description=Waybar
-After=sway-session.target
-Wants=sway-session.target
+PartOf=sway-session.target
 
 [Service]
 ExecStart=/usr/bin/waybar
