@@ -22,4 +22,4 @@ exec systemctl --user start waybar.service
 
 
 Using a mainstream display manager? (SDDM, GDM, LightDM, etc.) — your login manager likely activates graphical-session.target automatically. 
-In that case, just make sure waybar.service has After=graphical-session.target and WantedBy=graphical-session.target dependencies, this also removes requiring the config lines noted above.
+In that case, do not add the config lines above and make sure waybar.service has After=graphical-session.target and WantedBy=graphical-session.target dependencies.
