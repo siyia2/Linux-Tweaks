@@ -96,16 +96,13 @@ gaps inner 6
 gaps outer -6
 default_border pixel 5
 
+
 ### STARTUP PROGRAMS
-
 exec xhost local:siyia
-
-# Create sway-session.target for waybar service etc...
-exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-exec systemctl --user start sway-session.target
-
 #exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY=wayland-0 XDG_CURRENT_DESKTOP=sway
 exec swaylock -e -f -c 000000 --indicator-idle-visible
+# Start waybar in a pure systemD way to avoid bugs
+exec systemctl --user start waybar.service
 #exec env QT_QPA_PLATFORM=wayland doublecmd --no-splash
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 exec mako
