@@ -13,15 +13,11 @@ Then add the following so your compositor signals systemd when it's ready, which
 
 Sway (~/.config/sway/config):
 
-exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-exec systemctl --user start sway-session.target
 exec systemctl --user start waybar.service
 
 
 Hyprland (~/.config/hypr/hyprland.conf):
 
-exec-once = systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-exec-once = systemctl --user start hyprland-session.target
 exec systemctl --user start waybar.service
 
 
