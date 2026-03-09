@@ -184,7 +184,7 @@ bindsym --to-code {
  $mod+q kill
  $mod+d exec $menu
  $mod+Shift+p exec pkexec gpu_power_switch
- $mod+Shift+c reload
+ $mod+Shift+c reload ; exec killall waybar
  $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
  $mod+r mode "resize"
 }
