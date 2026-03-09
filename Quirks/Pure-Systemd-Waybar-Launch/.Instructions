@@ -21,5 +21,5 @@ Hyprland (~/.config/hypr/hyprland.conf):
 exec systemctl --user start waybar.service
 
 
-Using a mainstream display manager? (SDDM, GDM, LightDM, etc.) — your login manager likely activates graphical-session.target automatically, so you may not need to add those lines at all. 
-In that case, just make sure waybar.service has After=graphical-session.target and WantedBy=graphical-session.target dependencies instead of the above.
+Using a mainstream display manager? (SDDM, GDM, LightDM, etc.) — your login manager likely activates graphical-session.target automatically. 
+In that case, just make sure waybar.service has After=graphical-session.target and WantedBy=graphical-session.target dependencies, this also removes requiring the config lines noted above.
