@@ -4,5 +4,5 @@ Description=Waybar
 [Service]
 ExecStart=/usr/bin/waybar
 Restart=always
-RestartSec=0.5
+RestartSec=0.3
 Environment=PATH=/usr/local/bin:/usr/bin:/bin
