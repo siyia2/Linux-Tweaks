@@ -1,0 +1,25 @@
+1. Install the waybar service
+Copy waybar.service to the systemd user services directory. Create it first if it doesn't exist:
+mkdir -p ~/.config/systemd/user/
+cp waybar.service ~/.config/systemd/user/
+
+2. Enable and start the service
+Tell systemd to start waybar now and automatically on every login:
+bashsystemctl --user enable --now waybar.service
+
+3. Hand waybar over to systemd
+From now on systemd will manage waybar, so you need to remove any lines that launch waybar directly from your compositor config (e.g. exec waybar or exec-once = waybar), otherwise it will start twice.
+Then add the following so your compositor signals systemd when it's ready, which is what triggers waybar to start at the right time:
+
+Sway (~/.config/sway/config):
+
+exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec systemctl --user start sway-session.target
+
+Hyprland (~/.config/hypr/hyprland.conf):
+
+exec-once = systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec-once = systemctl --user start graphical-session.target
+
+Using a mainstream display manager? (SDDM, GDM, LightDM, etc.) — your login manager likely activates graphical-session.target automatically, so you may not need to add those lines at all. 
+In that case, just make sure waybar.service has After=graphical-session.target and WantedBy=graphical-session.target dependencies instead of the above.
