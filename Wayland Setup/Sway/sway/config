@@ -101,8 +101,15 @@ default_border pixel 5
 exec xhost local:siyia
 #exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY=wayland-0 XDG_CURRENT_DESKTOP=sway
 exec swaylock -e -f -c 000000 --indicator-idle-visible
+
 # Start waybar in a pure systemD way to avoid bugs
-exec systemctl --user start waybar.service
+
+# Export Wayland environment to systemd services
+exec systemctl --user import-environment WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
+
+# Start the sway-session.target, which triggers all dependent services
+exec systemctl --user start sway-session.target
+
 #exec env QT_QPA_PLATFORM=wayland doublecmd --no-splash
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 exec mako
