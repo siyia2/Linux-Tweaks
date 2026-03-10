@@ -6,7 +6,7 @@ PartOf=sway-session.target
 [Service]
 ExecStart=/usr/bin/waybar
 Restart=always
-RestartSec=0.5
+RestartSec=1
 Environment=PATH=/usr/local/bin:/usr/bin:/bin
 
 [Install]
