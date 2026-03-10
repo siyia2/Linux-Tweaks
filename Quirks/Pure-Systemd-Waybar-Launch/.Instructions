@@ -2,7 +2,7 @@
 Copy waybar.service to the systemd user services directory. Create it first if it doesn't exist:
 mkdir -p ~/.config/systemd/user/
 cp waybar.service ~/.config/systemd/user/
-cp sway-session.target ~/.config/systemd/user/
+cp login-session.target ~/.config/systemd/user/
 
 2. Enable and start the service
 Tell systemd to start waybar now and automatically on every login:
@@ -18,7 +18,7 @@ Sway (~/.config/sway/config):
 exec systemctl --user import-environment WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
 
 # Start the sway-session.target, which triggers all dependent services
-exec systemctl --user start sway-session.target
+exec systemctl --user start login-session.target
 
 Using a mainstream display manager? (SDDM, GDM, LightDM, etc.) — your login manager likely activates graphical-session.target automatically. 
-In that case, you do not need the sway-session.target file and lines at all, just make sure waybar.service has After=graphical-session.target and WantedBy=graphical-session.target dependencies.
+In that case, you do not need the login-session.target file and lines at all, just make sure waybar.service has After=graphical-session.target and WantedBy=graphical-session.target dependencies.
