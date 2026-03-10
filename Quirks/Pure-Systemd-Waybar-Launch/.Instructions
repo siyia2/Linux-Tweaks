@@ -13,13 +13,9 @@ Then add the following so your compositor signals systemd when it's ready, which
 
 Sway (~/.config/sway/config):
 
+exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec systemctl --user start sway-session.target
 exec systemctl --user start waybar.service
-
-
-Hyprland (~/.config/hypr/hyprland.conf):
-
-exec systemctl --user start waybar.service
-
 
 Using a mainstream display manager? (SDDM, GDM, LightDM, etc.) — your login manager likely activates graphical-session.target automatically. 
 In that case, do not add the config lines above and make sure waybar.service has After=graphical-session.target and WantedBy=graphical-session.target dependencies.
