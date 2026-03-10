@@ -1,3 +1,0 @@
-[Unit]
-Description=Sway Session Target
-After=default.target
