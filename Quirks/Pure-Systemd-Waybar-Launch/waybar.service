@@ -1,8 +1,13 @@
 [Unit]
 Description=Waybar
+After=sway-session.target
+PartOf=sway-session.target
 
 [Service]
 ExecStart=/usr/bin/waybar
 Restart=always
 RestartSec=0.3
 Environment=PATH=/usr/local/bin:/usr/bin:/bin
+
+[Install]
+WantedBy=sway-session.target
