@@ -1,7 +1,7 @@
 [Unit]
 Description=Waybar
-After=sway-session.target
-PartOf=sway-session.target
+After=login-session.target
+PartOf=login-session.target
 
 [Service]
 ExecStartPre=-/usr/bin/killall -q waybar
@@ -11,4 +11,4 @@ RestartSec=0.5
 Environment=PATH=/usr/local/bin:/usr/bin:/bin
 
 [Install]
-WantedBy=sway-session.target
+WantedBy=login-session.target
