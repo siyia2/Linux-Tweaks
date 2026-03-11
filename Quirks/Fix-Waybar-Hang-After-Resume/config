@@ -1,4 +1,4 @@
 before-sleep 'swaylock -e -f -c 000000'
 timeout 6000 'systemctl suspend'
 timeout 905 'swaylock -e -f -c 000000'
-after-resume 'pkill -x waybar || true; waybar; swaymsg "output * power on"'
+after-resume 'pkill -x waybar || true; nohup waybar >/dev/null 2>&1 &; swaymsg "output * power on"'
