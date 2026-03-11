@@ -101,15 +101,6 @@ default_border pixel 5
 exec xhost local:siyia
 #exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY=wayland-0 XDG_CURRENT_DESKTOP=sway
 exec swaylock -e -f -c 000000 --indicator-idle-visible
-
-# Start waybar in a pure systemD way to avoid bugs
-
-# Export Wayland environment to systemd services
-exec systemctl --user import-environment WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP
-
-# Start the sway-session.target, which triggers all dependent services
-exec systemctl --user start sway-session.target
-
 #exec env QT_QPA_PLATFORM=wayland doublecmd --no-splash
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 exec mako
@@ -191,7 +182,7 @@ bindsym --to-code {
  $mod+q kill
  $mod+d exec $menu
  $mod+Shift+p exec pkexec gpu_power_switch
- $mod+Shift+c reload ; exec killall waybar
+ $mod+Shift+c reload
  $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
  $mod+r mode "resize"
 }
@@ -345,8 +336,8 @@ mode "resize" {
 #
 # Read `man 5 sway-bar` for more information about this section.
 
-#bar {
-#    swaybar_command waybar
+bar {
+    swaybar_command waybar
 #    status_command while ~/.config/swaybar/status.sh; do sleep 1; done
 #    height 30
 #    font pango:Ubuntu Medium 12
@@ -354,6 +345,6 @@ mode "resize" {
 #      #  focused_workspace #006633 #006633 #FFFFFF
 #    }
 #    tray_output none
-#}
+}
 
 include /etc/sway/config.d/*
