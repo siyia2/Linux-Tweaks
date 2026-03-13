@@ -26,10 +26,27 @@ $(free | awk '
 EOF
 
 # --- CPU load: read and round to integer ---
-read -r cpu_load << EOF
-$(awk '{u=$2+$4; t=$2+$4+$5} NR==1{pu=u;pt=t} NR==2{printf "%d", int((u-pu)/(t-pt)*100 + 0.5)}' \
-  <(grep '^cpu ' /proc/stat) <(sleep 0.2; grep '^cpu ' /proc/stat))
-EOF
+if [[ -f /tmp/cpu_prev ]]; then
+    read -r _ prev_user prev_nice prev_system prev_idle rest < /tmp/cpu_prev
+    read -r _ curr_user curr_nice curr_system curr_idle rest < /proc/stat
+    
+    active_old=$((prev_user + prev_system))
+    active_new=$((curr_user + curr_system))
+    total_old=$((prev_user + prev_nice + prev_system + prev_idle))
+    total_new=$((curr_user + curr_nice + curr_system + curr_idle))
+    
+    if (( total_new > total_old )); then
+        cpu_load=$(( 100 * (active_new - active_old) / (total_new - total_old) ))
+    else
+        cpu_load=0
+    fi
+else
+    cpu_load=0
+fi
+
+# Save current stats without awk (pure bash)
+read -r cpu_line < /proc/stat
+echo "$cpu_line" > /tmp/cpu_prev
 
 # --- Audio info ---
 sink_info=$(wpctl get-volume @DEFAULT_AUDIO_SINK@)
