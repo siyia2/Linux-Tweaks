@@ -1,4 +1,6 @@
 #!/bin/sh
+
+# Place the file under /usr/lib/systemd/system-sleep/, current solution is for sway only.
 case "$1" in
   post)
     sleep 1
