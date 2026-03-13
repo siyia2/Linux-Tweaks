@@ -55,7 +55,7 @@ mic_info=$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@)
 volume=$(awk '{printf "%d%%", $2*100}' <<< "$sink_info")
 case "$sink_info" in *MUTED*) sink_mute=yes ;; *) sink_mute=no ;; esac
 case "$mic_info"  in *MUTED*) mic_mute=yes  ;; *) mic_mute=no  ;; esac
-mic_icon=$([ "$mic_mute"  = "yes" ] && echo "🟢" || echo "🎤")
+mic_icon=$([ "$mic_mute"  = "yes" ] && echo "🟢" || echo "🎙️")
 audio_info=$([ "$sink_mute" = "yes" ] && echo "🔇 $volume" || echo "🔉$volume")
 
 # --- Remaining cheap calls ---
