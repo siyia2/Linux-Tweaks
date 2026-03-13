@@ -71,6 +71,6 @@ kb_layout=$(swaymsg -t get_inputs \
 
 kb_layout="<span background='#2255b2' foreground='white'><b> $kb_layout </b></span>"
 network=$(ip route get 1.1.1.1 2>/dev/null | awk '/dev/{for(i=1;i<=NF;i++) if($i=="dev") print $(i+1)}')
-network=$([ -n "$network" ] && echo "⇆" || echo "⛔")
+network=$([ -n "$network" ] && echo "🔗" || echo "❌")
 
-echo "| RAM: $ram_usage ZRAM: $swap_usage VRAM: $vram_percent% | CPU: $cpu_load% @ $cpu_temp°C | GPU: $gpu_usage% @ $gpu_temp°C @ $gpu_fan rpm $gpu_power |                                                                                   | 🐧 $linux_version  ⚙️ $mesa_version | $audio_info $mic_icon $network $kb_layout $date_formatted"
+echo "| RAM: $ram_usage ZRAM: $swap_usage VRAM: $vram_percent% | CPU: $cpu_load% @ $cpu_temp°C | GPU: $gpu_usage% @ $gpu_temp°C @ $gpu_fan rpm $gpu_power |                                                                                   | 🐧 $linux_version  ⚙️ $mesa_version | $audio_info $mic_icon $network  $kb_layout  $date_formatted"
