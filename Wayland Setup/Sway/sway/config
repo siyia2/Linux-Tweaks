@@ -340,11 +340,11 @@ mode "resize" {
 bar {
     swaybar_command swaybar
     status_command while ~/.config/swaybar/status.sh; do sleep 1; done
-    height 26
-    font pango:Ubuntu Medium 11
-#    colors {
-#      #  focused_workspace #006633 #006633 #FFFFFF
-#    }
+    height 28
+    font pango:Ubuntu 11
+colors {
+        background #2B272B
+    }
     tray_output none
 }
 
