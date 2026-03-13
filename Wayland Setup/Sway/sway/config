@@ -343,7 +343,7 @@ bar {
     height 28
     font pango:Ubuntu 11
 colors {
-        background #272226
+        background #1e1a1f
     }
     tray_output none
 }
