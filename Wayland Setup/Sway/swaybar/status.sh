@@ -18,11 +18,17 @@ vram_percent=$(( (gpu_vram_mb * 100 + vram_total / 2) / vram_total ))
 
 # --- RAM/SWAP: single awk pass over free output, integers ---
 read -r ram_usage swap_usage << EOF
-$(free | awk '
-  NR==2 { ram=int($3/$2*100 + 0.5) }
-  NR==3 { swap=int($3/$2*100 + 0.5) }
-  END   { print ram"%" , swap"%" }
-')
+$(
+  free | awk 'NR==2 { printf int($3/$2*100+0.5)"%" }'
+  echo -n " "
+  zramctl | awk 'NR==2 {
+    total=$6; disk=$3
+    sub(/G$/,"",disk); disk*=1024
+    if (sub(/G$/,"",total)) total*=1024
+    else sub(/M$/,"",total)
+    printf int(total/disk*100+0.5)"%"
+  }'
+)
 EOF
 
 # --- CPU load: read and round to integer ---
