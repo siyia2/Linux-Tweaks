@@ -1,5 +1,5 @@
 #!/bin/sh
-# Sway status bar script - optimized version
+# Sway status bar script - optimized version with integer percentages
 
 # --- System files (read once via shell builtins, no subshells) ---
 read -r cpu_temp_raw   < /sys/class/hwmon/hwmon0/temp1_input
@@ -11,32 +11,27 @@ read -r vram_total     < /sys/class/drm/card1/device/mem_info_vram_total
 read -r gpu_vram_mb    < /sys/class/drm/card1/device/mem_info_vram_used
 read -r gpu_power_status < /sys/class/drm/card1/device/power_dpm_force_performance_level
 
-# --- Arithmetic in shell (no awk/grep for simple math) ---
+# --- Arithmetic in shell (integers only) ---
 cpu_temp=$(( cpu_temp_raw / 1000 ))
 gpu_temp=$(( gpu_temp_raw / 1000 ))
 vram_percent=$(( (gpu_vram_mb * 100 + vram_total / 2) / vram_total ))
 
-# --- RAM/SWAP: single awk pass over free output ---
+# --- RAM/SWAP: single awk pass over free output, integers ---
 read -r ram_usage swap_usage << EOF
 $(free | awk '
-  NR==2 { ram=int($3/$2*100+0.5) }
-  NR==3 { swap=int($3/$2*100+0.5) }
+  NR==2 { ram=int($3/$2*100 + 0.5) }
+  NR==3 { swap=int($3/$2*100 + 0.5) }
   END   { print ram"%" , swap"%" }
 ')
 EOF
 
-# --- CPU load: single stat read, no top (expensive!) ---
+# --- CPU load: read and round to integer ---
 read -r cpu_load << EOF
-$(awk '{u=$2+$4; t=$2+$4+$5} NR==1{pu=u;pt=t} NR==2{printf "%.1f", (u-pu)/(t-pt)*100}' \
+$(awk '{u=$2+$4; t=$2+$4+$5} NR==1{pu=u;pt=t} NR==2{printf "%d", int((u-pu)/(t-pt)*100 + 0.5)}' \
   <(grep '^cpu ' /proc/stat) <(sleep 0.2; grep '^cpu ' /proc/stat))
 EOF
 
-read -r mic_mute <<< "$(pactl get-source-mute @DEFAULT_SOURCE@ | awk '{print $2}')"
-
-read -r sink_mute volume <<< "$(pactl get-sink-volume @DEFAULT_SINK@ \
-  | awk '{match($0,/[0-9]+%/); vol=substr($0,RSTART,RLENGTH)}
-         END{print "",vol}')"
-
+# --- Audio info ---
 mic_mute=$(pactl get-source-mute @DEFAULT_SOURCE@ | cut -d' ' -f2)
 sink_mute=$(pactl get-sink-mute @DEFAULT_SINK@ | cut -d' ' -f2)
 volume=$(pactl get-sink-volume @DEFAULT_SINK@ | grep -o '[0-9]\+%' | head -1)
@@ -48,7 +43,7 @@ gpu_power=$([ "$gpu_power_status" = "low" ] && echo "🌱" || echo "🚀")
 # --- Remaining cheap calls ---
 date_formatted=$(date "+%a %d %b %Y, %H:%M")
 linux_version=$(uname -r | cut -d'-' -f1)
-mesa_version=$(glxinfo -B 2>/dev/null | awk '/OpenGL version/{print $NF}' | sed 's/[^0-9.].*//')
+mesa_version=$(pacman -Q mesa 2>/dev/null | awk '{print $2}' | cut -d- -f1 | cut -d: -f2)
 kb_layout=$(swaymsg -t get_inputs \
   | sed -nE 's/.*xkb_active_layout_name.*"([^"]+)".*/\1/p' \
   | head -n1 \
