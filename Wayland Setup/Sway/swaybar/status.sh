@@ -59,6 +59,7 @@ mic_icon=$([ "$mic_mute"  = "yes" ] && echo "🟢" || echo "🎙️")
 audio_info=$([ "$sink_mute" = "yes" ] && echo "🔇 $volume" || echo "🔉$volume")
 
 # --- Remaining cheap calls ---
+bt_battery=$(upower --dump | grep "percentage" | head -n 1 | awk '{print $NF}')
 gpu_power=$([ "$gpu_power_status" = "low" ] && echo "🌱" || echo "🚀")
 date_formatted=$(date "+%a %d %b %Y, %H:%M")
 linux_version=$(uname -r | cut -d'-' -f1)
@@ -73,4 +74,4 @@ kb_layout="<span background='#2255b2' foreground='white'><b> $kb_layout </b></sp
 network=$(ip route get 1.1.1.1 2>/dev/null | awk '/dev/{for(i=1;i<=NF;i++) if($i=="dev") print $(i+1)}')
 network=$([ -n "$network" ] && echo "🔗" || echo "❌")
 
-echo "| RAM: $ram_usage ZRAM: $swap_usage VRAM: $vram_percent% | CPU: $cpu_load% @ $cpu_temp°C | GPU: $gpu_usage% @ $gpu_temp°C @ $gpu_fan rpm $gpu_power |                                                                                   | 🐧 $linux_version  ⚙️ $mesa_version | $audio_info $mic_icon $network  $kb_layout  $date_formatted"
+echo "| RAM: $ram_usage ZRAM: $swap_usage VRAM: $vram_percent% | CPU: $cpu_load% @ $cpu_temp°C | GPU: $gpu_usage% @ $gpu_temp°C @ $gpu_fan rpm $gpu_power |                                                                                   | 🐧 $linux_version  ⚙️ $mesa_version |🔋$bt_battery $audio_info  $mic_icon $network $kb_layout  $date_formatted"
