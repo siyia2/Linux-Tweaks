@@ -1,47 +1,63 @@
 #!/bin/sh
-# The Sway configuration file in ~/.config/sway/config calls this script.
-# You should see changes to the status bar after saving this script.
-# If not, do "killall swaybar" and $mod+Shift+c to reload the configuration.
+# Sway status bar script - optimized version
 
-# Produces "21 days", for example
-uptime_formatted=$(uptime | cut -d ',' -f1  | cut -d ' ' -f4,5)
+# --- System files (read once via shell builtins, no subshells) ---
+read -r cpu_temp_raw   < /sys/class/hwmon/hwmon0/temp1_input
+read -r cpu_fan        < /sys/class/hwmon/hwmon2/fan1_input
+read -r gpu_usage      < /sys/class/drm/card1/device/gpu_busy_percent
+read -r gpu_temp_raw   < /sys/class/hwmon/hwmon3/temp1_input
+read -r gpu_fan        < /sys/class/drm/card1/device/hwmon/hwmon3/fan1_input
+read -r vram_total     < /sys/class/drm/card1/device/mem_info_vram_total
+read -r gpu_vram_mb    < /sys/class/drm/card1/device/mem_info_vram_used
+read -r gpu_power_status < /sys/class/drm/card1/device/power_dpm_force_performance_level
 
-ram_usage=$(free -t | awk 'NR == 2 {printf("%.d%"), $3/$2*100}')
-swap_usage=$(free -t | awk 'NR == 3 {printf(" %d%"), $3/$2*100}')
-cpu_load=$(top -n 1 -b | awk '/^%Cpu/{print $2}')
-cpu_fan=$(cat /sys/class/hwmon/hwmon2/fan1_input)
-cpu_temp=$(cat /sys/class/hwmon/hwmon0/temp1_input | grep -Po '.*(?=...$)')
+# --- Arithmetic in shell (no awk/grep for simple math) ---
+cpu_temp=$(( cpu_temp_raw / 1000 ))
+gpu_temp=$(( gpu_temp_raw / 1000 ))
+vram_percent=$(( (gpu_vram_mb * 100 + vram_total / 2) / vram_total ))
 
-mesa_version=$(glxinfo | grep "Version" | cut -c 13-)
-gpu_usage=$(cat /sys/class/drm/card0/device/gpu_busy_percent)
-gpu_temp=$(cat /sys/class/hwmon/hwmon3/temp1_input | grep -Po '.*(?=...$)')
-gpu_fan=$(cat /sys/class/drm/card0/device/hwmon/hwmon3/fan1_input)
-vram_total=$(cat /sys/class/drm/card0/device/mem_info_vram_total)
-gpu_vram_mb=$(cat /sys/class/drm/card0/device/mem_info_vram_used)
-vram_percent=$(awk "BEGIN { pc=100*${gpu_vram_mb}/${vram_total}; i=int(pc); print (pc-i<0.5)?i:i+1 }")
+# --- RAM/SWAP: single awk pass over free output ---
+read -r ram_usage swap_usage << EOF
+$(free | awk '
+  NR==2 { ram=int($3/$2*100+0.5) }
+  NR==3 { swap=int($3/$2*100+0.5) }
+  END   { print ram"%" , swap"%" }
+')
+EOF
 
-# The abbreviated weekday (e.g., "Sat"), followed by the ISO-formatted date
-# like 2018-10-06 and the time (e.g., 14:01)
-date_formatted=$(date "+%a %d %b %Y %H:%M")
-time_utc=$(date -u "+%H:%M")
-# Get the Linux version but remove the "-1-ARCH" part
-linux_version=$(uname -r | cut -d '-' -f1)
+# --- CPU load: single stat read, no top (expensive!) ---
+read -r cpu_load << EOF
+$(awk '{u=$2+$4; t=$2+$4+$5} NR==1{pu=u;pt=t} NR==2{printf "%.1f", (u-pu)/(t-pt)*100}' \
+  <(grep '^cpu ' /proc/stat) <(sleep 0.2; grep '^cpu ' /proc/stat))
+EOF
 
-volume=$(pactl list sinks | grep Volume | head -n1 | awk '{print $5}')
-audio_info=$(pactl list sinks | grep Mute | awk -v vol="${volume}" '{print $2=="no"? "🔉 " vol : "🔇 " vol}')
+read -r mic_mute <<< "$(pactl get-source-mute @DEFAULT_SOURCE@ | awk '{print $2}')"
 
-kb_layout=$(swaymsg -t get_inputs | jq '.[] | select(.identifier == "6700:19550:SEMICO_USB_Keyboard") | .xkb_active_layout_name' | tail -1| tail -c +2 | head -c -2)
+read -r sink_mute volume <<< "$(pactl get-sink-volume @DEFAULT_SINK@ \
+  | awk '{match($0,/[0-9]+%/); vol=substr($0,RSTART,RLENGTH)}
+         END{print "",vol}')"
 
+mic_mute=$(pactl get-source-mute @DEFAULT_SOURCE@ | cut -d' ' -f2)
+sink_mute=$(pactl get-sink-mute @DEFAULT_SINK@ | cut -d' ' -f2)
+volume=$(pactl get-sink-volume @DEFAULT_SINK@ | grep -o '[0-9]\+%' | head -1)
+
+mic_icon=$([ "$mic_mute"  = "yes" ] && echo "🔴" || echo "🟢")
+audio_info=$([ "$sink_mute" = "yes" ] && echo "🔇 $volume" || echo "🔉$volume")
+gpu_power=$([ "$gpu_power_status" = "low" ] && echo "🌱" || echo "🚀")
+
+# --- Remaining cheap calls ---
+date_formatted=$(date "+%a %d %b %Y, %H:%M")
+linux_version=$(uname -r | cut -d'-' -f1)
+mesa_version=$(glxinfo -B 2>/dev/null | awk '/OpenGL version/{print $NF}' | sed 's/[^0-9.].*//')
+kb_layout=$(swaymsg -t get_inputs \
+  | sed -nE 's/.*xkb_active_layout_name.*"([^"]+)".*/\1/p' \
+  | head -n1 \
+  | cut -c1-2 \
+  | tr a-z A-Z)
+
+kb_layout="<span background='#2255b2' foreground='white'><b> $kb_layout </b></span>"
 ssid=$(iwgetid wlp0s18f2u2 -r)
+network=$(ip route get 1.1.1.1 2>/dev/null | awk '/dev/{for(i=1;i<=NF;i++) if($i=="dev") print $(i+1)}')
+network=$([ -n "$network" ] && echo "⇆" || echo "⛔")
 
-network=$(ip route get 1.1.1.1 | grep -Po '(?<=dev\s)\w+' | cut -f1 -d ' ')
-if ! [ $network ]
-then
-   network="⛔"
-else
-   network="⇆"
-fi
-
-# Emojis and characters for the status bar
-# 💎 💻 💡 🔌 ⚡ 📁 ⌨️ 🐧   🖧 ⚙️ 📡 ⛔ ⇆ 🖴 \|
-echo RAM: $ram_usage "|" ZSWAP: $swap_usage "|" VRAM: $vram_percent% "|" CPU: $cpu_load% @ $cpu_temp°C @ $cpu_fan rpm "|" GPU: $gpu_usage.0% @ $gpu_temp°C @ $gpu_fan rpm "			" 🐧 $linux_version " " ⚙️ $mesa_version " " $audio_info " " $network " " ⌨️ $kb_layout " " $date_formatted " "UTC $time_utc" "
+echo "| RAM: $ram_usage ZRAM: $swap_usage VRAM: $vram_percent% | CPU: $cpu_load% @ $cpu_temp°C | GPU: $gpu_usage% @ $gpu_temp°C @ $gpu_fan rpm $gpu_power |                                                                   | 🐧 $linux_version  ⚙️ $mesa_version | $audio_info $mic_icon $network $kb_layout $date_formatted"
