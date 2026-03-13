@@ -41,6 +41,7 @@ mic_icon=$([ "$mic_mute"  = "yes" ] && echo "🔴" || echo "🟢")
 audio_info=$([ "$sink_mute" = "yes" ] && echo "🔇 $volume" || echo "🔉$volume")
 
 # --- Remaining cheap calls ---
+gpu_power=$([ "$gpu_power_status" = "low" ] && echo "🌱" || echo "🚀")
 date_formatted=$(date "+%a %d %b %Y, %H:%M")
 linux_version=$(uname -r | cut -d'-' -f1)
 mesa_version=$(pacman -Q mesa 2>/dev/null | awk '{print $2}' | cut -d- -f1 | cut -d: -f2)
