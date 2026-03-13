@@ -32,13 +32,13 @@ $(awk '{u=$2+$4; t=$2+$4+$5} NR==1{pu=u;pt=t} NR==2{printf "%d", int((u-pu)/(t-p
 EOF
 
 # --- Audio info ---
-mic_mute=$(pactl get-source-mute @DEFAULT_SOURCE@ | cut -d' ' -f2)
-sink_mute=$(pactl get-sink-mute @DEFAULT_SINK@ | cut -d' ' -f2)
-volume=$(pactl get-sink-volume @DEFAULT_SINK@ | grep -o '[0-9]\+%' | head -1)
-
+sink_info=$(wpctl get-volume @DEFAULT_AUDIO_SINK@)
+mic_info=$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@)
+volume=$(awk '{printf "%d%%", $2*100}' <<< "$sink_info")
+case "$sink_info" in *MUTED*) sink_mute=yes ;; *) sink_mute=no ;; esac
+case "$mic_info"  in *MUTED*) mic_mute=yes  ;; *) mic_mute=no  ;; esac
 mic_icon=$([ "$mic_mute"  = "yes" ] && echo "🔴" || echo "🟢")
 audio_info=$([ "$sink_mute" = "yes" ] && echo "🔇 $volume" || echo "🔉$volume")
-gpu_power=$([ "$gpu_power_status" = "low" ] && echo "🌱" || echo "🚀")
 
 # --- Remaining cheap calls ---
 date_formatted=$(date "+%a %d %b %Y, %H:%M")
@@ -51,7 +51,6 @@ kb_layout=$(swaymsg -t get_inputs \
   | tr a-z A-Z)
 
 kb_layout="<span background='#2255b2' foreground='white'><b> $kb_layout </b></span>"
-ssid=$(iwgetid wlp0s18f2u2 -r)
 network=$(ip route get 1.1.1.1 2>/dev/null | awk '/dev/{for(i=1;i<=NF;i++) if($i=="dev") print $(i+1)}')
 network=$([ -n "$network" ] && echo "⇆" || echo "⛔")
 
