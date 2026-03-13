@@ -178,7 +178,7 @@ bindsym --to-code {
  $mod+x exec $term
  $mod+f exec ghostty --title="~yazi~" -e yazi
  $mod+w exec firefox
- $mod+v exec pavucontrol
+ $mod+v exec sh -c "killall -q pavucontrol; pavucontrol"
  $mod+q kill
  $mod+d exec $menu
  $mod+Shift+p exec pkexec gpu_power_switch
