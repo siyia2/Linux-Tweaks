@@ -337,14 +337,14 @@ mode "resize" {
 # Read `man 5 sway-bar` for more information about this section.
 
 bar {
-    swaybar_command waybar
-#    status_command while ~/.config/swaybar/status.sh; do sleep 1; done
-#    height 30
-#    font pango:Ubuntu Medium 12
+    swaybar_command swaybar
+    status_command while ~/.config/swaybar/status.sh; do sleep 1; done
+    height 26
+    font pango:Ubuntu Medium 11
 #    colors {
 #      #  focused_workspace #006633 #006633 #FFFFFF
 #    }
-#    tray_output none
+    tray_output none
 }
 
 include /etc/sway/config.d/*
