@@ -2,7 +2,7 @@
 # Sway status bar script - optimized version with integer percentages
 
 # --- System files (read once via shell builtins, no subshells) ---
-read -r cpu_temp_raw   < /sys/class/hwmon/hwmon0/temp1_input
+read -r cpu_temp_raw   < /sys/class/hwmon/hwmon4/temp1_input
 read -r cpu_fan        < /sys/class/hwmon/hwmon2/fan1_input
 read -r gpu_usage      < /sys/class/drm/card1/device/gpu_busy_percent
 read -r gpu_temp_raw   < /sys/class/hwmon/hwmon3/temp1_input
@@ -27,16 +27,17 @@ EOF
 
 # --- CPU load: read and round to integer ---
 if [[ -f /tmp/cpu_prev ]]; then
-    read -r _ prev_user prev_nice prev_system prev_idle rest < /tmp/cpu_prev
-    read -r _ curr_user curr_nice curr_system curr_idle rest < /proc/stat
-    
-    active_old=$((prev_user + prev_system))
-    active_new=$((curr_user + curr_system))
-    total_old=$((prev_user + prev_nice + prev_system + prev_idle))
-    total_new=$((curr_user + curr_nice + curr_system + curr_idle))
-    
+    read -r _ pu pn ps pi pw pirq psirq pst _ _ < /tmp/cpu_prev
+    read -r _ cu cn cs ci cw cirq csirq cst _ _ < /proc/stat
+
+    active_old=$((pu + pn + ps + pirq + psirq + pst))
+    active_new=$((cu + cn + cs + cirq + csirq + cst))
+
+    total_old=$((pu + pn + ps + pi + pw + pirq + psirq + pst))
+    total_new=$((cu + cn + cs + ci + cw + cirq + csirq + cst))
+
     if (( total_new > total_old )); then
-        cpu_load=$(( 100 * (active_new - active_old) / (total_new - total_old) ))
+        cpu_load=$((100 * (active_new - active_old) / (total_new - total_old)))
     else
         cpu_load=0
     fi
@@ -54,7 +55,7 @@ mic_info=$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@)
 volume=$(awk '{printf "%d%%", $2*100}' <<< "$sink_info")
 case "$sink_info" in *MUTED*) sink_mute=yes ;; *) sink_mute=no ;; esac
 case "$mic_info"  in *MUTED*) mic_mute=yes  ;; *) mic_mute=no  ;; esac
-mic_icon=$([ "$mic_mute"  = "yes" ] && echo "🔴" || echo "🟢")
+mic_icon=$([ "$mic_mute"  = "yes" ] && echo "🟢" || echo "🎤")
 audio_info=$([ "$sink_mute" = "yes" ] && echo "🔇 $volume" || echo "🔉$volume")
 
 # --- Remaining cheap calls ---
@@ -72,4 +73,4 @@ kb_layout="<span background='#2255b2' foreground='white'><b> $kb_layout </b></sp
 network=$(ip route get 1.1.1.1 2>/dev/null | awk '/dev/{for(i=1;i<=NF;i++) if($i=="dev") print $(i+1)}')
 network=$([ -n "$network" ] && echo "⇆" || echo "⛔")
 
-echo "| RAM: $ram_usage ZRAM: $swap_usage VRAM: $vram_percent% | CPU: $cpu_load% @ $cpu_temp°C | GPU: $gpu_usage% @ $gpu_temp°C @ $gpu_fan rpm $gpu_power |                                                                                      | 🐧 $linux_version  ⚙️ $mesa_version | $audio_info $mic_icon $network $kb_layout $date_formatted"
+echo "| RAM: $ram_usage ZRAM: $swap_usage VRAM: $vram_percent% | CPU: $cpu_load% @ $cpu_temp°C | GPU: $gpu_usage% @ $gpu_temp°C @ $gpu_fan rpm $gpu_power |                                                                                   | 🐧 $linux_version  ⚙️ $mesa_version | $audio_info $mic_icon $network $kb_layout $date_formatted"
