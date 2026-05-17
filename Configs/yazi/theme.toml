@@ -3,10 +3,10 @@ rules = [
     # Symbolic links
     { url = "*", is = "link", fg = "cyan" },
     { url = "*", is = "orphan", fg = "red" },
-    
+
     # Executables
     { url = "*", is = "exec", fg = "green" },
-    
+
     # Images
     { mime = "image/*", fg = "yellow" },
     # Videos
@@ -14,7 +14,7 @@ rules = [
     { mime = "audio/*", fg = "magenta" },
     # Empty files
     { mime = "inode/empty", fg = "darkgray" },
-    
+
     # Archives
     { url = "*zip", fg = "#FFA500" },
     { url = "*rar", fg = "#FFA500" },
@@ -25,13 +25,36 @@ rules = [
     { mime = "application/tar", fg = "#FFA500" },
     { mime = "application/gzip", fg = "#FFA500" },
     { mime = "application/zstd", fg = "#FFA500" },
-    
+
     # Directories
     { url = "*/", fg = "blue" },
     { url = "*/", is = "link", fg = "cyan" },
     { url = "*/", is = "hidden", fg = "#0F7CB0", dim = true },
 ]
+
 [icon]
+globs = [
+    { url = "*.mp4", text = "🎬" },
+    { url = "*.mkv", text = "🎬" },
+    { url = "*.avi", text = "🎬" },
+    { url = "*.mov", text = "🎬" },
+    { url = "*.webm", text = "🎬" },
+    { url = "*.flv", text = "🎬" },
+    { url = "*.zip", text = "📦" },
+    { url = "*.rar", text = "📦" },
+    { url = "*.tar", text = "📦" },
+    { url = "*.tar.gz", text = "📦" },
+    { url = "*.tar.xz", text = "📦" },
+    { url = "*.tar.bz2", text = "📦" },
+    { url = "*.tar.zst", text = "📦" },
+    { url = "*.7z", text = "📦" },
+    { url = "*.xz", text = "📦" },
+    { url = "*.bz2", text = "📦" },
+    { url = "*.gz", text = "📦" },
+    { url = "*.zst", text = "📦" },
+    { url = "*.chd", text = "📦" },
+]
+
 exts = [
 	{ name = "iso", text = "💽", fg = "#00afff" },
 	{ name = "bin", text = "📀", fg = "#00afff" },
