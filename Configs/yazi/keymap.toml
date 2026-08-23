@@ -1,206 +1,225 @@
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on  = [ "a" ]
 run = "noop"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
+on  = [ "t" ]
+run = "noop"
+
+[[mgr.prepend_keymap]]
 on  = [ "<C-r>" ]
 run = "noop"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = [ "<Space>" ]
 run = [ "toggle", "arrow 1" ]
 desc = "Toggle selection without wraparound"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = [ 'g', 'l' ]
 run = 'cd ~/.local'
 desc = 'Go ~/.local'
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
+on = [ 'g', 'w' ]
+run = 'cd /mnt/Games/.wine_games'
+desc = 'Go /mnt/Games/.wine_games'
+
+[[mgr.prepend_keymap]]
+on = [ 'g', 'h' ]
+run = 'cd /mnt/Data/.hidden'
+desc = 'Go /mnt/Data/.hidden'
+
+[[mgr.prepend_keymap]]
 on = ["s", "m"]
 run = ["sort mtime --reverse=no", "linemode mtime"]
 desc = "Sort by modified time"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["s", "M"]
 run = ["sort mtime --reverse", "linemode mtime"]
 desc = "Sort by modified time (reverse)"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["s", "b"]
 run = ["sort btime --reverse=no", "linemode btime"]
 desc = "Sort by birth time"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["s", "B"]
 run = ["sort btime --reverse", "linemode btime"]
 desc = "Sort by birth time (reverse)"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["s", "e"]
 run = "sort extension --reverse=no"
 desc = "Sort by extension"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["s", "E"]
 run = "sort extension --reverse"
 desc = "Sort by extension (reverse)"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["s", "a"]
 run = "sort alphabetical --reverse=no"
 desc = "Sort alphabetically"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["s", "A"]
 run = "sort alphabetical --reverse"
 desc = "Sort alphabetically (reverse)"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["s", "n"]
 run = "sort natural --reverse=no"
 desc = "Sort naturally"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["s", "N"]
 run = "sort natural --reverse"
 desc = "Sort naturally (reverse)"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["s", "s"]
 run = ["sort size --reverse=no", "linemode size"]
 desc = "Sort by size"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["s", "S"]
 run = ["sort size --reverse", "linemode size"]
 desc = "Sort by size (reverse)"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["s", "r"]
 run = "sort random --reverse=no"
 desc = "Sort randomly"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["c"]
 run = "unyank"
 desc = "Clear yanked files"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["<C-c>"]
 run = "escape --all"
 desc = "Clear selection"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["<C-f>"]
 run = "search fd --smart"
 desc = "Search"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["f"]
 run = "filter --smart"
 desc = "Filter"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
+on = ["<C-t>"]
+run = "tab_create --current"
+desc = "Open new tab"
+
+[[mgr.prepend_keymap]]
 on = ["T"]
 run = "close"
 desc = "Close current tab"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["<C-z>"]
-run = '''shell 'kitty -T compress -e sh ~/.config/yazi/scripts/compress "$@"' '''
+run = '''shell 'ghostty --title="compress" -e "$HOME/.config/yazi/scripts/compress" %s' '''
 desc = "Archive selected files"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["d"]
 run = "yank --cut"
 desc = "Cut"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["<C-a>"]
 run = "toggle_all --state=none"
 desc = "Toggle between select all and clear selection"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["<Delete>"]
 run = "remove --permanently"
 desc = "remove"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["n", "f"]
 run = "create"
 desc = "Create a new file"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["l"]
 run = "link --force"
 desc = "Create a new symlink from yanked files/folders"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["n", "d"]
 run = "create --dir"
 desc = "Create a new directory"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["x"]
 run = "cancel"
 desc = "Kill task"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["<F1>"]
 run = "cd ~/"
 desc = "Cd to ~/"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["H"]
 run = "help"
 desc = "Display help"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["<F2>"]
 run = "cd /mnt/D/"
 desc = "Cd to /mnt/D/"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["<F3>"]
 run = "cd /mnt/"
 desc = "Cd to /mnt/"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["<F4>"]
 run = "cd /run/media/"
 desc = "Cd to /run/media/"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on  = "M"
 run = "plugin mount"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["<F9>"]
-run = "shell 'kitty' --orphan"
+run = "shell 'ghostty --working-directory=%{cwd}' --orphan"
 desc = "Launch terminal"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["e"]
-run = '''shell 'kitty -e micro "$0"' --orphan'''
+run = '''shell 'ghostty -e micro "$0"' --orphan'''
 desc = "Edit in terminal"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["A"]
-run = '''shell 'kitty -e ~/.local/bin/pass.sh' --orphan'''
+run = '''shell 'ghostty -e ~/.local/bin/pass.sh' --orphan'''
 desc = "Access kdbx  passwords"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["S"]
 run = '''shell 'sh  ~/.config/yazi/scripts/disk-space' --block'''
 desc = "Display disk space status"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["*"]
-run = '''shell 'for file in "$@"; do if [ -x "$file" ]; then chmod -x "$file"; else chmod +x "$file"; fi; done' '''
+run = 'shell "for file in %s; do if [ -x \"$file\" ]; then chmod -x \"$file\"; else chmod +x \"$file\"; fi; done"'
 desc = "Toggle executable permission for multiple files"
 
-[[manager.prepend_keymap]]
+[[mgr.prepend_keymap]]
 on = ["<C-x>"]
-run = '''shell 'sh ~/.config/yazi/scripts/extract "$@"' '''
+run = '''shell 'sh ~/.config/yazi/scripts/extract "%s"' '''
 desc = "Extract selected archives"

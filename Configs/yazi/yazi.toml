@@ -2,44 +2,38 @@
 linemode = "mtime"
 
 [opener]
-open_with_geany = [
-    { run = 'geany "$@"', orphan = true, for = "unix" },
+open_with_zed = [
+    { run = 'zeditor "%s"', orphan = true, for = "unix" },
 ]
 edit = [
-	{ run = '$EDITOR "$@"', block = true, for = "unix" },
+    { run = '$EDITOR "%s"', block = true, for = "unix" },
 ]
 open = [
-	{ run = 'xdg-open "$@"', desc = "Open" },
-]
-open_with_roller = [
-    { run = 'file-roller "$@"', orphan = true, for = "unix" },
+    { run = 'xdg-open "%s"', desc = "Open" },
 ]
 open_with_swayimg = [
-    { run = 'swayimg "$@"', orphan = true, for = "unix" },
-]
-extract_here = [
-	{ run = 'ya pub extract --list "$@"', desc = "extract here", for = "unix"},
+    { run = 'swayimg "%s"', orphan = true, for = "unix" },
 ]
 open_passwd = [
-    { run = 'keepassxc "$@"', orphan = true, for = "unix" },
+    { run = 'keepassxc "%s"', orphan = true, for = "unix" },
 ]
 open_pdf = [
-    { run = 'zathura "$@"', orphan = true, for = "unix" },
+    { run = 'zathura "%s"', orphan = true, for = "unix" },
 ]
 
 [open]
 prepend_rules = [
-	{ name = "*.{txt,c,h,lua,cpp,toml,log}", use = [ "open_with_geany", "edit" ] },
-	{ mime = "text/*", use = [ "open_with_geany", "edit" ] },
-    { name = "*.kdbx", use = [ "open_passwd" ] },
-    { name = "*.pdf", use = [ "open_pdf" ] },
-    { name = "*.{png,jpg,jpeg,gif,bmp,tiff,webp,svg}", use = [ "open_with_swayimg" ] },
-    { mime = "application/xz", use = [ "open_with_roller" , "extract_here" ] },
-    { mime = "application/bz", use = [ "open_with_roller" , "extract_here" ] },
-    { mime = "application/bz2", use = [ "open_with_roller" , "extract_here" ] },
-    { mime = "application/7z-compressed", use = [ "open_with_roller" , "extract_here" ] },
-    { mime = "application/tar", use = [ "open_with_roller" , "extract_here" ] },
-    { mime = "application/gzip", use = [ "open_with_roller", "extract_here" ] },
-    { mime = "application/zstd", use = [ "open_with_roller" , "extract_here" ] },
-    { mime = "application/zip", use = [ "open_with_roller" , "extract_here" ] },
+    { name = "*.{txt,c,h,lua,cpp,toml,log,json}", mime = "text/*", use = ["open_with_zed", "edit"] },
+    { mime = "text/*", use = [ "open_with_zed", "edit" ] },
+    { name = "*.kdbx", mime = "application/octet-stream", use = ["open_passwd"] },
+    { name = "*.pdf", mime = "application/pdf", use = ["open_pdf"] },
+    { name = "*.{png,jpg,jpeg,gif,bmp,tiff,webp,svg}", mime = "image/*", use = ["open_with_swayimg"] },
+    { mime = "application/xz", use = [ "extract_custom" ] },
+    { mime = "application/bz", use = [ "extract_custom" ] },
+    { mime = "application/bz2", use = [ "extract_custom" ] },
+    { mime = "application/7z-compressed", use = [ "extract_custom" ] },
+    { mime = "application/tar", use = [ "extract_custom" ] },
+    { mime = "application/gzip", use = [ "extract_custom" ] },
+    { mime = "application/zstd", use = [ "extract_custom" ] },
+    { mime = "application/zip", use = [ "extract_custom" ] },
 ]
