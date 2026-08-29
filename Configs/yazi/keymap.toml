@@ -201,7 +201,7 @@ desc = "Launch terminal"
 
 [[mgr.prepend_keymap]]
 on = ["e"]
-run = '''shell 'ghostty -e micro "$0"' --orphan'''
+run = '''shell 'ghostty -e micro "%s"' --orphan'''
 desc = "Edit in terminal"
 
 [[mgr.prepend_keymap]]
