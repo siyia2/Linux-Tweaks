@@ -2,8 +2,7 @@
 linemode = "mtime"
 
 [opener]
-open_with_zed = [
-    { run = 'zeditor "%s"', orphan = true, for = "unix" },
+open_with_zed = [    { run = 'rm -rf ~/.local/share/zed/db && zeditor "%s"', orphan = true, for = "unix" },
 ]
 edit = [
     { run = '$EDITOR "%s"', block = true, for = "unix" },
