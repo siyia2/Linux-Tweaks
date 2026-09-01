@@ -13,9 +13,6 @@ rules = [
     { mime = "video/*", fg = "magenta" },
     { mime = "audio/*", fg = "magenta" },
 
-    # Text (Keep only mime/styling rules here)
-    { mime = "text/*", fg = "white" },
-
     # Empty files
     { mime = "inode/empty", fg = "darkgray" },
 
@@ -58,7 +55,7 @@ globs = [
     { url = "*.zst", text = "📦" },
     { url = "*.chd", text = "📦" },
 
-    # Text icons added here via globs
+    # Specific extension matches
     { url = "*.txt", text = "📄" },
     { url = "*.c", text = "📄" },
     { url = "*.h", text = "📄" },
@@ -67,6 +64,19 @@ globs = [
     { url = "*.toml", text = "📄" },
     { url = "*.log", text = "📄" },
     { url = "*.json", text = "📄" },
+
+    # PDF & Documents (LibreOffice / Microsoft)
+    { url = "*.pdf", text = "📕" },
+    { url = "*.odt", text = "📝" },
+    { url = "*.ods", text = "📊" },
+    { url = "*.odp", text = "📽️" },
+    { url = "*.doc", text = "📝" },
+    { url = "*.docx", text = "📝" },
+    { url = "*.xlsx", text = "📊" },
+    { url = "*.pptx", text = "📽️" },
+
+    # Matches files with no extension (no dot in the name)
+    { url = "*[!.]*", text = "📄" },
 ]
 
 exts = [
