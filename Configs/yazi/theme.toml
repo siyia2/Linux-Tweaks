@@ -9,9 +9,13 @@ rules = [
 
     # Images
     { mime = "image/*", fg = "yellow" },
-    # Videos
+    # Videos & Audio
     { mime = "video/*", fg = "magenta" },
     { mime = "audio/*", fg = "magenta" },
+
+    # Text (Keep only mime/styling rules here)
+    { mime = "text/*", fg = "white" },
+
     # Empty files
     { mime = "inode/empty", fg = "darkgray" },
 
@@ -53,12 +57,22 @@ globs = [
     { url = "*.gz", text = "📦" },
     { url = "*.zst", text = "📦" },
     { url = "*.chd", text = "📦" },
+
+    # Text icons added here via globs
+    { url = "*.txt", text = "📄" },
+    { url = "*.c", text = "📄" },
+    { url = "*.h", text = "📄" },
+    { url = "*.lua", text = "📄" },
+    { url = "*.cpp", text = "📄" },
+    { url = "*.toml", text = "📄" },
+    { url = "*.log", text = "📄" },
+    { url = "*.json", text = "📄" },
 ]
 
 exts = [
-	{ name = "iso", text = "💽", fg = "#00afff" },
-	{ name = "bin", text = "📀", fg = "#00afff" },
-	{ name = "img", text = "📀", fg = "#00afff" },
-	{ name = "mdf", text = "📀", fg = "#00afff" },
-	{ name = "nrg", text = "📀", fg = "#00afff" },
+    { name = "iso", text = "💽", fg = "#00afff" },
+    { name = "bin", text = "📀", fg = "#00afff" },
+    { name = "img", text = "📀", fg = "#00afff" },
+    { name = "mdf", text = "📀", fg = "#00afff" },
+    { name = "nrg", text = "📀", fg = "#00afff" },
 ]
