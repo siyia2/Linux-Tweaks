@@ -2,31 +2,38 @@
 linemode = "mtime"
 
 [opener]
-open_with_zed = [    { run = 'rm -rf ~/.local/share/zed/db && zeditor "%s"', orphan = true, for = "unix" },
+open_with_zed = [
+    { run = 'rm -rf ~/.local/share/zed/db && zeditor %s', orphan = true, for = "unix" },
 ]
 edit = [
-    { run = '$EDITOR "%s"', block = true, for = "unix" },
+    { run = 'micro %s', block = true, for = "unix" },
 ]
 open = [
-    { run = 'xdg-open "%s"', desc = "Open" },
+    { run = 'xdg-open %s', desc = "Open" },
 ]
 open_with_swayimg = [
-    { run = 'swayimg "%s"', orphan = true, for = "unix" },
+    { run = 'swayimg %s', orphan = true, for = "unix" },
 ]
 open_passwd = [
-    { run = 'keepassxc "%s"', orphan = true, for = "unix" },
+    { run = 'keepassxc %s', orphan = true, for = "unix" },
 ]
 open_pdf = [
-    { run = 'zathura "%s"', orphan = true, for = "unix" },
+    { run = 'zathura %s', orphan = true, for = "unix" },
+]
+open_with_libreoffice = [
+    { run = 'libreoffice %s', orphan = true, for = "unix" },
 ]
 
 [open]
 prepend_rules = [
-    { name = "*.{txt,c,h,lua,cpp,toml,log,json}", mime = "text/*", use = ["open_with_zed", "edit"] },
+    { url = "*.{txt,c,h,lua,cpp,toml,log,json}", use = ["open_with_zed", "edit"] },
     { mime = "text/*", use = [ "open_with_zed", "edit" ] },
-    { name = "*.kdbx", mime = "application/octet-stream", use = ["open_passwd"] },
-    { name = "*.pdf", mime = "application/pdf", use = ["open_pdf"] },
-    { name = "*.{png,jpg,jpeg,gif,bmp,tiff,webp,svg}", mime = "image/*", use = ["open_with_swayimg"] },
+    { url = "*.kdbx", mime = "application/octet-stream", use = ["open_passwd"] },
+    { url = "*.pdf", mime = "application/pdf", use = ["open_pdf"] },
+    { url = "*.{png,jpg,jpeg,gif,bmp,tiff,webp,svg}", mime = "image/*", use = ["open_with_swayimg"] },
+    { url = "*.{doc,docx,dot,dotx,odt,ott,rtf}", mime = "application/vnd.openxmlformats-officedocument.wordprocessingml.document", use = ["open_with_libreoffice"] },
+    { url = "*.{xls,xlsx,xlt,xltx,ods,ots}", mime = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", use = ["open_with_libreoffice"] },
+    { url = "*.{ppt,pptx,pot,potx,odp,otp}", mime = "application/vnd.openxmlformats-officedocument.presentationml.presentation", use = ["open_with_libreoffice"] },
     { mime = "application/xz", use = [ "extract_custom" ] },
     { mime = "application/bz", use = [ "extract_custom" ] },
     { mime = "application/bz2", use = [ "extract_custom" ] },
