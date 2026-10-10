@@ -6,12 +6,12 @@
     //"modules-left": ["hyprland/workspaces"],
     //"modules-left": ["dwl/tags"],
 	"modules-left": ["sway/workspaces"],
-    "modules-center": ["memory","custom/zram","custom/vram","custom/cpu","cpu","temperature","custom/gpu","custom/gpusage","custom/gputemp","custom/gpufan","custom/gpupower"],
+    "modules-center": ["memory", "custom/vram", "custom/zram","custom/cpu","cpu","temperature","custom/gpu","custom/gputemp","custom/gpufan"],
     "modules-right": ["custom/kernel","custom/mesa","custom/bt_battery","pulseaudio","custom/mic","network","custom/kb","clock"],
     "sway/window": {
         "max-length": 1920
     },
-    
+
 
 //MEM STUFF
 
@@ -25,7 +25,7 @@
 "custom/zram": {
 	"restart-interval": 5,
         "exec": "/home/siyia/.config/waybar/modules/zram.sh",
-	"format": "Zram: {} ",
+	"format": " Zram: {} ",
 		"tooltip": false,
 "on-click": "killall btop & ghostty --title='btop' -e btop"
 },
@@ -35,7 +35,7 @@
 //CPU STUFF
 
 "custom/cpu": {
-  "format": "Cpu:",
+  "format": " Cpu:",
   "on-click": "killall btop & ghostty --title='btop' -e btop",
 		"tooltip": false
 },
@@ -52,7 +52,7 @@
         "exec": "/home/siyia/.config/waybar/modules/cpu_fan.sh",
 	"format": "  {} rpm ",
 		"tooltip": false,
-"on-click": "killall btop & kitty -T btop -e btop"
+"on-click": "killall btop & ghostty --title='btop' -e btop"
 },
 
 "temperature": {
@@ -87,7 +87,7 @@
 
 "custom/gpu": {
   "format": "| Gpu:",
-  "on-click": "exec pkexec gpu_power_switch",
+  "on-click": "killall btop & ghostty --title='btop' -e btop",
 		"tooltip": false
 },
 
@@ -96,7 +96,7 @@
         "exec": "/home/siyia/.config/waybar/modules/gpu_usage.sh",
 	"format": " {}% ",
 		"tooltip": false,
-"on-click": "exec pkexec gpu_power_switch"
+"on-click": "killall btop & ghostty --title='btop' -e btop"
 },
 
 "custom/gpufan": {
@@ -104,14 +104,14 @@
         "exec": "/home/siyia/.config/waybar/modules/gpu_fan.sh",
 	"format": "  {} rpm ",
 		"tooltip": false,
-"on-click": "exec pkexec gpu_power_switch"
+"on-click": "killall btop & ghostty --title='btop' -e btop"
 },
 
 "custom/vram": {
 		"restart-interval": 5,
 		"tooltip": false,
-		"exec": "/home/siyia/.config/waybar/modules/vram.sh",
-		"format": "Vram: {}% | ",
+		"exec": "/home/siyia/.config/waybar/modules/arc_vram_usage",
+		"format": "Vram: {} ",
 		"on-click": "killall btop & ghostty --title='btop' -e btop"
 },
 
@@ -120,7 +120,7 @@
         "exec": "/home/siyia/.config/waybar/modules/gpu_temp.sh",
 	"format": " {}°C",
 		"tooltip": false,
-"on-click": "exec pkexec gpu_power_switch"
+"on-click": "killall btop & ghostty --title='btop' -e btop"
 },
 
 "custom/gpupower": {
@@ -128,7 +128,7 @@
         "exec": "/home/siyia/.config/waybar/modules/gpu_power.sh",
 	"format": "{} ",
 		"tooltip": false,
-"on-click": "exec pkexec gpu_power_switch"
+"on-click": "killall btop & ghostty --title='btop' -e btop"
 },
 
 // MISC SW
@@ -189,16 +189,16 @@
         "exec": "/home/siyia/.config/waybar/modules/psu_fan.sh",
 	"format": " Psu: {} rpm ",
 		"tooltip": false,
-"on-click": "killall btop & kitty -T btop -e btop"
+"on-click": "killall btop & ghostty --title='btop' -e btop"
 },
 
 "custom/bt_battery": {
 		"restart-interval": 10,
 		"tooltip": false,
 		"exec": "/home/siyia/.config/waybar/modules/battery_bluetooth.sh",
-		"format": "🔋{} ",
+		"format": "🔋{}% ",
 		"on-click": "blueman-manager",
-		
+
 },
 
 
@@ -229,7 +229,7 @@
     "format-muted": " Muted 🔇",
     "format-icons": {
         "default": ["🔈","🔉","🔊"]
-        
+
 
     },
     "scroll-step": 1,
@@ -278,4 +278,3 @@
 }
 
 }
-
