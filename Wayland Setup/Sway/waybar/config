@@ -93,7 +93,7 @@
 
 "custom/gpusage": {
 	"restart-interval": 2,
-        "exec": "/home/siyia/.config/waybar/modules/arc_gpu_usage -e rcs -i 1000 -m 95",
+        "exec": "/home/siyia/.config/waybar/modules/arc_gpu_usage -e rcs -i 500 -a 2 -m 95",
 	"format": "| Gpu: {} ",
 		"tooltip": false,
 "on-click": "killall btop & ghostty --title='btop' -e btop"
