@@ -6,7 +6,7 @@
     //"modules-left": ["hyprland/workspaces"],
     //"modules-left": ["dwl/tags"],
 	"modules-left": ["sway/workspaces"],
-    "modules-center": ["memory", "custom/vram", "custom/zram","custom/cpu","cpu","temperature","custom/gpu","custom/gputemp","custom/gpufan"],
+    "modules-center": ["memory", "custom/vram", "custom/zram","custom/cpu","cpu","temperature","custom/gpusage","custom/gpu","custom/gputemp","custom/gpufan"],
     "modules-right": ["custom/kernel","custom/mesa","custom/bt_battery","pulseaudio","custom/mic","network","custom/kb","clock"],
     "sway/window": {
         "max-length": 1920
@@ -85,16 +85,16 @@
 
 // GPU STUFF
 
-"custom/gpu": {
-  "format": "| Gpu:",
-  "on-click": "killall btop & ghostty --title='btop' -e btop",
-		"tooltip": false
-},
+//"custom/gpu": {
+//  "format": "| Gpu:",
+//  "on-click": "killall btop & ghostty --title='btop' -e btop",
+//		"tooltip": false
+//},
 
 "custom/gpusage": {
 	"restart-interval": 2,
-        "exec": "/home/siyia/.config/waybar/modules/gpu_usage.sh",
-	"format": " {}% ",
+        "exec": "/home/siyia/.config/waybar/modules/arc_gpu_usage -e rcs -i 1000 -m 95",
+	"format": "| Gpu: {} ",
 		"tooltip": false,
 "on-click": "killall btop & ghostty --title='btop' -e btop"
 },
