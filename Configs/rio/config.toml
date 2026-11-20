@@ -1,4 +1,5 @@
 confirm-before-quit = false        # confirm-close-surface = false
+ignore-selection-foreground-color = true
 
 [navigation]
 mode = "Plain"
@@ -20,29 +21,30 @@ italic      = { family = "Inconsolata", style = "Normal", width = "Expanded", we
 bold-italic = { family = "Inconsolata", style = "Normal", width = "Expanded", weight = 700 }
 
 [colors]
-background = "#0f111a"
-foreground = "#c6d0f5"
-cursor     = "#f2d5cf"
-black      = "#000000"
-red        = "#cc0403"
-green      = "#19cb00"
-yellow     = "#cecb00"
-blue       = "#0d73cc"
-magenta    = "#cb1ed1"
-cyan       = "#0dcdcd"
-white      = "#dddddd"
-light-black   = "#767676"
-light-red     = "#f2201f"
-light-green   = "#23fd00"
-light-yellow  = "#fffd00"
-light-blue    = "#1a8fff"
-light-magenta = "#fd28ff"
-light-cyan    = "#14ffff"
-light-white   = "#ffffff"
+background           = "#0f111a"
+foreground           = "#c6d0f5"
+selection-background = "#333a56"
+cursor               = "#f2d5cf"
+black                = "#000000"
+red                  = "#cc0403"
+green                = "#19cb00"
+yellow               = "#cecb00"
+blue                 = "#0d73cc"
+magenta              = "#cb1ed1"
+cyan                 = "#0dcdcd"
+white                = "#dddddd"
+light-black          = "#767676"
+light-red            = "#f2201f"
+light-green          = "#23fd00"
+light-yellow         = "#fffd00"
+light-blue           = "#1a8fff"
+light-magenta        = "#fd28ff"
+light-cyan           = "#14ffff"
+light-white          = "#ffffff"
 
 [cursor]
 shape = "block"
-blinking = true
+blinking = false
 
 [shell]
 program = "/usr/bin/fish"
