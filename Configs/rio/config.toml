@@ -9,7 +9,7 @@ mode = "Plain"
 width = 800                        # pixels, not columns/rows (see note)
 height = 580
 opacity = 0.90                     # background-opacity
-decorations = "Disabled"           # gtk-titlebar = false; try "Enabled" if you lose the window frame
+decorations = "Enabled"           # gtk-titlebar
 
 [fonts]
 size = 18
