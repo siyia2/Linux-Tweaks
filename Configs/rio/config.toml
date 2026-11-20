@@ -1,10 +1,11 @@
 confirm-before-quit = false        # confirm-close-surface = false
 ignore-selection-foreground-color = true
 
+[panel]
+margin = [10]
+
 [navigation]
 mode = "Plain"
-
-# padding: see note below
 
 [window]
 width = 800                        # pixels, not columns/rows (see note)
