@@ -46,7 +46,7 @@ for f in "$@"; do
                 notify-send -t 3000 "Extraction Failed" "Failed to extract $f."
             fi ;;
         *.7z)
-            if 7z x "$f"; then
+            if 7z x -y "$f"; then
                 notify-send -t 3000 "Extraction Successful" "File $f extracted successfully."
             else
                 notify-send -t 3000 "Extraction Failed" "Failed to extract $f."
