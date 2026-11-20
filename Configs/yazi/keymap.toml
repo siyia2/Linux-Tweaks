@@ -26,6 +26,11 @@ run = 'cd /mnt/Games/.wine_games'
 desc = 'Go /mnt/Games/.wine_games'
 
 [[mgr.prepend_keymap]]
+on = [ 'g', 'd' ]
+run = 'cd /mnt/HDD/Downloads'
+desc = 'Go /mnt/HDD/Downloads'
+
+[[mgr.prepend_keymap]]
 on = [ 'g', 'h' ]
 run = 'cd /mnt/Data/.hidden'
 desc = 'Go /mnt/Data/.hidden'
@@ -127,7 +132,7 @@ desc = "Close current tab"
 
 [[mgr.prepend_keymap]]
 on = ["<C-z>"]
-run = '''shell 'ghostty --title="compress" -e "$HOME/.config/yazi/scripts/compress" %s' '''
+run = '''shell 'rio --title="compress" -e "$HOME/.config/yazi/scripts/compress" %s' '''
 desc = "Archive selected files"
 
 [[mgr.prepend_keymap]]
@@ -196,18 +201,13 @@ run = "plugin mount"
 
 [[mgr.prepend_keymap]]
 on = ["<F9>"]
-run = "shell 'ghostty --working-directory=%{cwd}' --orphan"
+run = "shell 'rio --working-dir=%{cwd}' --orphan"
 desc = "Launch terminal"
 
 [[mgr.prepend_keymap]]
 on = ["e"]
-run = '''shell 'ghostty --working-directory="$PWD" -e micro %s' --orphan'''
+run = "shell 'rio --working-dir=%{cwd} -e micro %s' --orphan"
 desc = "Edit in terminal"
-
-[[mgr.prepend_keymap]]
-on = ["A"]
-run = '''shell 'ghostty -e ~/.local/bin/pass.sh' --orphan'''
-desc = "Access kdbx  passwords"
 
 [[mgr.prepend_keymap]]
 on = ["S"]
