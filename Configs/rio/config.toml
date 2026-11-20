@@ -1,0 +1,53 @@
+confirm-before-quit = false        # confirm-close-surface = false
+
+[navigation]
+mode = "Plain"
+
+# padding: see note below
+
+[window]
+width = 800                        # pixels, not columns/rows (see note)
+height = 580
+opacity = 0.90                     # background-opacity
+decorations = "Disabled"           # gtk-titlebar = false; try "Enabled" if you lose the window frame
+
+[fonts]
+size = 18
+family = "Inconsolata"
+regular     = { family = "Inconsolata", style = "Normal", width = "Normal",   weight = 400 }
+bold        = { family = "Inconsolata", style = "Normal", width = "Normal",   weight = 700 }
+italic      = { family = "Inconsolata", style = "Normal", width = "Expanded", weight = 400 }
+bold-italic = { family = "Inconsolata", style = "Normal", width = "Expanded", weight = 700 }
+
+[colors]
+background = "#0f111a"
+foreground = "#c6d0f5"
+cursor     = "#f2d5cf"
+black      = "#000000"
+red        = "#cc0403"
+green      = "#19cb00"
+yellow     = "#cecb00"
+blue       = "#0d73cc"
+magenta    = "#cb1ed1"
+cyan       = "#0dcdcd"
+white      = "#dddddd"
+light-black   = "#767676"
+light-red     = "#f2201f"
+light-green   = "#23fd00"
+light-yellow  = "#fffd00"
+light-blue    = "#1a8fff"
+light-magenta = "#fd28ff"
+light-cyan    = "#14ffff"
+light-white   = "#ffffff"
+
+[cursor]
+shape = "block"
+blinking = true
+
+[shell]
+program = "/usr/bin/fish"
+args = []
+
+[renderer]
+backend = "Vulkan"
+performance = "High"
